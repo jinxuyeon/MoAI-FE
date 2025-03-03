@@ -1,0 +1,68 @@
+
+.RegisterForm{
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 13px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto;
+}
+.RegisterForm > h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.RegisterForm .form-group {
+    margin-bottom: 20px;
+}
+
+.RegisterForm label{
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.RegisterForm input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.RegisterForm input:focus {
+    outline: none;
+    border-color: #41bbfc;
+    background-color: #fff;
+}
+
+.RegisterForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7fccf6;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.RegisterForm button:hover {
+    background-color: #11a3f1;
+}
+.RegisterForm .link-button {
+    display: inline-block;
+    color: #7fccf6;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}

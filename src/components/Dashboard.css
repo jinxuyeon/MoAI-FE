@@ -1,0 +1,41 @@
+.Dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; /* 전체 높이 */
+    padding: 20px;
+}
+
+.Dashboard .Container{
+    display: flex; /* flex로 설정 */
+    flex-wrap: wrap; /* 자동 줄바꿈 */
+    justify-content: space-evenly; /* 간격 균등 배치 */
+    gap: 20px;
+    max-width: 1200px; /* 최대 너비 제한 */
+    padding: 20px;
+    max-height: 80vh; /* 내부 스크롤 제한 */
+    overflow-y: auto; /* 세로 스크롤 */
+    flex-grow: 1; /* Container가 부모의 남은 공간을 채우도록 설정 */
+}
+.Dashboard .box{
+    background-color: grey;
+    width: calc(33.333% - 20px); /* 한 줄에 3개 */
+    max-width: 500px;
+    min-width: 300px; /* 최소 너비 설정 */
+    height: 500px;
+    border-radius: 10px;
+}
+
+
+/* 🔽 작은 화면에서는 한 줄에 하나씩 */
+@media (max-width: 1024px) {
+    .Dashboard .box {
+        width: calc(50% - 20px); /* 두 개씩 배치 */
+    }
+}
+
+@media (max-width: 768px) {
+    .Dashboard .box {
+        width: calc(100% - 20px); /* 하나씩 배치 */
+    }
+}

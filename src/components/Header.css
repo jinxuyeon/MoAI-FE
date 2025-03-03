@@ -1,0 +1,19 @@
+
+.logout-btn {
+    color:black;
+    background-color: white;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.875rem;  /* 폰트 크기 조정 */
+    transition: transform 0.3s;
+  }
+  
+  .logout-btn:hover {
+    transform: scale(1.05);  /* 호버 시 버튼 크기 확대 */
+  }
+  
+  .logout-btn:focus {
+    outline: none;  /* 포커스 상태에서 외곽선 제거 */
+  }
