@@ -2,21 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; /* 전체 높이 */
-    padding: 20px;
+    flex-grow: 1; /* 부모에서 남은 공간을 채움 */
+    max-height: 100%; /* 부모 높이 내에서 제한 */
+    
 }
 
-.Dashboard .Container{
-    display: flex; /* flex로 설정 */
-    flex-wrap: wrap; /* 자동 줄바꿈 */
-    justify-content: space-evenly; /* 간격 균등 배치 */
+.Dashboard .Content-Container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow-y: auto;
     gap: 20px;
-    max-width: 1200px; /* 최대 너비 제한 */
-    padding: 20px;
-    max-height: 80vh; /* 내부 스크롤 제한 */
-    overflow-y: auto; /* 세로 스크롤 */
-    flex-grow: 1; /* Container가 부모의 남은 공간을 채우도록 설정 */
+    max-width: 1200px;
 }
+
 .Dashboard .box{
     background-color: grey;
     width: calc(33.333% - 20px); /* 한 줄에 3개 */

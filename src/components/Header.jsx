@@ -8,8 +8,8 @@ function Header() {
     window.location.href = "/login"
   }
   return (
-    <div className="Header">
-      <div>헤더더</div>
+    <div className="header-container">
+      <div className="title">Dashboard</div>
       <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
     </div>
       
