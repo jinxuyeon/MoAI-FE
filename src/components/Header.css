@@ -1,7 +1,7 @@
 
 .header-container{
     display: flex;
-    border-bottom: 2px solid rgb(223, 211, 211);
+    border-bottom: 2px solid #ccc;
     position: fixed;
     left: 0;
     top: 0;
@@ -24,13 +24,17 @@
   transition: transform 0.3s;
 }
 
-  
-  
-  
   .logout-btn:hover {
     transform: scale(1.05);  /* 호버 시 버튼 크기 확대 */
   }
   
   .logout-btn:focus {
     outline: none;  /* 포커스 상태에서 외곽선 제거 */
+  }
+
+  .header-space{
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    margin-right: 30px;
   }

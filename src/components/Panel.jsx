@@ -1,23 +1,23 @@
 
 import "./Panel.css"
-const Panel = ({username})=>{
+import Favorites from "./Favorites"
+import Friends from "./Friends"
+const Panel = ({ username }) => {
+
+
     return (
         <div className="Panel-Container">
+
+            
+            <button className="profile-button">프사</button>
+
             <h2>{username}</h2>
 
-            <div>즐겨찾기창</div>
-
-            <div>친구창</div>
-
+            <Favorites />
+            <hr />
+            <Friends />
+            <hr />
             <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-            <div>캘린더</div>
-
         </div>
     )
 

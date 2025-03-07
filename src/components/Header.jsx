@@ -4,13 +4,15 @@ function Header() {
 
   const handleLogout = ()=>{
     localStorage.removeItem("token")
-
     window.location.href = "/login"
   }
   return (
     <div className="header-container">
-      <div className="title">Dashboard</div>
+
+      <h4>Dashboard</h4>
+      <div className="header-space">
       <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
+      </div>
     </div>
       
   )

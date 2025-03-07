@@ -27,10 +27,12 @@ const MainPage = () => {
 
     return (
         <div className="MainPage">
-                <Header />
+            <Header />
+            <div className="MainPage-Layout">
             <div className="Panel-Dashboard-Container">
-                <Panel username = {userName}  />
+                <Panel username={userName} />
                 <Dashboard />
+            </div>
             </div>
         </div>
     )

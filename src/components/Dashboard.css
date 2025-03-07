@@ -5,14 +5,16 @@
     flex-grow: 1; /* 부모에서 남은 공간을 채움 */
     max-height: 100%; /* 부모 높이 내에서 제한 */
     
+    
 }
 
 .Dashboard .Content-Container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: start;
+    align-items: start;
     overflow-y: auto;
-    gap: 20px;
+    gap: 30px;
     max-width: 1200px;
 }
 

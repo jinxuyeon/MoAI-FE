@@ -1,16 +1,29 @@
-
 .Panel-Container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    background-color: rgb(194, 218, 250);
+    background-color: white;
     top: 80px;
     height: calc(100vh - 80px);
-    flex-basis: 30%;
-    padding: 20px;
     z-index: 50;
-    min-width: 340px;
-    max-width: 340px;
+    min-width: 440px;
+    gap: 40px;
+    margin-left: 60px;
+    margin-right: 30px;
+
 }
 
 
+
+.Panel-Container hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 12px 0;
+}
+
+.profile-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+
+}
