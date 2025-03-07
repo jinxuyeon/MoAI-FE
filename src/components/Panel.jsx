@@ -8,10 +8,11 @@ const Panel = ({ username }) => {
     return (
         <div className="Panel-Container">
 
-            
-            <button className="profile-button">프사</button>
+            <div style={{display:"flex", alignItems:"center", gap:"20px"}}>
+                <button className="profile-btn"></button>
+                <h2>{username}</h2>
+            </div>
 
-            <h2>{username}</h2>
 
             <Favorites />
             <hr />

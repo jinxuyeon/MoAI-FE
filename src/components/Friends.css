@@ -1,10 +1,7 @@
-
-
-.Friends-Button {
+.Friends-btn {
     background-color: white;
-    width: 100%;
     padding: 8px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     border: none;
     color: black;
@@ -25,5 +22,24 @@
     background-color: white;
     border-radius: 4px;
     transition: background-color 0.2s;
+}
+.add-friend-btn{
+    background-size: contain;
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 6px;
+    background-image: url('/icons/add-friend-icon.svg');
+    cursor: pointer;
+}
+
+
+.add-friend-btn:hover {
+    transform: scale(1.1); /* 약간 커짐 */
+}
+
+.add-friend-btn:active {
+    background-color: #ccc; /* 클릭 시 더 어두운 회색 */
 }
 

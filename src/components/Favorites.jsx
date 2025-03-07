@@ -15,15 +15,18 @@ const Favorites = () => {
     return (
         <div className="Favorites-Container">
 
-            <button className="Favorites-Button" onClick={() => setIsOpen(!isOpen)}>
-                ⭐ 즐겨찾기    {isOpen ? "🔺" : "🔻"}
-            </button>
+            <div style={{display: "flex", width: "100%",alignItems:"center"}}>
+                <button className="Favorites-Button" onClick={() => setIsOpen(!isOpen)}>
+                    ⭐ 즐겨찾기    {isOpen ? "🔺" : "🔻"}
+                </button>
+            </div>
+
             {isOpen && (
                 <ul className="Favorites-List">
-                {sampleFavorites.map((board, index) => (
-                    <li key={index} className="Favorites-Item">{board}</li>
-                ))}
-            </ul>
+                    {sampleFavorites.map((board, index) => (
+                        <li key={index} className="Favorites-Item">{board}</li>
+                    ))}
+                </ul>
             )}
         </div>
     )

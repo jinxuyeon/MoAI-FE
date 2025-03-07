@@ -9,7 +9,7 @@ function Header() {
   return (
     <div className="header-container">
 
-      <h4>Dashboard</h4>
+      <h2 style={{marginLeft:"28px"}}>Dashboard</h2>
       <div className="header-space">
       <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
       </div>

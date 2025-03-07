@@ -8,7 +8,7 @@
     align-items: center;
     height: 80px;
     width: 100%;
-    z-index: 9999
+    z-index: 150;
 
   }
 
@@ -21,7 +21,6 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.875rem;  /* 폰트 크기 조정 */
-  transition: transform 0.3s;
 }
 
   .logout-btn:hover {

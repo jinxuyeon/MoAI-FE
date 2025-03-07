@@ -6,9 +6,10 @@
     height: calc(100vh - 80px);
     z-index: 50;
     min-width: 440px;
-    gap: 40px;
+    gap: 45px;
     margin-left: 60px;
     margin-right: 30px;
+    margin-top: 20px;
 
 }
 
@@ -21,7 +22,8 @@
     margin: 12px 0;
 }
 
-.profile-button {
+.profile-btn {
+    background-image: url("/icons/profile.png");
     height: 40px;
     width: 40px;
     border-radius: 50%;
