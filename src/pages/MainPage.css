@@ -6,17 +6,10 @@
 
 
 .MainPage .Panel-Dashboard-Container {
-    margin-top: 80px;
-    max-width: 2400px;
+    margin-top: 60px;
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
-    /* 남은 공간을 채우도록 설정 */
     overflow: hidden;
+    min-width: 840px;
 }
 
-.MainPage-Layout{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}

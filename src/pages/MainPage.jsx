@@ -10,7 +10,7 @@ const MainPage = () => {
     const [userName, setUserName] = useState("");
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("accessToken");
         if (token) {
             try {
                 console.log("토큰:", token); //
@@ -27,12 +27,10 @@ const MainPage = () => {
 
     return (
         <div className="MainPage">
-            <Header />
-            <div className="MainPage-Layout">
+            <Header title={"Dashborad"}/>
             <div className="Panel-Dashboard-Container">
                 <Panel username={userName} />
                 <Dashboard />
-            </div>
             </div>
         </div>
     )

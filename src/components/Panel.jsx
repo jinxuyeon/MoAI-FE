@@ -2,17 +2,16 @@
 import "./Panel.css"
 import Favorites from "./Favorites"
 import Friends from "./Friends"
+import { Link } from "react-router-dom"
 const Panel = ({ username }) => {
 
 
     return (
-        <div className="Panel-Container">
-
-            <div style={{display:"flex", alignItems:"center", gap:"20px"}}>
+        <div className="Panel">
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                 <button className="profile-btn"></button>
-                <h2>{username}</h2>
+                <Link className="link-mypage" to={"/mypage"}>{username}</Link>
             </div>
-
 
             <Favorites />
             <hr />

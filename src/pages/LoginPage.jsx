@@ -1,7 +1,7 @@
 import { useState , useEffect} from "react";
 import LoginForm from "../components/LoginForm";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
 
     useEffect(() => {
         document.body.style.fontFamily = 'Arial, sans-serif';
@@ -28,7 +28,7 @@ const LoginPage = () => {
 
     return (
         <div>
-            <LoginForm />
+            <LoginForm setIsAuthenticated={setIsAuthenticated} />
         </div>
     );
 };
