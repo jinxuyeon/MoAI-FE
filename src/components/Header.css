@@ -14,7 +14,7 @@
   
 .logout-btn {
   color:black;
-  background-color: white;
+  background-color:transparent; 
   height: 30px;
   border: none;
   border-radius: 5px;
