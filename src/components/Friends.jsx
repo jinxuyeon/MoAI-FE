@@ -1,10 +1,13 @@
 import { useState } from "react";
 import "./Friends.css";
+import Modal from "./Modal";
 
 const Friends = () => {
 
     const [isOpen, setIsOpen] = useState(false);
-    
+    const [openModal, setOpenModal] = useState(false)
+
+
     const sampleFriends = [
         "진수연",
         "김태희",
@@ -14,7 +17,7 @@ const Friends = () => {
     ];
 
     // 버튼을 누르면 검색창이 열리도록
-    
+
     return (
         <div className="Friends-Container">
 
@@ -22,11 +25,15 @@ const Friends = () => {
                 <button className="Friends-btn" onClick={() => setIsOpen(!isOpen)}>
                     😊 팔로워{isOpen ? "🔺" : "🔻"}
                 </button>
-                <button className="add-friend-btn"></button>
+                <button
+                    className="add-friend-btn"
+                    onClick={()=>{setOpenModal(true);console.log("openModal 상태:", openModal); }}
+                ></button>
+                {openModal ? <Modal openModal={openModal} setOpenModal={setOpenModal} /> : null}
             </div>
 
             {/* 친구 검색창 */}
-           
+
 
             {/* 팔로워 리스트 */}
             {isOpen && (

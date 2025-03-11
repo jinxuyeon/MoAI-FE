@@ -3,7 +3,9 @@ import "./Panel.css"
 import Favorites from "./Favorites"
 import Friends from "./Friends"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 const Panel = ({ username }) => {
+
 
 
     return (
@@ -15,7 +17,7 @@ const Panel = ({ username }) => {
 
             <Favorites />
             <hr />
-            <Friends />
+            <Friends/>
             <hr />
             <div>캘린더</div>
         </div>

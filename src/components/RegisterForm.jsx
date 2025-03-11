@@ -20,7 +20,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/api/member/join", formData, {
+      const response = await axios.post("http://58.238.182.100:9000/api/member/join", formData, {
         headers: {
           "Content-Type": "application/json", // 서버에 JSON 데이터 전송
         },
