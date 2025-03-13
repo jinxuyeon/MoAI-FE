@@ -1,7 +1,7 @@
 import "./LoginForm.css"
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "./utils/authService";
 const LoginForm = ({setIsAuthenticated}) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
@@ -17,30 +17,24 @@ const LoginForm = ({setIsAuthenticated}) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://58.238.182.100:9000/api/member/login", formData, {
-        headers: {
-          "Content-Type": "application/json", // 서버에 JSON 데이터 전송
-        },
-      });
-
+      const response = await loginUser(formData); 
+  
       if (response.status === 200) {
         console.log("로그인 성공:", response.data);
-        localStorage.setItem("accessToken", response.data.accessToken)
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+  
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
 
-        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-
+  
         alert("로그인 성공!");
-        setIsAuthenticated(true)
+        setIsAuthenticated(true);
         navigate("/main");
       } else {
-        alert("아이디 또는 비밀번호가 잘못되었습니다다")
-  
-      
-        return
+        console.log(response.data);
+        alert("아이디 또는 비밀번호가 잘못되었습니다.");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       alert("로그인 실패!");
     }
   };
