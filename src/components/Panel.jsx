@@ -1,24 +1,19 @@
 import "./Panel.css";
 import Favorites from "./Favorites";
 import Friends from "./Friends";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link , useNavigate} from "react-router-dom";
+import axiosInstance from "./utils/AxiosInstance";
+import handleApiError from "./utils/handleApiError";
 
 const Panel = ({ username }) => {
+    const navigate = useNavigate(); 
     const adminButtonHandler = async () => {
         try {
-            console.log("요청 보내기: " + localStorage.getItem("accessToken"));
-
-            const response = await axios.get("http://localhost:8080/api/member/admin-test", {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    "Content-Type": "application/json"
-                }
-            });
-
+            const response = await axiosInstance.get("/api/member/admin-test");
             alert(`관리자 전용 요청 성공: ${response.data.message}`);
         } catch (error) {
-            alert(`에러 발생: ${error.response?.data?.message || error.message}`);
+            console.log(error);
+            handleApiError(error, navigate);    // 에러 처리 함수 호출
         }
     };
 

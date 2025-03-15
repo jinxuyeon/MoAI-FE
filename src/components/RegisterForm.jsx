@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "./utils/AxiosInstance";
 import "./RegisterForm.css"
 const RegisterForm = () => {
 
@@ -19,20 +19,13 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/api/member/join", formData, {
-        headers: {
-          "Content-Type": "application/json", // 서버에 JSON 데이터 전송
-        },
-      });
-
+      const response = await axiosInstance.post("/api/member/join", formData);
       console.log("회원가입 성공:", response.data);
       alert("회원가입 성공!");
       navigate("/login");
-
     } catch (error) {
-
       console.error("회원가입 에러:", error);
-      alert(error.response.data.message);
+      alert(error.response?.data?.message || "회원가입 실패");
     }
   };
 

@@ -13,11 +13,9 @@ const MainPage = () => {
         const token = localStorage.getItem("accessToken");
         if (token) {
             try {
-                console.log("토큰:", token); //
                 const decodedToken = jwtDecode(token);
                 console.log(decodedToken);
                 setUserName(decodedToken.username);
-                console.log(userName)
             } catch (error) {
                 console.error("토큰 디코딩 오류:", error);
             }

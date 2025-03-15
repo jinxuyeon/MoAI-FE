@@ -8,7 +8,7 @@ import MainPage from './pages/MainPage';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,10 +28,10 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-
+  
     if (token && !isTokenExpired(token)) {
       setIsAuthenticated(true);
-      console.log("인증완")
+      console.log("인증완료")
 
     } else {
       setIsAuthenticated(false);
@@ -42,7 +42,7 @@ function App() {
     }
   }, []);
 
-
+  
   return (
     <div>
       <Routes>
@@ -52,8 +52,8 @@ function App() {
         />
         <Route path="/login" element={<LoginPage setIsAuthenticated ={setIsAuthenticated}/>} />
         <Route path="/login/register" element={<RegisterPage />} />
-        <Route path="/main" element={isAuthenticated ? <MainPage /> : <Navigate to="/login" replace />} />
-        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/login" replace />} />
+        <Route path="/main" element={isAuthenticated ? <MainPage /> : <Navigate to="/" replace />} />
+        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
       </Routes>
     </div>
   );
