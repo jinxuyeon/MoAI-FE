@@ -4,12 +4,26 @@
     height: 100vh;
 }
 
-
 .MainPage .Panel-Dashboard-Container {
-    margin-top: 60px;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
     min-width: 840px;
+    overflow: hidden;
+    margin-top: 60px;
+    margin-left: 20px;
+
 }
 
+
+/* 반응형 레이아웃 550고정정 */
+@media (max-width: 550px) {
+    .MainPage .Panel-Dashboard-Container {
+        flex-direction: column; /* 패널이 위로, 대시보드는 아래로 */
+        align-items: center; /* 중앙 정렬 */
+        overflow-y: auto; /* 대시보드에서 세로 스크롤 허용 */
+    }
+
+    .MainPage .Panel-Dashboard-Container > div {
+        width: 100%; /* 각 요소가 가득 차도록 */
+    }
+}

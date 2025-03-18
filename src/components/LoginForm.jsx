@@ -40,14 +40,14 @@ const LoginForm = ({ setIsAuthenticated }) => {
         <h2>로그인</h2>
         <form className="form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="username">id:</label>
+            <label className="username">학번:</label>
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
               required
-              placeholder="id"
+              placeholder="학번"
             />
           </div>
           <div className="form-group">

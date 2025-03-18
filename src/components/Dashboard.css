@@ -1,22 +1,25 @@
 .Dashboard {
-    gap: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex :1; /* 부모에서 남은 공간을 채움 */
     max-height: 100%; /* 부모 높이 내에서 제한 */
     margin-left: 350px;
     overflow-y: auto;
+
 }
 
 .Dashboard .Content-Container{
+    margin-top: 40px;
+    margin-left: 80px;
+    margin-right: 40px;
     flex :1;
     display: flex;
+    height: fit-content;
     flex-wrap: wrap;
     justify-content: start;
     align-items: start;
     gap: 30px;
-    margin: 20px;
+
 }
 
 .Dashboard .box{
@@ -40,5 +43,18 @@
 @media (max-width: 768px) {
     .Dashboard .box {
         width: calc(100% - 20px) !important;
+    }
+}
+
+
+/* 반응형 레이아웃 550고정정 */
+@media (max-width: 550px) { 
+    .Dashboard {
+        overflow-y: unset;
+        margin-left: 0;
+    }
+    .Dashboard .Content-Container{
+        display: flex;
+        margin-left: 0
     }
 }

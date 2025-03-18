@@ -23,13 +23,12 @@ const Panel = ({ username }) => {
                 <button className="profile-btn"></button>
                 <Link className="link-mypage" to={"/mypage"}>{username}</Link>
             </div>
-
             <Favorites />
             <hr />
             <Friends />
             <hr />
-            <div>캘린더</div>
-            <button onClick={adminButtonHandler}>관리자만 가능한 버튼</button>
+            <div>캘린더</div> 
+            <hr />
         </div>
     );
 };

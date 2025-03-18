@@ -9,7 +9,6 @@ import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ function App() {
     if (token && !isTokenExpired(token)) {
       setIsAuthenticated(true);
       console.log("인증완료")
-
     } else {
       setIsAuthenticated(false);
       console.log("인증실패")
@@ -53,7 +51,7 @@ function App() {
         <Route path="/login" element={<LoginPage setIsAuthenticated ={setIsAuthenticated}/>} />
         <Route path="/login/register" element={<RegisterPage />} />
         <Route path="/main" element={isAuthenticated ? <MainPage /> : <Navigate to="/" replace />} />
-        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
+        <Route path="/mypage" element={/*isAuthenticated ?*/ <MyPage /> /*: <Navigate to="/" replace />*/} />
       </Routes>
     </div>
   );

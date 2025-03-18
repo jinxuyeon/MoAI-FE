@@ -25,10 +25,11 @@ const MainPage = () => {
 
     return (
         <div className="MainPage">
-            <Header title={"Dashborad"}/>
+
+            <Header title={"Dashborad"} />
             <div className="Panel-Dashboard-Container">
-                <Panel username={userName} />
-                <Dashboard />
+                    <Panel username={userName} />
+                    <Dashboard />
             </div>
         </div>
     )
