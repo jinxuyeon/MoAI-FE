@@ -2,7 +2,7 @@ import axios from "axios";
 
 const refreshAccessToken = async () => {
   try {
-    const response = await axios.post("http://localhost:8080/auth/refresh", {
+    const response = await axios.post("http://58.238.182.100:9000/auth/refresh", {
       refreshToken: localStorage.getItem("refreshToken"),
     });
 
