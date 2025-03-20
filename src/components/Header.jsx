@@ -3,8 +3,9 @@ import "./Header.css"
 function Header({title}) {
 
   const handleLogout = ()=>{
-    localStorage.removeItem("accessToken")
-    localStorage.removeItem("refreshToken")
+    //localStorage.removeItem("accessToken")
+    //localStorage.removeItem("refreshToken")
+    localStorage.clear()
     window.location.href = "/login"
   }
   return (
@@ -14,8 +15,7 @@ function Header({title}) {
       <div className="header-space">
       <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
       </div>
-    </div>
-      
+    </div>  
   )
 }
 

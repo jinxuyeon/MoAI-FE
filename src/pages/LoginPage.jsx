@@ -1,4 +1,4 @@
-import { useState , useEffect} from "react";
+import { useEffect} from "react";
 import LoginForm from "../components/LoginForm";
 
 const LoginPage = ({setIsAuthenticated}) => {

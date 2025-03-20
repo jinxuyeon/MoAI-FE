@@ -5,7 +5,7 @@
     max-height: 100%; /* 부모 높이 내에서 제한 */
     margin-left: 350px;
     overflow-y: auto;
-
+    height:100vh;
 }
 
 .Dashboard .Content-Container{
@@ -31,6 +31,7 @@
     border-radius: 10px;
     flex-basis: auto;
 }
+
 
 
 /* 🔽 작은 화면에서는 한 줄에 하나씩 */

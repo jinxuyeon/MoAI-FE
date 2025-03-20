@@ -15,10 +15,9 @@
   
 .logout-btn {
   color:black;
-  background-color:transparent; 
   height: 30px;
+  background-color:transparent; 
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 13px  /* 폰트 크기 조정 */
 }
