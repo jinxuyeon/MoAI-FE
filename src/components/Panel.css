@@ -8,6 +8,7 @@
     margin-top: 20px;
     position: fixed;
     height: auto;
+    overflow-y: auto !important;
 }
 
 

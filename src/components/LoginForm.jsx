@@ -14,6 +14,25 @@ const LoginForm = ({setIsAuthenticated}) => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post("/api/member/login", formData);
+      if (response.status === 200) {
+        console.log("로그인 성공:", response.data);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        setAuthData()
+        alert("로그인 성공!");
+        setAuthData();
+        setIsAuthenticated(true)
+        navigate("/main");
+      }
+    } catch (error) {
+      console.error("로그인 에러:", error);
+      alert("아이디 또는 비밀번호가 잘못되었습니다.");
+    }
+  };
   const setAuthData = () => {
     try {
       console.log("setAuthData 호출")
@@ -25,29 +44,6 @@ const LoginForm = ({setIsAuthenticated}) => {
       localStorage.setItem("name", decodedToken.name)
     } catch (error) {
       console.error("토큰 디코딩 오류:", error);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post("/api/member/login", formData);
-
-      if (response.status === 200) {
-        console.log("로그인 성공:", response.data);
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-      
-
-        setAuthData()
-        alert("로그인 성공!");
-        setAuthData();
-        setIsAuthenticated(true)
-        navigate("/main");
-      }
-    } catch (error) {
-      console.error("로그인 에러:", error);
-      alert("아이디 또는 비밀번호가 잘못되었습니다.");
     }
   };
 

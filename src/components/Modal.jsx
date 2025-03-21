@@ -2,21 +2,18 @@ import "./Modal.css";
 import { useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 
-const Modal = ({ openModal, setOpenModal }) => {
+const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFriendInfo,setHasFriendrequest, setRequestMemberList }) => {
     const [studentId, setStudentId] = useState("");
     const [result, setResult] = useState("");
     const [activeTab, setActiveTab] = useState("send");
-    const [requestMemberList, SetrquestMemberList] = useState([])
-
-    const id = localStorage.getItem("id");
     const myUsername = localStorage.getItem("username");
+    const id = localStorage.getItem("id");
 
     const handleSearch = async () => {
         try {
             if (studentId === myUsername) {
                 return;
             }
-
             const response = await axiosInstance.get(`/api/member/search?studentId=${studentId}`);
             setResult(response.data);
             if (response.status === 200) {
@@ -37,26 +34,39 @@ const Modal = ({ openModal, setOpenModal }) => {
                 setResult("친구 추가 요청이 전송되었습니다.");
             }
         } catch (error) {
-            console.log("친구 추가 요청 실패:", error);
+           console.log(error.response.data.message) //이렇게하자자
         }
     };
-
-    const ReceivedFriendRequests = async () => {
-        try {
-            const response = await axiosInstance.get(`api/friend/${id}/request-friend-list`)
-            if (response.status === 200) {
-                console.log("친구요청 목록 불러오기 완료")
-                SetrquestMemberList(response.data.requestMemberList)
-            }
-
-        } catch (error) {
-            console.log("요청 목록 가져오기 실패:", error)
-        }
-    }
 
     const handleTabChange = (tab) => {
         setActiveTab(tab); // "search" or "requests"
     };
+
+    const handleDecline = async (idToDecline) => {
+        try {
+            const response = await axiosInstance.post(`api/friend/${id}/decline-friend`, { idToDecline: idToDecline })
+            if (response.status === 200) {
+                console.log(`${idToDecline}친구요청 거절 완료`)
+                setRequestMemberList(requestMemberList.filter(request => request.id !== idToDecline));
+            }
+        } catch (error) {
+            console.log("친구 요청 거절 실패:", error)
+        }
+    }
+
+    const handleAccept = async (idToAccept) => {
+        try {
+            const response = await axiosInstance.post(`api/friend/${id}/accept-friend`, { idToAccept: idToAccept })
+            if (response.status === 200) {
+                console.log(`${idToAccept}친구요청 수락 완료`)
+                setRequestMemberList(requestMemberList.filter(request => request.id !== idToAccept));
+                fetchMyFriendInfo()
+            }
+        } catch (error) {
+            console.log("친구 수락 실패",error)
+        }
+
+    }
 
     return (
         <div className="Modal">
@@ -67,8 +77,8 @@ const Modal = ({ openModal, setOpenModal }) => {
                         <button className="header-btn" onClick={() => handleTabChange("send")}>검색</button>
                         <button className="header-btn" onClick={() => {
                             handleTabChange("receive");
-                            ReceivedFriendRequests()
-                        }}>받은 요청</button>
+                            setHasFriendrequest(false)
+                        }}> {hasFriendRequest ? "받은 요청🔴" : "받은 요청"}</button>
 
                         <button
                             className="cancel"
@@ -114,8 +124,8 @@ const Modal = ({ openModal, setOpenModal }) => {
                                         requestMemberList.map((request, index) => (
                                             <li key={index}>
                                                 {request.username} ({request.name})
-                                                <button>수락</button>
-                                                <button>거절</button>
+                                                <button onClick={() => handleAccept(request.id)}>수락</button>
+                                                <button onClick={() => handleDecline(request.id)}>거절</button>
                                             </li>
                                         ))
                                     ) : (

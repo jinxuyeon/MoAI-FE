@@ -3,10 +3,7 @@ import Favorites from "./Favorites";
 import Friends from "./Friends";
 import { Link } from "react-router-dom";
 const Panel = () => {
-
     const name = localStorage.getItem("name")
-   
-
     return (
         <div className="Panel">
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
@@ -14,11 +11,8 @@ const Panel = () => {
                 <Link className="link-mypage" to={"/mypage"}>{name}</Link>
             </div>
             <Favorites />
-            <hr />
             <Friends />
-            <hr />
             <div>캘린더</div> 
-            <hr />
         </div>
     );
 };
