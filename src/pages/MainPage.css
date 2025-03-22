@@ -1,29 +1,41 @@
 .MainPage {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    height: auto;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    display: block;
 }
 
 .MainPage .Panel-Dashboard-Container {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
+    width: 100%;
     min-width: 840px;
-    overflow: hidden;
-    margin-top: 60px;
-    margin-left: 20px;
+}
 
+.MainPage .Panel-container {
+    height:3000px;
+    border-right: 1px solid var(--base-border-color);
 }
 
 
 /* 반응형 레이아웃 550고정정 */
 @media (max-width: 550px) {
     .MainPage .Panel-Dashboard-Container {
-        flex-direction: column; /* 패널이 위로, 대시보드는 아래로 */
-        align-items: center; /* 중앙 정렬 */
-        overflow-y: auto; /* 대시보드에서 세로 스크롤 허용 */
+        flex-direction: column;
+        /* 패널이 위로, 대시보드는 아래로 */
+        align-items: center;
+        /* 중앙 정렬 */
+        overflow-y: auto;
+        /* 대시보드에서 세로 스크롤 허용 */
     }
 
-    .MainPage .Panel-Dashboard-Container > div {
-        width: 100%; /* 각 요소가 가득 차도록 */
+    .MainPage .Panel-container{
+        height: auto;
+    }
+
+    .MainPage .Panel-Dashboard-Container>div {
+        width: 100%;
+        /* 각 요소가 가득 차도록 */
     }
 }

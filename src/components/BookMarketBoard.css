@@ -1,0 +1,19 @@
+.BookMarketBoard{
+    border: 1px solid var(--base-border-color);
+    display: block;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    box-shadow: var(--board-shadow-color, 6px);
+    border-radius: 6px;
+    padding: 15px;
+    height: 100%  !important;
+    max-width: 600px;
+    gap: 30px;
+}
+.BookMarketBoard .info-container{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    overflow: auto;
+}

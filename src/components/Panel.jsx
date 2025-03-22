@@ -2,6 +2,7 @@ import "./Panel.css";
 import Favorites from "./Favorites";
 import Friends from "./Friends";
 import { Link } from "react-router-dom";
+import InputBox from "./InputBox";
 const Panel = () => {
     const name = localStorage.getItem("name")
     return (

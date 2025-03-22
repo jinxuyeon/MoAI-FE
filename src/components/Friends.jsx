@@ -29,11 +29,11 @@ const Friends = () => {
     const fetchMyFriendInfo = async () => {
         try {
             const response = await axiosInstance.get(`api/friend/${id}/accept-friend-list`)
-            if(response.status === 200){
+            if (response.status === 200) {
                 console.log("친구목록 불러오기 완료")
                 setMyFriendList(response.data.acceptMemberDtoList)
             }
-        }catch(error){
+        } catch (error) {
             console.log("친구 목록 가져오기 실패", error)
         }
     }
@@ -45,7 +45,7 @@ const Friends = () => {
 
     return (
         <div className="Friends-Container">
-            <div style={{ display: "flex", gap: "20px", width: "100%", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "2px", width: "100%", alignItems: "center" }}>
                 <button className="Friends-btn" onClick={() => setIsOpen(!isOpen)}>
                     😊 팔로워{isOpen ? "🔺" : "🔻"}
                 </button>
@@ -70,14 +70,14 @@ const Friends = () => {
             </div>
             {isOpen && (
                 <ul className="Friends-List">
-                {myFriendList.length > 0 ? (
-                    myFriendList.map((friend, index) => (
-                        <li key={index} className="Friends-Item">{friend.name}</li>
-                    ))
-                ) : (
-                    <li className="Friends-Item">친구가 없습니다.</li>
-                )}
-            </ul>
+                    {myFriendList.length > 0 ? (
+                        myFriendList.map((friend, index) => (
+                            <li key={index} className="Friends-Item">{friend.name}</li>
+                        ))
+                    ) : (
+                        <li className="Friends-Item">친구가 없습니다.</li>
+                    )}
+                </ul>
             )}
         </div>
     );

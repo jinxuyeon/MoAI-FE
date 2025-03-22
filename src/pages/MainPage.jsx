@@ -9,7 +9,10 @@ const MainPage = () => {
         <div className="MainPage">
             <Header title={"Dashborad"} />
             <div className="Panel-Dashboard-Container">
-                    <Panel />
+
+                <div className="Panel-container">
+                <Panel />
+                </div>
                     <Dashboard />
             </div>
         </div>
