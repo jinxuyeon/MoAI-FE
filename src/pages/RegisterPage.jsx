@@ -1,10 +1,16 @@
 import RegisterForm from "../components/RegisterForm"
 const RegisterPage = () => {
-    
+
     return (
         <div className="Page">
-            <RegisterForm className="form" />
+            <div className="left-side">
+                꾸미기
+            </div>
+            <div className="right-side">
+                <RegisterForm />
+            </div>
         </div>
+
     )
 }
 

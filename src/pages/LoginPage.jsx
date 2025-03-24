@@ -1,10 +1,15 @@
 import LoginForm from "../components/LoginForm";
-import "./LoginPage.css"
-const LoginPage = ({setIsAuthenticated}) => {
+import "./Page.css"
+import RegisterForm from "../components/RegisterForm";
+
+const LoginPage = ({ setIsAuthenticated }) => {
 
     return (
         <div className="Page">
-            <LoginForm setIsAuthenticated={setIsAuthenticated} />
+            <div className="left-side"> </div>
+            <div className="right-side">
+                <LoginForm setIsAuthenticated={setIsAuthenticated} />
+            </div>
         </div>
     );
 };
