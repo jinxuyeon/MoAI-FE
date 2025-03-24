@@ -2,10 +2,12 @@
     border: 1px solid var(--base-border-color);
     display: block;
     box-sizing: border-box;
-    word-wrap: break-word;
     box-shadow: var(--board-shadow-color, 6px);
     border-radius: 6px;
     padding: 15px;
     height: 100% Im !important;
     width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
+

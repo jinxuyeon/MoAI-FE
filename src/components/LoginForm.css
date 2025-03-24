@@ -1,69 +1,99 @@
-
-.LoginForm > .container{
-    background-color: #ffffff;
-    padding: 40px 30px;
-    border-radius: 13px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 0 auto;
-    
+.LoginForm {
+    width: 100%;  /* 화면 크기에 맞춰 자동 조정 */
+    max-width: 400px; /* 너무 커지지 않도록 제한 */
+    min-width: 150px; /* 최소 크기 유지 */
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: var(--board-shadow-color, 6px);
+    align-content: center;
+    justify-content: center
 }
-.LoginForm > h2 {
-    color: #333;
+
+.LoginForm h2 {
     font-size: 24px;
-    margin-top: 0;
-}
-
-.LoginForm > .container .form-group {
+    color: #333;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.LoginForm .form-group > label{
-    display: none;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-.LoginForm .form-group > input {
-    width: 100%;
-    padding: 12px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-    transition: all 0.3s ease-in-out;
+.LoginForm .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;  /* 각 필드 간 간격 */
 }
 
-.LoginForm .form-group >input:focus {
-    outline: none;
+.LoginForm label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.LoginForm input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.LoginForm input:focus {
     border-color: #41bbfc;
     background-color: #fff;
+    outline: none;
 }
 
-.LoginForm .form> button {
-    width: 100%;
+.LoginForm button {
     padding: 12px;
-    background-color: #7fccf6;
-    color: #fff;
     font-size: 16px;
+    color: white;
+    background-color: #41bbfc;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%;  /* 버튼의 크기를 100%로 설정하여 중앙 정렬 */
+    margin-bottom: 10px;  /* 버튼들 간의 간격을 두기 위한 여백 */
+    margin-top: 16px;
 }
 
-.LoginForm .form>button:hover {
-    background-color: #11a3f1;
+.LoginForm button:hover {
+    background-color: #3189d3;  /* 버튼 호버 시 색상 */
+}
+
+/* 로그인 버튼과 회원가입 버튼을 중앙 정렬 */
+.LoginForm .form-group:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .LoginForm .link-button {
-    display: block;
-    color: #7fccf6;
-    font-size: 14px;
+    text-align: center;
+    color: #3189d3;
     text-decoration: none;
+    font-size: 14px;
+    display: block;
+}
+
+.LoginForm .link-button:hover {
+    text-decoration: underline;  /* 링크에 호버 효과 추가 */
+}
+
+/* 반응형 */
+@media (max-width: 400px) {
+    .LoginForm {
+        padding: 15px;
+    }
+
+    .LoginForm h2 {
+        font-size: 20px;
+    }
+
+    .LoginForm input, .LoginForm button {
+        font-size: 14px;
+    }
 }

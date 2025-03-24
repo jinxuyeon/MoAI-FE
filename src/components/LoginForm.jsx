@@ -49,11 +49,10 @@ const LoginForm = ({setIsAuthenticated}) => {
 
   return (
     <div className="LoginForm">
-      <div className="container">
         <h2>로그인</h2>
         <form className="form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="username">학번:</label>
+            <label className="username"></label>
             <input
               type="text"
               name="username"
@@ -64,7 +63,7 @@ const LoginForm = ({setIsAuthenticated}) => {
             />
           </div>
           <div className="form-group">
-            <label className="password">비밀번호:</label>
+            <label className="password"></label>
             <input
               type="password"
               name="password"
@@ -74,15 +73,17 @@ const LoginForm = ({setIsAuthenticated}) => {
               placeholder="비밀번호"
             />
           </div>
+
           <button type="submit">로그인</button>
+        
         </form>
-        <div>
-          <Link className="link-button" to={"/login/register"}>
+        <Link className="link-button" to={"/login/register"}>
             회원가입
           </Link>
+        <div>
+          
         </div>
       </div>
-    </div>
   );
 };
 

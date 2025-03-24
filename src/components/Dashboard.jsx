@@ -9,9 +9,7 @@ const Dashboard = () => {
             <div className="Content-Container">
                 <NormalBoard />
 
-                <div className="market-container">
-                    <BookMarketBoard />
-                </div>
+             
             </div>
         </div>
     )

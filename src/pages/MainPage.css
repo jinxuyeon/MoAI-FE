@@ -20,7 +20,7 @@
 
 
 /* 반응형 레이아웃 550고정정 */
-@media (max-width: 550px) {
+@media (max-width: 780px) {
     .MainPage .Panel-Dashboard-Container {
         flex-direction: column;
         /* 패널이 위로, 대시보드는 아래로 */
