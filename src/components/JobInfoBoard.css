@@ -1,5 +1,7 @@
-.NormalBoard{
+
+.JobInfoBoard{
     min-width: 110px;
+    min-height: 100%;
     border: 1px solid var(--base-border-color);
     display: block;
     box-sizing: border-box;
@@ -10,4 +12,3 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
-

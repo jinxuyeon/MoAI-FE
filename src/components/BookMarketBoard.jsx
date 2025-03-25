@@ -4,7 +4,7 @@ const BookMarketBoard = () => {
 
     return (
         <section className="BookMarketBoard">
-            <h5>책 장터</h5>
+            <h3>책 장터</h3>
             <div className="info-container">
                 
                 <div>

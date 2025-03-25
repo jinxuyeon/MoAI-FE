@@ -49,11 +49,15 @@ function App() {
         />
         <Route path="/login" element={<LoginPage setIsAuthenticated ={setIsAuthenticated}/>} />
         <Route path="/login/register" element={<RegisterPage />} />
+
+        {/* 
         <Route path="/main" element={isAuthenticated ? <MainPage />: <Navigate to="/" replace />} />
-        {
-        //<Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
-        }
-        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <MyPage />} />
+        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
+        */}
+        
+        {/* 개발단계 시 아래 사용, 서버이용시 아래 주석후 위 주석 풀기 */}
+        <Route path="/main" element={isAuthenticated ? <MainPage />: <MainPage />} />
+        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <MyPage />} />  
 
         
 

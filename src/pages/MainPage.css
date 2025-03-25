@@ -11,6 +11,8 @@
 
 .MainPage .Panel-container {
     width: 280px;
+        min-width: 150px;
+
     border-right: 1px solid var(--base-border-color);
 }
 
@@ -20,24 +22,20 @@
     min-width: 150px;
 }
 
-/* 반응형 레이아웃 550고정정 */
-@media (max-width: 500px) {
+/* 반응형 레이아웃 760고정정 */
+@media (max-width: 760px) {
     .MainPage .Panel-Dashboard-Container {
         flex-direction: column;
-        /* 패널이 위로, 대시보드는 아래로 */
-        align-items: center;
-        /* 중앙 정렬 */
         overflow-y: auto;
-        /* 대시보드에서 세로 스크롤 허용 */
+        min-width: 140px;
     }
 
     .MainPage .Panel-container{
-        min-width: none;
+        min-width: 140px;
     }
 
     .MainPage .Panel-Dashboard-Container>div {
         width: 100%;
-        /* 각 요소가 가득 차도록 */
     }
 }
 

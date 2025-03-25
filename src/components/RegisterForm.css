@@ -54,7 +54,7 @@
     padding: 12px;
     font-size: 16px;
     color: white;
-    background-color: #41bbfc;
+    background-color: var(--base-blue-color);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -79,7 +79,7 @@
 
 .RegisterForm .link-button {
     text-align: center;
-    color: #3189d3;
+    color: var(--base-blue-color);
     text-decoration: none;
     font-size: 14px;
     display: block;

@@ -1,6 +1,7 @@
 import Header from "../components/Header"
 import "./MyPage.css"
 
+// 마이페이지-예빈
 const MyPage = () =>{
     return(
         <div className="MyPage">

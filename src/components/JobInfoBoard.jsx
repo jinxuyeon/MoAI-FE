@@ -1,8 +1,9 @@
-import "./NormalBoard.css"
-const NormalBoard = () => {
+import "./JobInfoBoard.css"
+
+const JobInfoBoard = () => {
     return (
-        <section className="NormalBoard">
-            <h3>일반게시판</h3>
+        <section className="JobInfoBoard">
+            <h3>채용정보</h3>
             <div>
                 <div><strong>게시글제목1</strong></div>
                 게시글 내용 미리보기기ddddddddd
@@ -14,8 +15,8 @@ const NormalBoard = () => {
 
             <div>게시글 더보기</div>
         </section>
+
     )
 }
 
-
-export default NormalBoard
+export default JobInfoBoard

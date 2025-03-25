@@ -3,25 +3,22 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // 기본 스타일
 import "./Calendar.css";
 
-
 const CalendarPanel = () => {
-    const [date, setDate] = useState(new Date());  // 선택한 날짜
-    const [isOpen, setIsOpen] = useState(false);  // 캘린더 열림/닫힘 상태
+    const [date, setDate] = useState(new Date()); // 선택한 날짜
+
+    console.log("선택한 날짜", date);
 
     return (
-        <div className="calendar-Container">
-            <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
-                <button className="Calendar-Button" onClick={() => setIsOpen(!isOpen)}>
-                    📅 캘린더   {isOpen ? "🔺" : "🔻"}
-                </button>
+        <div className="calendar-container">
+            <h4>🗓️캘린더</h4>
+            <div className="calendar">
+                <Calendar
+                    onChange={setDate}
+                    value={date}
+                    formatDay={(locale, date) => date.getDate()}
+                />
+                {/* <p>선택한 날짜: <strong>{date.toLocaleDateString()}</strong></p> */}
             </div>
-
-            {isOpen && (
-                <div className="calendar">
-                    <Calendar onChange={setDate} value={date}  />
-                    {/* <p>선택한 날짜: <strong>{date.toLocaleDateString()}</strong></p> */}
-                </div>
-            )}
         </div>
     );
 };

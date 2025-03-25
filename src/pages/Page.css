@@ -10,7 +10,7 @@
 .left-side{
     width: 100%;
     flex-basis: 80%;
-    background-color: #41bbfc;
+    background-color: var(--base-blue-color);
     height: 100%;
 }
 .right-side{

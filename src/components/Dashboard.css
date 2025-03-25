@@ -1,70 +1,92 @@
 .Dashboard {
     height: 100%;
-    width: 100%;
-    min-width: 150px;
+    min-width: 15px;
     padding: 20px;
-    max-width: 100%;
 }
 
-.Dashboard .Content-container{
+.Dashboard .Content-container {
     display: flex;
     flex-direction: row;
     max-width: 100%;
-    min-width: 10px;
-    align-items: start;
     gap: 20px;
     overflow-wrap: break-word;
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
 
-.Dashboard .main-container{
+.Dashboard .main-container {
     display: flex;
-    max-width: 1100px;
-    min-width: 10px;
+    width: 1500px;
+    min-width: 150px;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    gap: 50px;
+    gap: 40px;
     overflow-wrap: break-word;
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
-.Dashboard .rightside-container{
+
+.Dashboard .rightside-container {
+    
     flex-grow: 1;
-    min-width: 100px;
-    background-color: green;
+    min-width: 160px;
+    width: 500px;
 }
-.Dashboard .board-area{
-    display: flex;
+
+.Dashboard .board-area {
     width: 100%;
     height: auto;
     min-width: 10px;
 }
 
+.Dashboard .div-container {
+    display: flex;
+    justify-content: space-between;
+    min-width: 10px;
+    width: 100%;
+    gap: 30px;
+}
 
+.Dashboard .half-board-area {
+    min-width: 100px;
+    flex: 1;
+}
 
-@media (max-width: 500px) { 
+@media (max-width: 1080px) {
+    .Dashboard .Content-container {
+        gap: var(--medium-screen-gap);
+    }
+
+    .Dashboard .Content-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Dashboard .main-container {
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        gap: var(--medium-screen-gap);
+    }
+
+    .Dashboard .rightside-container {
+
+        width: 100%;
+    }
+
+    
+}
+
+@media (max-width: 760px) {
     .Dashboard {
-        overflow-y: unset;
-        margin-left: 0;
-        padding: 20px;
-    }
-    .Dashboard .Content-container{
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 630px) { 
-    .Dashboard .Content-container{
-        display: flex;
-        flex-direction: column;
+        padding: var(--small-screen-gap)
     }
 
-    .Dashboard.main-container{
-        width: 100%;
+    .Dashboard .div-container {
+        flex-direction: column;
+        gap: var(--small-screen-gap)
     }
-    .Dashboard .rightside-container{
-        width: 100%;
+
+    .Dashboard .half-board-area {
+        max-width: 100%
     }
 }
-  
