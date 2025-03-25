@@ -1,19 +1,23 @@
 .MainPage {
     height: 100%;
-    max-width: 100%;
+    width: 100%;
 }
 
 .MainPage .Panel-Dashboard-Container {
     flex-grow: 1;
+    min-width: 100vh;
     display: flex;
-    flex-direction: row;
-    width: 100%;
 }
 
 .MainPage .Panel-container {
-    width: 500px;
-    height: 3000px;
+    width: 280px;
     border-right: 1px solid var(--base-border-color);
+}
+
+.MainPage .Dashboard-container {
+    flex-grow: 1;
+    width: 300px;
+    min-width: 150px;
 }
 
 /* 반응형 레이아웃 550고정정 */
@@ -28,7 +32,7 @@
     }
 
     .MainPage .Panel-container{
-        height: auto;
+        min-width: none;
     }
 
     .MainPage .Panel-Dashboard-Container>div {

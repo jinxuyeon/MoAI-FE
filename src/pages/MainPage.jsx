@@ -4,7 +4,6 @@ import Dashboard from "../components/Dashboard"
 import "./Mainpage.css"
 const MainPage = () => {
 
-
     return (
         <div className="MainPage">
             <Header title={"Dashborad"} />
@@ -12,7 +11,9 @@ const MainPage = () => {
                 <div className="Panel-container">
                     <Panel />
                 </div>
-                <Dashboard />
+                <div className="Dashboard-container">
+                    <Dashboard />
+                </div>
             </div>
         </div>
     )
