@@ -9,6 +9,7 @@ html, body {
     padding: 0;
     box-sizing: border-box;
     overflow-wrap: break-word;
-    word-wrap: break-word;
+    word-wrap: break-word; 
+    white-space: normal; /* 공백을 유지하면서 줄바꿈 */
 }
 

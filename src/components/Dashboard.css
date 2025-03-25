@@ -1,59 +1,31 @@
 .Dashboard {
-    display: block;
-    max-height: 100%; /* 부모 높이 내에서 제한 */
+    height: 100%;
     width: 100%;
+    min-width: 150px;
     padding: 20px;
 }
 
 .Dashboard .Content-Container{
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 100%;
-    flex :1;
     height: fit-content;
     justify-content: start;
     align-items: start;
     gap: 20px;
 }
 
-.Dashboard .box{
-    background-color: grey;
-    width: calc(33.333% - 20px); /* 한 줄에 3개 */
-    max-width: 500px;
-    min-width: 300px; /* 최소 너비 설정 */
-    height: 500px;
-    border-radius: 10px;
-    flex-basis: auto;
-}
-
-.market-container{
-    width: 100%;
-}
-
-
-/* 🔽 작은 화면에서는 한 줄에 하나씩 */
-@media (max-width: 1024px) {
-    .Dashboard .box {
-        width: calc(50% - 20px); /* 두 개씩 배치 */
-    }
-}
-
-@media (max-width: 768px) {
-    .Dashboard .box {
-        width: calc(100% - 20px) !important;
-    }
-}
 
 
 /* 반응형 레이아웃 550고정정 */
-@media (max-width: 550px) { 
+@media (max-width: 500px) { 
     .Dashboard {
         overflow-y: unset;
         margin-left: 0;
+        padding: 10px;
     }
     .Dashboard .Content-Container{
         display: flex;
-        margin-left: 0
+        margin: 0;
     }
 }

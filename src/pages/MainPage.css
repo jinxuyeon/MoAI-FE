@@ -1,8 +1,6 @@
 .MainPage {
-    height: auto;
+    height: 100%;
     max-width: 100%;
-    overflow-wrap: break-word;
-    display: block;
 }
 
 .MainPage .Panel-Dashboard-Container {
@@ -10,17 +8,16 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-width: 840px;
 }
 
 .MainPage .Panel-container {
-    height:3000px;
+    width: 500px;
+    height: 3000px;
     border-right: 1px solid var(--base-border-color);
 }
 
-
 /* 반응형 레이아웃 550고정정 */
-@media (max-width: 780px) {
+@media (max-width: 500px) {
     .MainPage .Panel-Dashboard-Container {
         flex-direction: column;
         /* 패널이 위로, 대시보드는 아래로 */
@@ -39,3 +36,4 @@
         /* 각 요소가 가득 차도록 */
     }
 }
+
