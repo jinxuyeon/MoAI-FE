@@ -4,6 +4,7 @@ import Friends from "./Friends";
 import { Link , useNavigate} from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import handleApiError from "./utils/handleApiError";
+import Calendar from "./Calendar";
 
 const Panel = ({ username }) => {
     const navigate = useNavigate(); 
@@ -26,8 +27,8 @@ const Panel = ({ username }) => {
             <Favorites />
             <hr />
             <Friends />
-            <hr />
-            <div>캘린더</div> 
+            <hr />        
+            <Calendar />
             <hr />
         </div>
     );

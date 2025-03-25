@@ -1,0 +1,44 @@
+
+/* 캘린더 버튼 */
+
+.Calendar-Button {
+    background-color: white;
+    padding: 8px;
+    font-size: 16px;
+
+    font-weight: bold;
+    border: none;
+    color: black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+
+/* react-calendar 스타일 수정 */
+.react-calendar {
+    max-height: 200px; /* 최대 높이를 설정하여 세로 크기 제한 */
+    overflow-y: auto;  /* 내용이 넘칠 경우 스크롤이 생기도록 설정 */
+    margin: 0 auto;  /* 수평 가운데 정렬 */
+}
+
+/* 날짜 셀의 높이를 줄여서 세로 크기 조정 */
+.react-calendar__month-view__weekdays {
+    font-size: 14px;  /* 요일 폰트 크기 */
+    font-family: 'Arial', sans-serif;
+    height: 40px;     /* 요일 셀의 높이 */
+}
+
+.react-calendar__month-view__days {
+    font-size: 14px;  /* 날짜 셀의 폰트 크기 */
+}
+
+.react-calendar__tile {
+    padding: 6px;     /* 날짜 셀 안의 여백을 줄여서 세로 길이 조정 */
+    font-size: 14px;   /* 날짜 텍스트 크기 */
+}
+
+.react-calendar__tile:disabled {
+    background-color: #f0f0f0;
+    color: #ccc;
+}
