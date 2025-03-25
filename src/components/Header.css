@@ -1,24 +1,20 @@
 
 .header-container{
     display: flex;
-    border-bottom: 1px solid #ccc;
-    position: fixed;
-    left: 0;
-    top: 0;
+    border-bottom: 1px solid var(--base-border-color);
+    position: relative !important;
+    background-color: var(--base-point-color);
     align-items: center;
     height: 60px;
     width: 100%;
-    z-index: 150;
     min-width: 300px;
   }
 
-  
 .logout-btn {
   color:black;
-  background-color:transparent; 
   height: 30px;
+  background-color:transparent; 
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 13px  /* 폰트 크기 조정 */
 }

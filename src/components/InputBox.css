@@ -1,0 +1,42 @@
+    
+.InputBox{
+    display: flex;
+    background-color: var(--base-point-color);
+    border-radius: 6px;
+    border: 1px solid var(--base-border-color);
+    word-wrap: break-word;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    min-height: 35px;
+    box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+}
+.InputBox input{
+    line-height: 20px; /*커서올리면 보이는 빨간줄 안잘림림*/
+    word-wrap: break-word;
+    margin-left: 8px;
+    font-size: 14px;
+    display: block;
+    min-height: 35px;
+    border:none;
+    outline: none;
+    background: none;
+    width: 100%;
+}
+.InputBox .search-btn{
+    background-size: contain;
+    width: 34px;
+    height: 29px;
+    border:none;
+    background-color: transparent;
+    margin-right: 5px;
+    cursor: pointer;
+    filter: brightness(0.8);
+
+}
+
+.InputBox .search-btn:active {
+    transform: scale(0.9); /* 버튼을 살짝 줄여 눌린 느낌 */
+    opacity: 0.7; 
+}

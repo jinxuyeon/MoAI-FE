@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './App.css';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
@@ -8,9 +8,9 @@ import MainPage from './pages/MainPage';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const navigate = useNavigate();
 
   const isTokenExpired = (token) => {
@@ -29,7 +29,7 @@ function App() {
     const token = localStorage.getItem("accessToken");
   
     if (token && !isTokenExpired(token)) {
-      setIsAuthenticated(true);
+      setIsAuthenticated(true)
       console.log("인증완료")
     } else {
       setIsAuthenticated(false);
@@ -42,18 +42,16 @@ function App() {
 
   
   return (
-    <div>
       <Routes>
         <Route
           path="/"
-          element={/*isAuthenticated ?*/ <Navigate to="/main" replace /> /*: <Navigate to="/login" replace  />*/}
+          element={isAuthenticated ? <Navigate to="/main" replace /> : <Navigate to="/login" replace  />}
         />
         <Route path="/login" element={<LoginPage setIsAuthenticated ={setIsAuthenticated}/>} />
         <Route path="/login/register" element={<RegisterPage />} />
-        <Route path="/main" element={/*isAuthenticated ?*/ <MainPage /> /*: <Navigate to="/" replace />*/} />
-        <Route path="/mypage" element={/*isAuthenticated ?*/ <MyPage /> /*: <Navigate to="/" replace />*/} />
+        <Route path="/main" element={isAuthenticated ? <MainPage />: <Navigate to="/" replace />} />
+        <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
       </Routes>
-    </div>
   );
 }
 

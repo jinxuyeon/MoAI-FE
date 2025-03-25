@@ -1,3 +1,8 @@
 :root {
     --breakpoint-mobile: 650px;
+    --base-border-color : #d1d9e0;
+    --base-point-color:#f6f8fa;
+    --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f
+
 }
+
