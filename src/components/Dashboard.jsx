@@ -22,6 +22,15 @@ const Dashboard = () => {
                         </div>
                     </section>
 
+                    <section className="div-container">
+                        <div className="half-board-area">
+                            <NormalBoard />
+                        </div>
+                        <div className="half-board-area">
+                            <NormalBoard />
+                        </div>
+                    </section>
+
                     <section className="board-area">
                         <NormalBoard />
                     </section>

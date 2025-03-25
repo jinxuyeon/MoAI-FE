@@ -16,6 +16,8 @@ const CalendarPanel = () => {
                     onChange={setDate}
                     value={date}
                     formatDay={(locale, date) => date.getDate()}
+                    locale="ko-KR"
+
                 />
                 {/* <p>선택한 날짜: <strong>{date.toLocaleDateString()}</strong></p> */}
             </div>
