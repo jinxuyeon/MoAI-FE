@@ -5,12 +5,13 @@
 
 
 .Friends-Container .header{
+    padding: 5px;
+    gap: 5px;
     display: flex;
     align-items: center;
 }
 .Friends-btn {
     background-color: white;
-    padding: 8px;
     font-size: 16px;
     font-weight: bold;
     border: none;

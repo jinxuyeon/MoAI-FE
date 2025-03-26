@@ -11,6 +11,8 @@
     min-width: 300px;
   }
 
+
+
 .logout-btn {
   color:black;
   width: 20px;
@@ -35,4 +37,11 @@
     justify-content: end;
     align-content: center;
     margin-right: 25px;
+    gap: 100px;
+  }
+  .util-box{
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    gap: 20px;
   }

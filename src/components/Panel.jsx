@@ -21,7 +21,7 @@ const Panel = () => {
 
     return (
         <div className="Panel">
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <div className="header">
                 <button className="profile-btn"></button>
                 <Link className="link-mypage" to={"/mypage"}>
                     {name || "게스트"}

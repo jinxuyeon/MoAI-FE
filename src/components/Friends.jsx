@@ -55,7 +55,7 @@ const Friends = () => {
                     className="Friends-btn"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    <h4>칭구</h4>
+                    <h4>친구</h4>
                 </button>
                 <button
                     className="add-friend-btn"
