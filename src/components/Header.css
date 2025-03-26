@@ -6,7 +6,6 @@
     background-color: var(--base-point-color);
     align-items: center;
     align-content: center;
-    justify-content: center;
     height: 60px;
     width: 100%;
     min-width: 300px;
@@ -22,14 +21,18 @@
   font-size: 13px  /* 폰트 크기 조정 */
 }
 
+
+
   .logout-btn:hover {
-    text-decoration: underline;
+    opacity: 0.5;
   }
   
   
   .header-space{
+    max-height: 20px;
     flex-grow: 1;
     display: flex;
     justify-content: end;
-    margin-right: 30px;
+    align-content: center;
+    margin-right: 25px;
   }

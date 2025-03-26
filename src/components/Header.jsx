@@ -13,7 +13,7 @@ function Header({title}) {
     <div className="header-container">
       <h2 style={{marginLeft:"28px"}}>{title}</h2>
       <div className="header-space">
-      <button className="logout-btn" onClick={handleLogout}>
+      <button className="logout-btn"  title="로그아웃" onClick={handleLogout}>
         <LogOut/>
       </button>
       </div>
