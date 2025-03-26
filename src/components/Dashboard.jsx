@@ -30,10 +30,6 @@ const Dashboard = () => {
                             <NormalBoard />
                         </div>
                     </section>
-
-                    <section className="board-area">
-                        <NormalBoard />
-                    </section>
                     <section className="board-area">
                         {/*장터터 게시판-세윤
                         section밖 코드는 건들 노노노*/}

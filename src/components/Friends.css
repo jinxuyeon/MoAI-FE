@@ -3,6 +3,11 @@
 
 }
 
+
+.Friends-Container .header{
+    display: flex;
+    align-items: center;
+}
 .Friends-btn {
     background-color: white;
     padding: 8px;
@@ -29,9 +34,9 @@
     transition: background-color 0.2s;
 }
 .add-friend-btn{
-    background-size: contain;
+    position: relative;
     background-color: white;
-    width: 27px;
+    width: 28px;
     height: 25px;
     border: none;
     border-radius: 6px;

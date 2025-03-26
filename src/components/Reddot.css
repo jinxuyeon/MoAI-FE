@@ -1,0 +1,20 @@
+.Reddot{
+
+    background-color: var(--red-dot-color);
+    padding: 0 5px !important;
+    width: 18px !important;
+    height: 17px !important;
+    position: absolute !important;
+    justify-content: center !important;
+    align-content: center !important;  
+    top: 0;
+    right: 0;
+    translate: 33% -33%;
+    cursor: pointer;
+    border-radius: 50px !important;
+}
+.Reddot .content{
+    font-size: 11px;
+    font-weight: 700 !important;
+    color: white;
+}

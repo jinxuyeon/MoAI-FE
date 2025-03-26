@@ -60,18 +60,17 @@
 
 
 .Modal .request-btn{
+  
+  position: relative;
   background-color: transparent;
   border: none;
+  padding: 5px;
   cursor: pointer;
 }
 
 .Modal .request-btn:hover {
   opacity: 0.5;
   /* 마우스 올릴 때 약간 투명해짐 */
-}
-
-.Modal .request-btn:active {
-  transform: scale(0.95); /* 클릭할 때 살짝 작아짐 */
 }
 
 

@@ -21,6 +21,13 @@
     padding: 5px;
 }
 
+.calendar-header{
+    position: relative;
+    display: flex;
+    gap:5px;
+    align-items: center;
+}
+
 
 /* react-calendar 스타일 수정 */
 .react-calendar {

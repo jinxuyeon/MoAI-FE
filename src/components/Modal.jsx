@@ -2,8 +2,17 @@ import "./Modal.css";
 import { useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 import InputBox from "./InputBox";
+import Reddot from "./Reddot";
 
-const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFriendInfo, setHasFriendrequest, setRequestMemberList }) => {
+const Modal = ({
+    setOpenModal,
+    hasFriendRequest,
+    requestMemberList,
+    fetchMyFriendInfo,
+    setHasFriendrequest,
+    setRequestMemberList,
+    count
+}) => {
     const [studentId, setStudentId] = useState("");
     const [result, setResult] = useState("");
     const [activeTab, setActiveTab] = useState("send");
@@ -12,8 +21,9 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
 
     const handleSearch = async () => {
         try {
-            
-            const response = await axiosInstance.get(`/api/member/search?studentId=${studentId}`);
+            const response = await axiosInstance.get(
+                `/api/friend/search?studentId=${studentId}`
+            );
             setResult(response.data);
             if (response.status === 200) {
                 setResult(response.data); // 정상적인 데이터 처리
@@ -26,13 +36,16 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
 
     const HandleAddFriend = async () => {
         try {
-            const response = await axiosInstance.post(`/api/friend/${id}/add-friend`, { studentId: studentId });
+            const response = await axiosInstance.post(
+                `/api/friend/${id}/add-friend`,
+                { studentId: studentId }
+            );
             if (response.status === 200) {
                 setResult("친구 추가 요청이 전송되었습니다.");
             }
         } catch (error) {
-            console.error("친구 요청 실패:", error)
-            setResult(error.response.data.message)
+            console.error("친구 요청 실패:", error);
+            setResult(error.response.data.message);
         }
     };
 
@@ -42,29 +55,42 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
 
     const handleDecline = async (idToDecline) => {
         try {
-            const response = await axiosInstance.post(`api/friend/${id}/decline-friend`, { idToDecline: idToDecline })
+            const response = await axiosInstance.post(
+                `api/friend/${id}/decline-friend`,
+                { idToDecline: idToDecline }
+            );
             if (response.status === 200) {
-                console.log(`${idToDecline}친구요청 거절 완료`)
-                setRequestMemberList(requestMemberList.filter(request => request.id !== idToDecline));
+                console.log(`${idToDecline}친구요청 거절 완료`);
+                setRequestMemberList(
+                    requestMemberList.filter(
+                        (request) => request.id !== idToDecline
+                    )
+                );
             }
         } catch (error) {
-            console.error("친구 요청 거절 실패:", error)
+            console.error("친구 요청 거절 실패:", error);
         }
-    }
+    };
 
     const handleAccept = async (idToAccept) => {
         try {
-            const response = await axiosInstance.post(`api/friend/${id}/accept-friend`, { idToAccept: idToAccept })
+            const response = await axiosInstance.post(
+                `api/friend/${id}/accept-friend`,
+                { idToAccept: idToAccept }
+            );
             if (response.status === 200) {
-                console.log(`${idToAccept}친구요청 수락 완료`)
-                setRequestMemberList(requestMemberList.filter(request => request.id !== idToAccept));
-                fetchMyFriendInfo()
+                console.log(`${idToAccept}친구요청 수락 완료`);
+                setRequestMemberList(
+                    requestMemberList.filter(
+                        (request) => request.id !== idToAccept
+                    )
+                );
+                fetchMyFriendInfo();
             }
         } catch (error) {
-            console.log("친구 수락 실패", error)
+            console.log("친구 수락 실패", error);
         }
-
-    }
+    };
 
     return (
         <div className="Modal">
@@ -72,14 +98,27 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
                 <div className="container">
                     <div className="header">
                         <h3>🖐️친구 추가</h3>
-                        <button className="request-btn" onClick={() => handleTabChange("send")}>검색</button>
-                        <button className="request-btn" onClick={() => {
-                            handleTabChange("receive");
-                            setHasFriendrequest(false)
-                        }}> {hasFriendRequest ? "받은 요청❗" : "받은 요청"}</button>
-
                         <button
-                            style={{ backgroundImage: "url('/icons/exit-image.svg')" }}
+                            className="request-btn"
+                            onClick={() => handleTabChange("send")}
+                        >
+                            검색
+                        </button>
+                        <button
+                            className="request-btn"
+                            onClick={() => {
+                                handleTabChange("receive");
+                                setHasFriendrequest(false);
+                            }}
+                        >
+                            받은요청
+                            {hasFriendRequest && <Reddot count={count}/>}{" "}
+                            {/* 친구 요청이 있을 때만 표시 */}
+                        </button>
+                        <button
+                            style={{
+                                backgroundImage: "url('/icons/exit-image.svg')",
+                            }}
                             className="exit-btn"
                             type="button"
                             onClick={() => {
@@ -96,13 +135,22 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
                                     state={studentId}
                                     setStateFunction={setStudentId}
                                     onClickFunction={handleSearch}
-                                    placeholder={"학번으로 친구를 찾아보세요"} />
+                                    placeholder={"학번으로 친구를 찾아보세요"}
+                                />
                             </div>
                             <div className="request-container">
                                 {result && result.username ? (
                                     <>
-                                        <p> {result.name} ({result.username})</p>
-                                        <button className="request-btn" onClick={HandleAddFriend}>+요청</button>
+                                        <p>
+                                            {" "}
+                                            {result.name} ({result.username})
+                                        </p>
+                                        <button
+                                            className="request-btn"
+                                            onClick={HandleAddFriend}
+                                        >
+                                            +요청
+                                        </button>
                                     </>
                                 ) : (
                                     <p>{result}</p>
@@ -113,12 +161,32 @@ const Modal = ({ setOpenModal, hasFriendRequest, requestMemberList, fetchMyFrien
                         <div className="requests-box">
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (
-                                    <div className="request-container" key={index}>
-                                        <span> {request.name} ({request.username})</span>
+                                    <div
+                                        className="request-container"
+                                        key={index}
+                                    >
+                                        <span>
+                                            {" "}
+                                            {request.name} ({request.username})
+                                        </span>
                                         <div>
-                                            <button className="request-btn" onClick={() => handleAccept(request.id)}>수락</button>
+                                            <button
+                                                className="request-btn"
+                                                onClick={() =>
+                                                    handleAccept(request.id)
+                                                }
+                                            >
+                                                수락
+                                            </button>
                                             /
-                                            <button className="request-btn" onClick={() => handleDecline(request.id)}>거절</button>
+                                            <button
+                                                className="request-btn"
+                                                onClick={() =>
+                                                    handleDecline(request.id)
+                                                }
+                                            >
+                                                거절
+                                            </button>
                                         </div>
                                     </div>
                                 ))
