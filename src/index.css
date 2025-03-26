@@ -1,7 +1,16 @@
-html, body {
+@font-face {
+    font-family: "Pretendard-Light";
+    src: url("components/fonts/Pretendard-Light.otf") format("opentype");
+}
+
+
+
+html,
+body {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden; /*지우지마마*/
+    font-family: Pretendard-Light ;
 
 }
 
@@ -10,7 +19,6 @@ html, body {
     padding: 0;
     box-sizing: border-box;
     overflow-wrap: break-word;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     white-space: normal; /* 공백을 유지하면서 줄바꿈 */
 }
-

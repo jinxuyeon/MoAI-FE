@@ -1,4 +1,5 @@
 import "./Header.css"
+import { LogOut } from 'lucide-react';
 
 function Header({title}) {
 
@@ -12,7 +13,9 @@ function Header({title}) {
     <div className="header-container">
       <h2 style={{marginLeft:"28px"}}>{title}</h2>
       <div className="header-space">
-      <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
+      <button className="logout-btn" onClick={handleLogout}>
+        <LogOut/>
+      </button>
       </div>
     </div>  
   )
