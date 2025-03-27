@@ -1,20 +1,21 @@
-.Reddot{
-
+.Reddot {
     background-color: var(--red-dot-color);
-    padding: 0 5px !important;
-    width: 18px !important;
-    height: 17px !important;
+    width: 16px !important;
+    height: 16px !important;
     position: absolute !important;
-    justify-content: center !important;
-    align-content: center !important;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
     top: 0;
     right: 0;
-    translate: 33% -33%;
+    transform: translate(50%, -50%);
     cursor: pointer;
-    border-radius: 50px !important;
+    border-radius: 50% !important;
 }
-.Reddot .content{
-    font-size: 11px;
+
+.Reddot .content {
+    font-size: 10px;
     font-weight: 700 !important;
     color: white;
 }

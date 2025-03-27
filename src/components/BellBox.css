@@ -1,0 +1,17 @@
+.BellBox{
+    position: relative;
+
+}
+.bell-btn{
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: #e8e6e6;
+    cursor: pointer;
+}
+
+
+.bell-btn:hover {
+    opacity: 0.5;
+}

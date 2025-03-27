@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Friends.css";
-import Modal from "./Modal";
+import FriendModal from "./FriendModal";
 import axiosInstance from "./utils/AxiosInstance";
 import Reddot from "./Reddot";
 import { UserRoundPlus } from "lucide-react";
@@ -65,11 +65,10 @@ const Friends = () => {
                     }}
                 >
                     <UserRoundPlus />
-                    {hasFriendRequest && <Reddot count ={requestMemberList.length}/>}
-                    {/* 친구 요청이 있을 때만 표시 */}
+                    <Reddot count={requestMemberList.length} />
                 </button>
                 {openModal ? (
-                    <Modal
+                    <FriendModal
                         setOpenModal={setOpenModal}
                         hasFriendRequest={hasFriendRequest}
                         setHasFriendrequest={setHasFriendrequest}
@@ -77,7 +76,7 @@ const Friends = () => {
                         setRequestMemberList={setRequestMemberList}
                         setMyFriendList={setMyFriendList}
                         fetchMyFriendInfo={fetchMyFriendInfo}
-                        count ={requestMemberList.length}
+                        count={requestMemberList.length}
                     />
                 ) : null}
             </div>

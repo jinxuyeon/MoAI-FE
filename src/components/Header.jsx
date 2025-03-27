@@ -1,7 +1,7 @@
 import "./Header.css";
 import { LogOut } from "lucide-react";
-import { Bell } from "lucide-react";
-import { Mails } from "lucide-react";
+import Bellbox from "./BellBox";
+import MailBox from "./MailBox";
 
 function Header({ title }) {
     const handleLogout = () => {
@@ -15,8 +15,8 @@ function Header({ title }) {
             <h2 style={{ marginLeft: "28px" }}>{title}</h2>
             <div className="header-space">
                 <div className="util-box">
-                    <Bell />
-                    <Mails />
+                    <Bellbox />
+                    <MailBox />
                 </div>
 
                 <button

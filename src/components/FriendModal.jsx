@@ -1,10 +1,10 @@
-import "./Modal.css";
+import "./FriendModal.css";
 import { useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 import InputBox from "./InputBox";
 import Reddot from "./Reddot";
 
-const Modal = ({
+const FriendModal = ({
     setOpenModal,
     hasFriendRequest,
     requestMemberList,
@@ -112,8 +112,7 @@ const Modal = ({
                             }}
                         >
                             받은요청
-                            {hasFriendRequest && <Reddot count={count}/>}{" "}
-                            {/* 친구 요청이 있을 때만 표시 */}
+                            <Reddot count={requestMemberList.length}/>
                         </button>
                         <button
                             style={{
@@ -201,4 +200,4 @@ const Modal = ({
     );
 };
 
-export default Modal;
+export default FriendModal;

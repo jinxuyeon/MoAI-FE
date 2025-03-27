@@ -31,11 +31,11 @@
   
   
   .header-space{
-    max-height: 20px;
     flex-grow: 1;
+    height: 100%;
     display: flex;
     justify-content: end;
-    align-content: center;
+    align-items: center;
     margin-right: 25px;
     gap: 100px;
   }

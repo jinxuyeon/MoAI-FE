@@ -1,0 +1,16 @@
+.MailBox{
+    position: relative;
+
+}
+.mail-btn{
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: #e8e6e6;
+    cursor: pointer;
+}
+
+.mail-btn:hover {
+    opacity: 0.5;
+}
