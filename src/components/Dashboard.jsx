@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import NormalBoard from "./NormalBoard";
+import NoticeBoard from "./NoticeBoard";
 import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
 const Dashboard = () => {
@@ -9,25 +9,14 @@ const Dashboard = () => {
                 <div className="main-container">
 
                     <section className="board-area">
-                        
-                        <NormalBoard />
+                        <NoticeBoard />
                     </section>
-
                     <section className="div-container">
                         <div className="half-board-area">
-                            <NormalBoard />
+                            <NoticeBoard />
                         </div>
                         <div className="half-board-area">
-                            <NormalBoard />
-                        </div>
-                    </section>
-
-                    <section className="div-container">
-                        <div className="half-board-area">
-                            <NormalBoard />
-                        </div>
-                        <div className="half-board-area">
-                            <NormalBoard />
+                            <NoticeBoard />
                         </div>
                     </section>
                     <section className="board-area">

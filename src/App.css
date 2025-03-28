@@ -4,15 +4,21 @@
     --base-point-color:#f6f8fa;  
     --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f;   /* 게시판 그림자 */
     --red-dot-color:#f56565;
+    --point-text-color-blue:#0969da;
 
 
 
+
+    /*게시판 내부 폰트 사이즈*/
+    --board-title-size: 0.95rem;
     /* 반응형 변수 */
     --breakpoint-mobile: 650px;
-
     --medium-screen-padding: 15px;
     --small-screen-padding: 8px;
     --medium-screen-gap: 15px;
     --small-screen-gap: 8px;
+
+    font-size: 16px; 
+    /*기본 폰트사이즈*/
 }
 

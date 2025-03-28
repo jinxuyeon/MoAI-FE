@@ -9,8 +9,8 @@
     height: 60px;
     width: 100%;
     min-width: 300px;
+    gap: 20px;
   }
-
 
 
 .logout-btn {
@@ -37,7 +37,7 @@
     justify-content: end;
     align-items: center;
     margin-right: 25px;
-    gap: 100px;
+    gap: 60px;
   }
   .util-box{
     display: flex;

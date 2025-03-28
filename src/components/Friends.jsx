@@ -60,7 +60,7 @@ const Friends = () => {
                 <button
                     className="add-friend-btn"
                     onClick={() => {
-                        setOpenModal(true);
+                        setOpenModal(true);dkarjsk
                         console.log("openModal 상태:", openModal);
                     }}
                 >
@@ -85,7 +85,7 @@ const Friends = () => {
                     {myFriendList.length > 0 ? (
                         myFriendList.map((friend, index) => (
                             <li key={index} className="Friends-Item">
-                                {friend.name}
+                                <button>{friend.name}</button>
                             </li>
                         ))
                     ) : (

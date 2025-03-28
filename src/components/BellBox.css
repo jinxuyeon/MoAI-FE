@@ -1,8 +1,10 @@
-.BellBox{
+.BellBox {
+    font-size: 15px;
     position: relative;
-
+    display: inline-block;
 }
-.bell-btn{
+
+.bell-btn {
     position: relative;
     border: none;
     border-radius: 5px;
@@ -11,7 +13,44 @@
     cursor: pointer;
 }
 
-
 .bell-btn:hover {
     opacity: 0.5;
+}
+
+/* 알림 리스트 스타일 */
+.notification-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    max-height: 300px;
+    width: 200px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    overflow: auto;
+    gap: 10px;
+}
+
+.notification-empty {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+
+/* 작은 화면에서 스타일 조정 */
+@media (max-width: 500px) {
+    .notification-dropdown {
+        left: 50%;
+        width: 150px;
+        transform: translateX(-50%);
+    }
+
+    .notification-item {
+        font-size: 14px;
+    }
 }
