@@ -23,3 +23,18 @@
     /*기본 폰트사이즈*/
 }
 
+
+.footer{
+    width: 100%;
+    background-color: var(--base-blue-color);
+    max-height: 2em;
+    min-height: 7em;
+    align-content: center;
+    text-align: center;
+}
+
+.body-container{
+    min-height: 100vh;
+    min-width: 100vw;
+    
+}
