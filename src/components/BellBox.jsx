@@ -12,11 +12,12 @@ const BellBox = () => {
         { id: 1, text: "Alice님이 댓글을 남겼습니다." },
         { id: 2, text: "Bob님이 게시글에 좋아요를 눌렀습니다." },
         { id: 3, text: "Charlie님이 팔로우했습니다." },
-        { id: 3, text: "Charlie님이 팔로우했습니다." },
-        { id: 3, text: "Charlie님이 팔로우했습니다." },
-        { id: 3, text: "Charlie님이 팔로우했습니다." },
-        { id: 3, text: "Charlie님이 팔로우했습니다." },
+        { id: 4, text: "Charlie님이 팔로우했습니다." },
+        { id: 5, text: "Charlie님이 팔로우했습니다." },
+        { id: 6, text: "Charlie님이 팔로우했습니다." },
+        { id: 7, text: "Charlie님이 팔로우했습니다." },
     ];
+    
 
     useEffect(() => {
         function handleClickOutside(event) {

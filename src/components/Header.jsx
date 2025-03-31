@@ -2,6 +2,7 @@ import "./Header.css";
 import { LogOut } from "lucide-react";
 import Bellbox from "./BellBox";
 import MailBox from "./MailBox";
+import { Link } from "react-router-dom";
 
 function Header({ title }) {
     const handleLogout = () => {
@@ -12,7 +13,8 @@ function Header({ title }) {
     };
     return (
         <div className="header-container">
-            <h2 style={{ marginLeft: "28px" }}>{title}</h2>
+            <Link to="/main" className="text_btn"></Link>
+            <h2 style={{ marginLeft: "10px" }}>{title}</h2>
             <div className="header-space">
                 <div className="util-box">
                     <Bellbox />

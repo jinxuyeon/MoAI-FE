@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import BoardPage from './pages/BoardPage';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import { jwtDecode } from "jwt-decode";
@@ -57,6 +58,7 @@ function App() {
         
         {/* 개발단계 시 아래 사용, 서버이용시 아래 주석후 위 주석 풀기 */}
         <Route path="/main" element={isAuthenticated ? <MainPage />: <MainPage />} />
+        <Route path="/main/:boardType" element={isAuthenticated ? <BoardPage />: <BoardPage />} />
         <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <MyPage />} />  
 
         
