@@ -28,9 +28,9 @@
     width: 100%;
     background-color: var(--base-blue-color);
     max-height: 2em;
-    min-height: 7em;
-    align-content: center;
+    min-height: 5em;
     text-align: center;
+    align-content: center;
 }
 
 .body-container{

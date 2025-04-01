@@ -11,16 +11,15 @@
     min-width: 300px;
   }
 
-  .header-container .text_btn {
-    background-image: url("/icons/logo2.svg");
+  .header-container .logo_btn {
+    background-image: url("/icons/logo.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     cursor: pointer;
-    min-height: 60px;
-    min-width: 60px;
-    border-radius: 50%;
+    min-height: 40px;
+    min-width: 90px;
     margin-left: 15px;
     text-decoration: none; /* 기본 링크 스타일 제거 */
 }

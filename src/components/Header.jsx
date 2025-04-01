@@ -13,7 +13,7 @@ function Header({ title }) {
     };
     return (
         <div className="header-container">
-            <Link to="/main" className="text_btn"></Link>
+            <Link to="/main" className="logo_btn"></Link>
             <h2 style={{ marginLeft: "10px" }}>{title}</h2>
             <div className="header-space">
                 <div className="util-box">

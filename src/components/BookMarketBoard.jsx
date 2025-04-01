@@ -10,7 +10,7 @@ const BookMarketBoard = () => {
     // 판매 중인 책 정보를 저장하는 상태 (각 게시글마다 개별 이미지 추가)
     const [posts, setPosts] = useState([
         { id: 1, title: "자료구조 책 팝니다", price: 15000, description: "깨끗하게 사용했습니다.", imgUrl: "https://image.yes24.com/goods/69750539/XL" },
-        { id: 2, title: "알고리즘 책 판매", price: 18000, description: "거의 새책 상태입니다.", imgUrl: "https://www.hanbit.co.kr/data/books/B7707942187_l.jpg" },
+       { id: 2, title: "알고리즘 책 판매", price: 18000, description: "거의 새책 상태입니다.", imgUrl: "https://www.hanbit.co.kr/data/books/B7707942187_l.jpg" },
         { id: 3, title: "컴퓨터 구조 교재", price: 12000, description: "필기 조금 있습니다.", imgUrl: "https://www.hanbit.co.kr/data/books/B9011295374_l.jpg" },
         { id: 4, title: "C++ 프로그래밍 책", price: 17000, description: "사용감 적음.", imgUrl: "https://contents.kyobobook.co.kr/sih/fit-in/400x0/pdt/9791156643647.jpg" }
     ]);

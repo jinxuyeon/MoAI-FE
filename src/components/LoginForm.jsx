@@ -23,7 +23,6 @@ const LoginForm = ({setIsAuthenticated}) => {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         setAuthData()
-        alert("로그인 성공!");
         setAuthData();
         setIsAuthenticated(true)
         navigate("/main");

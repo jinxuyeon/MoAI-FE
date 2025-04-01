@@ -8,15 +8,22 @@
     margin: 0;
 }
 .left-side{
+    background-image: url("/icons/background.png"); 
     width: 100%;
-    flex-basis: 80%;
-    background-color: var(--base-blue-color);
+    flex-basis: 130%;
     height: 100%;
 }
 .right-side{
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
+    align-items: center;
+}
+
+.logo-img{
+    width: 100px;
+    height: 50px;
 }
 
 @media (max-width: 800px) {
