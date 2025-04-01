@@ -2,6 +2,9 @@ import axios from "axios";
 import refreshAccessToken from "./refreshAccessToken";
 
 const axiosInstance = axios.create({
+    //baseURL: "http://localhost:8080", // API 기본 URL
+    baseURL: "http://58.238.182.100:9000", // API 기본 URL
+    //baseURL: "http://192.168.45.70:8080", // API 기본 URL
     headers: {
         "Content-Type": "application/json",
     },
@@ -38,3 +41,5 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+
