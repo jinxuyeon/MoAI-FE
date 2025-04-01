@@ -60,11 +60,9 @@
     }
     .Dashboard .Content-container {
         gap: var(--medium-screen-gap);
-    }
-
-    .Dashboard .Content-container {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
     .Dashboard .main-container {
