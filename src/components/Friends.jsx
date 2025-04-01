@@ -60,7 +60,7 @@ const Friends = () => {
                 <button
                     className="add-friend-btn"
                     onClick={() => {
-                        setOpenModal(true);dkarjsk
+                        setOpenModal(true);
                         console.log("openModal 상태:", openModal);
                     }}
                 >

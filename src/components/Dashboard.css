@@ -3,6 +3,7 @@
     min-width: 10px;
     padding: 20px;
     padding-left: 50px;
+    display: flex;
 }
 
 .Dashboard .Content-container {
@@ -11,11 +12,12 @@
     width: 100%;
     min-width: 10px;
     gap: 50px;
+    justify-content: center;
 }
 
 .Dashboard .main-container {
     display: flex;
-    max-width: 1500px; /* 변경: 고정 width -> 최대 width */
+    max-width: 1200px; /* 변경: 고정 width -> 최대 width */
     width: 100%; /* 추가: 부모 요소에 맞게 크기 조정 */
     min-width: 10px;
     flex-direction: column;
@@ -29,6 +31,7 @@
     flex-grow: 1;
     min-width: 10px;
     width: 500px;
+    max-width: 400px;
 }
 
 .Dashboard .board-area {

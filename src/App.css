@@ -1,10 +1,11 @@
 :root {
     --base-blue-color : #82BBFC;  /* 로그인 페이지 테마 색 */
+    --point-text-color-blue:#0969da;
+
     --base-border-color : #d1d9e0;  /* 회색 경계선 색 */
     --base-point-color:#f6f8fa;  
     --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f;   /* 게시판 그림자 */
     --red-dot-color:#f56565;
-    --point-text-color-blue:#0969da;
 
 
 
@@ -22,3 +23,18 @@
     /*기본 폰트사이즈*/
 }
 
+
+.footer{
+    width: 100%;
+    background-color: var(--base-blue-color);
+    max-height: 2em;
+    min-height: 7em;
+    align-content: center;
+    text-align: center;
+}
+
+.body-container{
+    min-height: 100vh;
+    min-width: 100vw;
+    
+}

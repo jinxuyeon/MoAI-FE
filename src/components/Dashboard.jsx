@@ -24,6 +24,18 @@ const Dashboard = () => {
                         section밖 코드는 건들 노노노*/}
                         <BookMarketBoard />
                     </section>
+
+                    <section className="board-area">
+                        <NoticeBoard />
+                    </section>
+
+                    <section className="board-area">
+                        <NoticeBoard />
+                    </section>
+
+                    <section className="board-area">
+                        <NoticeBoard />
+                    </section>
                 </div>
 
                 <div className="rightside-container">
