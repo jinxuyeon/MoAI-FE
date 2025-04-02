@@ -10,10 +10,18 @@ const RegisterPage = () => {
                 <IntroBox />
             </div>
             <div className="right-side">
-                <img className="logo-img" src="/icons/logo.svg" alt="img" />
-                <RegisterForm />
+                <div className="form-container">
+                    <img
+                        className="logo-img"
+                        src="/icons/logo.svg"
+                        alt="logo_img"
+                    />
+                    <RegisterForm/>
+                </div>
             </div>
         </div>
+
+
     );
 };
 

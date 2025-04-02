@@ -6,11 +6,17 @@ const LoginPage = ({ setIsAuthenticated }) => {
     return (
         <div className="Page">
             <div className="left-side">
-                <IntroBox/>
+                <IntroBox />
             </div>
             <div className="right-side">
-                <img className="logo-img" src="/icons/logo.svg" alt="logo_img" />
-                <LoginForm setIsAuthenticated={setIsAuthenticated} />
+                <div className="form-container">
+                    <img
+                        className="logo-img"
+                        src="/icons/logo.svg"
+                        alt="logo_img"
+                    />
+                    <LoginForm setIsAuthenticated={setIsAuthenticated} />
+                </div>
             </div>
         </div>
     );

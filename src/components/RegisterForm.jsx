@@ -32,9 +32,7 @@ const RegisterForm = () => {
   return (
 
     <div className="RegisterForm">
-        <h2>회원가입🗒️</h2>
         <form className="form"onSubmit={handleSubmit}>
-
           <div className="form-group">
             <label className="username">ID:</label>
             <input
