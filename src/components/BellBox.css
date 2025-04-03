@@ -5,6 +5,9 @@
 }
 
 .bell-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     border: none;
     border-radius: 5px;
@@ -18,14 +21,14 @@
 }
 
 /* 알림 리스트 스타일 */
-.notification-dropdown {
+.notice-dropdown {
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 40px;
     right: 0;
     max-height: 300px;
-    width: 200px;
+    width: 250px;
     background: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
@@ -35,22 +38,54 @@
     gap: 10px;
 }
 
-.notification-empty {
+.notice-empty {
     padding: 10px;
     text-align: center;
     font-size: 14px;
     color: gray;
 }
+.notice-item{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 13px;
+    border: 1px solid plum;
+    border-radius: 5px;
+    padding: 4px;
+    gap: 5px;
+}
+.delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    opacity: 0.5;
+}
+
+
+.x{
+    width: 15px;
+    height: 15px;
+}
+
 
 /* 작은 화면에서 스타일 조정 */
 @media (max-width: 500px) {
-    .notification-dropdown {
+    .notice-dropdown {
         left: 50%;
         width: 150px;
         transform: translateX(-50%);
     }
 
-    .notification-item {
+    .notice-item {
         font-size: 14px;
     }
 }

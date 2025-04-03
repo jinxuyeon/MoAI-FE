@@ -70,7 +70,7 @@ function App() {
                     
                 </Routes>
             </div>
-            {shouldShowFooter && <div className="footer">@masdfkuj@nanmer.cvom capstone project</div>}
+            {shouldShowFooter && <div className="footer">지켜보고 있다🙄🙄🙄🙄🙄</div>}
         </div>
     );
 }

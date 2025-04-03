@@ -6,7 +6,7 @@ const MailBox = () => {
         <div className="MailBox">
             <button className="mail-btn">
                 <Mails />
-                <Reddot count={5}/>
+                <Reddot count={0}/>
             </button>
         </div>
     );

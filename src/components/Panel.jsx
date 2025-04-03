@@ -9,10 +9,13 @@ const Panel = () => {
     const name = localStorage.getItem("name");
     const studentId = localStorage.getItem("username")
     const handleSearch = async () => {
+        const id = localStorage.getItem("id");
+        if (!id) return; // ID가 없으면 요청하지 않음
+
         try {
-            const response = await axiosInstance.get(`/api/member/search?studentId=${studentId}`);
+            const response = await axiosInstance.get(`/api/member/${id}/notice`);
             if (response.status === 200) {
-                console.log(response)
+                console.log("알림 가져오기 성공", response.data);
             }
         } catch (error) {
             console.error("검색 실패:", error);

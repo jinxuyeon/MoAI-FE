@@ -26,6 +26,9 @@
 
 
 .logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color:black;
   width: 20px;
   height:20px;
