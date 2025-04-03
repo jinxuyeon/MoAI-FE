@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import "./MyPage.css";
-
 import { useEffect, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 
