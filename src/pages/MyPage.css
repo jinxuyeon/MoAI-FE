@@ -25,12 +25,12 @@
     background-color: white;
 }
 
-/* 1️⃣ 프로필 영역 (왼쪽 끝으로 붙이기) */
+
 .profile-section {
     width: 33%;
     min-width: 300px;
     background: white;
-    padding: 30px 0px;
+    padding: 30px 0px 10px 0px; 
     margin-left: 0;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,8 @@
     overflow-y: auto;
 }
 
-.profile-section label{
+
+.profile-section label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 3px;
@@ -49,16 +50,23 @@
     text-align: left;
 }
 
-/* 2️⃣ 프로필 사진 */
-.profile-pic {
-    width: 150px;
-    height: 150px;
-    background: #d9d9d9;
-    border-radius: 50%;
-    margin-bottom: 20px;
-}
-
-/* 3️⃣ 입력 필드 스타일 (길이 짧게 & 중앙 정렬) */
+  
+/* 자기소개 스타일 */
+.profile-section textarea {
+    width: 70%;
+    min-height: 80px; 
+    margin: 12px 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* 사용자가 크기 못 바꾸게 고정 */
+    font-family: inherit;
+    font-size: 14px;
+    align-self: center;
+  }
+  
+/* 입력 필드 스타일 (길이 짧게 & 중앙 정렬) */
 .profile-section input {
     width: 70%; /* 기존 90% → 70%로 줄임 */
     margin: 12px 0;
@@ -70,21 +78,22 @@
     align-self: center; /* 입력 박스를 중앙에 배치 */
 }
 
-/* 4️⃣ 저장 버튼 스타일 (길이 줄이고 중앙 정렬) */
+/* 저장 버튼 스타일 (길이 줄이고 중앙 정렬) */
 .profile-section button {
     margin-top: 20px;
+    margin-bottom: 0px; /* 저장 버튼 아래 여백 제거 */
     padding: 10px;
-    background: #4caf50;
+    background: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 50%; /* 기존 90% → 50%로 줄임 */
+    width: 50%; 
     text-align: center;
     align-self: center; /* 중앙 배치 */
 }
 
-/* 1️⃣ 개인정보 섹션 라벨 (큰 글씨 & 구분) */
+/* 개인정보 섹션 라벨 (큰 글씨 & 구분) */
 .section-title {
     font-size: 20px; /* 기본 라벨보다 크기 증가 */
     font-weight: bold;
@@ -95,10 +104,10 @@
     padding-bottom: 5px; /* 구분선과 글자 간격 */
 }
 
-/* 🎯 공백 라벨 (엔터 한 줄 정도의 공간 추가) */
+/* 공백 라벨 */
 .spacer-label {
     display: block;
-    height: 15px; /* 공백 크기 조정 (엔터 한 줄 정도) */
+    height: 15px; /* 공백 크기 조정 */
 }
 
 .main-content {
@@ -116,7 +125,6 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    
 }
 
 /* 알림, 친구 목록 (큰 박스) */
@@ -134,3 +142,6 @@
     flex: 1;
     height: 120px;
 }
+
+
+  

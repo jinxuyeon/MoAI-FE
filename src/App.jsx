@@ -59,6 +59,7 @@ function App() {
                     <Route path="/main" element={<MainPage />} />
                     <Route path="/main/:boardType" element={<BoardPage />} />
                     <Route path="/mypage" element={<MyPage />} />
+                    
 
                     {/* 개발단계 시 위 형식식 사용, */}
 
