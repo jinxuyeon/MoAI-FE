@@ -60,8 +60,7 @@ const MyPage = () => {
           {/* 프로필 */}
           <aside className="profile-section">
             <MyProfile profileImageUrl={userInfo.profileImageUrl} />
-         
-
+        
             <label>이름</label>
             <input type="text" value={userInfo.name} readOnly />
 
