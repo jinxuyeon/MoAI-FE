@@ -56,19 +56,9 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
                     <Route path="/login/register" element={<RegisterPage />} />
-                    <Route path="/main" element={<MainPage />} />
-                    <Route path="/main/:boardType" element={<BoardPage />} />
-                    <Route path="/mypage" element={<MyPage />} />
-                    
-
-                    {/* 개발단계 시 위 형식식 사용, */}
-
-                    {/* 
-                    <Route path="/main" element={isAuthenticated ? <MainPage />: <Navigate to="/" replace />} />
-                    <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <Navigate to="/" replace />} />
-                    */}
-
-                    
+                    <Route path="/main/community/:boardType" element={isAuthenticated ? <BoardPage />: <BoardPage />} />
+                    <Route path="/main" element={isAuthenticated ? <MainPage />: <MainPage />} />
+                    <Route path="/mypage" element={isAuthenticated ? <MyPage /> :  <MyPage />} />
                 </Routes>
             </div>
             {shouldShowFooter && <div className="footer">지켜보고 있다🙄🙄🙄🙄🙄</div>}

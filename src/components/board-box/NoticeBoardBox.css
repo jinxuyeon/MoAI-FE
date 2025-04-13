@@ -1,0 +1,39 @@
+
+.NoticeBoardBox{
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 50%;
+    padding: 20px;
+}
+
+.notice-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.notice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notice-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.notice-item:last-child {
+    border-bottom: none;
+}
+
+.notice-item-title {
+    font-weight: 500;
+}
+
+.notice-item-date {
+    color: #888;
+    font-size: 14px;
+}

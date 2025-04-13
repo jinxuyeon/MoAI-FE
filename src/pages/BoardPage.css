@@ -1,0 +1,9 @@
+
+.navibar-container{
+    border-bottom: 1px solid var(--base-border-color);
+
+}
+.board-container{
+    display: flex;
+    justify-content: center;
+}

@@ -13,9 +13,7 @@ const NoticeBoard = () => {
             <div>
                 <strong>{"(4학년)캡스톤 디자인 관련 안내사항항"}</strong>
             </div>
-            <Link to={"/main/notice"}>게시글 더보기</Link>
-
-            <div></div>
+            <Link to={"/main/community/notice"}>게시글 더보기</Link>
         </section>
     );
 };
