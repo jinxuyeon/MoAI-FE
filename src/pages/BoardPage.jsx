@@ -27,12 +27,14 @@ const BoardPage = () => {
 
     return (
         <div className="BoardPage">
-            <Header title={"Community"} />
-            <div className="navibar-container">
-                <NaviBar currentBoard={boardType} />
+            <div>
+                <Header title={"Community"} />
             </div>
-            <div className="board-container">
-                {renderBoard()}
+            <div className="layout-container">
+                <div className="navibar-container">
+                    <NaviBar currentBoard={boardType} />
+                </div>
+                <div className="board-container">{renderBoard()}</div>
             </div>
         </div>
     );

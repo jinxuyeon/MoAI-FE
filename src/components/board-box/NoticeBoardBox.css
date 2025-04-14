@@ -1,8 +1,7 @@
 
 .NoticeBoardBox{
-    border: 1px solid #ccc;
     border-top: none;
-    width: 50%;
+    width: 100%;
     padding: 20px;
 }
 
@@ -16,17 +15,18 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    
 }
 
 .notice-item {
+    margin-top: 10px;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
 }
 
 .notice-item:last-child {
-    border-bottom: none;
 }
 
 .notice-item-title {

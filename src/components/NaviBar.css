@@ -1,9 +1,9 @@
 
 .NaviBar{
+    display: flex;
+    flex-direction: column;
     padding: 10px;
-    justify-content: center;
-    align-items: center;
     display: flex;
     height: 70px;
-    gap: 50px;
+    gap: 10px;
 }

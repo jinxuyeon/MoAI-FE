@@ -1,9 +1,17 @@
-
-.navibar-container{
-    border-bottom: 1px solid var(--base-border-color);
-
+.BoardPage {
+    display: block;
 }
-.board-container{
+
+.layout-container {
     display: flex;
+    justify-content: center; /* 가로 정렬 */
+    width: 100%;
+}
+.navibar-container {
+    border-right: 1px solid var(--base-border-color);
+    width: 20%;
+}
+.board-container {
+    width: 60%;
     justify-content: center;
 }
