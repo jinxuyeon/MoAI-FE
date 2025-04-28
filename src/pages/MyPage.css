@@ -25,6 +25,7 @@
     background-color: white;
 }
 
+/* 프로필 영역 (왼쪽 끝으로 붙이기) */
 
 .profile-section {
     width: 33%;
@@ -50,6 +51,170 @@
     text-align: left;
 }
 
+
+/* 프로필 이미지 스타일 */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  /* 이미지 없을 경우 */
+  .profile-pic.empty {
+    background: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  .profile-pic-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+  
+  .profile-pic,
+  .profile-pic.empty {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .camera-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: white;
+    border-radius: 50%;
+    padding: 4px;
+    width: 28px;  
+    height: 28px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .profile-menu {
+    position: absolute;
+    top: 160px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    padding: 10px;
+    width: 180px;
+  }
+  .profile-menu div {
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .profile-menu div:hover {
+    background-color: #f0f0f0;
+  }
+
+
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px); /* 블러 */
+    background-color: rgba(0, 0, 0, 0.6); /* 어둡게 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+  }
+  
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+    background-color: transparent; /* 회색 백그라운드로 덮으니까 배경색 필요 X */
+    padding: 0; /* ✅ 여기 padding 제거!! */
+  }
+  
+  
+/* 확대된 프로필 이미지 */
+.modal-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+
+  .modal-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+
+/* 모달용 No Image 스타일 */
+.modal-empty {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    color: #888;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
   
 /* 자기소개 스타일 */
 .profile-section textarea {

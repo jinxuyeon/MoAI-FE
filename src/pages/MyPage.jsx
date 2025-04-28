@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 
 
+import { Camera } from 'lucide-react';
+
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState({
@@ -15,6 +17,31 @@ const MyPage = () => {
     password: "",
     profileImageUrl: ""
   });
+
+
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showEditOptions, setShowEditOptions] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false); // ✅ 모달 상태 추가
+
+  const toggleMenu = () => {
+    setShowProfileMenu(!showProfileMenu);
+    setShowEditOptions(false);
+  };
+
+  const handleProfileView = () => {
+    setShowProfileModal(true); // ✅ 모달 열기
+    setShowProfileMenu(false); // 메뉴 닫기
+  };
+
+  const handleEditClick = () => {
+    setShowEditOptions(true);
+  };
+
+  const handleOption = (action) => {
+    alert(`${action} 기능은 추후 구현 예정입니다.`);
+    setShowProfileMenu(false);
+    setShowEditOptions(false);
+  };
 
   const id = localStorage.getItem("id");
 
@@ -59,8 +86,40 @@ const MyPage = () => {
         <div className="inner-container">
           {/* 프로필 */}
           <aside className="profile-section">
+
             <MyProfile profileImageUrl={userInfo.profileImageUrl} />
         
+
+            <div className="profile-pic-container">
+              {userInfo.profileImageUrl ? (
+                <img
+                  className="profile-pic"
+                  src={userInfo.profileImageUrl}
+                  alt="프로필"
+                />
+              ) : (
+                <div className="profile-pic empty">No Image</div>
+              )}
+              <Camera className="camera-icon" onClick={toggleMenu} />
+
+              {showProfileMenu && (
+                <div className="profile-menu">
+                  {!showEditOptions ? (
+                    <>
+                      <div onClick={handleProfileView}>프로필 보기</div>
+                      <div onClick={handleEditClick}>프로필 수정</div>
+                    </>
+                  ) : (
+                    <>
+                      <div onClick={() => handleOption("라이브러리에서 선택")}>라이브러리에서 선택</div>
+                      <div onClick={() => handleOption("사진 찍기")}>사진 찍기</div>
+                      <div onClick={() => handleOption("현재 사진 삭제")}>현재 사진 삭제</div>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+
             <label>이름</label>
             <input type="text" value={userInfo.name} readOnly />
 
@@ -106,8 +165,22 @@ const MyPage = () => {
             </main>
         </div>
       </div>
+            {/* 모달창: 프로필 보기 */}
+            {showProfileModal && (
+        <div className="modal-backdrop" onClick={() => setShowProfileModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {userInfo.profileImageUrl ? (
+              <img src={userInfo.profileImageUrl} alt="프로필 확대" />
+            ) : (
+              <div className="profile-pic modal-empty">No Image</div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default MyPage;
+
+
