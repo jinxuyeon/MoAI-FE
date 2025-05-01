@@ -5,7 +5,6 @@
 
 .MainPage .Panel-Dashboard-Container {
     flex-grow: 1;
-    min-width: 100vh;
     display: flex;
 }
 
@@ -13,6 +12,8 @@
     width: 280px;
     min-width: 10px;
     border-right: 1px solid var(--base-border-color);
+    z-index:10;
+
 }
 
 .MainPage .Dashboard-container {

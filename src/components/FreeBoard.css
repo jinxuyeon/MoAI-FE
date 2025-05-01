@@ -1,0 +1,19 @@
+.NormalBoard{
+    min-width: 110px;
+    border: 1px solid var(--base-border-color);
+    box-shadow: var(--board-shadow-color);
+
+    display: block;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 15px;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.NormalBoard .title{
+    font-size:var(--board-title-size);
+    color : var(--point-text-color-blue);
+}
+

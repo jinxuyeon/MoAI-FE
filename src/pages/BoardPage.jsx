@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import NaviBar from "../components/NaviBar";
 import NoticeBoardBox from "../components/board-box/NoticeBoardBox";
 import MarketBox from "../components/board-box/MarketBox";
+import FreeBoardBox from "../components/board-box/FreeBoardBox";
 import "./BoardPage.css";
 
 const BoardPage = () => {
@@ -15,7 +16,7 @@ const BoardPage = () => {
             case "market":
                 return <MarketBox />;
             case "free":
-                return <div>자유게시판 컴포넌트</div>;
+                return <FreeBoardBox/>
             case "popular":
                 return <div>인기게시판 컴포넌트</div>;
             case "lecture":
@@ -31,10 +32,12 @@ const BoardPage = () => {
                 <Header title={"Community"} />
             </div>
             <div className="layout-container">
-                <div className="navibar-container">
-                    <NaviBar currentBoard={boardType} />
+                <div className="content-container">
+                    <div className="navibar-container">
+                        <NaviBar currentBoard={boardType} />
+                    </div>
+                    <div className="board-container">{renderBoard()}</div>
                 </div>
-                <div className="board-container">{renderBoard()}</div>
             </div>
         </div>
     );

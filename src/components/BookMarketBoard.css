@@ -1,21 +1,72 @@
 .BookMarketBoard{
     border: 1px solid var(--base-border-color);
+    box-shadow: var(--board-shadow-color);
     display: block;
     box-sizing: border-box;
-    
-    box-shadow: var(--board-shadow-color, 6px);
     border-radius: 6px;
     padding: 15px;
-    height: 100%  !important;
-    max-width: 100%;
-    gap: 30px;
-    min-width: 100px
+    width: 100%;
+    position: relative;
+    z-index: 0; /* 낮은 값 */
 }
-.BookMarketBoard .info-container{
+
+.BookMarketBoard h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--base-border-color);
+    padding-bottom: 5px;
+}
+
+
+.info-container.single {
     display: flex;
     flex-direction: row;
-    word-wrap: break-word;
+    justify-content: flex-start;
+    align-items: center;
     gap: 40px;
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.info-container.fade-in {
+    opacity: 1;
+}
+
+.info-container.fade-out {
+    opacity: 0;
+}
+
+.book-post {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-button-group {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.mini-button {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 4px 7px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mini-button:hover {
+    background-color: #ddd;
+    transform: scale(1.1);
 }
