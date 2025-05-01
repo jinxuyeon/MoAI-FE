@@ -3,15 +3,21 @@
 }
 
 .layout-container {
+    justify-content: center;
+
     display: flex;
+    flex-direction: column;
     justify-content: center; /* 가로 정렬 */
+    align-items: center;
     width: 100%;
 }
+.BoardPage .content-container{
+    max-width: 1000px;
+    width: 80%;
+}
 .navibar-container {
-    border-right: 1px solid var(--base-border-color);
-    width:10%;
+
 }
 .board-container {
-    width: 60%;
     justify-content: center;
 }

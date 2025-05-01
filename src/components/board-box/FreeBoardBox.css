@@ -1,0 +1,38 @@
+
+.FreeBoardBox{
+    border-top: none;
+    width: 100%;
+}
+
+.notice-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.notice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.notice-item {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.notice-item:last-child {
+}
+
+.notice-item-title {
+    font-weight: 500;
+}
+
+.notice-item-date {
+    color: #888;
+    font-size: 14px;
+}

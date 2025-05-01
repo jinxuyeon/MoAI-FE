@@ -1,13 +1,5 @@
 .notice-table {
     width: 100%;
-    border-collapse: separate; /* border-collapse: collapse 제거하고 separate로 변경 */
-    border-spacing: 0; /* 셀 간 간격 없애기 */
-    margin-top: 20px;
-    margin-left: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px; /* 전체 테이블을 둥글게 */
-    overflow: hidden; /* 둥근 모서리 안에서 내용도 잘리게 */
-   
 }
 
 .notice-title {

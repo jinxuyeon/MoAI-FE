@@ -1,9 +1,28 @@
-
-.NaviBar{
+.NaviBar {
+    height: 40px;
     display: flex;
-    flex-direction: column;
+    gap: 30px;
+    align-items: center;
     padding: 10px;
-    display: flex;
-    height: 70px;
-    gap: 10px;
+    background-color: var(--base-blue-color);
+    margin-bottom: 50px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* 모든 링크 기본 스타일 */
+.navi-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.45s ease; /* 부드러운 애니메이션 */
+    transform-origin: center;
+}
+
+/* 활성화된 메뉴 항목 */
+.navi-link.active {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;       /* 글자 크기 증가 */
+    transform: scale(1.0); /* 약간 커지게 */
 }
