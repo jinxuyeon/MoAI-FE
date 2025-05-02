@@ -1,5 +1,6 @@
 .JobInfoBoard {
     min-width: 110px;
+    min-height: 300px;
     border: 1px solid var(--base-border-color);
     display: block;
     box-sizing: border-box;

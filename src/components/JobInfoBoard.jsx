@@ -5,6 +5,10 @@ const JobInfoBoard = () => {
         { id: 1, title: "백엔드 개발자", link: "https://example.com/job1", preview: "Spring Boot 개발" },
         { id: 2, title: "프론트엔드 개발자", link: "https://example.com/job2", preview: "React 개발" },
         { id: 3, title: "데이터 엔지니어", link: "https://example.com/job3", preview: "Spark, Hadoop" },
+        { id: 3, title: "데이터 엔지니어", link: "https://example.com/job3", preview: "Spark, Hadoop" },
+        { id: 3, title: "데이터 엔지니어", link: "https://example.com/job3", preview: "Spark, Hadoop" },
+        { id: 3, title: "데이터 엔지니어", link: "https://example.com/job3", preview: "Spark, Hadoop" },
+
     ];
 
     return (

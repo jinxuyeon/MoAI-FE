@@ -20,6 +20,7 @@
     flex-grow: 1;
     width: 300px;
     min-width: 10px;
+    margin-bottom: 400px;
 }
 
 /* 반응형 레이아웃 760고정정 */

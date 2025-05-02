@@ -8,6 +8,7 @@ import MyPage from "./pages/MyPage";
 import MainPage from "./pages/MainPage";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import Footer from "./components/Footer";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,7 +62,7 @@ function App() {
                     <Route path="/mypage" element={isAuthenticated ? <MyPage /> :  <MyPage />} />
                 </Routes>
             </div>
-            {shouldShowFooter && <div className="footer">지켜보고 있다🙄🙄🙄🙄🙄</div>}
+            {shouldShowFooter && <Footer/>}
         </div>
     );
 }
