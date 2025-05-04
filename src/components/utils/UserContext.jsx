@@ -29,9 +29,9 @@ export const UserProvider = ({ children }) => {
       .catch(err => {
         console.log("me 정보 가져오기 실패:", err);
         setUser(null);
+        setUser(dummyUser) //테스트용 임시 더미
       })
       .finally(() => {setIsLoading(false)
-        setUser(dummyUser) //테스트용 임시 더미
       });
   }, []);
 
