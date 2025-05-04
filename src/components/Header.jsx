@@ -18,10 +18,8 @@ function Header({ title }) {
     };
 
     const handleSearch = async () => {
-        const id = localStorage.getItem("id");
-        if (!id) return; // ID가 없으면 요청하지 않음
         try {
-            const response = await axiosInstance.get(`/api/member/${id}/notice`);
+            const response = await axiosInstance.get(`/api/member/my-notices`);
             if (response.status === 200) {
                 console.log("알림 가져오기 성공", response.data);
                 setNotices(response.data.notices);

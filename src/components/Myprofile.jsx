@@ -2,14 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { Camera } from "lucide-react";
 import "./Myprofile.css";
 
-const MyProfile = ({ profileImageUrl }) => {
+const MyProfile = ({ profileImageUrl, onImageSelect }) => {
   const [selectedImage, setSelectedImage] = useState(profileImageUrl);
   const fileInputRef = useRef(null);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showEditOptions, setShowEditOptions] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const menuRef = useRef(null); // ✅ 메뉴 참조
+  const menuRef = useRef(null);
 
+  
   const toggleMenu = () => {
     setShowProfileMenu((prev) => !prev);
     setShowEditOptions(false);
@@ -25,6 +26,7 @@ const MyProfile = ({ profileImageUrl }) => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
+      onImageSelect?.(file); // 상위에 파일 전달
     }
     setShowProfileMenu(false);
     setShowEditOptions(false);
@@ -35,19 +37,19 @@ const MyProfile = ({ profileImageUrl }) => {
   };
 
   const handleDeleteImage = () => {
+    // 이미지 시각적 제거만, 실제 삭제는 저장할 때 수행
     setSelectedImage(null);
+    onImageSelect?.(null); // 상위에 "삭제된 상태" 전달
     setShowProfileMenu(false);
     setShowEditOptions(false);
   };
 
-  // ✅ 메뉴 바깥 클릭 시 자동 닫기
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setShowProfileMenu(false);
       }
     };
-
     if (showProfileMenu) {
       document.addEventListener("mousedown", handleClickOutside);
     }
@@ -64,9 +66,9 @@ const MyProfile = ({ profileImageUrl }) => {
         <div className="profile-pic empty">No Image</div>
       )}
 
+
       <Camera className="camera-icon" onClick={toggleMenu} />
 
-      {/* 프로필 수정 메뉴 */}
       {showProfileMenu && (
         <div className="profile-menu" ref={menuRef}>
           {!showEditOptions ? (
@@ -83,16 +85,14 @@ const MyProfile = ({ profileImageUrl }) => {
         </div>
       )}
 
-      {/* 숨겨진 파일 선택 input */}
-      <input 
-        type="file" 
-        accept="image/*" 
-        ref={fileInputRef} 
-        style={{ display: "none" }} 
-        onChange={handleFileChange} 
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileChange}
       />
 
-      {/* 모달: 프로필 보기 */}
       {showProfileModal && (
         <div className="modal-backdrop" onClick={() => setShowProfileModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

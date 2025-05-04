@@ -1,11 +1,15 @@
 import "./LoginForm.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import { jwtDecode } from "jwt-decode";
+import { UserContext } from "./utils/UserContext";
+
 const LoginForm = ({ setIsAuthenticated }) => {
+
     const [formData, setFormData] = useState({ username: "", password: "" });
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
 
     const handleChange = (e) => {
         setFormData({
@@ -29,8 +33,10 @@ const LoginForm = ({ setIsAuthenticated }) => {
                     response.data.refreshToken
                 );
                 setAuthData();
-                setAuthData();
                 setIsAuthenticated(true);
+
+                const meRes = await axiosInstance.get("/api/member/me");
+                setUser(meRes.data);
                 navigate("/main");
             }
         } catch (error) {
@@ -44,9 +50,6 @@ const LoginForm = ({ setIsAuthenticated }) => {
             const token = localStorage.getItem("accessToken");
             const decodedToken = jwtDecode(token);
             console.log(decodedToken);
-            localStorage.setItem("username", decodedToken.username);
-            localStorage.setItem("id", decodedToken.id);
-            localStorage.setItem("name", decodedToken.name);
         } catch (error) {
             console.error("토큰 디코딩 오류:", error);
         }

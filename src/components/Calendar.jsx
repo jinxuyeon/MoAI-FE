@@ -3,13 +3,10 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // 기본 스타일
 import "./Calendar.css";
 import { CalendarDays } from "lucide-react";
-import Reddot from "./Reddot";
 
 
 const CalendarPanel = () => {
     const [date, setDate] = useState(new Date()); // 선택한 날짜
-
-    console.log("선택한 날짜", date);
 
     return (
         <div className="calendar-container">

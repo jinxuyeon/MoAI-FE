@@ -1,72 +1,56 @@
 .profile-pic-container {
     position: relative;
-    width: 150px;
-    aspect-ratio: 1 / 1; /* 모든 브라우저 크기 고정 */
-    border-radius: 50%; 
+    width: 70%;           /* ✅ 부모의 70% 너비 */
+    aspect-ratio: 1 / 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    overflow: hidden; 
+  }
+  
+  
+  /* 실제 프로필 이미지 */
+  .profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* 이미지 없을 경우 */
+  .profile-pic.empty {
     display: flex;
     justify-content: center;
     align-items: center;
     background: #d9d9d9;
-}
-
-.profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
-    aspect-ratio: 1 / 1; /* 모든 브라우저 크기 고정 */
-   
-}
-  
-/* 이미지 없을 경우 */
-.profile-pic.empty {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;  
-    background: #d9d9d9;  
     color: #999;
     font-size: 14px;
-    text-align: center;
     font-weight: bold;
-    white-space: nowrap;  /* ✅ 텍스트가 줄 바꿈되지 않도록 */
-}
-
-.profile-pic,
-.profile-pic.empty {
-    width: 100%;
-    height: 100%;
+    text-align: center;
+    white-space: nowrap;
     border-radius: 50%;
-    object-fit: cover;
-    background: #d9d9d9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: #888;
-}
+  }
   
-.camera-icon {
+  /* 카메라 아이콘 */
+  .camera-icon {
     position: absolute;
     bottom: 5px;
     right: 5px;
     background: white;
     border-radius: 50%;
     padding: 4px;
-    width: 28px;  
-    height: 28px;
+    width: 30px;
+    height: 30px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     color: #555;
     cursor: pointer;
-    
-}
+  }
   
-.profile-menu {
+  /* 메뉴 */
+  .profile-menu {
     position: absolute;
-    top: 160px;
+    bottom: 40px;  /* 카메라 버튼 위에 살짝 뜨도록 조정 */
     right: 0;
     background: white;
     border: 1px solid #ddd;
@@ -75,19 +59,20 @@
     z-index: 100;
     padding: 10px;
     width: 180px;
-}
-.profile-menu div {
+  }
+  
+  .profile-menu div {
     padding: 8px;
     cursor: pointer;
     font-size: 14px;
-}
+  }
   
-.profile-menu div:hover {
+  .profile-menu div:hover {
     background-color: #f0f0f0;
-}
-
-/* 프로필 보기 모달 */
-.modal-backdrop {
+  }
+  
+  /* 모달 전체 영역 */
+  .modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -99,38 +84,27 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
-}
+  }
   
-.modal-content {
-    position: relative;
+  /* 프로필 이미지 확대 */
+  .modal-content {
     width: 300px;
     height: 300px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-    background-color: transparent; /* 회색 백그라운드로 덮으니까 배경색 필요 X */
-    padding: 0; /* ✅ 여기 padding 제거!! */
-}
-
+    background-color: transparent;
+  }
   
-/* 확대된 프로필 이미지 */
-.modal-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 100%;
-}
-
-.modal-profile-image {
+  .modal-content img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    display: block;
-}
-
-/* 모달용 No Image 스타일 */
-.modal-empty {
+  }
+  
+  /* No Image 표시 */
+  .modal-empty {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -141,4 +115,5 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-}
+  }
+  

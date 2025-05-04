@@ -13,38 +13,41 @@ const Friends = () => {
     const [myFriendList, setMyFriendList] = useState([]);
     const id = localStorage.getItem("id");
 
-    const fetchRequstFriendInfo = async () => {
-        console.log("fetchFriendInfo 호출");
+
+    const fetchRequestFriendInfo = async () => {
         try {
-            const response = await axiosInstance.get(
-                `api/friend/${id}/request-friend-list`
-            );
-            if (response.status === 200) {
+            const { data } = await axiosInstance.get("/api/friend/request-friend-list");
+            if (Array.isArray(data.requestMemberList)) {
                 console.log("친구요청 목록 불러오기 완료");
-                setRequestMemberList(response.data.requestMemberList);
-                setHasFriendrequest(response.data.requestMemberList.length > 0);
+                setRequestMemberList(data.requestMemberList);
+                setHasFriendrequest(data.requestMemberList.length > 0);
+            } else {
+                console.warn("데이터 형식 오류", data);
+                setHasFriendrequest(false);
             }
         } catch (error) {
             setHasFriendrequest(false);
-            console.log("요청 목록 가져오기 실패:", error);
+            console.error("요청 목록 가져오기 실패:", error);
         }
     };
 
+
     const fetchMyFriendInfo = async () => {
         try {
-            const response = await axiosInstance.get(
-                `api/friend/${id}/accept-friend-list`
-            );
-            if (response.status === 200) {
+            const { data } = await axiosInstance.get("/api/friend/my-friends");
+            if (Array.isArray(data.acceptMemberDtoList)) {
                 console.log("친구목록 불러오기 완료");
-                setMyFriendList(response.data.acceptMemberDtoList);
+                setMyFriendList(data.acceptMemberDtoList);
+            } else {
+                console.warn("친구 목록 응답 형식 오류", data);
             }
         } catch (error) {
-            console.log("친구 목록 가져오기 실패", error);
+            console.error("친구 목록 가져오기 실패", error);
         }
     };
+
     useEffect(() => {
-        fetchRequstFriendInfo();
+        fetchRequestFriendInfo();
         fetchMyFriendInfo();
     }, []); //빈 배열을 넣으면 처음 마운트될 때만 실행됨
 
