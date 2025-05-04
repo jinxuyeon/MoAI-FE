@@ -31,8 +31,8 @@ export const UserProvider = ({ children }) => {
         setUser(null);
         setUser(dummyUser) //테스트용 임시 더미
       })
-      .finally(() => {setIsLoading(false)
-      });
+      .finally(() => setIsLoading(false)
+      );
   }, []);
 
   return (

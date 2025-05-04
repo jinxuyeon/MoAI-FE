@@ -1,0 +1,39 @@
+.MailSide {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-button {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.friend-button:hover {
+    background-color: #f4f4f4;
+}
+
+.friend-button.selected {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.add-chat-button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: var(--point-green);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-chat-button:hover {
+    background-color: var(--point-focus-green);
+}

@@ -1,7 +1,8 @@
 :root {
     --base-blue-color : #82BBFC;  /* 로그인 페이지 테마 색 */
     --point-text-color-blue:#0969da;
-
+    --point-green : #1f883d;
+    --point-focus-green:#1a7f37;
     --base-border-color : #d1d9e0;  /* 회색 경계선 색 */
     --base-point-color:#f6f8fa;  
     --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f;   /* 게시판 그림자 */

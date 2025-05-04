@@ -9,6 +9,7 @@ import MainPage from "./pages/MainPage";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Footer from "./components/Footer";
+import MailPage from "./pages/MailPage.jsx";
 import { UserProvider } from "./components/utils/UserContext.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -42,7 +43,7 @@ function App() {
     }, []);
 
     // 현재 페이지가 로그인 또는 회원가입 페이지인지 확인
-    const hideFooterRoutes = ["/login", "/login/register"];
+    const hideFooterRoutes = ["/login", "/login/register", "chat-mail"];
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
     return (
@@ -60,6 +61,8 @@ function App() {
                     <Route path="/main/community/:boardType" element={isAuthenticated ? <BoardPage />: <BoardPage />} />
                     <Route path="/main" element={isAuthenticated ? <MainPage />: <MainPage />} />
                     <Route path="/mypage" element={isAuthenticated ? <MyPage /> :  <MyPage />} />
+                    <Route path="/chat-mail" element={isAuthenticated ? <MailPage /> :  <MailPage />} />
+
                 </Routes>
             </div>
             {shouldShowFooter && <Footer/>}

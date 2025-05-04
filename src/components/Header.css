@@ -1,26 +1,26 @@
+.header-container {
+  display: flex;
+  border-bottom: 1px solid var(--base-border-color);
+  background-color: var(--base-point-color);
+  align-items: center;
+  align-content: center;
+  height: 60px;
+  width: 100%;
+  min-width: 300px;
+}
 
-.header-container{
-    display: flex;
-    border-bottom: 1px solid var(--base-border-color);
-    background-color: var(--base-point-color);
-    align-items: center;
-    align-content: center;
-    height: 60px;
-    width: 100%;
-    min-width: 300px;
-  }
-
-  .header-container .logo_btn {
-    background-image: url("/icons/logo.svg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    cursor: pointer;
-    min-height: 40px;
-    min-width: 90px;
-    margin-left: 15px;
-    text-decoration: none; /* 기본 링크 스타일 제거 */
+.header-container .logo_btn {
+  background-image: url("/icons/logo.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  min-height: 40px;
+  min-width: 90px;
+  margin-left: 15px;
+  text-decoration: none;
+  /* 기본 링크 스타일 제거 */
 }
 
 
@@ -28,34 +28,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color:black;
+  color: black;
   width: 20px;
-  height:20px;
-  background-color:transparent; 
+  height: 20px;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 13px  /* 폰트 크기 조정 */
+  font-size: 13px
+    /* 폰트 크기 조정 */
 }
 
 
 
-  .logout-btn:hover {
-    opacity: 0.5;
-  }
-  
-  
-  .header-space{
-    flex-grow: 1;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    margin-right: 25px;
-    gap: 60px;
-  }
-  .util-box{
-    display: flex;
-    justify-content: end;
-    align-content: center;
-    gap: 20px;
-  }
+
+.logout-btn:hover {
+  opacity: 0.5;
+}
+
+
+.header-space {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 25px;
+  gap: 60px;
+}
+
+.util-box {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  gap: 20px;
+}

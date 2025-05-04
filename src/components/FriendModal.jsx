@@ -37,15 +37,15 @@ const FriendModal = ({
     const HandleAddFriend = async () => {
         try {
             const response = await axiosInstance.post(
-                `/api/friend/${id}/add-friend`,
-                { studentId: studentId }
+                "/api/friend/add-friend",  // ⬅️ id 제거된 URL
+                { studentId: studentId }   // 요청 바디만 전달
             );
             if (response.status === 200) {
                 setResult("친구 추가 요청이 전송되었습니다.");
             }
         } catch (error) {
             console.error("친구 요청 실패:", error);
-            setResult(error.response.data.message);
+            setResult(error.response?.data?.message || "요청 실패");
         }
     };
 
@@ -56,15 +56,13 @@ const FriendModal = ({
     const handleDecline = async (idToDecline) => {
         try {
             const response = await axiosInstance.post(
-                `api/friend/${id}/decline-friend`,
-                { idToDecline: idToDecline }
+                `/api/friend/decline-friend`,
+                { idToDecline }
             );
             if (response.status === 200) {
-                console.log(`${idToDecline}친구요청 거절 완료`);
-                setRequestMemberList(
-                    requestMemberList.filter(
-                        (request) => request.id !== idToDecline
-                    )
+                console.log(`${idToDecline} 친구요청 거절 완료`);
+                setRequestMemberList(prev =>
+                    prev.filter(request => request.id !== idToDecline)
                 );
             }
         } catch (error) {
@@ -75,11 +73,11 @@ const FriendModal = ({
     const handleAccept = async (idToAccept) => {
         try {
             const response = await axiosInstance.post(
-                `api/friend/${id}/accept-friend`,
-                { idToAccept: idToAccept }
+                `/api/friend/accept-friend`, // ✅ id 제거
+                { idToAccept } // 또는 { idToAccept: idToAccept }
             );
             if (response.status === 200) {
-                console.log(`${idToAccept}친구요청 수락 완료`);
+                console.log(`${idToAccept} 친구요청 수락 완료`);
                 setRequestMemberList(
                     requestMemberList.filter(
                         (request) => request.id !== idToAccept
@@ -91,6 +89,7 @@ const FriendModal = ({
             console.log("친구 수락 실패", error);
         }
     };
+    
 
     return (
         <div className="Modal">
