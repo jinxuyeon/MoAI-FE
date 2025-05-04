@@ -9,7 +9,7 @@ import MainPage from "./pages/MainPage";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Footer from "./components/Footer";
-
+import { UserProvider } from "./components/utils/UserContext.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ function App() {
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
     return (
-        <div>
+        <UserProvider>
             <div className="body-container">
                 <Routes>
                     <Route
@@ -63,7 +63,7 @@ function App() {
                 </Routes>
             </div>
             {shouldShowFooter && <Footer/>}
-        </div>
+        </UserProvider>
     );
 }
 

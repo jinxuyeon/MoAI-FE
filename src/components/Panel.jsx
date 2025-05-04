@@ -12,12 +12,12 @@ const Panel = () => {
             const id = localStorage.getItem("id");
             const formData = new FormData();
 
-            const imageResponse = await fetch("/테스트 이미지");
+            const imageResponse = await fetch("icons/profile_base.jpg");
             const blob = await imageResponse.blob();
 
             // 확장자 동적 결정
             const extension = blob.type.split("/")[1]; // 예: "png", "jpeg"
-            const fileName = `profile-image.${extension}`;
+            const fileName = `profile-base.${extension}`;
 
             const file = new File([blob], fileName, { type: blob.type });
 
