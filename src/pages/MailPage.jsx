@@ -7,7 +7,7 @@ const MailPage = () => {
     const friends = ["친구1", "친구2", "친구3", "친구4"];
     const [selectedFriend, setSelectedFriend] = useState(friends[0]);
     const [message, setMessage] = useState("");
-
+    
     const chatData = {
         친구1: [
             { from: "me", text: "안녕?" },

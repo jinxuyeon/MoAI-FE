@@ -6,18 +6,14 @@ import Reddot from "./Reddot";
 
 const FriendModal = ({
     setOpenModal,
-    hasFriendRequest,
     requestMemberList,
     fetchMyFriendInfo,
     setHasFriendrequest,
     setRequestMemberList,
-    count
 }) => {
     const [studentId, setStudentId] = useState("");
     const [result, setResult] = useState("");
     const [activeTab, setActiveTab] = useState("send");
-    const myUsername = localStorage.getItem("username");
-    const id = localStorage.getItem("id");
 
     const handleSearch = async () => {
         try {
@@ -89,7 +85,7 @@ const FriendModal = ({
             console.log("친구 수락 실패", error);
         }
     };
-    
+
 
     return (
         <div className="Modal">
@@ -111,7 +107,7 @@ const FriendModal = ({
                             }}
                         >
                             받은요청
-                            <Reddot count={requestMemberList.length}/>
+                            <Reddot count={requestMemberList.length} />
                         </button>
                         <button
                             style={{
@@ -139,14 +135,17 @@ const FriendModal = ({
                             <div className="request-container">
                                 {result && result.username ? (
                                     <>
-                                        <p>
-                                            {" "}
-                                            {result.name} ({result.username})
-                                        </p>
-                                        <button
-                                            className="request-btn"
-                                            onClick={HandleAddFriend}
-                                        >
+                                        <div className="search-result-profile">
+                                            <img
+                                                src={result.profileImageUrl || "/default-profile.png"}
+                                                alt="프로필"
+                                                className="profile-img"
+                                            />
+                                            <p>
+                                                {result.name} ({result.username})
+                                            </p>
+                                        </div>
+                                        <button className="request-btn" onClick={HandleAddFriend}>
                                             +요청
                                         </button>
                                     </>
@@ -159,30 +158,21 @@ const FriendModal = ({
                         <div className="requests-box">
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (
-                                    <div
-                                        className="request-container"
-                                        key={index}
-                                    >
-                                        <span>
-                                            {" "}
-                                            {request.name} ({request.username})
-                                        </span>
+                                    <div className="request-container" key={index}>
+                                        <div className="search-result-profile">
+                                            <img
+                                                src={request.profileImageUrl || "/default-profile.png"}
+                                                alt="프로필"
+                                                className="profile-img"
+                                            />
+                                            <span>{request.name} ({request.username})</span>
+                                        </div>
                                         <div>
-                                            <button
-                                                className="request-btn"
-                                                onClick={() =>
-                                                    handleAccept(request.id)
-                                                }
-                                            >
+                                            <button className="request-btn" onClick={() => handleAccept(request.id)}>
                                                 수락
                                             </button>
                                             /
-                                            <button
-                                                className="request-btn"
-                                                onClick={() =>
-                                                    handleDecline(request.id)
-                                                }
-                                            >
+                                            <button className="request-btn" onClick={() => handleDecline(request.id)}>
                                                 거절
                                             </button>
                                         </div>

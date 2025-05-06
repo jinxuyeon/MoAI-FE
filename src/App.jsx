@@ -43,7 +43,7 @@ function App() {
     }, []);
 
     // 현재 페이지가 로그인 또는 회원가입 페이지인지 확인
-    const hideFooterRoutes = ["/login", "/login/register", "chat-mail"];
+    const hideFooterRoutes = ["/login", "/login/register", "/chat-mail"];
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
     return (
