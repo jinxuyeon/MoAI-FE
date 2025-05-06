@@ -3,25 +3,6 @@
     flex-direction: column;
 }
 
-.friend-button {
-    background-color: white;
-    border: none;
-    padding: 10px;
-    text-align: left;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.friend-button:hover,
-.friend-button.selected {
-    background-color: #f4f4f4;
-}
-
-.friend-button.selected {
-    font-weight: bold;
-}
-
 .add-chat-button {
     margin: 10px;
     padding: 10px;
@@ -38,6 +19,32 @@
     background-color: var(--point-focus-green);
 }
 
+.room-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #c8e6c9;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.room-button:hover {
+    background-color: #b2dfdb;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 모달 오버레이 */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -51,6 +58,7 @@
     z-index: 999;
 }
 
+/* 모달 본체 */
 .modal-content {
     background-color: white;
     width: 280px;
@@ -109,44 +117,6 @@
 .modal-search-result-area {
     min-height: 200px;
     overflow-y: auto;
-}
-
-.modal-friend-list {
-    max-height: 240px;
-    overflow-y: auto;
-}
-
-.modal-friend-btn {
-    width: 100%;
-    margin: 6px 0;
-    padding: 10px;
-    background-color: #e8f5e9;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    cursor: pointer;
-    text-align: left;
-    transition: background-color 0.2s;
-}
-
-.modal-friend-btn:hover {
-    background-color: #c8e6c9;
-}
-
-.modal-close-btn {
-    margin-top: 10px;
-    width: 100%;
-    padding: 8px;
-    background-color: #cccccc;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.modal-close-btn:hover {
-    background-color: #b3b3b3;
 }
 
 .no-result {

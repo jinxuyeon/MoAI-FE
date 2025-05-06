@@ -2,11 +2,27 @@ import "./Mailpage.css";
 import Header from "../components/Header";
 import MailSide from "../components/MailSide";
 import { useState } from "react";
-
+import axiosInstance from "../components/utils/AxiosInstance";
+import { useEffect } from "react";
 const MailPage = () => {
     const [selectedFriend, setSelectedFriend] = useState(null);
     const [message, setMessage] = useState("");
-    
+    const [chatRooms, setChatRooms] = useState([]);
+
+    const fetchChatRooms = async () => {
+        try {
+            const response = await axiosInstance.get("/api/mail/my-room");
+            if (response.status === 200 && response.data.roomDtos) {
+                setChatRooms(response.data.roomDtos);
+            }
+        } catch (error) {
+            console.error("채팅방 목록 불러오기 실패:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchChatRooms();
+    }, []);
     
 
     const handleSend = () => {
@@ -21,6 +37,7 @@ const MailPage = () => {
             <div className="layout">
                 <aside className="mail-side">
                     <MailSide
+                        chatRooms ={chatRooms}
                         selectedFriend={selectedFriend}
                         setSelectedFriend={setSelectedFriend}
                     />
