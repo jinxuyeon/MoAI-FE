@@ -1,20 +1,31 @@
 import MailModal from "./MailModal";
 import "./MailSide.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axiosInstance from "./utils/AxiosInstance";
 
-const MailSide = ({ friends, setSelectedFriend }) => {
+const MailSide = ({ setSelectedFriend }) => {
     const [showModal, setShowModal] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [activeTab, setActiveTab] = useState("search");
+    const [chatRooms, setChatRooms] = useState([]);
 
-    const handleFriendSelect = (friend) => {
-        setSelectedFriend(friend);
-        setShowModal(false);
+    const fetchChatRooms = async () => {
+        try {
+            const response = await axiosInstance.get("/api/mail/my-room");
+            if (response.status === 200 && response.data.roomDtos) {
+                setChatRooms(response.data.roomDtos);
+            }
+        } catch (error) {
+            console.error("채팅방 목록 불러오기 실패:", error);
+        }
     };
 
-    const filteredFriends = friends.filter((friend) =>
-        friend.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    useEffect(() => {
+        fetchChatRooms();
+    }, []);
+
+    const handleFriendSelect = (room) => {
+        setSelectedFriend(room); // 전체 room 객체 전달
+        setShowModal(false);
+    };
 
     return (
         <div className="MailSide">
@@ -22,18 +33,35 @@ const MailSide = ({ friends, setSelectedFriend }) => {
                 className="add-chat-button"
                 onClick={() => {
                     setShowModal(true);
-                    setSearchTerm("");
-                    setActiveTab("search");
                 }}
             >
                 + 대화 추가하기
             </button>
 
-            {showModal && (
-                <MailModal setOpenModal={setShowModal} />
-            )}
+            {showModal && <MailModal setOpenModal={setShowModal} />}
 
             <p>나의 채팅방</p>
+
+            <div className="chat-room-list">
+                {chatRooms.length > 0 ? (
+                    chatRooms.map((room, idx) => (
+                        <button
+                            key={idx}
+                            className="friend-button"
+                            onClick={() => handleFriendSelect(room)}
+                        >
+                            <img
+                                src={room.partner.profileImageUrl || "/default-profile.png"}
+                                alt="프로필"
+                                className="profile-img"
+                            />
+                            {room.partner.name}
+                        </button>
+                    ))
+                ) : (
+                    <p className="no-room">채팅방이 없습니다.</p>
+                )}
+            </div>
         </div>
     );
 };

@@ -4,20 +4,10 @@ import MailSide from "../components/MailSide";
 import { useState } from "react";
 
 const MailPage = () => {
-    const friends = ["친구1", "친구2", "친구3", "친구4"];
-    const [selectedFriend, setSelectedFriend] = useState(friends[0]);
+    const [selectedFriend, setSelectedFriend] = useState(null);
     const [message, setMessage] = useState("");
     
-    const chatData = {
-        친구1: [
-            { from: "me", text: "안녕?" },
-            { from: "friend", text: "오랜만이야!" },
-        ],
-        친구2: [
-            { from: "friend", text: "과제 했어?" },
-            { from: "me", text: "아직 ㅎ" },
-        ],
-    };
+    
 
     const handleSend = () => {
         if (!message.trim()) return;
@@ -31,25 +21,11 @@ const MailPage = () => {
             <div className="layout">
                 <aside className="mail-side">
                     <MailSide
-                        friends={friends}
                         selectedFriend={selectedFriend}
                         setSelectedFriend={setSelectedFriend}
                     />
                 </aside>
-
                 <section className="chat-section">
-                    <div className="chat-content">
-                        {selectedFriend ? (
-                            chatData[selectedFriend]?.map((msg, idx) => (
-                                <div key={idx} className={`chat-bubble ${msg.from}`}>
-                                    {msg.text}
-                                </div>
-                            ))
-                        ) : (
-                            <div className="no-chat">친구를 선택해주세요.</div>
-                        )}
-                    </div>
-
                     <div className="chat-input-box">
                         <input
                             type="text"
