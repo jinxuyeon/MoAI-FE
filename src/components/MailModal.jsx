@@ -3,7 +3,7 @@ import "./MailModal.css";
 import axiosInstance from "./utils/AxiosInstance";
 import InputBox from "./InputBox";
 
-const MailModal = ({ setOpenModal }) => {
+const MailModal = ({ setOpenModal, fetchChatRooms }) => {
     const [studentId, setStudentId] = useState("");
     const [result, setResult] = useState("");
     const [activeTab, setActiveTab] = useState("send");
@@ -38,6 +38,7 @@ const MailModal = ({ setOpenModal }) => {
         try {
             const response = await axiosInstance.post(`/api/mail/new?username=${username}`);
             alert("채팅방이 생성되었습니다.");
+            fetchChatRooms()
             setOpenModal(false);
         } catch (error) {
             console.error("채팅방 생성 실패:", error);
@@ -51,10 +52,10 @@ const MailModal = ({ setOpenModal }) => {
                 <div className="container">
                     <div className="header">
                         <h3>📝대화 추가</h3>
-                        <button className="request-btn" onClick={() => handleTabChange("send")}>
+                        <button className="request-tap-btn" onClick={() => handleTabChange("send")}>
                             검색
                         </button>
-                        <button className="request-btn" onClick={() => handleTabChange("receive")}>
+                        <button className="request-tap-btn" onClick={() => handleTabChange("receive")}>
                             친구목록
                         </button>
                         <button

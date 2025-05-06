@@ -94,13 +94,13 @@ const FriendModal = ({
                     <div className="header">
                         <h3>🖐️친구 추가</h3>
                         <button
-                            className="request-btn"
+                            className="request-tap-btn"
                             onClick={() => handleTabChange("send")}
                         >
                             검색
                         </button>
                         <button
-                            className="request-btn"
+                            className="request-tap-btn"
                             onClick={() => {
                                 handleTabChange("receive");
                                 setHasFriendrequest(false);
@@ -167,12 +167,12 @@ const FriendModal = ({
                                             />
                                             <span>{request.name} ({request.username})</span>
                                         </div>
-                                        <div>
-                                            <button className="request-btn" onClick={() => handleAccept(request.id)}>
+                                        <div >
+                                            <button className="request-btn accept" onClick={() => handleAccept(request.id)}>
                                                 수락
                                             </button>
-                                            /
-                                            <button className="request-btn" onClick={() => handleDecline(request.id)}>
+                                            |
+                                            <button className="request-btn decline" onClick={() => handleDecline(request.id)}>
                                                 거절
                                             </button>
                                         </div>
