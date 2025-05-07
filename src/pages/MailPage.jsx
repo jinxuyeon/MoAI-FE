@@ -23,7 +23,7 @@ const MailPage = () => {
     useEffect(() => {
         fetchChatRooms();
     }, []);
-    
+
 
     const handleSend = () => {
         if (!message.trim()) return;
@@ -37,12 +37,16 @@ const MailPage = () => {
             <div className="layout">
                 <aside className="mail-side">
                     <MailSide
-                        chatRooms ={chatRooms}
+                        fetchChatRooms={fetchChatRooms}
+                        chatRooms={chatRooms}
                         selectedFriend={selectedFriend}
                         setSelectedFriend={setSelectedFriend}
                     />
                 </aside>
                 <section className="chat-section">
+                    <section className="chat-box">
+                    sdfsdfsd
+                    </section>
                     <div className="chat-input-box">
                         <input
                             type="text"

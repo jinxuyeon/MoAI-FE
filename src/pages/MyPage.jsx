@@ -116,9 +116,13 @@ const MyPage = () => {
               </button>
             </div>
             <div className="activity-content">
-  {activeTab === "posts" && <div className="box checklist-box" style={{ minHeight: "100px" }}>작성글 박스</div>}
-  {activeTab === "comments" && <div className="box checklist-box" style={{ minHeight: "100px" }}>작성댓글 박스</div>}
-</div>
+              {activeTab === "posts" && (
+                <div className="box checklist-box" style={{ minHeight: "100px" }}>작성글 박스</div>
+              )}
+              {activeTab === "comments" && (
+                <div className="box checklist-box" style={{ minHeight: "100px" }}>작성댓글 박스</div>
+              )}
+            </div>
 
             <label className="section-title small">체크리스트</label>
             <div className="box checklist-box">
@@ -155,12 +159,14 @@ const MyPage = () => {
           {/* 오른쪽 전체 게시판 섹션 */}
           <aside className="board-section">
             <div className="search-box">
-              <input
-                type="text"
-                placeholder="전체 게시판의 글을 검색해보세요!"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              <div className="search-input-wrapper">
+                <input
+                  type="text"
+                  placeholder="전체 게시판의 글을 검색해보세요!"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
             </div>
             <div className="board-box">
               <div className="board-title">자유게시판</div>

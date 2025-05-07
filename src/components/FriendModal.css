@@ -57,10 +57,7 @@
   justify-content: space-between;
   margin:8px
 }
-
-
-.Modal .request-btn{
-  
+.request-tap-btn{
   position: relative;
   background-color: transparent;
   border: none;
@@ -68,11 +65,32 @@
   cursor: pointer;
 }
 
-.Modal .request-btn:hover {
-  opacity: 0.5;
-  /* 마우스 올릴 때 약간 투명해짐 */
+.Modal .request-tap-btn:hover {
+  opacity: 0.7;
+}
+.Modal .request-btn{
+  color: white;
+  border-radius: 6px;
+  position: relative;
+  background-color: transparent;
+  background-color: var(--point-green);
+  border: none;
+  cursor: pointer;
+  padding: 2px;
 }
 
+.Modal .request-btn:hover {
+  background-color: var(--point-focus-green);
+}
+.request-btn.accept {
+  color: white;
+  background-color: var(--point-green); /* 녹색 */
+}
+
+.request-btn.decline {
+  color: black;
+  background-color: white
+}
 
 .Modal .exit-btn {
   width: 15px;
@@ -103,3 +121,4 @@
   border-radius: 50%;
   object-fit: cover;
 }
+

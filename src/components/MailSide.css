@@ -19,22 +19,32 @@
     background-color: var(--point-focus-green);
 }
 
+.room-button-container{
+    display: flex;
+    background-color: #F0F0F0;
+}
+
 .room-button {
     display: flex;
     align-items: center;
+    align-content: center;
     gap: 10px;
     width: 100%;
     padding: 10px;
-    font-size: 16px;
-    background-color: #c8e6c9;
+    font-size: 1rem;
     border: none;
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.5s;
+}
+.room-btton-exit{
+    background-color: transparent;
+    height: 30%;
+    border: none;
 }
 
 .room-button:hover {
-    background-color: #b2dfdb;
+    background-color: #ccc;
 }
 
 .profile-img {
