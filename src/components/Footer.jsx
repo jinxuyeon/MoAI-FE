@@ -25,7 +25,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                © 2025 BookUniv. All rights reserved.
+                © 2025 moai_official. All rights reserved.
             </div>
         </div>
     );
