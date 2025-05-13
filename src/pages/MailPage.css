@@ -24,12 +24,11 @@
     flex-direction: column;
 }
 
-.chat-box{
+.chat-box {
     height: 80%;
     max-height: 700px;
     background-color: #f4f4f4;
     padding: 20px;
-
 }
 
 .chat-content {
@@ -59,11 +58,6 @@
     background-color: var(--point-text-color-blue);
     color: white;
     align-self: flex-end;
-}
-
-.no-chat {
-    color: #999;
-    font-size: 16px;
 }
 
 .chat-input-box {
