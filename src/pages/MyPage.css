@@ -159,7 +159,7 @@
 
 /* 공통 박스 스타일 */
 .box {
-  background: #a9a9a9;
+  background: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -253,6 +253,25 @@
 .checklist-items li.checked .item-text {
   text-decoration: line-through;
   color: #888;
+
+}
+
+.circle {
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+  user-select: none;
+}
+
+.recruitment-box {
+  min-height: 200px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+
 }
 
 .circle {
