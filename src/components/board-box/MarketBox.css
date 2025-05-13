@@ -1,0 +1,71 @@
+.MarketBox {
+    padding: 20px;
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.market-title {
+    font-size: 24px;
+}
+
+/* .write-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 6px;
+} */
+
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.market-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.market-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.market-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.market-info {
+    padding: 12px;
+}
+
+.active-page {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.market-info h3 {
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+}
+
+.market-info .price {
+    font-weight: bold;
+    color: #2a9d8f;
+    margin-bottom: 4px;
+}
+
+.market-info .description {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}

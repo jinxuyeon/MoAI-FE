@@ -43,9 +43,9 @@ const NoticeBoardBox = () => {
         <div className="NoticeBoardBox">
             <div className="notice-header">
                 <h2 className="notice-title">공지사항</h2>
-                <Link to="/main/notice/write" className="write-button">
+                {/* <Link to="/main/notice/write" className="write-button">
                     글쓰기
-                </Link>
+                </Link> */}
             </div>
 
             <table className="notice-table">
