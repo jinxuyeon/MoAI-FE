@@ -83,6 +83,14 @@ const MyPage = () => {
             <MyProfile profileImageUrl={user.profileImageUrl} onImageSelect={setSelectedImageFile} />
             <label>이름</label>
             <input type="text" value={user.name} readOnly />
+            <label>별명</label>
+            <input
+              type="text"
+              value={user.nickname || ""}
+              onChange={(e) =>
+                setUser((prev) => ({ ...prev, nickname: e.target.value }))
+              }
+            />
             <label>자기소개</label>
             <textarea
               value={intro}
@@ -132,6 +140,12 @@ const MyPage = () => {
                   value={newItem}
                   onChange={(e) => setNewItem(e.target.value)}
                   placeholder="새 체크리스트 입력"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {        // 💬 엔터 키로 추가
+                      e.preventDefault();
+                      handleAddItem();
+                    }
+                  }}
                 />
                 <button onClick={handleAddItem}>추가</button>
               </div>
