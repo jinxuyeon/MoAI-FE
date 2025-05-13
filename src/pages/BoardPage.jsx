@@ -17,7 +17,9 @@ const BoardPage = () => {
             case "market":
                 return <MarketBox />;
             case "free":
-                return <FreeBoardBox/>;
+                return <FreeBoardBox />;
+            case "popular":
+                return <div>인기게시판 컴포넌트</div>;
             case "secret":
                 return <SecretBoardBox/>;
             case "lecture":
@@ -29,14 +31,17 @@ const BoardPage = () => {
 
     return (
         <div className="BoardPage">
-            <div>
+            <div className="header-with-button">
                 <Header title={"Community"} />
+                
             </div>
             <div className="layout-container">
                 <div className="content-container">
                     <div className="navibar-container">
                         <NaviBar currentBoard={boardType} />
+                        <button className="write-button">글쓰기</button>
                     </div>
+
                     <div className="board-container">{renderBoard()}</div>
                 </div>
             </div>
