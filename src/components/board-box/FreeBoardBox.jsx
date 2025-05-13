@@ -47,7 +47,7 @@ const FreeBoardBox = () => {
         <div className="FreeBoardBox">
             <div className="free-header">
                 <h2 className="free-title">자유 게시판</h2>
-                <Link to="/main/free/write" className="write-button">글쓰기</Link>
+                {/* <Link to="/main/free/write" className="write-button">글쓰기</Link> */}
             </div>
 
             <table className="free-table">

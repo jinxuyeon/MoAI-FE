@@ -2,7 +2,6 @@
     min-width: 110px;
     border: 1px solid var(--base-border-color);
     box-shadow: var(--board-shadow-color);
-
     display: block;
     box-sizing: border-box;
     border-radius: 6px;

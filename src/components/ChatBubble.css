@@ -1,0 +1,20 @@
+.ChatBubble {
+    display: inline-block;
+    background-color: aqua;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    padding: 10px 14px;
+    max-width: 700px;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.content-box {
+    display: inline-block; /* ✅ block ❌ */
+}
+
+.content {
+    display: inline;
+    font-size: 16px;
+    margin: 0;
+}

@@ -5,6 +5,7 @@ import NoticeBoardBox from "../components/board-box/NoticeBoardBox";
 import MarketBox from "../components/board-box/MarketBox";
 import FreeBoardBox from "../components/board-box/FreeBoardBox";
 import "./BoardPage.css";
+import SecretBoardBox from "../components/board-box/SecretBoardBox";
 
 const BoardPage = () => {
     const { boardType } = useParams(); // <- URL에서 현재 게시판 종류 추출
@@ -19,6 +20,8 @@ const BoardPage = () => {
                 return <FreeBoardBox />;
             case "popular":
                 return <div>인기게시판 컴포넌트</div>;
+            case "secret":
+                return <SecretBoardBox/>;
             case "lecture":
                 return <div>강의게시판 컴포넌트</div>;
             default:

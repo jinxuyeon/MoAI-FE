@@ -130,13 +130,20 @@
   margin-bottom: 20px;
 }
 
-.board-section .search-box input {
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-wrapper input {
+  width: 100%;
   padding: 8px;
+  padding-right: 30px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
   margin-bottom: 8px;
   width: 97%;
+  box-sizing: border-box;
 }
 
 .board-section .board-title {
@@ -153,7 +160,6 @@
   font-size: 14px;
 }
 
-/* 게시판 박스 */
 .board-box {
   padding: 10px;
 }
@@ -200,14 +206,15 @@
   flex-direction: column;
 }
 
-/* 내 활동 제목만 글씨 작게 */
 .section-title.small {
   font-size: 16px;
   border-bottom: none;
   margin-bottom: 0px;
 }
 
-.checklist-box {
+.checklist-box,
+.activity-content .box {
+  min-height: 100px;
   background: #f9f9f9;
   padding: 20px;
   border-radius: 10px;

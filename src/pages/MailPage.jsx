@@ -4,6 +4,7 @@ import MailSide from "../components/MailSide";
 import { useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import { useEffect } from "react";
+import ChatBubble from "../components/ChatBubble";
 const MailPage = () => {
     const [selectedFriend, setSelectedFriend] = useState(null);
     const [message, setMessage] = useState("");
@@ -24,7 +25,6 @@ const MailPage = () => {
         fetchChatRooms();
     }, []);
 
-
     const handleSend = () => {
         if (!message.trim()) return;
         console.log(`${selectedFriend}에게 보냄:`, message);
@@ -44,8 +44,10 @@ const MailPage = () => {
                     />
                 </aside>
                 <section className="chat-section">
-                    <section className="chat-box">
-                    sdfsdfsd
+                    <section className="chat-box chat-content">
+                        <div className="chat-bubble friend">안녕</div>
+                        <div className="chat-bubble me">누구세요?</div>
+                        <ChatBubble/>
                     </section>
                     <div className="chat-input-box">
                         <input
