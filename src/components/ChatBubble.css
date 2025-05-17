@@ -1,20 +1,44 @@
 .ChatBubble {
-    display: inline-block;
-    background-color: aqua;
-    border: 1px solid #ccc;
-    border-radius: 16px;
-    padding: 10px 14px;
-    max-width: 700px;
-    word-break: break-word;
-    white-space: pre-wrap;
+    display: flex;
+    margin: 8px;
+    width: 100%;
+    
+}
+
+.ChatBubble.mine {
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.ChatBubble.theirs {
+    justify-content: flex-start;
+    align-self: flex-start;
 }
 
 .content-box {
-    display: inline-block; /* ✅ block ❌ */
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    padding: 10px 14px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+
+.ChatBubble.theirs .content-box {
+    background-color: #ffffff; /* 상대 메시지 색 */
+    border: 1px solid #ddd;
 }
 
 .content {
     display: inline;
     font-size: 16px;
     margin: 0;
+}
+
+.chat-date {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+    display: block;
 }
