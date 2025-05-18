@@ -17,7 +17,7 @@
 
 .Dashboard .main-container {
     display: flex;
-    max-width: 1200px; /* 변경: 고정 width -> 최대 width */
+    max-width: 800px; /* 변경: 고정 width -> 최대 width */
     width: 100%; /* 추가: 부모 요소에 맞게 크기 조정 */
     min-width: 10px;
     flex-direction: column;
