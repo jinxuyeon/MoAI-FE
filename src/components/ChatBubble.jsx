@@ -1,12 +1,19 @@
 import "./ChatBubble.css";
+import { useContext } from "react";
+import { UserContext } from "./utils/UserContext";
+UserContext
+const ChatBubble = ({ msg }) => {
+    const { user } = useContext(UserContext);
+    const isMine = user.id === msg.senderId;
 
-const ChatBubble = () => {
     return (
-        <div className="ChatBubble">
+        <div className={`ChatBubble ${isMine ? "mine" : "theirs"}`}>
             <div className="content-box">
-                <p className="content">대화내sdfdsfsdfsdfsdfsdfsdfsdfsd용 예시.</p>
+                <span className="chat-date">{new Date(msg.date).toLocaleString()}</span>
+                <p className="content">{msg.content}</p>
             </div>
         </div>
+
     );
 };
 

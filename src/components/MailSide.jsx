@@ -1,22 +1,21 @@
 import MailModal from "./MailModal";
 import "./MailSide.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import axiosInstance from "./utils/AxiosInstance";
 
-const MailSide = ({ setSelectedFriend, chatRooms, fetchChatRooms }) => {
+const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
     const [showModal, setShowModal] = useState(false);
     const handleFriendSelect = (room) => {
-        setSelectedFriend(room); // 전체 room 객체 전달
+        setSelectedRoom(room); // 전체 room 객체 전달
         setShowModal(false);
     };
-
 
     const handleExitRoom = async (roomId) => {
         try {
             const response = await axiosInstance.delete(`/api/mail/exit-room/${roomId}`);
             if (response.status === 200) {
-                console.log(response.data.message); // "채팅방 삭제 성공"
-                await fetchChatRooms(); // 목록 갱신
+                console.log(response.data.message); 
+                await fetchChatRooms(); 
             }
         } catch (error) {
             console.error("채팅방 나가기 실패:", error);
@@ -37,7 +36,6 @@ const MailSide = ({ setSelectedFriend, chatRooms, fetchChatRooms }) => {
             {showModal && <MailModal
                 fetchChatRooms={fetchChatRooms}
                 setOpenModal={setShowModal} />}
-            <p>나의 채팅방</p>
 
             <div className="chat-room-list">
                 {chatRooms.length > 0 ? (
