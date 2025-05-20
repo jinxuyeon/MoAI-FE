@@ -1,0 +1,79 @@
+.LectureCategoryBox {
+    padding: 20px;
+}
+
+.lecture-category-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.lecture-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* ✅ 4열 */
+    gap: 20px;
+}
+
+
+.lecture-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.lecture-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+}
+
+.lecture-color-box {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #eee;
+    border-radius: 10px 10px 0 0;
+}
+
+.lecture-info {
+    padding: 12px;
+}
+
+.lecture-info h3 {
+    font-size: 16px;
+    margin: 0 0 4px;
+}
+
+.lecture-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .active-page {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
