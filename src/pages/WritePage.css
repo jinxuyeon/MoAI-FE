@@ -1,0 +1,263 @@
+/* ========== 전체 레이아웃 ========== */
+.WritePage {
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.write-layout {
+  display: flex;
+  max-width: 1200px;
+  margin: 40px auto;
+  gap: 24px;
+  padding: 20px;
+}
+
+.write-main {
+  flex: 3;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+/* ========== 글쓰기 제목 ========== */
+.write-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* ========== 게시판 선택 & 제목 입력 영역 ========== */
+.write-box {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.write-box .write-select {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background-color: transparent;
+  outline: none;
+  appearance: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.write-box .write-select:focus {
+  border-bottom: 2px solid #00c73c;
+}
+
+.write-box .write-input {
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  background-color: #f5f6f8;
+  border-radius: 12px;
+  color: #333;
+}
+
+/* ========== 에디터 박스 ========== */
+.editor-box {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+/* 툴바 영역 (아이콘/서식) */
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0 0 0;
+  background: transparent;
+  border: none;
+}
+
+.toolbar-row button,
+.toolbar-row select {
+  background: transparent;
+  border: none;
+  padding: 6px 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.toolbar-row button:hover {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* 아이콘 + 텍스트 버튼 */
+.toolbar-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.toolbar-label {
+  font-size: 11px;
+  color: #999;
+  margin-top: 5px;
+  line-height: 1;
+}
+
+/* 구분선 */
+.divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 4px 0;
+}
+
+/* 본문 입력 영역 */
+.write-textarea {
+  border: none;
+  resize: vertical;
+  padding: 14px;
+  font-size: 16px;
+  min-height: 250px;
+  outline: none;
+  background-color: #fff;
+}
+
+/* ========== 버튼 영역 (등록/임시저장) ========== */
+.write-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.save-draft,
+.submit-post {
+  padding: 10px 24px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-draft {
+  background-color: #e5e5e5;
+}
+
+.submit-post {
+  background-color: #3498db;
+  color: white;
+}
+
+/* ========== 사이드바 영역 ========== */
+.write-sidebar {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  height: fit-content;
+  border: 1px solid #ddd;
+}
+
+.write-setting h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.write-setting label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 0 12px;
+}
+
+.styled-select {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  outline: none;
+  appearance: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.select-arrow {
+  pointer-events: none;
+  color: #888;
+}
+.custom-dropdown {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.custom-select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.write-textarea.editable {
+  border: none;
+  resize: vertical;
+  padding: 14px;
+  font-size: 16px;
+  min-height: 250px;
+  outline: none;
+  background-color: #fff;
+  line-height: 1.6;
+}
+

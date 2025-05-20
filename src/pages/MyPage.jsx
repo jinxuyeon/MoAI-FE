@@ -83,6 +83,14 @@ const MyPage = () => {
             <MyProfile profileImageUrl={user.profileImageUrl} onImageSelect={setSelectedImageFile} />
             <label>이름</label>
             <input type="text" value={user.name} readOnly />
+            <label>별명</label>
+            <input
+              type="text"
+              value={user.nickname || ""}
+              onChange={(e) =>
+                setUser((prev) => ({ ...prev, nickname: e.target.value }))
+              }
+            />
             <label>자기소개</label>
             <textarea
               value={intro}
@@ -116,8 +124,12 @@ const MyPage = () => {
               </button>
             </div>
             <div className="activity-content">
-              {activeTab === "posts" && <div className="box checklist-box">작성글 박스</div>}
-              {activeTab === "comments" && <div className="box medium">작성댓글 박스</div>}
+              {activeTab === "posts" && (
+                <div className="box checklist-box" style={{ minHeight: "100px" }}>작성글 박스</div>
+              )}
+              {activeTab === "comments" && (
+                <div className="box checklist-box" style={{ minHeight: "100px" }}>작성댓글 박스</div>
+              )}
             </div>
 
             <label className="section-title small">체크리스트</label>
@@ -128,6 +140,12 @@ const MyPage = () => {
                   value={newItem}
                   onChange={(e) => setNewItem(e.target.value)}
                   placeholder="새 체크리스트 입력"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {        // 💬 엔터 키로 추가
+                      e.preventDefault();
+                      handleAddItem();
+                    }
+                  }}
                 />
                 <button onClick={handleAddItem}>추가</button>
               </div>
@@ -155,12 +173,14 @@ const MyPage = () => {
           {/* 오른쪽 전체 게시판 섹션 */}
           <aside className="board-section">
             <div className="search-box">
-              <input
-                type="text"
-                placeholder="전체 게시판의 글을 검색해보세요!"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              <div className="search-input-wrapper">
+                <input
+                  type="text"
+                  placeholder="전체 게시판의 글을 검색해보세요!"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
             </div>
             <div className="board-box">
               <div className="board-title">자유게시판</div>

@@ -1,4 +1,4 @@
-import { Mails } from "lucide-react";
+import { MessagesSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // ← 추가
 import Reddot from "./Reddot";
 import "./MailBox.css"
@@ -13,7 +13,7 @@ const MailBox = () => {
     return (
         <div className="MailBox">
             <button className="mail-btn" onClick={handleClick}>
-                <Mails />
+                <MessagesSquare />
                 <Reddot count={0} />
             </button>
         </div>

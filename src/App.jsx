@@ -11,6 +11,10 @@ import axios from "axios";
 import Footer from "./components/Footer";
 import MailPage from "./pages/MailPage.jsx";
 import { UserProvider } from "./components/utils/UserContext.jsx";
+import NoticeWrite from "./components/board-box/NoticeWrite";
+
+import WritePage from "./pages/WritePage";
+
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
@@ -58,14 +62,18 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
                     <Route path="/login/register" element={<RegisterPage />} />
-                    <Route path="/main/community/:boardType" element={isAuthenticated ? <BoardPage />: <BoardPage />} />
-                    <Route path="/main" element={isAuthenticated ? <MainPage />: <MainPage />} />
-                    <Route path="/mypage" element={isAuthenticated ? <MyPage /> :  <MyPage />} />
-                    <Route path="/chat-mail" element={isAuthenticated ? <MailPage /> :  <MailPage />} />
+                    <Route path="/main/community/:boardType" element={isAuthenticated ? <BoardPage /> : <BoardPage />} />
+                    <Route path="/main" element={isAuthenticated ? <MainPage /> : <MainPage />} />
+                    <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <MyPage />} />
+                    <Route path="/chat-mail" element={isAuthenticated ? <MailPage /> : <MailPage />} />
+                    <Route path="/main/notice/write" element={<NoticeWrite />} />
+                    <Route path="/board/:boardType" element={<BoardPage />} />
+                    <Route path="/write/:boardType" element={<WritePage />} />
+
 
                 </Routes>
             </div>
-            {shouldShowFooter && <Footer/>}
+            {shouldShowFooter && <Footer />}
         </UserProvider>
     );
 }
