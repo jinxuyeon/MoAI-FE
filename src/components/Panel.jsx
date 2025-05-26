@@ -13,34 +13,20 @@ const Panel = () => {
     if (!user) return <div>로그인이 필요합니다</div>;
 
     const handleSearch = async () => {
+        const filename = "test-image.jpg";
+
         try {
-            const id = localStorage.getItem("id");
-            const formData = new FormData();
-
-            const imageResponse = await fetch("icons/profile_base.jpg");
-            const blob = await imageResponse.blob();
-
-            const extension = blob.type.split("/")[1]; // 예: "png", "jpeg"
-            const fileName = `profile-base.${extension}`;
-
-            const file = new File([blob], fileName, { type: blob.type });
-            if (file.size > 1 * 1024 * 1024) {
-                alert("1MB 이하의 파일만 업로드할 수 있습니다.");
-                return;
-            }
-
-            formData.append("profileImage", file);
-            const response = await axiosInstance.post(`/api/member/${id}/set-profile-image`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+            const res = await axiosInstance.post("/api/post/post-up", {
+                title: "테스트 제목",
+                content: "<p>테스트 본문</p>",
+                boardType: "FREE",  // enum 값 중 하나
             });
 
-            console.log("업로드 완료:", response.data);
-            alert("이미지 업로드 성공!");
+            console.log("응답:", res.data);
+            alert("성공! 콘솔 확인");
         } catch (err) {
-            console.error("업로드 실패:", err);
-            alert("이미지 업로드 실패");
+            console.error("❌요청 실패:", err);
+            alert("실패");
         }
     };
 
