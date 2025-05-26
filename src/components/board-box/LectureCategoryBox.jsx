@@ -39,6 +39,7 @@ const LectureCategoryBox = () => {
                         to={`/main/lecture/${lecture.id}`}
                         key={lecture.id}
                         className="lecture-card"
+                        state={{lecture}}
                     >
                         <div
                             className="lecture-color-box"

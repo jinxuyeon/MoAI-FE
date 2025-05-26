@@ -1,0 +1,219 @@
+.LectureBoardPage {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.lecture-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.lecture-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lecture-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.lecture-professor {
+  font-size: 14px;
+  color: #666;
+  margin-top: 3px;
+}
+
+.tab-and-write-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+}
+.tab-button:hover {
+  background-color: #f2f2f2;
+}
+
+.write-button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 36px;
+  margin-left: 8px;
+}
+.write-button:hover {
+  background-color: #2980b9;
+}
+
+.lecture-content-wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.lecture-main-box {
+  flex: 1;
+  background-color: white;
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  min-height: 300px;
+}
+
+.placeholder-text {
+  color: #888;
+  font-size: 14px;
+}
+
+.lecture-sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dday-box,
+.activity-box {
+  background-color: white;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.dday-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dday-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dday-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dday-message {
+  font-size: 14px;
+  color: #333;
+}
+
+.dday-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dday-number {
+  font-size: 40px;
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.dday-add-button {
+  margin-top: 6px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #3498db;
+  cursor: pointer;
+}
+
+.dday-input-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dday-input-form input[type="text"],
+.dday-input-form input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.dday-save-button {
+  padding: 6px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dday-save-button:hover {
+  background-color: #2980b9;
+}
+
+.lecture-board-container {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.lecture-sidebar-left {
+  width: 220px;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  background-color: white;
+}
+
+.lecture-main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.lecture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lecture-link {
+  display: block;
+  padding: 8px 0;
+  color: #007bff;
+  text-decoration: none;
+}
+.lecture-link:hover {
+  text-decoration: underline;
+}
+
+.lecture-sidebar-link {
+  text-decoration: none;
+  color: #000;
+}
+.lecture-sidebar-link:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
