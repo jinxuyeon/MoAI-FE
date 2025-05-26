@@ -45,9 +45,15 @@ const BoardPage = () => {
                 <div className="content-container">
                     <div className="navibar-container">
                         <NaviBar currentBoard={boardType} />
+                        {boardType === "lecture" ? (
+                            <button className="write-button" onClick={() => navigate("/create-lecture")}>
+                                생성
+                            </button>
+                        ) : (
                         <button className="write-button" onClick={handleWriteClick}>
                             글쓰기
                         </button>
+                        )}
                     </div>
                     <div className="board-container">{renderBoard()}</div>
                 </div>
