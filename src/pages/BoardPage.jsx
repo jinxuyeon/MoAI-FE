@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import NaviBar from "../components/NaviBar";
@@ -25,7 +26,7 @@ const BoardPage = () => {
             case "secret":
                 return <SecretBoardBox />;
             case "lecture":
-                return <LectureCategoryBox/>;
+                return <LectureCategoryBox />;
             default:
                 return <div>존재하지 않는 게시판입니다.</div>;
         }
@@ -45,9 +46,12 @@ const BoardPage = () => {
                 <div className="content-container">
                     <div className="navibar-container">
                         <NaviBar currentBoard={boardType} />
-                        <button className="write-button" onClick={handleWriteClick}>
-                            글쓰기
-                        </button>
+                        {/* boardType이 "lecture"인 경우 글쓰기 버튼 숨김 */}
+                        {boardType !== "lecture" && (
+                            <button className="write-button" onClick={handleWriteClick}>
+                                글쓰기
+                            </button>
+                        )}
                     </div>
                     <div className="board-container">{renderBoard()}</div>
                 </div>
