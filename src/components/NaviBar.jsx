@@ -7,7 +7,7 @@ const NaviBar = ({ currentBoard }) => {
         { name: "책장터", path: "market" },
         { name: "자유게시판", path: "free" },
         { name: "비밀게시판", path: "secret" },
-        { name: "강의 게시판", path: "lecture" },
+        { name: "강의게시판", path: "lecture" },
     ];
 
     return (

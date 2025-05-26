@@ -31,7 +31,7 @@ const LectureCategoryBox = () => {
 
     return (
         <div className="LectureCategoryBox">
-            <h2 className="lecture-category-title">강의 목록</h2>
+            <h2 className="lecture-category-title">강의목록</h2>
 
             <div className="lecture-card-grid">
                 {visibleLectures.map((lecture) => (

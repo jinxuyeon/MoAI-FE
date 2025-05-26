@@ -51,6 +51,14 @@ const BoardPage = () => {
                             <button className="write-button" onClick={handleWriteClick}>
                                 글쓰기
                             </button>
+                        {boardType === "lecture" ? (
+                            <button className="write-button" onClick={() => navigate("/create-lecture")}>
+                                생성
+                            </button>
+                        ) : (
+                        <button className="write-button" onClick={handleWriteClick}>
+                            글쓰기
+                        </button>
                         )}
                     </div>
                     <div className="board-container">{renderBoard()}</div>
