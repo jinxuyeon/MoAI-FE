@@ -1,4 +1,5 @@
-.NormalBoard{
+.BasicBoard{
+    min-height: 100px;
     min-width: 110px;
     border: 1px solid var(--base-border-color);
     display: block;
@@ -11,7 +12,7 @@
     word-wrap: break-word;
 }
 
-.NormalBoard .title{
+.BasicBoard .title{
     font-size:var(--board-title-size);
     color : var(--point-text-color-blue);
 }

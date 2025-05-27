@@ -135,6 +135,15 @@
     text-align: center;
 }
 
+.new-mail-count {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin-left: 8px;
+    font-size: 12px;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
