@@ -2,7 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
-import { Book } from 'lucide-react';
+import { Book } from "lucide-react";
+import { useNavigate } from "react-router-dom"; 
 
 const calculateDday = (targetDateStr) => {
     const today = new Date();
@@ -40,6 +41,7 @@ const dummyPosts = {
 
 const LectureBoardPage = () => {
     const { lectureId } = useParams();
+    const navigate = useNavigate();
     const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
     const [selectedTab, setSelectedTab] = useState("질문");
 
@@ -147,8 +149,11 @@ const LectureBoardPage = () => {
                                     {tab}
                                 </button>
                             ))}
+                            <button className="lecture-write-button"
+                            onClick={() => navigate(`/main/lecture/${lectureId}/write`)}
+                            >
+                                글쓰기</button>
                         </div>
-                        <button className="write-button">글쓰기</button>
                     </div>
 
                     <div className="lecture-content-wrapper">

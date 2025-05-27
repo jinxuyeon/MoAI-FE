@@ -15,6 +15,8 @@ import NoticeWrite from "./components/board-box/NoticeWrite";
 
 import WritePage from "./pages/WritePage";
 import LectureBoardPage from "./pages/LectureBoardPage";
+import LectureWritePage from "./pages/LectureWritePage";
+
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,6 +73,7 @@ function App() {
                     <Route path="/board/:boardType" element={<BoardPage />} />
                     <Route path="/main/lecture/:lectureId" element={<LectureBoardPage />} />
                     <Route path="/write/:boardType" element={<WritePage />} />
+                    <Route path="/main/lecture/:lectureId/write" element={<LectureWritePage />} />
 
 
                 </Routes>
