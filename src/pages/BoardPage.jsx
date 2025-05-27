@@ -47,10 +47,7 @@ const BoardPage = () => {
                     <div className="navibar-container">
                         <NaviBar currentBoard={boardType} />
                         {/* boardType이 "lecture"인 경우 글쓰기 버튼 숨김 */}
-                        {boardType !== "lecture" && (
-                            <button className="write-button" onClick={handleWriteClick}>
-                                글쓰기
-                            </button>
+                    
                         {boardType === "lecture" ? (
                             <button className="write-button" onClick={() => navigate("/create-lecture")}>
                                 생성
