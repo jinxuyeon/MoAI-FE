@@ -44,6 +44,15 @@ const Dashboard = () => {
                         <h3>Additional Resources</h3>
                         <BasicBoard type = {"FREE"}  title={"???게시판"}/>
                     </section>
+
+                    <section className="inner-container">
+                        <h3>Additional Resources</h3>
+                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
+                    </section>
+                    <section className="inner-container">
+                        <h3>Additional Resources</h3>
+                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
+                    </section>
                 </div>
 
                 <div className="rightside-container">
