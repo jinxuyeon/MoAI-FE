@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // ← 추가
 import Reddot from "./Reddot";
 import "./MailBox.css"
 
-const MailBox = () => {
+const MailBox = ({newMailCount}) => {
     const navigate = useNavigate(); // ← 훅 호출
 
     const handleClick = () => {
@@ -14,7 +14,7 @@ const MailBox = () => {
         <div className="MailBox">
             <button className="mail-btn" onClick={handleClick}>
                 <MessagesSquare />
-                <Reddot count={0} />
+                <Reddot count={newMailCount} />
             </button>
         </div>
     );

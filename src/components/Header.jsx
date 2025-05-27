@@ -10,6 +10,7 @@ import { useState } from "react";
 function Header({ title }) {
 
     const [notices, setNotices] = useState([]);
+    const [newMailCount, setNewMailCount] = useState(0)
     const handleLogout = () => {
         //localStorage.removeItem("accessToken")
         //localStorage.removeItem("refreshToken")
@@ -29,9 +30,21 @@ function Header({ title }) {
         }
     };
 
+   const checkMail = async () => {
+    try {
+        const response = await axiosInstance.get("/api/mail/check-new");
+        if (response.status === 200) {
+            console.log("메일 개수 확인:", response.data.newMailCount);
+            setNewMailCount(response.data.newMailCount);
+        }
+    } catch (error) {
+        console.error("메일 확인 실패:", error);
+    }
+};
 
     useEffect(() => {
         handleSearch();
+        checkMail();
     }, []);
 
     return (
@@ -40,8 +53,8 @@ function Header({ title }) {
             <h2 style={{ marginLeft: "10px" }}>{title}</h2>
             <div className="header-space">
                 <div className="util-box">
-                    <Bellbox notices ={notices} setNotices ={setNotices}/>
-                    <MailBox />
+                    <Bellbox notices={notices} setNotices={setNotices} />
+                    <MailBox newMailCount = {newMailCount}/>
                 </div>
 
                 <button
