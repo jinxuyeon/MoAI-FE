@@ -1,8 +1,7 @@
 import "./Dashboard.css";
-import NoticeBoard from "./NoticeBoard";
 import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
-import FreeBoard from "./FreeBoard";
+import BasicBoard from "./BasicBoard";
 import { House, Volume2 } from "lucide-react";
 const Dashboard = () => {
     return (
@@ -19,31 +18,31 @@ const Dashboard = () => {
                             <Volume2 size={20} color="var(--normal-text-color)"/>
                         <h3>From the Office</h3>
                         </div>
-                        <NoticeBoard />
+                         <BasicBoard type = {"NOTICE"} title={"학과사무실에서 알려드립니다다"} />
                     </section>
                     <section className="inner-container">
                         <h3>Join the Conversation</h3>
                         <section className="div-container">
                             <div className="half-board-area">
-                                <FreeBoard />
+                                <BasicBoard type = {"FREE"} title={"자유게시판"}/>
                             </div>
                             <div className="half-board-area">
-                                <FreeBoard />
+                                <BasicBoard type = {"SECRET"}  title={"비밀게시판"}/>
                             </div>
                         </section>
 
                         <section className="div-container">
                             <div className="half-board-area">
-                                <FreeBoard />
+                                <BasicBoard type = {"FREE"}  title={"??게시판"}/>
                             </div>
                             <div className="half-board-area">
-                                <FreeBoard />
+                                <BasicBoard type = {"FREE"}  title={"???게시판"}/>
                             </div>
                         </section>
                     </section>
                     <section className="inner-container">
                         <h3>Additional Resources</h3>
-                        <NoticeBoard />
+                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
                     </section>
                 </div>
 
