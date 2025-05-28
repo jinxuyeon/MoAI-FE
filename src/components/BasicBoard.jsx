@@ -11,7 +11,7 @@ const BasicBoard = ({type, title}) => {
                 params: {
                     boardType: type,
                     page: 0,
-                    size: 2,
+                    size: 3,
                 },
             });
 

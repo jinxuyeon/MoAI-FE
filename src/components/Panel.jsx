@@ -53,7 +53,7 @@ const Panel = () => {
             </div>
             <Favorites />
             <Friends />
-            <Calendar />
+            <Calendar/>
             <input type="file" ref={fileInputRef} accept="image/*" />
             <button onClick={handleSearch}>테스트용 (S3 업로드)</button>
         </div>

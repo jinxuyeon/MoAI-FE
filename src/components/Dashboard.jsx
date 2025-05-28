@@ -3,6 +3,7 @@ import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
 import BasicBoard from "./BasicBoard";
 import { House, Volume2 } from "lucide-react";
+import Calendar from "react-calendar";
 const Dashboard = () => {
     return (
         <div className="Dashboard">
@@ -12,47 +13,37 @@ const Dashboard = () => {
                         <House size={32} />
                         <h1>Home</h1>
                     </div>
-                    
+
                     <section className="inner-container">
                         <div className="title-container">
-                            <Volume2 size={20} color="var(--normal-text-color)"/>
-                        <h3>From the Office</h3>
+                            <Volume2 size={20} color="var(--normal-text-color)" />
+                            <h3>From the Office</h3>
                         </div>
-                         <BasicBoard type = {"NOTICE"} title={"학과사무실에서 알려드립니다다"} />
+                        <BasicBoard type={"NOTICE"} title={"학과사무실에서 알려드립니다다"} />
                     </section>
                     <section className="inner-container">
                         <h3>Join the Conversation</h3>
                         <section className="div-container">
                             <div className="half-board-area">
-                                <BasicBoard type = {"FREE"} title={"자유게시판"}/>
+                                <BasicBoard type={"FREE"} title={"자유게시판"} />
                             </div>
                             <div className="half-board-area">
-                                <BasicBoard type = {"SECRET"}  title={"비밀게시판"}/>
+                                <BasicBoard type={"SECRET"} title={"비밀게시판"} />
                             </div>
                         </section>
 
                         <section className="div-container">
                             <div className="half-board-area">
-                                <BasicBoard type = {"FREE"}  title={"??게시판"}/>
+                                <BasicBoard type={"FREE"} title={"선배님 고민잇어으예 ~"} />
                             </div>
                             <div className="half-board-area">
-                                <BasicBoard type = {"FREE"}  title={"???게시판"}/>
+                                <BasicBoard type={"FREE"} title={"진로상담"} />
                             </div>
                         </section>
                     </section>
-                    <section className="inner-container">
-                        <h3>Additional Resources</h3>
-                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
-                    </section>
 
-                    <section className="inner-container">
-                        <h3>Additional Resources</h3>
-                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
-                    </section>
-                    <section className="inner-container">
-                        <h3>Additional Resources</h3>
-                        <BasicBoard type = {"FREE"}  title={"???게시판"}/>
-                    </section>
+                    
+
                 </div>
 
                 <div className="rightside-container">
