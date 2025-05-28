@@ -2,7 +2,7 @@ import "./Header.css";
 import { LogOut } from "lucide-react";
 import Bellbox from "./BellBox";
 import MailBox from "./MailBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -17,6 +17,13 @@ function Header({ title }) {
         localStorage.clear();
         window.location.href = "/login";
     };
+
+    const navigate = useNavigate();
+
+  const goToAdminPage = () => {
+    navigate('/admin');
+  };
+
 
     const handleSearch = async () => {
         try {
@@ -53,6 +60,7 @@ function Header({ title }) {
             <h2 style={{ marginLeft: "10px" }}>{title}</h2>
             <div className="header-space">
                 <div className="util-box">
+                     <button onClick={goToAdminPage}>관리자 페이지</button>
                     <Bellbox notices={notices} setNotices={setNotices} />
                     <MailBox newMailCount = {newMailCount}/>
                 </div>

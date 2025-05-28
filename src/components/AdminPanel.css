@@ -1,0 +1,17 @@
+.AdminPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.AdminPanel button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.AdminPanel button:hover {
+  background-color: #eaeaea;
+}

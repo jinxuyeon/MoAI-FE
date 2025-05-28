@@ -1,0 +1,13 @@
+.AdminPage {
+    display: flex;
+    height: 100vh;
+}
+.AdminPage .aside{
+    width: 40%;
+    max-width: 300px;
+    background-color: aquamarine;
+}
+.AdminPage .content-container{
+    flex-grow: 1;
+    background-color: beige;
+}
