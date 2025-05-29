@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useEffect, useState, useRef } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import axiosInstance from "../components/utils/AxiosInstance";
 
 import "./WritePage.css";
@@ -54,28 +54,18 @@ const WritePage = () => {
     if (!file) return;
 
     try {
-      // 1. presigned URL 요청 (인증 필요하므로 axiosInstance 사용)
       const res = await axiosInstance.get("/api/aws/S3/presign", {
         params: { filename: file.name },
       });
       const { uploadUrl, fileUrl } = res.data;
-      console.log("✅ presigned URL 응답:", uploadUrl);
-
-      // 2. presigned URL로 S3에 파일 PUT 요청 (인증 X, 일반 axios 사용)
       await axios.put(uploadUrl, file, {
-        headers: {
-          "Content-Type": file.type,
-        },
+        headers: { "Content-Type": file.type },
       });
-
-      alert("✅ 업로드 성공!");
-      console.log("📂 업로드된 S3 파일 URL:", fileUrl);
 
       const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 100%; margin: 8px 0;" />`;
       insertHTML(imgTag);
     } catch (err) {
-      console.error("❌ Presigned URL 요청 또는 업로드 실패:", err);
-      alert("실패");
+      alert("이미지 업로드 실패");
     }
   };
 
@@ -114,59 +104,49 @@ const WritePage = () => {
         alert("등록 실패. 다시 시도해주세요.");
       }
     } catch (err) {
-      console.error(err);
       alert("서버 오류가 발생했습니다.");
     }
   };
 
-  const handleTempSave = async () => {
-    const { title, content } = getFormData();
-    if (!selectedBoard || (!title && !content)) {
-      alert("게시판을 선택하고 내용을 입력해 주세요.");
-      return;
-    }
+  // ✅ 폰트 사이즈 변경 함수 (드래그 유지)
+  const changeFontSize = (delta) => {
+    const selection = window.getSelection();
+    if (!selection.rangeCount || selection.isCollapsed) return;
 
-    try {
-      const res = await axiosInstance.post("/api/posts/temp", {
-        boardType: selectedBoard.value,
-        title,
-        content,
-      });
+    const range = selection.getRangeAt(0);
 
-      if (res.status === 200 || res.status === 201) {
-        alert("임시저장 완료!");
-      } else {
-        alert("임시저장 실패");
+    // 이미 span으로 감싸져 있으면 그것 사용, 아니면 새로 감쌈
+    let wrapper;
+    if (
+      range.startContainer.parentNode === range.endContainer.parentNode &&
+      range.startContainer.parentNode.nodeName === "SPAN"
+    ) {
+      wrapper = range.startContainer.parentNode;
+    } else {
+      wrapper = document.createElement("span");
+      try {
+        range.surroundContents(wrapper);
+      } catch (e) {
+        // surroundContents 실패 시(겹친 태그 있을 때) fallback
+        const span = document.createElement("span");
+        span.appendChild(range.extractContents());
+        range.insertNode(span);
+        wrapper = span;
       }
-    } catch (err) {
-      console.error(err);
-      alert("서버 오류가 발생했습니다.");
     }
+
+    const currentSize = parseFloat(window.getComputedStyle(wrapper).fontSize) || 16;
+    wrapper.style.fontSize = `${Math.max(1, currentSize + delta)}px`;
+
+    // 선택 영역 유지
+    const newRange = document.createRange();
+    newRange.selectNodeContents(wrapper);
+    selection.removeAllRanges();
+    selection.addRange(newRange);
   };
 
-  const increaseFontSize = () => {
-    const selection = window.getSelection();
-    if (!selection.rangeCount || selection.isCollapsed) return;
-    const range = selection.getRangeAt(0);
-    const span = document.createElement("span");
-    span.style.fontSize = "18px";
-    span.textContent = selection.toString();
-    range.deleteContents();
-    range.insertNode(span);
-    editorRef.current.focus();
-  };
-
-  const decreaseFontSize = () => {
-    const selection = window.getSelection();
-    if (!selection.rangeCount || selection.isCollapsed) return;
-    const range = selection.getRangeAt(0);
-    const span = document.createElement("span");
-    span.style.fontSize = "12px";
-    span.textContent = selection.toString();
-    range.deleteContents();
-    range.insertNode(span);
-    editorRef.current.focus();
-  };
+  const increaseFontSize = () => changeFontSize(1);
+  const decreaseFontSize = () => changeFontSize(-1);
 
   const applyLink = () => {
     const selection = window.getSelection();
@@ -311,27 +291,9 @@ const WritePage = () => {
           </div>
 
           <div className="write-actions">
-            <button className="save-draft" onClick={handleTempSave}>
-              임시등록
-            </button>
             <button className="submit-post" onClick={handleSubmit}>
               등록
             </button>
-          </div>
-        </div>
-
-        <div className="write-sidebar">
-          <div className="write-setting">
-            <h4>공개 설정</h4>
-            <label>
-              <input type="checkbox" defaultChecked /> 댓글 허용
-            </label>
-            <label>
-              <input type="checkbox" defaultChecked /> 블로그ㆍ카페 공유 허용
-            </label>
-            <label>
-              <input type="checkbox" defaultChecked /> 외부 공유 허용
-            </label>
           </div>
         </div>
       </div>

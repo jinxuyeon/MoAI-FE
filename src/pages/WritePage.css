@@ -6,17 +6,13 @@
 
 .write-layout {
   display: flex;
-  max-width: 1200px;
-  margin: 40px auto;
-  gap: 24px;
+  justify-content: center;
   padding: 20px;
 }
 
 .write-main {
-  flex: 3;
-  background-color: #fff;
-  padding: 24px;
-  border-radius: 12px;
+  width: 100%;
+  max-width: 900px; /* 기존보다 넓게 설정 */
 }
 
 /* ========== 글쓰기 제목 ========== */
@@ -161,14 +157,8 @@
   color: white;
 }
 
-/* ========== 사이드바 영역 ========== */
 .write-sidebar {
-  flex: 1;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  height: fit-content;
-  border: 1px solid #ddd;
+  display: none;
 }
 
 .write-setting h4 {
