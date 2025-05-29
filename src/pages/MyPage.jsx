@@ -152,11 +152,10 @@ const handleSaveNickname = async () => {
               </ul>
             </div>
 
-            <label className="section-title small">관심 채용공고</label>
-            <div className="box recruitment-box">
-              관심 있는 채용공고가 여기에 표시됩니다.
-            </div>
+            
           </main>
+
+          
 
           <aside className="board-section">
             <div className="search-box">
