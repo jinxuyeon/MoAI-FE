@@ -76,6 +76,8 @@ function App() {
                     <Route path="/write/:boardType" element={<WritePage />} />
                     <Route path="/main/lecture/:lectureId/write" element={<LectureWritePage />} />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/main/community/:boardType/post/:postId" element={<BoardPage />} />
+
 
 
 
