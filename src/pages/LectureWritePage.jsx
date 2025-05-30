@@ -1,16 +1,15 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import axios from "axios";
-import "./WritePage.css";
-import "./LectureWritePage.css";
-
+import "./WritePage.css"; // ✅ CSS 재사용
 
 import {
   FileImage,
   Paperclip,
   Link as LinkIcon,
+  Menu,
   AArrowUp,
   AArrowDown,
 } from "lucide-react";
@@ -21,6 +20,25 @@ const LectureWritePage = () => {
   const { lectureId } = useParams();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("질문");
+  const [showTabSelect, setShowTabSelect] = useState(false);
+
+  const lectureList = [
+    { id: 1, title: "운영체제" },
+    { id: 2, title: "자료구조" },
+    { id: 3, title: "데이터베이스" },
+    { id: 4, title: "캡스톤디자인" },
+    { id: 5, title: "영상처리" },
+    { id: 6, title: "데이터 처리" },
+    { id: 7, title: "신호처리" },
+    { id: 8, title: "보안체제" },
+    { id: 9, title: "해양데이터통신" },
+    { id: 10, title: "c언어" },
+    { id: 11, title: "네트워크 구조" },
+    { id: 12, title: "알고리즘 설계" },
+    { id: 13, title: "선형대수학" },
+  ];
+
+  const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
 
   const editorRef = useRef(null);
   const imageInputRef = useRef(null);
@@ -50,18 +68,17 @@ const LectureWritePage = () => {
         headers: { "Content-Type": file.type },
       });
 
-      alert("✅ 업로드 성공!");
       const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 100%; margin: 8px 0;" />`;
       insertHTML(imgTag);
     } catch (err) {
-      console.error("이미지 업로드 실패:", err);
-      alert("업로드 실패");
+      alert("이미지 업로드 실패");
     }
   };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     const fileTag = `<a href="#" style="color: #3498db;">📎 ${file.name}</a>`;
     insertHTML(fileTag);
   };
@@ -94,10 +111,27 @@ const LectureWritePage = () => {
         alert("등록 실패. 다시 시도해주세요.");
       }
     } catch (err) {
-      console.error(err);
       alert("서버 오류가 발생했습니다.");
     }
   };
+
+  const changeFontSize = (delta) => {
+    const selection = window.getSelection();
+    if (!selection.rangeCount || selection.isCollapsed) return;
+
+    const range = selection.getRangeAt(0);
+    const span = document.createElement("span");
+    span.appendChild(range.extractContents());
+    span.style.fontSize = `${Math.max(1, delta + 16)}px`;
+    range.insertNode(span);
+    selection.removeAllRanges();
+    const newRange = document.createRange();
+    newRange.selectNodeContents(span);
+    selection.addRange(newRange);
+  };
+
+  const increaseFontSize = () => changeFontSize(1);
+  const decreaseFontSize = () => changeFontSize(-1);
 
   const applyLink = () => {
     const selection = window.getSelection();
@@ -126,66 +160,72 @@ const LectureWritePage = () => {
       <Header title="Community" />
       <div className="write-layout">
         <div className="write-main">
-          <h2 className="write-title">강의 게시판 글쓰기</h2>
-
-          <div className="tab-buttons" style={{ marginBottom: "16px" }}>
-            {tabList.map((tab) => (
-              <button
-                key={tab}
-                className={`tab-button ${selectedTab === tab ? "active-tab" : ""}`}
-                onClick={() => setSelectedTab(tab)}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+          <h2 className="write-title">
+            {lecture ? `${lecture.title} 강의 게시판 글쓰기` : "강의 게시판 글쓰기"}
+          </h2>
 
           <div className="write-section">
-            <input
-              type="text"
-              className="write-input"
-              placeholder="제목을 입력해 주세요."
-            />
+            <div className="write-box">
+              {/* 카테고리 드롭다운 */}
+              <div className="custom-dropdown">
+                <div className="custom-select-box" onClick={() => setShowTabSelect(!showTabSelect)}>
+                  <span>{selectedTab}</span>
+                  <Menu size={18} />
+                </div>
+                {showTabSelect && (
+                  <div className="dropdown-menu">
+                    {tabList.map((tab) => (
+                      <div
+                        className="dropdown-item"
+                        key={tab}
+                        onClick={() => {
+                          setSelectedTab(tab);
+                          setShowTabSelect(false);
+                        }}
+                      >
+                        {tab}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
+              {/* 제목 입력 */}
+              <input
+                type="text"
+                className="write-input"
+                placeholder="제목을 입력해 주세요."
+              />
+            </div>
+
+            {/* 에디터 */}
             <div className="editor-box flat">
               <div className="toolbar-row flat">
-                <button onClick={() => imageInputRef.current.click()} title="사진">
+                <button className="toolbar-button" onClick={() => imageInputRef.current.click()} title="사진">
                   <FileImage size={24} />
+                  <span className="toolbar-label">사진</span>
                 </button>
-                <button onClick={() => fileInputRef.current.click()} title="파일">
+                <button className="toolbar-button" onClick={() => fileInputRef.current.click()} title="파일">
                   <Paperclip size={24} />
+                  <span className="toolbar-label">파일</span>
                 </button>
-                <button onClick={applyLink} title="링크">
+                <button className="toolbar-button" onClick={applyLink} title="링크">
                   <LinkIcon size={24} />
+                  <span className="toolbar-label">링크</span>
                 </button>
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={imageInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleImageUpload}
-                />
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleFileUpload}
-                />
+                <input type="file" accept="image/*" ref={imageInputRef} style={{ display: "none" }} onChange={handleImageUpload} />
+                <input type="file" ref={fileInputRef} style={{ display: "none" }} onChange={handleFileUpload} />
               </div>
 
               <hr className="divider" />
 
               <div className="toolbar-row flat">
-                <button onClick={() => applyStyle("bold")}><b>B</b></button>
-                <button onClick={() => applyStyle("italic")}><i>I</i></button>
-                <button onClick={() => applyStyle("underline")}><u>U</u></button>
-                <button title="글자 키우기" onClick={() => applyStyle("increaseFontSize")}>
-                  <AArrowUp size={20} />
-                </button>
-                <button title="글자 줄이기" onClick={() => applyStyle("decreaseFontSize")}>
-                  <AArrowDown size={20} />
-                </button>
+                <button title="굵게" onClick={() => applyStyle("bold")}><b>B</b></button>
+                <button title="기울임" onClick={() => applyStyle("italic")}><i>I</i></button>
+                <button title="밑줄" onClick={() => applyStyle("underline")}><u>U</u></button>
+                <button title="글자 키우기" onClick={increaseFontSize}><AArrowUp size={20} /></button>
+                <button title="글자 줄이기" onClick={decreaseFontSize}><AArrowDown size={20} /></button>
               </div>
 
               <hr className="divider" />

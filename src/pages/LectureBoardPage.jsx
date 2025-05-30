@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
 import { Book } from "lucide-react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 const calculateDday = (targetDateStr) => {
     const today = new Date();
@@ -13,7 +13,6 @@ const calculateDday = (targetDateStr) => {
     return diffDays >= 0 ? `D-${diffDays}` : `D+${Math.abs(diffDays)}`;
 };
 
-// 임시 사용자 ID (로그인 연동 시 수정 필요)
 const userId = "user123";
 
 const lectureList = [
@@ -32,19 +31,12 @@ const lectureList = [
     { id: 13, title: "선형대수학", professor: "최캡스톤" },
 ];
 
-const dummyPosts = {
-    질문: ["운영체제 질문입니다", "디스크 스케줄링이 뭐죠?"],
-    후기: ["좋은 강의였어요!", "교수님 설명이 명확해요"],
-    자료실: ["수업 PPT 자료", "과제 예시 코드"],
-    공지사항: ["중간고사 공지", "과제 제출 안내"],
-};
-
 const LectureBoardPage = () => {
     const { lectureId } = useParams();
     const navigate = useNavigate();
     const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
     const [selectedTab, setSelectedTab] = useState("질문");
-
+    const [posts, setPosts] = useState([]);
     const [showInputForm, setShowInputForm] = useState(false);
     const [eventName, setEventName] = useState("중간고사");
     const [eventDate, setEventDate] = useState(() => {
@@ -53,7 +45,24 @@ const LectureBoardPage = () => {
         return d.toISOString().split("T")[0];
     });
 
+    const [weeklyStats, setWeeklyStats] = useState({
+        질문: 0,
+        후기: 0,
+        자료실: 0,
+        공지사항: 0,
+    });
+
     useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const res = await fetch(`/api/lecture-posts?lectureId=${lectureId}&category=${selectedTab}`);
+                const data = await res.json();
+                setPosts(data);
+            } catch (error) {
+                console.error("게시글 불러오기 실패:", error);
+            }
+        };
+
         const fetchDday = async () => {
             try {
                 const res = await fetch(`/api/dday/${userId}/${lectureId}`);
@@ -67,8 +76,20 @@ const LectureBoardPage = () => {
             }
         };
 
+        const fetchWeeklyStats = async () => {
+            try {
+                const res = await fetch(`/api/lecture-posts/stats?lectureId=${lectureId}`);
+                const data = await res.json();
+                setWeeklyStats(data);
+            } catch (error) {
+                console.error("이번주 활동 데이터 불러오기 실패:", error);
+            }
+        };
+
+        fetchPosts();
         fetchDday();
-    }, [lectureId]);
+        fetchWeeklyStats();
+    }, [lectureId, selectedTab]);
 
     const handleSave = async () => {
         const payload = {
@@ -149,20 +170,22 @@ const LectureBoardPage = () => {
                                     {tab}
                                 </button>
                             ))}
-                            <button className="lecture-write-button"
-                            onClick={() => navigate(`/main/lecture/${lectureId}/write`)}
+                            <button
+                                className="lecture-write-button"
+                                onClick={() => navigate(`/main/lecture/${lectureId}/write`)}
                             >
-                                글쓰기</button>
+                                글쓰기
+                            </button>
                         </div>
                     </div>
 
                     <div className="lecture-content-wrapper">
                         <div className="lecture-main-box">
-                            {dummyPosts[selectedTab]?.length > 0 ? (
+                            {posts.length > 0 ? (
                                 <ul>
-                                    {dummyPosts[selectedTab].map((post, index) => (
+                                    {posts.map((post, index) => (
                                         <li key={index} style={{ marginBottom: "12px" }}>
-                                            📌 {post}
+                                            📌 {post.title}
                                         </li>
                                     ))}
                                 </ul>
@@ -212,8 +235,10 @@ const LectureBoardPage = () => {
                             <div className="activity-box">
                                 <h4>이번주 활동</h4>
                                 <ul>
-                                    <li>질문 5건</li>
-                                    <li>후기 2건</li>
+                                    <li>질문 {weeklyStats["질문"]}건</li>
+                                    <li>후기 {weeklyStats["후기"]}건</li>
+                                    <li>자료실 {weeklyStats["자료실"]}건</li>
+                                    <li>공지사항 {weeklyStats["공지사항"]}건</li>
                                 </ul>
                             </div>
                         </div>
