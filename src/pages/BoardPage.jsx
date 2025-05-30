@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import NaviBar from "../components/NaviBar";
 import NoticeBoardBox from "../components/board-box/NoticeBoardBox";
@@ -7,18 +7,11 @@ import MarketBox from "../components/board-box/MarketBox";
 import FreeBoardBox from "../components/board-box/FreeBoardBox";
 import SecretBoardBox from "../components/board-box/SecretBoardBox";
 import LectureCategoryBox from "../components/board-box/LectureCategoryBox";
-import FreePostDetail from "../components/post/FreePostDetail";
-import NoticePostDetail from "../components/post/NoticePostDetail";
-import SecretPostDetail from "../components/post/SecretPostDetail";
-import MarketPostDetail from "../components/post/MarketPostDetail";
 import "./BoardPage.css";
 
 const BoardPage = () => {
     const { boardType } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
-
-    const isPostDetail = location.pathname.includes("/post/"); 
 
     const renderBoard = () => {
         switch (boardType) {
@@ -38,25 +31,6 @@ const BoardPage = () => {
                 return <div>존재하지 않는 게시판입니다.</div>;
         }
     };
-
-    const renderPostDetail = () => {
-        switch (boardType) {
-            case "notice":
-                return <NoticePostDetail />;
-            case "free":
-                return <FreePostDetail />;
-            case "secret":
-                return <SecretPostDetail />;
-            case "market":
-                return <MarketPostDetail />;
-            case "lecture":
-                return<div>강의게시물 컴포넌트</div>;
-            default:
-                return <div>상세 게시글을 찾을 수 없습니다.</div>;
-        }
-    };
-
- 
 
     const handleWriteClick = () => {
         // 현재 게시판 타입으로 write 페이지 이동
@@ -83,10 +57,7 @@ const BoardPage = () => {
                             </button>
                         )}
                     </div>
-                    
-                    <div className="board-container">
-                        {isPostDetail ? renderPostDetail() : renderBoard()}
-                        </div>
+                    <div className="board-container">{renderBoard()}</div>
                 </div>
             </div>
         </div>

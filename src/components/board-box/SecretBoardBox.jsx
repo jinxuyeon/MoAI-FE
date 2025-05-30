@@ -48,8 +48,7 @@ const SecretBoardBox = () => {
               <img src={secret.imgUrl} alt="썸네일" className="secret-thumbnail" />
             )}
             <div className="secret-list-content">
-              <Link to={`/main/community/secret/post/${secret.id}`} className="secret-link">
-                {secret.title}
+              <Link to={`/main/secret/${secret.id}`} className="secret-link">
                 <div className="secret-title-line">
                   <div className="secret-title-wrapper">
                     <h3 className="secret-title">{secret.title}</h3>
