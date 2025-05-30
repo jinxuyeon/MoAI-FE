@@ -19,7 +19,6 @@ const Dashboard = () => {
                             <Volume2 size={20} color="var(--normal-text-color)" />
                             <h3>From the Office</h3>
                         </div>
-                        <BasicBoard type={"NOTICE"} title={"학과사무실에서 알려드립니다다"} />
                         <BasicBoard type={"NOTICE_C"} title={"학과사무실에서 알려드립니다"} />
                     </section>
                     <section className="inner-container">
@@ -42,9 +41,6 @@ const Dashboard = () => {
                             </div>
                         </section>
                     </section>
-
-                    
-
                 </div>
 
                 <div className="rightside-container">
