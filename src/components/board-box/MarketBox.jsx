@@ -30,7 +30,8 @@ const MarketBox = () => {
             <div className="market-grid">
                 {visibleMarkets.map((post) => (
                     <div key={post.id} className="market-item">
-                        <Link to={`/main/market/${post.id}`}>
+                        <Link to={`/main/community/market/post/${post.id}`}>
+                                          
                             <img src={post.imgUrl} alt="썸네일" className="market-thumbnail" />
                             <div className="market-info">
                                 <h3>{post.title}</h3>
