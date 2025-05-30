@@ -3,12 +3,11 @@ import "./NaviBar.css";
 
 const NaviBar = ({ currentBoard }) => {
     const menus = [
-        { name: "공지사항", path: "notice" },
+        { name: "공지사항", path: "notice_c" },
         { name: "자유게시판", path: "free" },
         { name: "비밀게시판", path: "secret" },
         { name: "강의게시판", path: "lecture" },
         { name: "책장터", path: "market" },
-
     ];
 
     return (

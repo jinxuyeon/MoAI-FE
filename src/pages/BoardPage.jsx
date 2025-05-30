@@ -15,7 +15,7 @@ const BoardPage = () => {
 
     const renderBoard = () => {
         switch (boardType) {
-            case "notice":
+            case "notice_c":
                 return <NoticeBoardBox />;
             case "market":
                 return <MarketBox />;

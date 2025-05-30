@@ -20,6 +20,7 @@ const Dashboard = () => {
                             <h3>From the Office</h3>
                         </div>
                         <BasicBoard type={"NOTICE"} title={"학과사무실에서 알려드립니다다"} />
+                        <BasicBoard type={"NOTICE_C"} title={"학과사무실에서 알려드립니다"} />
                     </section>
                     <section className="inner-container">
                         <h3>Join the Conversation</h3>
