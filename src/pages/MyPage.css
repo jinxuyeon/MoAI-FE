@@ -2,7 +2,7 @@
 .MyPage {
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
 }
 
 /* 메인 컨텐츠 컨테이너 */
@@ -11,14 +11,14 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: auto;
+  height: 100%;
   overflow-y: auto;
 }
 
 /* 내부 컨텐츠 컨테이너: 3단 구성 */
 .MyPage .inner-container {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -28,8 +28,8 @@
 /* 왼쪽 프로필 섹션 */
 .profile-section {
   width: 50%;
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 280px;
+  min-width: 280px;
   background: none;
   padding: 30px 0px 10px 0px;
   margin-left: 0;
@@ -195,6 +195,8 @@
 .activity-tabs button {
   padding: 8px 16px;
   border: 1px solid #ccc;
+  border-bottom: none;
+
   background: #f0f0f0;
   border-radius: 6px 6px 0 0;
   cursor: pointer;
@@ -204,7 +206,7 @@
 
 .activity-tabs button.active {
   background: white;
-  border-bottom: 2px solid white;
+  border-bottom: none;
   color: #3498db;
   font-weight: bold;
 }
@@ -220,64 +222,7 @@
   margin-bottom: 0px;
 }
 
-.checklist-box,
-.activity-content .box {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
-  height: auto;       
-}
 
-
-.checklist-input-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.checklist-input-row input {
-  flex-grow: 1;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.checklist-input-row button {
-  padding: 8px 12px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.checklist-items {
-  list-style: none;
-  padding: 0;
-}
-
-.checklist-items li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  padding: 6px 0;
-}
-
-.checklist-items li.checked .item-text {
-  text-decoration: line-through;
-  color: #888;
-
-}
-
-.circle {
-  font-size: 18px;
-  width: 22px;
-  text-align: center;
-  user-select: none;
-}
 
 .recruitment-box {
   min-height: 200px;

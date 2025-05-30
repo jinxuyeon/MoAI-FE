@@ -17,7 +17,6 @@ const BoardPage = () => {
     const { boardType } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
-
     const isPostDetail = location.pathname.includes("/post/"); 
 
     const renderBoard = () => {
@@ -55,8 +54,6 @@ const BoardPage = () => {
                 return <div>상세 게시글을 찾을 수 없습니다.</div>;
         }
     };
-
- 
 
     const handleWriteClick = () => {
         // 현재 게시판 타입으로 write 페이지 이동

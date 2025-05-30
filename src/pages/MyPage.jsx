@@ -4,6 +4,7 @@ import "./MyPage.css";
 import { useEffect, useState, useContext } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import { UserContext } from "../components/utils/UserContext";
+import TodoBox from "../components/TodoBox";
 
 const MyPage = () => {
     const [intro, setIntro] = useState("");
@@ -182,56 +183,8 @@ const MyPage = () => {
                                 )}
                             </div>
                         </section>
-
-                        
                     </main>
-
-                    <aside className="board-section">
-                        <section>
-                            <label className="section-title small">
-                                체크리스트
-                            </label>
-                            <div className="box checklist-box">
-                                <div className="checklist-input-row">
-                                    <input
-                                        type="text"
-                                        value={newItem}
-                                        onChange={(e) =>
-                                            setNewItem(e.target.value)
-                                        }
-                                        placeholder="새 체크리스트 입력"
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") {
-                                                e.preventDefault();
-                                                handleAddItem();
-                                            }
-                                        }}
-                                    />
-                                    <button onClick={handleAddItem}>
-                                        추가
-                                    </button>
-                                </div>
-                                <ul className="checklist-items">
-                                    {checklist.map((item, index) => (
-                                        <li
-                                            key={index}
-                                            className={
-                                                item.checked ? "checked" : ""
-                                            }
-                                            onClick={() => toggleItem(index)}
-                                        >
-                                            <span className="circle">
-                                                {item.checked ? "●" : "○"}
-                                            </span>
-                                            <span className="item-text">
-                                                {item.text}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </section>
-                    </aside>
+                        <TodoBox />
                 </div>
             </div>
         </div>

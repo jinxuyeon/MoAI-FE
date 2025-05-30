@@ -14,24 +14,23 @@ const Panel = () => {
     if (isLoading) return <div>로딩 중...</div>;
     if (!user) return <div>로그인이 필요합니다</div>;
 
-    const handleSearch = async () => {
+    const testhandle = async () => {
         try {
-            const res = await axiosInstance.get("api/post", {
-                params: {
-                    boardType: "FREE",
-                    page: 0,
-                    size: 5,
-                },
-            });
+            for (let i = 1; i <= 100; i++) {
+                const postData = {
+                    boardType: "SECRET",
+                    title: `title${i}`,
+                    content: `<p>content${i}</p>` // HTML 형식으로 감쌈
+                };
 
-            console.log("✅ 게시글 응답:", res.data);
-            const posts = res.data.content;
+                await axiosInstance.post("/api/post/post-up", postData);
+                console.log(`✅ 게시글 ${i} 저장 완료`);
+            }
 
-            posts.forEach((post, idx) => {
-                console.log(`📌 ${idx + 1}. ${post.title} (${post.createdDate})`);
-            });
+            alert("테스트 게시글 100개 저장 완료");
         } catch (err) {
-            console.error("❌ 게시글 불러오기 실패:", err);
+            console.error("❌ 게시글 저장 중 오류 발생:", err);
+            alert("게시글 저장 실패");
         }
     };
 
@@ -53,9 +52,9 @@ const Panel = () => {
             </div>
             <Favorites />
             <Friends />
-            <Calendar/>
+            <Calendar />
             <input type="file" ref={fileInputRef} accept="image/*" />
-            <button onClick={handleSearch}>테스트용 (S3 업로드)</button>
+            <button onClick={testhandle}>테스트용 (S3 업로드)</button>
         </div>
     );
 };

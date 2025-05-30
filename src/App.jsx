@@ -78,9 +78,6 @@ function App() {
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/main/community/:boardType/post/:postId" element={<BoardPage />} />
 
-
-
-
                 </Routes>
             </div>
             {shouldShowFooter && <Footer />}
