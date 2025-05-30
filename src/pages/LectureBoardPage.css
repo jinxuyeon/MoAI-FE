@@ -54,15 +54,16 @@
 }
 
 .lecture-write-button {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
+  background-color: #3399ff;   /* 파란색 */
   border: none;
-  border-radius: 8px;
+  border-radius: 8px;          /* 둥근 모서리 */
+  color: white;
+  padding: 6px 16px;           /* 여백 */
   cursor: pointer;
-  height: 36px;
-  margin-left: 585px;
+  height: 32px;                /* 기존 높이 유지 */
+  margin-left: 585px;          /* 기존 위치 유지 */
 }
+
 .lecture-write-button:hover {
   background-color: #2980b9;
 }
@@ -219,3 +220,14 @@
   text-decoration: underline;
   color: #007bff;
 }
+.activity-box ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.activity-box h4 {
+  font-size: 1.2rem;  
+  font-weight: bold;  
+  margin-bottom: 8px; 
+}
+
