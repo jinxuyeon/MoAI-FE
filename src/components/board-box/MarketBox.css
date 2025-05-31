@@ -1,5 +1,4 @@
 .MarketBox {
-    padding: 20px;
 }
 
 .market-header {
@@ -13,17 +12,9 @@
     font-size: 24px;
 }
 
-/* .write-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 8px 12px;
-    text-decoration: none;
-    border-radius: 6px;
-} */
-
 .market-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* ✅ 4열로 변경 */
     gap: 16px;
 }
 
@@ -34,6 +25,7 @@
     transition: box-shadow 0.3s ease;
     text-decoration: none;
     color: inherit;
+    background-color: #fff;
 }
 
 .market-item:hover {
@@ -42,7 +34,7 @@
 
 .market-thumbnail {
     width: 100%;
-    height: 180px;
+    height: 140px; /* ✅ 이미지 크기 줄임 */
     object-fit: cover;
 }
 
@@ -50,13 +42,8 @@
     padding: 12px;
 }
 
-.active-page {
-    font-weight: bold;
-    color: #4caf50;
-}
-
 .market-info h3 {
-    font-size: 1.1rem;
+    font-size: 1rem; /* ✅ 제목 폰트 줄임 */
     margin: 0 0 4px 0;
 }
 
@@ -66,17 +53,3 @@
     margin-bottom: 4px;
 }
 
-.market-info .description {
-    color: #555;
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-}
-
-.market-item a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.market-item a:hover {
-    text-decoration: underline;
-}

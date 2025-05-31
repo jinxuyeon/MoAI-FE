@@ -8,15 +8,18 @@ import FreePostDetail from "../components/post/FreePostDetail";
 import NoticePostDetail from "../components/post/NoticePostDetail";
 import SecretPostDetail from "../components/post/SecretPostDetail";
 import MarketPostDetail from "../components/post/MarketPostDetail";
+import BasicBoardBox from "../components/board-box/BasicBoardBox";
 import "./BoardPage.css";
 import axiosInstance from "../components/utils/AxiosInstance";
-import BasicBoardBox from "../components/board-box/BasicBoardBox";
+import MarketUploadModal from "../components/board-box/MarketUploadModal";
 
 const BoardPage = () => {
     const { boardType } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
     const isPostDetail = location.pathname.includes("/post/");
+    const [showUploadModal, setShowUploadModal] = useState(false);
+
     const [postData, setPostData] = useState({
         posts: [],
         totalCount: 0,
@@ -51,7 +54,12 @@ const BoardPage = () => {
             case "free":
             case "notice_c":
             case "secret":
-                return <BasicBoardBox data={postData} onPageChange={(page) => handleSearch(boardType, page)} />;
+                return (
+                    <BasicBoardBox
+                        data={postData}
+                        onPageChange={(page) => handleSearch(boardType, page)}
+                    />
+                );
             case "market":
                 return <MarketBox />;
             case "popular":
@@ -94,11 +102,24 @@ const BoardPage = () => {
                     <div className="navibar-container">
                         <NaviBar currentBoard={boardType} />
                         {boardType === "lecture" ? (
-                            <button className="write-button" onClick={() => navigate("/create-lecture")}>
+                            <button
+                                className="write-button"
+                                onClick={() => navigate("/create-lecture")}
+                            >
                                 생성
                             </button>
+                        ) : boardType === "market" ? (
+                            <button
+                                className="write-button"
+                                onClick={() => setShowUploadModal(true)}
+                            >
+                                물품등록
+                            </button>
                         ) : (
-                            <button className="write-button" onClick={handleWriteClick}>
+                            <button
+                                className="write-button"
+                                onClick={handleWriteClick}
+                            >
                                 글쓰기
                             </button>
                         )}
@@ -109,6 +130,11 @@ const BoardPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* 모달 렌더링 */}
+            {showUploadModal && (
+                <MarketUploadModal onClose={() => setShowUploadModal(false)} />
+            )}
         </div>
     );
 };
