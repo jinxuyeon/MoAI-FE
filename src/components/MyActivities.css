@@ -1,0 +1,41 @@
+.MyActivities {
+  width: 100%;
+  max-width: 600px;
+  min-width: 400px
+}
+
+.activity-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.activity-tabs button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  background: #f0f0f0;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.activity-tabs button.active {
+  background: white;
+  border-bottom: none;
+  color: #3498db;
+  font-weight: bold;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.box.checklist-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}

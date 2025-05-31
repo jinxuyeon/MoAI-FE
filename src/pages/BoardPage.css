@@ -1,5 +1,6 @@
 .BoardPage {
     display: block;
+    min-height: 100vh;
 }
 
 .layout-container {

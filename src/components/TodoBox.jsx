@@ -2,6 +2,8 @@ import "./TodoBox.css";
 import { useState, useEffect } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 import dayjs from "dayjs";
+import { Plus } from "lucide-react";
+import { ListChecks } from 'lucide-react';
 
 const TodoBox = () => {
     const [todolist, setTodolist] = useState([]);
@@ -23,8 +25,8 @@ const TodoBox = () => {
 
     const handleAddItem = async () => {
         if (newItem.trim() === "") return;
-        if (todolist.length >= 10) {
-            alert("최대 10개의 항목만 등록할 수 있습니다.");
+        if (todolist.length >= 20) {
+            alert("최대 20개의 항목만 등록할 수 있습니다.");
             return;
         }
 
@@ -79,11 +81,11 @@ const TodoBox = () => {
     };
 
     const getDday = (dueDateStr) => {
-  const today = dayjs().startOf("day");
-  const target = dayjs(dueDateStr).startOf("day");
-  const diff = target.diff(today, "day");
-  return diff === 0 ? "D-Day" : diff > 0 ? `D-${diff}` : `D+${-diff}`;
-};
+        const today = dayjs().startOf("day");
+        const target = dayjs(dueDateStr).startOf("day");
+        const diff = target.diff(today, "day");
+        return diff === 0 ? "D-Day" : diff > 0 ? `D-${diff}` : `D+${-diff}`;
+    };
 
 
     const pendingItems = todolist
@@ -96,9 +98,11 @@ const TodoBox = () => {
 
     return (
         <section className="todo-section">
-            <label className="section-title small">TO-DO LIST</label>
-
             <div className="box todolist-box">
+                <div className="title-box">
+                    <ListChecks />
+                   <h3>체크리스트</h3>
+                </div>
                 <div className="todolist-input-row">
                     <input
                         type="date"
@@ -117,7 +121,7 @@ const TodoBox = () => {
                             }
                         }}
                     />
-                    <button onClick={handleAddItem}>추가</button>
+                    <button onClick={handleAddItem}><Plus color="black" /></button>
                 </div>
 
                 <ul className="todolist-items">
@@ -127,9 +131,8 @@ const TodoBox = () => {
                                 <span className="circle">○</span>
                                 <span className="item-text">{item.content}</span>
                                 <span
-                                    className={`dday ${
-                                        dayjs(item.dueDate).diff(dayjs(), "day") <= 1 ? "urgent" : ""
-                                    }`}
+                                    className={`dday ${dayjs(item.dueDate).diff(dayjs(), "day") <= 1 ? "urgent" : ""
+                                        }`}
                                 >
                                     ({getDday(item.dueDate)})
                                 </span>
@@ -140,21 +143,21 @@ const TodoBox = () => {
                 </ul>
 
                 <ul className="todolist-items">
-  {doneItems.map((item, index) => (
-    <li key={`done-${index}`} className="checked">
-  <div className="item-left" onClick={() => toggleItem(todolist.indexOf(item))}>
-    <span className="circle">●</span>
-    
-    {/* ✅ 취소선 하나만 적용되게 하나의 span으로 묶음 */}
-    <span className="strike-wrap">
-      {item.content} ({getDday(item.dueDate)})
-    </span>
-  </div>
-  <button onClick={() => deleteItem(todolist.indexOf(item))}>x</button>
-</li>
+                    {doneItems.map((item, index) => (
+                        <li key={`done-${index}`} className="checked">
+                            <div className="item-left" onClick={() => toggleItem(todolist.indexOf(item))}>
+                                <span className="circle">●</span>
 
-  ))}
-</ul>
+                                {/* ✅ 취소선 하나만 적용되게 하나의 span으로 묶음 */}
+                                <span className="strike-wrap">
+                                    {item.content} ({getDday(item.dueDate)})
+                                </span>
+                            </div>
+                            <button onClick={() => deleteItem(todolist.indexOf(item))}>x</button>
+                        </li>
+
+                    ))}
+                </ul>
 
             </div>
         </section>

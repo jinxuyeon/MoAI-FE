@@ -1,38 +1,31 @@
-/* 전체 페이지 */
+/* 전체 페이지 레이아웃 */
 .MyPage {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-/* 메인 컨텐츠 컨테이너 */
+/* 최상단 컨테이너 (Header 아래쪽) */
 .MyPage .container {
-  margin-top: 0px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  height: 100%;
+  height: 100vh;
   overflow-y: auto;
 }
 
-/* 내부 컨텐츠 컨테이너: 3단 구성 */
+/* 내부 컨테이너: 좌측 프로필 + 우측 메인 */
 .MyPage .inner-container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   background-color: white;
 }
 
-/* 왼쪽 프로필 섹션 */
+/* ---------------- 프로필 섹션 ---------------- */
 .profile-section {
   width: 50%;
   max-width: 280px;
   min-width: 280px;
-  background: none;
-  padding: 30px 0px 10px 0px;
-  margin-left: 0;
+  padding: 30px 0px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,13 +33,13 @@
   border-right: 1px solid #ddd;
 }
 
-.proflie-img-box{
+.proflie-img-box {
   display: flex;
   align-content: center;
   justify-content: center;
-
 }
 
+/* 프로필 섹션 내 라벨 */
 .profile-section label {
   font-size: 14px;
   font-weight: bold;
@@ -55,7 +48,18 @@
   text-align: left;
 }
 
-/* 자기소개 스타일 */
+/* 프로필 입력 필드 */
+.profile-section input {
+  width: 70%;
+  margin: 12px 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+  align-self: center;
+}
+
+/* 자기소개 입력창 */
 .profile-section textarea {
   width: 70%;
   min-height: 80px;
@@ -69,21 +73,9 @@
   align-self: center;
 }
 
-/* 입력 필드 스타일 */
-.profile-section input {
-  width: 70%;
-  margin: 12px 0 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: left;
-  align-self: center;
-}
-
-/* 저장 버튼 스타일 */
-.profile-section .save-btn {
-  margin-top: 20px;
-  margin-bottom: 0px;
+/* 닉네임 저장 버튼 */
+.save-nickname-btn {
+  margin-top: 8px;
   padding: 10px;
   background: #3498db;
   color: white;
@@ -95,7 +87,7 @@
   align-self: center;
 }
 
-/* 개인정보 섹션 제목 */
+/* 개인정보 섹션 제목 라벨 */
 .section-title {
   font-size: 16px;
   font-weight: bold;
@@ -106,151 +98,19 @@
   padding-bottom: 5px;
 }
 
-/* 라벨 간 공백 */
+/* 라벨 간 공백 용도 */
 .spacer-label {
   display: block;
   height: 15px;
 }
 
-/* 가운데 메인 컨텐츠 */
+/* ---------------- 메인 컨텐츠 ---------------- */
 .main-content {
-  height: auto;
-  width: 50%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  border-right: 1px solid #ddd;
-}
-
-/* 오른쪽 게시판 섹션 */
-.board-section {
-  width: 25%;
-  min-width: 280px;
-  padding: 20px;
-  background-color: white;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.board-section .search-box {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.search-input-wrapper {
-  position: relative;
-}
-
-.search-input-wrapper input {
   width: 100%;
-  padding: 8px;
-  padding-right: 30px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  margin-bottom: 8px;
-  width: 97%;
-  box-sizing: border-box;
-}
-
-.board-section .board-title {
-  font-weight: bold;
-  margin: 10px 0 5px;
-  font-size: 15px;
-}
-
-.board-post {
-  background: #f4f4f4;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.board-box {
-  padding: 10px;
-}
-
-/* 공통 박스 스타일 */
-.box {
-  background: #f9f9f9;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.medium {
-  flex: 1;
-  min-height: 100px;
-  height: auto;
-}
-
-.activity-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.activity-tabs button {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  border-bottom: none;
-
-  background: #f0f0f0;
-  border-radius: 6px 6px 0 0;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.activity-tabs button.active {
-  background: white;
-  border-bottom: none;
-  color: #3498db;
-  font-weight: bold;
-}
-
-.activity-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.section-title.small {
-  font-size: 16px;
-  border-bottom: none;
-  margin-bottom: 0px;
-}
-
-
-
-.recruitment-box {
-  min-height: 200px;
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-
-}
-
-.circle {
-  font-size: 18px;
-  width: 22px;
-  text-align: center;
-  user-select: none;
-}
-
-.recruitment-box {
-  min-height: 200px;
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
+  flex-direction: row;
+  gap: 25px;
+  justify-content: center;
+  align-content: center;
 }

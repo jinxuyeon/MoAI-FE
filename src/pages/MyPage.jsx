@@ -5,10 +5,9 @@ import { useEffect, useState, useContext } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import { UserContext } from "../components/utils/UserContext";
 import TodoBox from "../components/TodoBox";
-
+import MyActivities from "../components/MyActivities";
 const MyPage = () => {
     const [intro, setIntro] = useState("");
-    const [activeTab, setActiveTab] = useState("posts");
     const [checklist, setChecklist] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
@@ -143,48 +142,12 @@ const MyPage = () => {
                     </aside>
 
                     <main className="main-content">
-                        <label className="section-title small">내 활동</label>
-
-                        <section>
-                            <div className="activity-tabs">
-                                <button
-                                    className={
-                                        activeTab === "posts" ? "active" : ""
-                                    }
-                                    onClick={() => setActiveTab("posts")}
-                                >
-                                    작성글
-                                </button>
-                                <button
-                                    className={
-                                        activeTab === "comments" ? "active" : ""
-                                    }
-                                    onClick={() => setActiveTab("comments")}
-                                >
-                                    작성댓글
-                                </button>
-                            </div>
-                            <div className="activity-content">
-                                {activeTab === "posts" && (
-                                    <div
-                                        className="box checklist-box"
-                                        style={{ minHeight: "100px" }}
-                                    >
-                                        작성글 박스
-                                    </div>
-                                )}
-                                {activeTab === "comments" && (
-                                    <div
-                                        className="box checklist-box"
-                                        style={{ minHeight: "100px" }}
-                                    >
-                                        작성댓글 박스
-                                    </div>
-                                )}
-                            </div>
-                        </section>
+                        <MyActivities />
+                        {/* 여기로옮김 */}
+                        <div>
+                            <TodoBox />
+                        </div>
                     </main>
-                        <TodoBox />
                 </div>
             </div>
         </div>
