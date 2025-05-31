@@ -4,6 +4,7 @@ import FriendModal from "./FriendModal";
 import axiosInstance from "./utils/AxiosInstance";
 import Reddot from "./Reddot";
 import { UserRoundPlus } from "lucide-react";
+import ProfileTemplate from "./ProfileTemplate";
 
 const Friends = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -83,12 +84,15 @@ const Friends = () => {
                     />
                 ) : null}
             </div>
+            
             {isOpen && (
                 <ul className="Friends-List">
                     {myFriendList.length > 0 ? (
                         myFriendList.map((friend, index) => (
                             <li key={index} className="Friends-Item">
-                                <button>{friend.name}</button>
+                                <ProfileTemplate
+                                profileImageUrl={friend.profileImageUrl}
+                                name =  {friend.name}/>
                             </li>
                         ))
                     ) : (

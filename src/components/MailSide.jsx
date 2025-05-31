@@ -2,6 +2,7 @@ import MailModal from "./MailModal";
 import "./MailSide.css";
 import { useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
+import { Trash2 } from "lucide-react";
 
 const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
     const [showModal, setShowModal] = useState(false);
@@ -62,7 +63,7 @@ const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
                                 className="room-button-exit"
                                 onClick={() => handleExitRoom(room.roomId)}
                             >
-                                나가기
+                                <Trash2 />
                             </button>
                         </div>
                     ))

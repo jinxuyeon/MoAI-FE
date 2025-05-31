@@ -133,6 +133,7 @@ const FriendModal = ({
                                 />
                             </div>
                             <div className="request-container">
+
                                 {result && result.username ? (
                                     <>
                                         <div className="search-result-profile">
@@ -159,6 +160,7 @@ const FriendModal = ({
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (
                                     <div className="request-container" key={index}>
+
                                         <div className="search-result-profile">
                                             <img
                                                 src={request.profileImageUrl || "/default-profile.png"}

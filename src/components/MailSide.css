@@ -37,9 +37,8 @@
     cursor: pointer;
     transition: background-color 0.5s;
 }
-.room-btton-exit{
-    background-color: transparent;
-    height: 30%;
+.room-button-exit{
+    background-color: #ccc;
     border: none;
 }
 

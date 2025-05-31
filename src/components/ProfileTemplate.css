@@ -1,0 +1,16 @@
+.ProfileTemplate{
+    display: block;
+}
+
+.ProfileTemplate .search-result-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ProfileTemplate .profile-img {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  object-fit: cover;
+}

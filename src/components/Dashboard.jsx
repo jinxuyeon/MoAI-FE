@@ -3,7 +3,7 @@ import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
 import BasicBoard from "./BasicBoard";
 import { House, Volume2 } from "lucide-react";
-import Calendar from "react-calendar";
+import { ShoppingCart } from "lucide-react";
 const Dashboard = () => {
     return (
         <div className="Dashboard">
@@ -45,7 +45,13 @@ const Dashboard = () => {
 
                 <div className="rightside-container">
                     <JobInfoBoard />
-                    <BookMarketBoard type={"MARKET"} title={"장터"}/>
+                    <div className="inner-container">
+                        <div className="title-container">
+                            <ShoppingCart size={20} color="var(--normal-text-color)" />
+                            <h3>Find the items you need</h3>
+                        </div>
+                        <BookMarketBoard type={"MARKET"} title={"장터"} />
+                    </div>
                 </div>
             </div>
         </div>

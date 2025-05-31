@@ -42,7 +42,7 @@
 .Dashboard .rightside-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     flex-grow: 1;
     min-width: 10px;
     width: 500px;
