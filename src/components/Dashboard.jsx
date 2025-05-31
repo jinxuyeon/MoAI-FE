@@ -34,10 +34,10 @@ const Dashboard = () => {
 
                         <section className="div-container">
                             <div className="half-board-area">
-                                <BasicBoard type={"FREE"} title={"선배님 고민잇어으예 ~"} />
+                                <BasicBoard type={"FREE"} title={"선배님 고민있어으예 ~"} />
                             </div>
                             <div className="half-board-area">
-                                <BasicBoard type={"FREE"} title={"진로상담"} />
+                                <BasicBoard type={"FREE"} title={"취업, 면접 후기"} />
                             </div>
                         </section>
                     </section>
