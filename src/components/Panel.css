@@ -15,7 +15,7 @@
     padding: 5px;
     display:flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 }
 .link-mypage{
     font-weight: 1000;
@@ -35,8 +35,9 @@
 }
 
 .profile-btn {
-    height: 40px;
-    width: 40px;
+    border:  1px solid #4f4949;
+    height: 43px;
+    width: 43px;
     border-radius: 50%;
 }
 

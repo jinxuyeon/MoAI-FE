@@ -21,7 +21,7 @@ const Panel = () => {
                     boardType: "SECRET",
                     title: `title${i}`,
                     content: `<p>content${i}</p>` // HTML 형식으로 감쌈
-                };
+                }; n  
 
                 await axiosInstance.post("/api/post/post-up", postData);
                 console.log(`✅ 게시글 ${i} 저장 완료`);

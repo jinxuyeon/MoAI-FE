@@ -28,7 +28,7 @@ const BasicBoardBox = ({ data, onPageChange }) => {
                 </div>
               </Link>
               <div className="free-meta-line">
-                조회수 N | ❤️ {post.likeCount} | 댓글 {post.commentCount}
+                조회수 :{post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
               </div>
             </div>
           </div>
