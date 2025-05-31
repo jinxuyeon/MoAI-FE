@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 const TodoBox = () => {
     const [todolist, setTodolist] = useState([]);
     const [newItem, setNewItem] = useState("");
-    const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD")); // 기본값: 오늘
+    const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD"));
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -79,19 +79,24 @@ const TodoBox = () => {
     };
 
     const getDday = (dueDateStr) => {
-        const today = dayjs();
-        const target = dayjs(dueDateStr);
-        const diff = target.diff(today, "day");
-        return diff === 0 ? "D-Day" : diff > 0 ? `D-${diff}` : `D+${-diff}`;
-    };
+  const today = dayjs().startOf("day");
+  const target = dayjs(dueDateStr).startOf("day");
+  const diff = target.diff(today, "day");
+  return diff === 0 ? "D-Day" : diff > 0 ? `D-${diff}` : `D+${-diff}`;
+};
 
-    const pendingItems = todolist.filter((item) => item.status === "PENDING");
-    const doneItems = todolist.filter((item) => item.status === "DONE");
+
+    const pendingItems = todolist
+        .filter((item) => item.status === "PENDING")
+        .sort((a, b) => dayjs(a.dueDate).diff(dayjs(b.dueDate)));
+
+    const doneItems = todolist
+        .filter((item) => item.status === "DONE")
+        .sort((a, b) => dayjs(a.dueDate).diff(dayjs(b.dueDate)));
 
     return (
-        <section>
-            <label className="section-title small">투두리스트</label>
-
+        <section className="todo-section">
+            <label className="section-title small">TO-DO LIST</label>
 
             <div className="box todolist-box">
                 <div className="todolist-input-row">
@@ -112,7 +117,6 @@ const TodoBox = () => {
                             }
                         }}
                     />
-                    
                     <button onClick={handleAddItem}>추가</button>
                 </div>
 
@@ -122,7 +126,13 @@ const TodoBox = () => {
                             <div className="item-left" onClick={() => toggleItem(todolist.indexOf(item))}>
                                 <span className="circle">○</span>
                                 <span className="item-text">{item.content}</span>
-                                <span className="dday">({getDday(item.dueDate)})</span>
+                                <span
+                                    className={`dday ${
+                                        dayjs(item.dueDate).diff(dayjs(), "day") <= 1 ? "urgent" : ""
+                                    }`}
+                                >
+                                    ({getDday(item.dueDate)})
+                                </span>
                             </div>
                             <button onClick={() => deleteItem(todolist.indexOf(item))}>x</button>
                         </li>
@@ -130,21 +140,26 @@ const TodoBox = () => {
                 </ul>
 
                 <ul className="todolist-items">
-                    {doneItems.map((item, index) => (
-                        <li key={`done-${index}`} className="checked">
-                            <div className="item-left" onClick={() => toggleItem(todolist.indexOf(item))}>
-                                <span className="circle">●</span>
-                                <span className="item-text">{item.content}</span>
-                                <span className="checkmark">✔️</span>
-                                <span className="dday">({getDday(item.dueDate)})</span>
-                            </div>
-                            <button onClick={() => deleteItem(todolist.indexOf(item))}>x</button>
-                        </li>
-                    ))}
-                </ul>
+  {doneItems.map((item, index) => (
+    <li key={`done-${index}`} className="checked">
+  <div className="item-left" onClick={() => toggleItem(todolist.indexOf(item))}>
+    <span className="circle">●</span>
+    
+    {/* ✅ 취소선 하나만 적용되게 하나의 span으로 묶음 */}
+    <span className="strike-wrap">
+      {item.content} ({getDday(item.dueDate)})
+    </span>
+  </div>
+  <button onClick={() => deleteItem(todolist.indexOf(item))}>x</button>
+</li>
+
+  ))}
+</ul>
+
             </div>
         </section>
     );
 };
 
 export default TodoBox;
+
