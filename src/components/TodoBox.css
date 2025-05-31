@@ -4,6 +4,11 @@
   border-radius: 10px;
   border: 1px solid #ddd;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+  width: 100%;
+  max-width: 420px;
+  margin-left: 10px;
+  align-self: flex-start;
 }
 
 .todolist-input-row {
@@ -40,6 +45,20 @@
   padding: 6px 0;
 }
 
+.todo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding-left: 40px; 
+}
+
+.todo-section .section-title {
+  text-align: center;
+  padding-left: 10px;  /* 👈 좌측 여백 추가 */
+  width: 100%;
+}
+
 .item-left {
   display: flex;
   align-items: center;
@@ -47,10 +66,11 @@
   cursor: pointer;
 }
 
-.todolist-items li.checked .item-text {
+.todolist-items li.checked .item-left {
   text-decoration: line-through;
   color: #888;
 }
+
 
 .todolist-items li.incomplete .item-text {
   color: #333;
@@ -86,4 +106,44 @@
 .checked .checkmark {
   opacity: 1;
   transform: scale(1.2);
+}
+
+@keyframes blink-red {
+  0% { color: red; opacity: 1; }
+  50% { color: red; opacity: 0.3; }
+  100% { color: red; opacity: 1; }
+}
+
+.dday {
+  font-size: 14px;
+  color: #999;
+}
+
+.dday.urgent {
+  animation: blink-red 1s infinite;
+  font-weight: bold;
+}
+
+/* ✅ 취소선은 여기에만 적용 */
+.todolist-items li.checked .strike-wrap {
+  text-decoration: line-through;
+  text-decoration-skip-ink: none;
+  color: #888;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ✅ 원 안의 점은 그대로 유지 (취소선 없음) */
+.circle {
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ✅ 기존 item-left에는 취소선 제거 */
+.todolist-items li.checked .item-left {
+  text-decoration: none;
+  color: inherit;
 }
