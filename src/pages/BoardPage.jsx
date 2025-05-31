@@ -61,7 +61,12 @@ const BoardPage = () => {
                     />
                 );
             case "market":
-                return <MarketBox />;
+                return (
+                    <MarketBox
+                        data={postData}
+                        onPageChange={(page) => handleSearch(boardType, page)}
+                    />
+                );
             case "popular":
                 return <div>인기게시판 컴포넌트</div>;
             case "lecture":

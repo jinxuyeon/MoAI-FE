@@ -69,3 +69,8 @@
     background-color: #ddd;
     transform: scale(1.1);
 }
+
+.BookMarketBoard img{
+    border-radius: 8px;
+
+}

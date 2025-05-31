@@ -45,7 +45,7 @@ const Dashboard = () => {
 
                 <div className="rightside-container">
                     <JobInfoBoard />
-                    <BookMarketBoard />
+                    <BookMarketBoard type={"MARKET"} title={"장터"}/>
                 </div>
             </div>
         </div>
