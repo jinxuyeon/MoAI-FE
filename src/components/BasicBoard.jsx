@@ -21,7 +21,7 @@ const BasicBoard = ({ type, title }) => {
       setPosts(postData);
     } catch (err) {
       console.error("❌ 게시글 불러오기 실패:", err);
-      setPosts([]); // 실패 시 빈 배열 처리
+      setPosts([]);
     }
   };
 
@@ -31,11 +31,20 @@ const BasicBoard = ({ type, title }) => {
 
   return (
     <section className="BasicBoard">
-      <h4 className="title">{title}</h4>
+      <div className = "container">
+        <div className="title-line">
+          <h4 className="title">{title}</h4>
+          <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
+          게시글 더보기 ⇀</Link>
+        </div>
+      </div>
+
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.id} className="basic-post-item">
-            <strong>{post.title}</strong>
+            <Link to={`/main/community/${type.toLowerCase()}/post/${post.id}`}>
+              <strong>{post.title}</strong>
+            </Link>
             <p className="meta">
               {post.writerNickname} | {post.createdDate?.slice(0, 10)} | ❤️ {post.likeCount} | 💬 {post.commentCount}
             </p>
@@ -44,7 +53,7 @@ const BasicBoard = ({ type, title }) => {
       ) : (
         <div>게시글이 없습니다.</div>
       )}
-      <Link to={`/main/community/${type.toLowerCase()}`}>게시글 더보기</Link>
+      
     </section>
   );
 };

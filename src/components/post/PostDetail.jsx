@@ -38,6 +38,7 @@ const PostDetail = () => {
     );
   };
 
+
   const handleCommentSubmit = () => {
     if (!newComment.trim()) return;
     const newId = comments.length + 1;
@@ -47,6 +48,8 @@ const PostDetail = () => {
     ]);
     setNewComment("");
   };
+
+
 
   if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
 
