@@ -79,6 +79,8 @@
   .comment-form {
     display: flex;
     gap: 8px;
+    margin-bottom: 12px;
+
   }
   
   .comment-form input {
