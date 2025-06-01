@@ -49,8 +49,6 @@ const PostDetail = () => {
     setNewComment("");
   };
 
-
-
   if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
 
   return (

@@ -15,14 +15,17 @@ const Panel = () => {
     if (!user) return <div>로그인이 필요합니다</div>;
 
     const testhandle = async () => {
-    try {
-        const res = await axiosInstance.get("/api/post/50");  // 예: 50번 게시글
-        console.log("게시글 정보:", res.data);
-    } catch (err) {
-        console.error("게시글 불러오기 실패", err);
-        alert("게시글 불러오기 실패");
-    }
-};
+        try {
+            const res = await axiosInstance.post("/api/post/50/comments", {
+                content: "테스트 댓글입니다."
+            });
+            console.log("✅ 댓글 등록 응답:", res.data);
+            alert("댓글 등록 성공!");
+        } catch (err) {
+            console.error("❌ 댓글 등록 실패:", err);
+            alert("댓글 등록 실패");
+        }
+    };
 
     return (
         <div className="Panel">
