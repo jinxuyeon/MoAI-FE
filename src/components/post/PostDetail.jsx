@@ -39,17 +39,27 @@ const PostDetail = () => {
   };
 
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
-    const newId = comments.length + 1;
-    setComments([
-      ...comments,
-      { id: newId, author: "익명", text: newComment, likes: 0, liked: false }
-    ]);
-    setNewComment("");
+  
+    try {
+      await axiosInstance.post(`/api/post/${postId}/comments`, {
+        content: newComment
+      });
+  
+      // ✅ 댓글 목록 다시 불러오기
+      const res = await axiosInstance.get(`/api/post/${postId}`);
+      setPost(res.data);
+      setComments(res.data.comments || []);
+      setNewComment("");
+    } catch (err) {
+      console.error("❌ 댓글 등록 실패:", err);
+      alert("댓글 등록 실패");
+    }
   };
-
-
+  
+  
+  
 
   if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
 
@@ -76,11 +86,22 @@ const PostDetail = () => {
         <span className="comment-header">💬 댓글 {comments.length}</span>
       </div>
 
+
+      <div className="comment-form">
+        <input
+          type="text"
+          placeholder="댓글을 입력하세요"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button onClick={handleCommentSubmit}>작성</button>
+      </div>
+
       <ul className="comment-list">
         {comments.map((c) => (
           <li key={c.id} className="comment-item">
             <div className="comment-info">
-              <strong>{c.author}</strong>: {c.text}
+              <strong>{c.author || c.writerNickname}</strong>: {c.text || c.content}
             </div>
             <button
               className="comment-like-button"
@@ -92,15 +113,6 @@ const PostDetail = () => {
         ))}
       </ul>
 
-      <div className="comment-form">
-        <input
-          type="text"
-          placeholder="댓글을 입력하세요"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        />
-        <button onClick={handleCommentSubmit}>작성</button>
-      </div>
     </div>
   );
 };
