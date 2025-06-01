@@ -89,12 +89,17 @@ const WritePage = () => {
       alert("게시판, 제목, 내용을 모두 입력해 주세요.");
       return;
     }
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = content;
+    const firstImg = tempDiv.querySelector("img");
+    const imageUrls = firstImg ? firstImg.src : null;
 
     try {
       const res = await axiosInstance.post("/api/post/post-up", {
         boardType: selectedBoard.value,
         title,
         content,
+        imageUrls, 
       });
 
       if (res.status === 200 || res.status === 201) {
@@ -108,7 +113,6 @@ const WritePage = () => {
     }
   };
 
-  // ✅ 폰트 사이즈 변경 함수 (드래그 유지)
   const changeFontSize = (delta) => {
     const selection = window.getSelection();
     if (!selection.rangeCount || selection.isCollapsed) return;
