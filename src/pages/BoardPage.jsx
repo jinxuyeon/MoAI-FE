@@ -40,7 +40,7 @@ const BoardPage = () => {
                     size: 10,
                 },
             });
-            setPostData(res.data);
+            setPostData( res.data?.pageResponse);
         } catch (err) {
             console.error("❌ 게시글 불러오기 실패:", err);
         }

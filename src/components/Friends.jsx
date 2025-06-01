@@ -19,7 +19,6 @@ const Friends = () => {
         try {
             const { data } = await axiosInstance.get("/api/friend/request-friend-list");
             if (Array.isArray(data.requestMemberList)) {
-                console.log("친구요청 목록 불러오기 완료");
                 setRequestMemberList(data.requestMemberList);
                 setHasFriendrequest(data.requestMemberList.length > 0);
             } else {
@@ -37,7 +36,6 @@ const Friends = () => {
         try {
             const { data } = await axiosInstance.get("/api/friend/my-friends");
             if (Array.isArray(data.acceptMemberDtoList)) {
-                console.log("친구목록 불러오기 완료");
                 setMyFriendList(data.acceptMemberDtoList);
             } else {
                 console.warn("친구 목록 응답 형식 오류", data);

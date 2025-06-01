@@ -28,7 +28,6 @@ function Header({ title }) {
     try {
       const response = await axiosInstance.get(`/api/member/my-notices`);
       if (response.status === 200) {
-        console.log("알림 가져오기 성공", response.data);
         setNotices(response.data.notices);
       }
     } catch (error) {

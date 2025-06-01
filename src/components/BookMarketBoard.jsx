@@ -26,8 +26,7 @@ const BookMarketBoard = ({ type, title }) => {
                 },
             });
 
-            console.log("✅ 게시글 응답:", res.data);
-            const postData = res.data?.posts || [];
+            const postData =  res.data?.pageResponse?.posts || [];
             setPosts(postData);
         } catch (err) {
             console.error("❌ 게시글 불러오기 실패:", err);

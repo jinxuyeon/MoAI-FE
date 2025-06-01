@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, X, Check } from "lucide-react"; 
+import { useNavigate } from "react-router-dom";
 import Reddot from "./Reddot";
 import "./BellBox.css";
 import axiosInstance from "./utils/AxiosInstance";
@@ -8,8 +9,22 @@ import axiosInstance from "./utils/AxiosInstance";
 const BellBox = ({ notices, setNotices }) => {
     const [isOpen, setIsOpen] = useState(false);
     const boxRef = useRef(null);
+    const navigate = useNavigate();
 
-    // ✅ 개별별 알림 읽기 처리
+    // ✅ 알림 클릭 → 읽음 처리 + 이동
+    const handleNoticeClick = async (notice) => {
+        try {
+            await axiosInstance.post(`/api/notice/read/${notice.id}`);
+            setNotices((prev) => prev.filter((n) => n.id !== notice.id));
+            if (notice.targetUrl) {
+                navigate(notice.targetUrl);
+            }
+        } catch (err) {
+            console.error("알림 이동 및 삭제 실패", err);
+        }
+    };
+
+    // ✅ 개별 알림 삭제
     const handleDelete = async (id) => {
         try {
             const response = await axiosInstance.post(`/api/notice/read/${id}`);
@@ -22,9 +37,9 @@ const BellBox = ({ notices, setNotices }) => {
         }
     };
 
-    // ✅ 모든 알림 읽기 처리
+    // ✅ 전체 알림 읽기
     const handleMarkAllAsRead = async () => {
-        const noticeIds = notices.map((notice) => notice.id); // 현재 알림의 ID 목록 추출
+        const noticeIds = notices.map((notice) => notice.id);
         if (noticeIds.length === 0) return; 
         try {
             const response = await axiosInstance.post(`/api/notice/read-all`, { noticeIds });
@@ -36,6 +51,7 @@ const BellBox = ({ notices, setNotices }) => {
             console.error("모든 알림 읽기 실패:", error);
         }
     };
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (boxRef.current && !boxRef.current.contains(event.target)) {
@@ -64,7 +80,6 @@ const BellBox = ({ notices, setNotices }) => {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                     >
-                        {/* ✅ "모두 읽기" 버튼 추가 */}
                         {notices.length > 0 && (
                             <div className="notice-header">
                                 <button className="mark-all-btn" onClick={handleMarkAllAsRead}>
@@ -77,8 +92,16 @@ const BellBox = ({ notices, setNotices }) => {
                         {notices.length > 0 ? (
                             notices.map((notice) => (
                                 <div key={notice.id} className="notice-item">
-                                    {notice.content}
-                                    <button className="delete-btn" onClick={() => handleDelete(notice.id)}>
+                                    <span
+                                        className="notice-link"
+                                        onClick={() => handleNoticeClick(notice)}
+                                    >
+                                        {notice.content}
+                                    </span>
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() => handleDelete(notice.id)}
+                                    >
                                         <X className="x" />
                                     </button>
                                 </div>

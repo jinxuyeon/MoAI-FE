@@ -5,7 +5,7 @@
     --point-focus-green:#1a7f37;
     --base-border-color : #d1d9e0;  /* 회색 경계선 색 */
     --base-point-color:#f6f8fa;  
-    --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f;   /* 게시판 그림자 */
+    --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 1px 6px 0px #25292e1f;   /* 게시판 그림자 */
     --red-dot-color:#f56565;
 
     --normal-text-color:#59636e;

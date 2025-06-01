@@ -23,8 +23,8 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     axiosInstance.get("/api/member/me")
       .then(res => {
-        console.log("me 가져오기 성공")
-        setUser(res.data)
+        setUser(res.data.meDto)
+        setIsLoading(false);
       })
       .catch(err => {
         console.log("me 정보 가져오기 실패:", err);

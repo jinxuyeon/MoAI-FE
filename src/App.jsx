@@ -28,8 +28,6 @@ function App() {
         try {
             const decoded = jwtDecode(token);
             const currentTime = Date.now() / 1000;
-            console.log(`현재:${currentTime}`);
-            console.log(`만료:${decoded.exp}`);
             return decoded.exp < currentTime;
         } catch (error) {
             return true;

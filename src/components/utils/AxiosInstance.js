@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        console.log("응답 수신:", response);
+        console.log(`응답 수신:👌${response.data.message}`, response.data);
         return response;
     },
     async (error) => {

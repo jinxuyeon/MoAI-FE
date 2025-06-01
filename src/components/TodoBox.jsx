@@ -38,7 +38,7 @@ const TodoBox = () => {
 
         try {
             const res = await axiosInstance.post("/api/member/todo/add", newTodo);
-            const savedTodo = res.data;
+            const savedTodo = res.data.savedTodo;
             setTodolist([...todolist, savedTodo]);
             setNewItem("");
         } catch (error) {

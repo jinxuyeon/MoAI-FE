@@ -75,6 +75,14 @@
     width: 15px;
     height: 15px;
 }
+.notice-link {
+    cursor: pointer;
+    color: #2a7de1;
+    text-decoration: underline;
+    flex: 1;
+    word-break: break-word;
+}
+
 
 
 /* 작은 화면에서 스타일 조정 */
