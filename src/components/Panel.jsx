@@ -15,24 +15,14 @@ const Panel = () => {
     if (!user) return <div>로그인이 필요합니다</div>;
 
     const testhandle = async () => {
-        try {
-            for (let i = 1; i <= 100; i++) {
-                const postData = {
-                    boardType: "SECRET",
-                    title: `title${i}`,
-                    content: `<p>content${i}</p>` // HTML 형식으로 감쌈
-                }; n  
-
-                await axiosInstance.post("/api/post/post-up", postData);
-                console.log(`✅ 게시글 ${i} 저장 완료`);
-            }
-
-            alert("테스트 게시글 100개 저장 완료");
-        } catch (err) {
-            console.error("❌ 게시글 저장 중 오류 발생:", err);
-            alert("게시글 저장 실패");
-        }
-    };
+    try {
+        const res = await axiosInstance.get("/api/post/50");  // 예: 50번 게시글
+        console.log("게시글 정보:", res.data);
+    } catch (err) {
+        console.error("게시글 불러오기 실패", err);
+        alert("게시글 불러오기 실패");
+    }
+};
 
     return (
         <div className="Panel">
