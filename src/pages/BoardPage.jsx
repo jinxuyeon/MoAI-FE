@@ -4,11 +4,8 @@ import Header from "../components/Header";
 import NaviBar from "../components/NaviBar";
 import MarketBox from "../components/board-box/MarketBox";
 import LectureCategoryBox from "../components/board-box/LectureCategoryBox";
-import FreePostDetail from "../components/post/FreePostDetail";
-import NoticePostDetail from "../components/post/NoticePostDetail";
-import SecretPostDetail from "../components/post/SecretPostDetail";
-import MarketPostDetail from "../components/post/MarketPostDetail";
 import BasicBoardBox from "../components/board-box/BasicBoardBox";
+import PostDetail from "../components/post/PostDetail";
 import "./BoardPage.css";
 import axiosInstance from "../components/utils/AxiosInstance";
 import MarketUploadModal from "../components/board-box/MarketUploadModal";
@@ -76,23 +73,6 @@ const BoardPage = () => {
         }
     };
 
-    const renderPostDetail = () => {
-        switch (boardType) {
-            case "notice_c":
-                return <NoticePostDetail />;
-            case "free":
-                return <FreePostDetail />;
-            case "secret":
-                return <SecretPostDetail />;
-            case "market":
-                return <MarketPostDetail />;
-            case "lecture":
-                return <div>강의게시물 컴포넌트</div>;
-            default:
-                return <div>상세 게시글을 찾을 수 없습니다.</div>;
-        }
-    };
-
     const handleWriteClick = () => {
         navigate(`/write/${boardType}`);
     };
@@ -131,7 +111,7 @@ const BoardPage = () => {
                     </div>
 
                     <div className="board-container">
-                        {isPostDetail ? renderPostDetail() : renderBoard()}
+                        {isPostDetail ? <PostDetail /> : renderBoard()}
                     </div>
                 </div>
             </div>

@@ -1,42 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./SecretPostDetail.css";
+import axiosInstance from "../utils/AxiosInstance";
+import "./PostDetail.css";
 
-const dummyPosts = [
-  {
-    id: 1,
-    title: "자유게시판 첫 번째 글",
-    content: "이건 자유게시판 테스트용 내용입니다.",
-    author: "홍길동",
-    date: "2025-05-26",
-    views: 42,
-    imgUrl:  "https://i.kym-cdn.com/photos/images/original/001/389/404/a2b.jpg", // 썸네일 예시
-    comments: [
-      { id: 1, author: "익명", text: "잘 봤어요!", likes: 0, liked: false },
-      { id: 2, author: "익명", text: "감사합니다!", likes: 0, liked: false }
-    ]
-  },
-  {
-    id: 2,
-    title: "두 번째 글입니다",
-    content: "이건 두 번째 글의 내용이에요!",
-    author: "이몽룡",
-    date: "2025-05-25",
-    views: 35,
-    imgUrl: "",
-    comments: []
-  },
-];
-
-const SecretPostDetail = () => {
+const PostDetail = () => {
   const { postId } = useParams();
-  const post = dummyPosts.find((p) => p.id === parseInt(postId));
-
+  const [post, setPost] = useState(null);
   const [liked, setLiked] = useState(false);
-  const [comments, setComments] = useState(post?.comments || []);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/post/${postId}`);
+        setPost(res.data);
+        setComments(res.data.comments || []);
+      } catch (err) {
+        console.error("❌ 게시글 상세 불러오기 실패:", err);
+      }
+    };
+    fetchPost();
+  }, [postId]);
+
 
   const handleLike = () => {
     setLiked(!liked);
@@ -62,6 +48,8 @@ const SecretPostDetail = () => {
     setNewComment("");
   };
 
+  if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
+
   return (
     <div className="post-detail-container">
       <div className="post-title-with-like">
@@ -72,12 +60,14 @@ const SecretPostDetail = () => {
       </div>
 
       <div className="post-meta">
-        {post.author} | {post.date} | 조회 {post.views}
+        {post.author} | {post.created_date?.slice(0, 10)} | 조회 {post.view_count}
       </div>
 
-      {post.imgUrl && <img src={post.imgUrl} alt="썸네일" className="post-image" />}
+      {post.image_urls && (
+        <img src={post.image_urls} alt="썸네일" className="post-image" />
+      )}
 
-      <p className="post-content">{post.content}</p>
+      <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div> 
 
       <div className="comment-header-line">
         <span className="comment-header">💬 댓글 {comments.length}</span>
@@ -93,7 +83,7 @@ const SecretPostDetail = () => {
               className="comment-like-button"
               onClick={() => handleCommentLike(c.id)}
             >
-               {c.liked ? "❤️" : "🤍"}
+              {c.liked ? "❤️" : "🤍"}
             </button>
           </li>
         ))}
@@ -112,4 +102,4 @@ const SecretPostDetail = () => {
   );
 };
 
-export default SecretPostDetail;
+export default PostDetail;
