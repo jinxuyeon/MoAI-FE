@@ -15,7 +15,12 @@ const PostDetail = () => {
       try {
         const res = await axiosInstance.get(`/api/post/${postId}`);
         setPost(res.data);
-        setComments(res.data.comments || []);
+  
+        // 최신순 정렬 (createdDate 기준)
+        const sortedComments = [...(res.data.comments || [])].sort(
+          (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+        );
+        setComments(sortedComments);
       } catch (err) {
         console.error("❌ 게시글 상세 불러오기 실패:", err);
       }
@@ -44,19 +49,23 @@ const PostDetail = () => {
   
     try {
       await axiosInstance.post(`/api/post/${postId}/comments`, {
-        content: newComment
+        content: newComment,
       });
   
-      // ✅ 댓글 목록 다시 불러오기
+      // ✅ 댓글 다시 불러오기 후 최신순 정렬
       const res = await axiosInstance.get(`/api/post/${postId}`);
       setPost(res.data);
-      setComments(res.data.comments || []);
+  
+      const latestComments = res.data.comments || [];
+      setComments((res.data.comments || []).reverse()); // 최신 댓글을 맨 위로
+  
       setNewComment("");
     } catch (err) {
       console.error("❌ 댓글 등록 실패:", err);
       alert("댓글 등록 실패");
     }
   };
+  
 
   if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
 
