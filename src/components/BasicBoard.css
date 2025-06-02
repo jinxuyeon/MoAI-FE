@@ -5,6 +5,7 @@
     box-shadow: var(--board-shadow-color);
     margin-bottom: 24px;
     border: 1px solid var(--base-border-color);
+    height: 100%;
   }
   
   .title {
@@ -21,11 +22,16 @@
     margin-bottom: 5px;
   }
   
-  
+  .post-link{
+    display: flex;
+    margin-top: 0;
+  }
+
   .basic-post-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    align-content: center;
     padding: 8px 0;
     border-bottom: 1px solid #f0f0f0;
   }
@@ -45,11 +51,17 @@
     text-decoration: underline;
   }
   
-  .meta {
-    font-size: 13px;
-    color: #888;
-    white-space: nowrap;
-  }
+ 
+.meta {
+  margin-left: auto; /* ✅ 오른쪽 끝으로 이동 */
+  white-space: nowrap; /* ✅ 줄바꿈 방지 */
+}
+ 
+.meta-content {
+  font-size: 13px;
+  color: #888;
+  margin: 0; /* 기본 p 태그 여백 제거 */
+}
   
   .BasicBoard a:last-of-type {
     display: block;
