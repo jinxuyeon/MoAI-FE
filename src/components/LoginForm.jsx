@@ -36,7 +36,7 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 setIsAuthenticated(true);
 
                 const meRes = await axiosInstance.get("/api/member/me");
-                setUser(meRes.data);
+                setUser(meRes.data.meDto);
                 navigate("/main");
             }
         } catch (error) {

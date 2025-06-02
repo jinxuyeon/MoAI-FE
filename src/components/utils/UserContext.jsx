@@ -6,7 +6,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 
-  
+
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,16 +23,14 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     axiosInstance.get("/api/member/me")
       .then(res => {
-        setUser(res.data.meDto)
-        setIsLoading(false);
+        setUser(res.data.meDto);
+        setIsLoading(false); // 성공 시
       })
       .catch(err => {
-        console.log("me 정보 가져오기 실패:", err);
-        setUser(null);
-        setUser(dummyUser) //테스트용 임시 더미
-      })
-      .finally(() => setIsLoading(false)
-      );
+        console.error("me 정보 가져오기 실패:", err);
+        setUser(dummyUser); // 테스트 시
+        setIsLoading(false); // 실패 시에도 로딩 완료
+      });
   }, []);
 
   return (

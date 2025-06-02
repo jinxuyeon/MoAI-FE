@@ -4,7 +4,6 @@ import Dashboard from "../components/Dashboard";
 import "./Mainpage.css";
 const MainPage = () => {
 
-    console.log("메인 렌더링")
     return (
         <div className="MainPage">
             <Header title={"Dashborad"} />
