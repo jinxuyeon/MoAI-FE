@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./ProfileTemplate.css";
-import axiosInstance from "./utils/AxiosInstance"; // 경로에 맞게 조정하세요
+import axiosInstance from "./utils/AxiosInstance"; // 경로 조정 필요
 
 const ProfileTemplate = ({ profileImageUrl, name, id }) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,10 +26,7 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
             alt="프로필"
             className="profile-img"
           />
-          <span
-            className="profile-name"
-            onClick={fetchUserInfo}
-          >
+          <span className="profile-name" onClick={fetchUserInfo}>
             {name}
           </span>
         </div>
@@ -38,15 +35,26 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
       {showModal && userInfo && (
         <div className="profile-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={profileImageUrl || "/default-profile.png"}
-              alt="프로필"
-              className="modal-profile-img"
-            />
-            <h3>{userInfo.nickname}</h3>
-            <p>{userInfo.email}</p>
-            <p>{userInfo.introduction || "소개 정보가 없습니다."}</p>
-            <button onClick={() => setShowModal(false)}>닫기</button>
+            <div className="modal-header">
+              <img
+                src={userInfo.profileImageUrl || "/default-profile.png"}
+                alt="프로필"
+                className="modal-profile-img"
+              />
+              <div className="modal-name-block">
+                <h3>{userInfo.nickname}</h3>
+                <span className="modal-username">{userInfo.email}</span>
+              </div>
+            </div>
+
+            <div className="modal-body">
+              <p><strong>소개:</strong> {userInfo.intro || "소개 정보가 없습니다."}</p>
+              <p><strong>권한:</strong> {userInfo.roles.join(", ")}</p>
+            </div>
+
+            <div className="modal-footer">
+              <button onClick={() => setShowModal(false)}>닫기</button>
+            </div>
           </div>
         </div>
       )}
