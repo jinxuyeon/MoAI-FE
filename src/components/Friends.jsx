@@ -90,7 +90,9 @@ const Friends = () => {
                             <li key={index} className="Friends-Item">
                                 <ProfileTemplate
                                 profileImageUrl={friend.profileImageUrl}
-                                name =  {friend.name}/>
+                                name =  {friend.name}
+                                id = {friend.id}
+                                />
                             </li>
                         ))
                     ) : (

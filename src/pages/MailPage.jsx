@@ -4,7 +4,6 @@ import MailSide from "../components/MailSide";
 import { useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import { useEffect } from "react";
-import ChatBubble from "../components/ChatBubble";
 import ChatBox from "../components/ChatBox";
 const MailPage = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);

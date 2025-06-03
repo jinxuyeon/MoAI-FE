@@ -19,6 +19,7 @@ const CommentBox = ({ comment, handleCommentLike }) => {
                         <ProfileTemplate
                             profileImageUrl={comment.writerProfileImageUrl}
                             name={comment.writerNickname}
+                            id = {comment.writerId}
                         />
                     </div>
                     <div>
