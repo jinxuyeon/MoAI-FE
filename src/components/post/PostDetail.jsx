@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
-import ProfileTemplate from "../ProfileTemplate";
 import CommentBox from "./CommentBox";
+import ProfileTemplate from "../ProfileTemplate";
 
 const PostDetail = () => {
   const { postId } = useParams();
@@ -11,6 +11,7 @@ const PostDetail = () => {
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [showMenu, setShowMenu] = useState(false); // 메뉴 버튼 토글
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -70,13 +71,37 @@ const PostDetail = () => {
     <div className="post-detail-container">
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
-        <button className="like-toggle-button" onClick={handleLike}>
-          {liked ? "❤️" : "🤍"}
-        </button>
+
+        {post.isAuthor && (
+          <div className="post-menu-container">
+            <button
+              className="post-menu-button"
+              onClick={() => setShowMenu((prev) => !prev)}
+            >
+              ⋮
+            </button>
+            {showMenu && (
+              <div className="post-menu-dropdown">
+                <button className="post-menu-item">수정</button>
+                <button className="post-menu-item">삭제</button>
+              </div>
+            )}
+          </div>
+        )}
+
       </div>
 
       <div className="post-meta">
-        {post.writerNickname} | {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
+        {post.boardType === "SECRET" ? (
+          <div className="anonymous-writer">익명</div>
+        ) : (
+          <ProfileTemplate
+            profileImageUrl={post.writerProfileImageUrl}
+            name={post.writerNickname}
+            id={post.writerId}
+          />
+        )}
+        {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
       </div>
 
       {post.image_urls && (
@@ -89,6 +114,13 @@ const PostDetail = () => {
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
       </section>
+
+      <div className="like-container">
+        <button className="like-toggle-button" onClick={handleLike}>
+          {liked ? "❤️" : "🤍"}
+        </button>
+      </div>
+
 
       <div className="comment-header-line">
         <span className="comment-header">💬 댓글 {comments.length}</span>
@@ -113,7 +145,7 @@ const PostDetail = () => {
       <ul className="comment-list">
         {comments.map((c) => (
           <li key={c.id} className="comment-item">
-            <CommentBox comment={c} handleCommentLike={handleCommentLike} boardType = {post.boardType} />
+            <CommentBox comment={c} handleCommentLike={handleCommentLike} boardType={post.boardType} />
           </li>
         ))}
       </ul>

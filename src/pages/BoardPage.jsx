@@ -51,6 +51,7 @@ const BoardPage = () => {
       case "free":
       case "notice_c":
       case "secret":
+      case "review":
         return (
           <BasicBoardBox
             data={postData}

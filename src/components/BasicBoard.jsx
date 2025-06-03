@@ -31,9 +31,8 @@ const BasicBoard = ({ type, title }) => {
     <section className="BasicBoard">
       <div className="container">
         <div className="title-line">
-          <h4 className="title">{title}</h4>
           <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
-            게시글 더보기 ⇀
+            <h4 className="title">{title}</h4>
           </Link>
         </div>
       </div>

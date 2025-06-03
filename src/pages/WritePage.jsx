@@ -30,6 +30,8 @@ const WritePage = () => {
     { label: "자유게시판", value: "FREE" },
     { label: "비밀게시판", value: "SECRET" },
     { label: "강의게시판", value: "LECTURE" },
+    { label: "취업, 면접 게시판 ", value: "REVIEW" },
+
   ];
 
   useEffect(() => {

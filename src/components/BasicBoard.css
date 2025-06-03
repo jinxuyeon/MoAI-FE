@@ -11,7 +11,7 @@
 .title {
   font-size: 18px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--point-text-color-blue);
   margin-bottom: 5px;
 }
 
@@ -87,9 +87,7 @@
 }
 
 .more-link {
-  font-size: 14px;
-  color: #007bff;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .more-link:hover {
