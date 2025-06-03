@@ -13,16 +13,21 @@ const Dashboard = () => {
                         <House size={32} />
                         <h1>Home</h1>
                     </div>
-                    <div className="title-container">
-                        <Volume2 size={20} color="var(--normal-text-color)" />
-                        <h3>From the Office</h3>
-                    </div>
-                    <section className="inner-container">
-
-                        <BasicBoard type={"NOTICE_C"} title={"학과사무실에서 알려드립니다"} />
-                    </section>
                     <div>
-                        <h3>Join the Conversation</h3>
+                        <div className="title-container">
+                            <Volume2 size={20} color="var(--normal-text-color)" />
+                            <h3>From the Office</h3>
+                        </div>
+                        <section className="inner-container">
+
+                            <BasicBoard type={"NOTICE_C"} title={"학과사무실에서 알려드립니다"} />
+                        </section>
+                    </div>
+
+                    <div>
+                        <div className="title-container">
+                            <h3>Join the Conversation</h3>
+                        </div>
                         <section className="inner-container">
                             <section className="div-container">
                                 <div className="half-board-area">
@@ -48,13 +53,16 @@ const Dashboard = () => {
 
                 <div className="rightside-container">
                     <JobInfoBoard />
-                    <div className="inner-container">
+                    <div>
                         <div className="title-container">
                             <ShoppingCart size={20} color="var(--normal-text-color)" />
                             <h3>Find the items you need</h3>
                         </div>
-                        <BookMarketBoard type={"MARKET"} title={"장터"} />
+                        <div className="inner-container">
+                            <BookMarketBoard type={"MARKET"} title={"장터"} />
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
