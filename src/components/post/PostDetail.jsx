@@ -4,6 +4,7 @@ import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
 import CommentBox from "./CommentBox";
 import ProfileTemplate from "../ProfileTemplate";
+import MenuButton from "./MenuButton";
 
 const PostDetail = () => {
   const { postId } = useParams();
@@ -11,7 +12,6 @@ const PostDetail = () => {
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [showMenu, setShowMenu] = useState(false); // 메뉴 버튼 토글
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -73,22 +73,11 @@ const PostDetail = () => {
         <h2 className="post-title">{post.title}</h2>
 
         {post.isAuthor && (
-          <div className="post-menu-container">
-            <button
-              className="post-menu-button"
-              onClick={() => setShowMenu((prev) => !prev)}
-            >
-              ⋮
-            </button>
-            {showMenu && (
-              <div className="post-menu-dropdown">
-                <button className="post-menu-item">수정</button>
-                <button className="post-menu-item">삭제</button>
-              </div>
-            )}
-          </div>
+          <MenuButton
+            onEdit={() => console.log("✏️ 수정")}
+            onDelete={() => console.log("🗑️ 삭제")}
+          />
         )}
-
       </div>
 
       <div className="post-meta">

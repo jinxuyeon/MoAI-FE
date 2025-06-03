@@ -1,34 +1,41 @@
-
-
-
-.CommentBox{
-    display: flex;
-    gap: 10px;
-    width: 100%;
+.CommentBox {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0;
 }
 
-.comment-like-button {
-  font-size: 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #555;
-  margin-left: auto;
+.comment-content-left {
+  flex-shrink: 0;
 }
 
-
-.CommentBox .profile-content-box{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.comment-body-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
+
+.comment-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .comment-date {
   font-size: 12px;
   color: #888;
-  margin-top: 4px;
+  margin: 0;
 }
+
 .anonymous-nickname {
   font-weight: bold;
   font-size: 14px;
   color: #444;
+}
+
+.content-box {
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
