@@ -113,7 +113,7 @@ const PostDetail = () => {
       <ul className="comment-list">
         {comments.map((c) => (
           <li key={c.id} className="comment-item">
-            <CommentBox comment={c} handleCommentLike={handleCommentLike} />
+            <CommentBox comment={c} handleCommentLike={handleCommentLike} boardType = {post.boardType} />
           </li>
         ))}
       </ul>

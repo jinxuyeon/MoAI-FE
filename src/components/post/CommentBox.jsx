@@ -1,7 +1,7 @@
 import ProfileTemplate from "../ProfileTemplate";
 import "./CommentBox.css";
 
-const CommentBox = ({ comment, handleCommentLike }) => {
+const CommentBox = ({ comment, handleCommentLike, boardType }) => {
     const formattedDate = new Date(comment.createdDate).toLocaleString("ko-KR", {
         year: "numeric",
         month: "2-digit",
@@ -16,11 +16,15 @@ const CommentBox = ({ comment, handleCommentLike }) => {
             <div className="profile-content-box">
                 <div>
                     <div>
-                        <ProfileTemplate
-                            profileImageUrl={comment.writerProfileImageUrl}
-                            name={comment.writerNickname}
-                            id = {comment.writerId}
-                        />
+                        {boardType === "SECRET" ? (
+                            <div className="anonymous-nickname">익명</div>
+                        ) : (
+                            <ProfileTemplate
+                                profileImageUrl={comment.writerProfileImageUrl}
+                                name={comment.writerNickname}
+                                id={comment.writerId}
+                            />
+                        )}
                     </div>
                     <div>
                         <p className="comment-date">{formattedDate}</p>

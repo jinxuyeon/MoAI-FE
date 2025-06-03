@@ -23,12 +23,13 @@ const BasicBoardBox = ({ data, onPageChange }) => {
                     <h3 className="free-title">{post.title}</h3>
                   </div>
                   <div className="free-author-date">
-                    {post.writerNickname} | {post.createdDate?.slice(0, 10)}
+                    {post.boardType === "SECRET" ? "익명" : post.writerNickname} |{" "}
+                    {post.createdDate?.slice(0, 10)}
                   </div>
                 </div>
               </Link>
               <div className="free-meta-line">
-                조회수 :{post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
+                조회수 : {post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
               </div>
             </div>
           </div>
