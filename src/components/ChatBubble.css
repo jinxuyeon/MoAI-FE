@@ -15,7 +15,7 @@
     align-self: flex-start;
 }
 
-.content-box {
+.ChatBubble .content-box {
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 16px;
