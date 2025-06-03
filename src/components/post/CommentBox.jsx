@@ -13,7 +13,7 @@ const CommentBox = ({ comment, handleCommentLike, boardType }) => {
   });
 
   return (
-    <div className="CommentBox">
+    <div className={`CommentBox ${comment.isAuthor ? "my-comment" : ""}`}>
       <div className="comment-content-left">
         {boardType === "SECRET" ? (
           <div className="anonymous-nickname">익명</div>
