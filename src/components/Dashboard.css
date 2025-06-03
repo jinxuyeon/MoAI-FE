@@ -51,7 +51,7 @@
 }
 .Dashboard .inner-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
 }
 
@@ -64,15 +64,16 @@
 
 .Dashboard .div-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     min-width: 10px;
     width: 100%;
     gap: 30px;
+    height: auto;
 }
 
 .Dashboard .half-board-area {
     min-width: 100px;
-    flex: 1;
+    height: auto;
 }
 
 @media (max-width: 1080px) {
