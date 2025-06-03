@@ -33,29 +33,30 @@ const BasicBoard = ({ type, title }) => {
         <div className="title-line">
           <h4 className="title">{title}</h4>
           <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
-            게시글 더보기 ⇀</Link>
+            게시글 더보기 ⇀
+          </Link>
         </div>
       </div>
 
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.id} className="basic-post-item">
-            <Link className="post-link"
-              to={`/main/community/${type.toLowerCase()}/post/${post.id}`}>
+            <Link
+              className="post-link"
+              to={`/main/community/${type.toLowerCase()}/post/${post.id}`}
+            >
               <strong>{post.title}</strong>
             </Link>
             <div className="meta">
               <p className="meta-content">
-              {post.writerNickname} | {post.createdDate?.slice(0, 10)}
-            </p>
+                {post.writerNickname} | {post.createdDate?.slice(0, 10)}
+              </p>
             </div>
-
           </div>
         ))
       ) : (
         <div>게시글이 없습니다.</div>
       )}
-
     </section>
   );
 };
