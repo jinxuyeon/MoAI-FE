@@ -119,11 +119,11 @@ const MyPage = () => {
                             }
                         />
                         <button
-                            className="save-nickname-btn"
-                            onClick={handleSaveNickname}
-                        >
-                            저장
-                        </button>
+  className="save-btn"
+  onClick={handleSaveNickname}
+>
+저장
+</button>
 
                         <label>자기소개</label>
                         <textarea
@@ -131,7 +131,12 @@ const MyPage = () => {
                             placeholder="200자 이내로 입력하세요"
                             onChange={(e) => setIntro(e.target.value)}
                         />
-                        <button onClick={handleSave}>자기소개 저장</button>
+                        <button
+  className="save-btn"
+  onClick={handleSave}
+>
+저장
+</button>
 
                         <label className="section-title">개인정보</label>
                         <label className="spacer-label"></label>
