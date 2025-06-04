@@ -1,31 +1,7 @@
 import "./BasicBoard.css";
 import { Link } from "react-router-dom";
-import axiosInstance from "./utils/AxiosInstance";
-import { useEffect, useState } from "react";
 
-const BasicBoard = ({ type, title }) => {
-  const [posts, setPosts] = useState([]);
-
-  const handleSearch = async () => {
-    try {
-      const res = await axiosInstance.get("/api/post", {
-        params: {
-          boardType: type,
-          page: 0,
-          size: 3,
-        },
-      });
-      const postData = res.data?.pageResponse?.posts || [];
-      setPosts(postData);
-    } catch (err) {
-      console.error("❌ 게시글 불러오기 실패:", err);
-      setPosts([]);
-    }
-  };
-
-  useEffect(() => {
-    handleSearch();
-  }, []);
+const BasicBoard = ({ type,  posts, title }) => {
 
   return (
     <section className="BasicBoard">
@@ -42,7 +18,7 @@ const BasicBoard = ({ type, title }) => {
           <div key={post.id} className="basic-post-item">
             <Link
               className="post-link"
-              to={`/main/community/${type.toLowerCase()}/post/${post.id}`}
+              to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
             >
               <strong>{post.title}</strong>
             </Link>

@@ -2,71 +2,88 @@ import "./Dashboard.css";
 import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
 import BasicBoard from "./BasicBoard";
-import { House, Volume2 } from "lucide-react";
-import { ShoppingCart } from "lucide-react";
+import { House, Volume2, ShoppingCart } from "lucide-react";
+import axiosInstance from "./utils/AxiosInstance";
+import { useEffect, useState } from "react";
+
 const Dashboard = () => {
-    return (
-        <div className="Dashboard">
-            <div className="Content-container">
-                <div className="main-container">
-                    <div className="title-container">
-                        <House size={32} />
-                        <h1>Home</h1>
-                    </div>
-                    <div>
-                        <div className="title-container">
-                            <Volume2 size={20} color="var(--normal-text-color)" />
-                            <h3>From the Office</h3>
-                        </div>
-                        <section className="inner-container">
+  const [postsSummary, setPostsSummary] = useState(null);
 
-                            <BasicBoard type={"NOTICE_C"} title={"학과사무실에서 알려드립니다"} />
-                        </section>
-                    </div>
+  const handleInitPosts = async () => {
+    try {
+      const res = await axiosInstance.get("/api/post/summary-multiple");
+      setPostsSummary(res.data);
+    } catch (err) {
+      console.error("❌ 게시판 요약 데이터 요청 실패:", err);
+    }
+  };
 
-                    <div>
-                        <div className="title-container">
-                            <h3>Join the Conversation</h3>
-                        </div>
-                        <section className="inner-container">
-                            <section className="div-container">
-                                <div className="half-board-area">
-                                    <BasicBoard type={"FREE"} title={"자유게시판"} />
-                                </div>
-                                <div className="half-board-area">
-                                    <BasicBoard type={"SECRET"} title={"비밀게시판"} />
-                                </div>
-                            </section>
+  useEffect(() => {
+    handleInitPosts();
+  }, []);
 
-                            <section className="div-container">
-                                <div className="half-board-area">
-                                    <BasicBoard type={"FREE"} title={"선배님 고민있어으예 ~"} />
-                                </div>
-                                <div className="half-board-area">
-                                    <BasicBoard type={"REVIEW"} title={"취업, 면접 후기"} />
-                                </div>
-                            </section>
-                        </section>
-                    </div>
+  if (!postsSummary) return <div className="Dashboard">로딩 중...</div>;
 
-                </div>
+  return (
+    <div className="Dashboard">
+      <div className="Content-container">
+        <div className="main-container">
+          <div className="title-container">
+            <House size={32} />
+            <h1>Home</h1>
+          </div>
 
-                <div className="rightside-container">
-                    <JobInfoBoard />
-                    <div>
-                        <div className="title-container">
-                            <ShoppingCart size={20} color="var(--normal-text-color)" />
-                            <h3>Find the items you need</h3>
-                        </div>
-                        <div className="inner-container">
-                            <BookMarketBoard type={"MARKET"} title={"장터"} />
-                        </div>
-                    </div>
-
-                </div>
+          <div>
+            <div className="title-container">
+              <Volume2 size={20} color="var(--normal-text-color)" />
+              <h3>From the Office</h3>
             </div>
+            <section className="inner-container">
+              <BasicBoard title="학과사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type ={"NOTICE_C"}/>
+            </section>
+          </div>
+
+          <div>
+            <div className="title-container">
+              <h3>Join the Conversation</h3>
+            </div>
+            <section className="inner-container">
+              <section className="div-container">
+                <div className="half-board-area">
+                  <BasicBoard title="자유게시판" posts={postsSummary.Posts_free} type ={"FREE"}/>
+                </div>
+                <div className="half-board-area">
+                  <BasicBoard title="비밀게시판" posts={postsSummary.Posts_secret} type ={"SECRET"}/>
+                </div>
+              </section>
+
+              <section className="div-container">
+                <div className="half-board-area">
+                  <BasicBoard title="선배님 고민있어으예 ~" posts={postsSummary.Posts_free} type ={"FREE"} />
+                </div>
+                <div className="half-board-area">
+                  <BasicBoard title="취업, 면접 후기" posts={postsSummary.Posts_review} type ={"REVIEW"} />
+                </div>
+              </section>
+            </section>
+          </div>
         </div>
-    );
+
+        <div className="rightside-container">
+          <JobInfoBoard />
+          <div>
+            <div className="title-container">
+              <ShoppingCart size={20} color="var(--normal-text-color)" />
+              <h3>Find the items you need</h3>
+            </div>
+            <div className="inner-container">
+              <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type ={"MARKET"}  />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;

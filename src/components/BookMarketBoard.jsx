@@ -1,38 +1,14 @@
 import "./BookMarketBoard.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axiosInstance from "./utils/AxiosInstance";
 
 const formatPrice = (price) => {
     return new Intl.NumberFormat("ko-KR").format(price || 0) + " 원";
 };
 
-const BookMarketBoard = ({ type, title }) => {
-    const [posts, setPosts] = useState([]);
+const BookMarketBoard = ({ type, title, posts }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [fade, setFade] = useState(true);
-
-    useEffect(() => {
-        handleSearch();
-    }, []);
-
-    const handleSearch = async () => {
-        try {
-            const res = await axiosInstance.get("/api/post", {
-                params: {
-                    boardType: type,
-                    page: 0,
-                    size: 5,
-                },
-            });
-
-            const postData =  res.data?.pageResponse?.posts || [];
-            setPosts(postData);
-        } catch (err) {
-            console.error("❌ 게시글 불러오기 실패:", err);
-            setPosts([]);
-        }
-    };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
