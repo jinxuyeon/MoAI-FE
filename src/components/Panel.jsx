@@ -45,8 +45,8 @@ const Panel = () => {
       <Favorites />
       <Friends />
       <Calendar />
-      <input type="file" ref={fileInputRef} accept="image/*" />
-      <button onClick={testhandle}>테스트용 (S3 업로드)</button>
+      {/* <input type="file" ref={fileInputRef} accept="image/*" /> */}
+      {/* <button onClick={testhandle}>테스트용 (S3 업로드)</button> */}
     </div>
   );
 };
