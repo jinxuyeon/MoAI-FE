@@ -14,17 +14,22 @@ const Panel = () => {
   if (isLoading || !user) return <div>로딩 중...</div>; // ✅ 로딩/로그인 체크 철저히
 
   const testhandle = async () => {
-    try {
-      const res = await axiosInstance.post("/api/post/50/comments", {
-        content: "테스트 댓글입니다.",
-      });
-      console.log("✅ 댓글 등록 응답:", res.data);
-      alert("댓글 등록 성공!");
-    } catch (err) {
-      console.error("❌ 댓글 등록 실패:", err);
-      alert("댓글 등록 실패");
+  try {
+    const res = await axiosInstance.get("/api/post/summary-multiple");
+
+    console.log("✅ 게시판 요약 데이터:", res.data);
+    alert("게시판 요약 데이터를 성공적으로 가져왔습니다!");
+  } catch (err) {
+    console.error("❌ 게시판 요약 데이터 요청 실패:", err);
+
+    if (err.response?.data?.message) {
+      alert(`요약 데이터 요청 실패: ${err.response.data.message}`);
+    } else {
+      alert("요약 데이터 요청 중 오류가 발생했습니다.");
     }
-  };
+  }
+};
+
 
   return (
     <div className="Panel">
