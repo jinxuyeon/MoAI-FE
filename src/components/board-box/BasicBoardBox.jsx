@@ -20,25 +20,26 @@ const getBoardTitle = (boardType) => {
 };
 
 const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
-
-  console.log(`${isMarked}`)
   const { posts, currentPage, totalPages } = postsArr;
   const boardTitle = getBoardTitle(boardType);
 
-  // ✅ 로컬 즐겨찾기 상태
+  // ✅ 로컬 즐겨찾기 상태 (즉시 반영용)
   const [marked, setMarked] = useState(isMarked);
 
   const handleToggleFavorite = async () => {
     if (!posts.length) return;
 
     const boardName = getBoardTitle(boardType);
+
     try {
-      if (isMarked) {
+      if (marked) {
+        // 즐겨찾기 삭제 요청
         await axiosInstance.delete("/api/post/favorites", {
           params: { boardType },
         });
         setMarked(false);
       } else {
+        // 즐겨찾기 추가 요청
         await axiosInstance.post("/api/post/favorites", {
           boardType,
           boardName,
@@ -68,7 +69,7 @@ const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
           >
             <Star
               size={20}
-              fill={isMarked ? "#facc15" : "none"}
+              fill={marked ? "#facc15" : "none"}
               stroke="#f59e0b"
             />
           </button>
