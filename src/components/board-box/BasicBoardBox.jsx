@@ -113,7 +113,13 @@ const BasicBoardBox = ({ boardType }) => {
             <div key={post.id} className="free-list-item">
               <div className="free-list-content-with-thumbnail">
                 {post.imageUrls && (
-                  <img src={post.imageUrls} alt="썸네일" className="free-thumbnail" />
+                  <img
+                    src={post.
+                      thumbNailUrl}
+                    alt="썸네일"
+                    className="free-thumbnail"
+                    loading="lazy"
+                  />
                 )}
                 <div className="free-list-content">
                   <Link

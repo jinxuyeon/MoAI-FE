@@ -32,7 +32,7 @@ const Panel = () => {
         <button
           className="profile-btn"
           style={{
-            backgroundImage: `url(${user.profileImageUrl})`,
+            backgroundImage: `url(${user.profileThumbnails})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

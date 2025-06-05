@@ -19,7 +19,7 @@ const CommentBox = ({ comment, handleCommentLike, boardType }) => {
           <div className="anonymous-nickname">익명</div>
         ) : (
           <ProfileTemplate
-            profileImageUrl={comment.writerProfileImageUrl}
+            profileImageUrl={comment.writerProfileThumbnails}
             name={comment.writerNickname}
             id={comment.writerId}
           />

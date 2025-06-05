@@ -85,7 +85,7 @@ const PostDetail = () => {
           <div className="anonymous-writer">익명</div>
         ) : (
           <ProfileTemplate
-            profileImageUrl={post.writerProfileImageUrl}
+            profileImageUrl={post.writerProfileThumbnails}
             name={post.writerNickname}
             id={post.writerId}
           />
