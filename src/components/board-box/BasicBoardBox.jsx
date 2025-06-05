@@ -19,6 +19,7 @@ const getBoardTitle = (boardType) => {
   }
 };
 
+
 const BasicBoardBox = ({ boardType }) => {
   const [postData, setPostData] = useState({
     posts: [],
@@ -107,6 +108,12 @@ const BasicBoardBox = ({ boardType }) => {
       </div>
 
       <div className="free-list">
+        {posts.map((post) => (
+          <div key={post.id} className="free-list-item">
+            <div className="free-list-content-with-thumbnail">
+              {post.imageUrls && (
+                <img src={post.imageUrls} alt="썸네일" className="free-thumbnail" />
+              )}
         {postData.posts.length === 0 ? (
           <p>게시글이 없습니다.</p>
         ) : (
@@ -122,7 +129,7 @@ const BasicBoardBox = ({ boardType }) => {
                       <h3 className="free-title">{post.title}</h3>
                     </div>
                     <div className="free-author-date">
-                      {post.boardType === "SECRET" ? "익명" : post.writerNickname} |{" "}
+                      {post.boardType === "SECRET" ? "익명" : post.writerNickname} | {post.createdDate?.slice(0, 10)}
                       {post.createdDate?.slice(0, 10)}
                     </div>
                   </div>
