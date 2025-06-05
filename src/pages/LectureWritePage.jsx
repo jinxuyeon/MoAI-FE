@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import { useRef, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import axios from "axios";
-import "./WritePage.css"; // ✅ CSS 재사용
+import "./WritePage.css"; 
+import "./LectureBoardPage.jsx"; 
 
 import {
   FileImage,
@@ -23,19 +24,11 @@ const LectureWritePage = () => {
   const [showTabSelect, setShowTabSelect] = useState(false);
 
   const lectureList = [
-    { id: 1, title: "운영체제" },
-    { id: 2, title: "자료구조" },
-    { id: 3, title: "데이터베이스" },
+    { id: 1, title: "영상처리및실습" },
+    { id: 2, title: "데이터분석과 시각화" },
+    { id: 3, title: "네트워크보안" },
     { id: 4, title: "캡스톤디자인" },
-    { id: 5, title: "영상처리" },
-    { id: 6, title: "데이터 처리" },
-    { id: 7, title: "신호처리" },
-    { id: 8, title: "보안체제" },
-    { id: 9, title: "해양데이터통신" },
-    { id: 10, title: "c언어" },
-    { id: 11, title: "네트워크 구조" },
-    { id: 12, title: "알고리즘 설계" },
-    { id: 13, title: "선형대수학" },
+    { id: 5, title: "비판적사고와 논리" }
   ];
 
   const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
