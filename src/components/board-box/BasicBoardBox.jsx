@@ -20,12 +20,9 @@ const getBoardTitle = (boardType) => {
 };
 
 const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
-
-  console.log(`${isMarked}`)
   const { posts, currentPage, totalPages } = postsArr;
   const boardTitle = getBoardTitle(boardType);
 
-  // ✅ 로컬 즐겨찾기 상태
   const [marked, setMarked] = useState(isMarked);
 
   const handleToggleFavorite = async () => {
@@ -68,7 +65,7 @@ const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
           >
             <Star
               size={20}
-              fill={isMarked ? "#facc15" : "none"}
+              fill={marked ? "#facc15" : "none"}
               stroke="#f59e0b"
             />
           </button>
@@ -78,23 +75,27 @@ const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
       <div className="free-list">
         {posts.map((post) => (
           <div key={post.id} className="free-list-item">
-            <div className="free-list-content">
-              <Link
-                to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
-                className="free-link"
-              >
-                <div className="free-title-line">
-                  <div className="free-title-wrapper">
-                    <h3 className="free-title">{post.title}</h3>
+            <div className="free-list-content-with-thumbnail">
+              {post.imageUrls && (
+                <img src={post.imageUrls} alt="썸네일" className="free-thumbnail" />
+              )}
+              <div className="free-list-content">
+                <Link
+                  to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
+                  className="free-link"
+                >
+                  <div className="free-title-line">
+                    <div className="free-title-wrapper">
+                      <h3 className="free-title">{post.title}</h3>
+                    </div>
+                    <div className="free-author-date">
+                      {post.boardType === "SECRET" ? "익명" : post.writerNickname} | {post.createdDate?.slice(0, 10)}
+                    </div>
                   </div>
-                  <div className="free-author-date">
-                    {post.boardType === "SECRET" ? "익명" : post.writerNickname} |{" "}
-                    {post.createdDate?.slice(0, 10)}
-                  </div>
+                </Link>
+                <div className="free-meta-line">
+                  조회수 : {post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
                 </div>
-              </Link>
-              <div className="free-meta-line">
-                조회수 : {post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
               </div>
             </div>
           </div>
