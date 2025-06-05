@@ -56,6 +56,7 @@ const BoardPage = () => {
           <BasicBoardBox
             data={postData}
             onPageChange={(page) => handleSearch(boardType, page)}
+            boardType = {boardType}
           />
         );
       case "market":
@@ -63,6 +64,7 @@ const BoardPage = () => {
           <MarketBox
             data={postData}
             onPageChange={(page) => handleSearch(boardType, page)}
+            boardType = {boardType}
           />
         );
       case "popular":
@@ -88,9 +90,10 @@ const BoardPage = () => {
         <div className="content-container">
           <div className="navibar-container">
             <NaviBar currentBoard={boardType} />
-
             {/* ✅ 상세글 페이지일 때는 버튼 숨김 */}
-            {!isPostDetail && (
+            
+          </div>
+          {!isPostDetail && (
               boardType === "lecture" ? (
                 <button
                   className="write-button"
@@ -114,7 +117,6 @@ const BoardPage = () => {
                 </button>
               )
             )}
-          </div>
 
           <div className="board-container">
             {isPostDetail ? <PostDetail /> : renderBoard()}

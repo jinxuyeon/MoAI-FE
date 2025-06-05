@@ -1,13 +1,28 @@
 import { Link } from "react-router-dom";
 import "./BasicBoardBox.css";
 
-const BasicBoardBox = ({ data, onPageChange }) => {
+const getBoardTitle = (boardType) => {
+  switch (boardType.toLowerCase()) {
+    case "free":
+      return "자유 게시판";
+    case "notice_c":
+      return "학과 공지사항";
+    case "secret":
+      return "비밀 게시판";
+    case "review":
+      return "후기 게시판";
+    default:
+      return "게시판";
+  }
+};
+
+const BasicBoardBox = ({ data, onPageChange, boardType }) => {
   const { posts, currentPage, totalPages } = data;
 
   return (
     <div className="FreeBoardBox">
       <div className="free-header">
-        <h2 className="Free-title">게시판</h2>
+        <h2 className="Free-title">{getBoardTitle(boardType)}</h2>
       </div>
 
       <div className="free-list">

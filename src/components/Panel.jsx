@@ -14,21 +14,17 @@ const Panel = () => {
   if (isLoading || !user) return <div>로딩 중...</div>; // ✅ 로딩/로그인 체크 철저히
 
   const testhandle = async () => {
-  try {
-    const res = await axiosInstance.get("/api/post/summary-multiple");
+    try {
+      const response = await axiosInstance.get("/api/post/favorites");
 
-    console.log("✅ 게시판 요약 데이터:", res.data);
-    alert("게시판 요약 데이터를 성공적으로 가져왔습니다!");
-  } catch (err) {
-    console.error("❌ 게시판 요약 데이터 요청 실패:", err);
 
-    if (err.response?.data?.message) {
-      alert(`요약 데이터 요청 실패: ${err.response.data.message}`);
-    } else {
-      alert("요약 데이터 요청 중 오류가 발생했습니다.");
+      alert("조회 성공");
+    } catch (error) {
+      console.error("❌ 즐겨찾기 조회 실패:", error);
+      alert("조회 실패");
     }
-  }
-};
+  };
+
 
 
   return (
@@ -51,7 +47,7 @@ const Panel = () => {
       <Friends />
       <Calendar />
       {/* <input type="file" ref={fileInputRef} accept="image/*" /> */}
-      {/* <button onClick={testhandle}>테스트용 (S3 업로드)</button> */}
+      <button onClick={testhandle}>테스트용 (S3 업로드)</button>
     </div>
   );
 };
