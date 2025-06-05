@@ -42,9 +42,6 @@ const BasicBoard = ({ type, posts, title }) => {
           <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
             <h4 className="title">{title}</h4>
           </Link>
-          <button className="star-button" onClick={toggleFavorite} title="즐겨찾기 추가/제거">
-            <Star size={18} fill={isFavorited ? "#fcd34d" : "none"} stroke="#f59e0b" />
-          </button>
         </div>
       </div>
 
