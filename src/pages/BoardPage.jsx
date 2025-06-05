@@ -16,6 +16,7 @@ const BoardPage = () => {
   const location = useLocation();
   const isPostDetail = location.pathname.includes("/post/");
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [isMarked, setIsMarked] = useState(false)
 
   const [postData, setPostData] = useState({
     posts: [],
@@ -41,6 +42,7 @@ const BoardPage = () => {
         },
       });
       setPostData(res.data?.pageResponse);
+      setIsMarked(res.data.isMarked)
     } catch (err) {
       console.error("❌ 게시글 불러오기 실패:", err);
     }
@@ -54,9 +56,10 @@ const BoardPage = () => {
       case "review":
         return (
           <BasicBoardBox
-            data={postData}
+            postsArr={postData}
             onPageChange={(page) => handleSearch(boardType, page)}
             boardType = {boardType}
+            isMarked = {isMarked}
           />
         );
       case "market":
@@ -65,6 +68,7 @@ const BoardPage = () => {
             data={postData}
             onPageChange={(page) => handleSearch(boardType, page)}
             boardType = {boardType}
+            isMarked = {isMarked}
           />
         );
       case "popular":

@@ -1,8 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
-import axios from "axios";
-
+import axiosInstance from "../utils/AxiosInstance";
 import "./BasicBoardBox.css";
 
 const getBoardTitle = (boardType) => {
@@ -20,71 +19,44 @@ const getBoardTitle = (boardType) => {
   }
 };
 
-const BasicBoardBox = ({ data, onPageChange, boardType }) => {
-  const { posts, currentPage, totalPages } = data;
+const BasicBoardBox = ({ postsArr, onPageChange, boardType, isMarked }) => {
 
-  const [favorites, setFavorites] = useState([]);
-  const boardTitle = posts[0]?.boardTypeName || "게시판";
-  const boardType = posts[0]?.boardType || "unknown";
+  console.log(`${isMarked}`)
+  const { posts, currentPage, totalPages } = postsArr;
+  const boardTitle = getBoardTitle(boardType);
 
-  const matchedFavorite = favorites.find(f => f.boardName === boardTitle);
-  const isFavorited = Boolean(matchedFavorite);
+  // ✅ 로컬 즐겨찾기 상태
+  const [marked, setMarked] = useState(isMarked);
 
-  const fetchFavorites = async () => {
+  const handleToggleFavorite = async () => {
+    if (!posts.length) return;
+
+    const boardName = getBoardTitle(boardType);
     try {
-      const { data } = await axios.get("/api/favorites");
-      if (Array.isArray(data)) setFavorites(data);
+      if (isMarked) {
+        await axiosInstance.delete("/api/post/favorites", {
+          params: { boardType },
+        });
+        setMarked(false);
+      } else {
+        await axiosInstance.post("/api/post/favorites", {
+          boardType,
+          boardName,
+        });
+        setMarked(true);
+      }
     } catch (e) {
-      console.error("즐겨찾기 불러오기 실패", e);
+      console.error("❌ 즐겨찾기 토글 실패", e);
     }
   };
 
- const toggleFavorite = async () => {
-  try {
-    const boardName = posts[0]?.boardTypeName;
-    const boardType = posts[0]?.boardType;
-
-    if (!boardName || !boardType) return;
-
-    const existing = favorites.find(fav => fav.boardName === boardName);
-
-    if (existing) {
-      await axios.delete(`/api/favorites/${existing.id}`);
-    } else {
-      await axios.post("/api/post/favorite", {
-        boardName,
-        boardType
-      });
-    }
-
-    fetchFavorites();
-    window.dispatchEvent(new Event("favoritesUpdated"));
-  } catch (e) {
-    console.error("즐겨찾기 토글 실패", e);
-  }
-};
-
-
-  useEffect(() => {
-    fetchFavorites();
-  }, []);
-
   return (
     <div className="FreeBoardBox">
-      <div
-        className="free-header"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "10px",
-        }}
-      >
-        {/* 제목 + 즐겨찾기 */}
+      <div className="free-header">
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 className="Free-title">{boardTitle}</h2>
           <button
-            onClick={toggleFavorite}
+            onClick={handleToggleFavorite}
             style={{
               background: "none",
               border: "none",
@@ -94,7 +66,11 @@ const BasicBoardBox = ({ data, onPageChange, boardType }) => {
             }}
             title="즐겨찾기 추가/제거"
           >
-            <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
+            <Star
+              size={20}
+              fill={isMarked ? "#facc15" : "none"}
+              stroke="#f59e0b"
+            />
           </button>
         </div>
       </div>

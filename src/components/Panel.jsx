@@ -17,7 +17,6 @@ const Panel = () => {
     try {
       const response = await axiosInstance.get("/api/post/favorites");
 
-
       alert("조회 성공");
     } catch (error) {
       console.error("❌ 즐겨찾기 조회 실패:", error);
