@@ -19,7 +19,6 @@ const getBoardTitle = (boardType) => {
   }
 };
 
-
 const BasicBoardBox = ({ boardType }) => {
   const [postData, setPostData] = useState({
     posts: [],
@@ -54,7 +53,7 @@ const BasicBoardBox = ({ boardType }) => {
   };
 
   useEffect(() => {
-    fetchData(0); // boardType 바뀌면 첫 페이지부터
+    fetchData(0);
   }, [boardType]);
 
   const handlePageChange = (page) => {
@@ -63,7 +62,6 @@ const BasicBoardBox = ({ boardType }) => {
 
   const handleToggleFavorite = async () => {
     const boardName = getBoardTitle(boardType);
-
     try {
       if (marked) {
         await axiosInstance.delete("/api/post/favorites", {
@@ -108,34 +106,33 @@ const BasicBoardBox = ({ boardType }) => {
       </div>
 
       <div className="free-list">
-        {posts.map((post) => (
-          <div key={post.id} className="free-list-item">
-            <div className="free-list-content-with-thumbnail">
-              {post.imageUrls && (
-                <img src={post.imageUrls} alt="썸네일" className="free-thumbnail" />
-              )}
         {postData.posts.length === 0 ? (
           <p>게시글이 없습니다.</p>
         ) : (
           postData.posts.map((post) => (
             <div key={post.id} className="free-list-item">
-              <div className="free-list-content">
-                <Link
-                  to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
-                  className="free-link"
-                >
-                  <div className="free-title-line">
-                    <div className="free-title-wrapper">
-                      <h3 className="free-title">{post.title}</h3>
+              <div className="free-list-content-with-thumbnail">
+                {post.imageUrls && (
+                  <img src={post.imageUrls} alt="썸네일" className="free-thumbnail" />
+                )}
+                <div className="free-list-content">
+                  <Link
+                    to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
+                    className="free-link"
+                  >
+                    <div className="free-title-line">
+                      <div className="free-title-wrapper">
+                        <h3 className="free-title">{post.title}</h3>
+                      </div>
+                      <div className="free-author-date">
+                        {post.boardType === "SECRET" ? "익명" : post.writerNickname} |{" "}
+                        {post.createdDate?.slice(0, 10)}
+                      </div>
                     </div>
-                    <div className="free-author-date">
-                      {post.boardType === "SECRET" ? "익명" : post.writerNickname} | {post.createdDate?.slice(0, 10)}
-                      {post.createdDate?.slice(0, 10)}
-                    </div>
+                  </Link>
+                  <div className="free-meta-line">
+                    조회수 : {post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
                   </div>
-                </Link>
-                <div className="free-meta-line">
-                  조회수 : {post.viewCount} | ❤️ {post.likeCount} | 댓글 {post.commentCount}
                 </div>
               </div>
             </div>
@@ -145,7 +142,9 @@ const BasicBoardBox = ({ boardType }) => {
 
       <div className="pagination">
         {postData.currentPage > 0 && (
-          <button onClick={() => handlePageChange(postData.currentPage - 1)}>&lt; 이전</button>
+          <button onClick={() => handlePageChange(postData.currentPage - 1)}>
+            &lt; 이전
+          </button>
         )}
         {Array.from({ length: postData.totalPages }, (_, index) => (
           <button
@@ -157,7 +156,9 @@ const BasicBoardBox = ({ boardType }) => {
           </button>
         ))}
         {postData.currentPage < postData.totalPages - 1 && (
-          <button onClick={() => handlePageChange(postData.currentPage + 1)}>다음 &gt;</button>
+          <button onClick={() => handlePageChange(postData.currentPage + 1)}>
+            다음 &gt;
+          </button>
         )}
       </div>
     </div>
