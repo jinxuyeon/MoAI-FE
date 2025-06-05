@@ -76,3 +76,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.star-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.star-toggle-button svg {
+  transform: translateY(2px);
+}

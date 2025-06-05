@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
-import axios from "axios"; // axios 사용
+import axiosInstance from "./utils/AxiosInstance";
 import "./Favorites.css";
-
-const boardRoutes = {
-  "학과사무실에서 알려드립니다": "notice_c",
-  "자유게시판": "free",
-  "선배님 고민있어으예 ~": "free",
-  "비밀게시판": "secret",
-  "취업, 면접 후기": "review"
-};
 
 const Favorites = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +10,9 @@ const Favorites = () => {
 
   const fetchFavorites = async () => {
     try {
-      const { data } = await axios.get("/api/favorites");
-      if (Array.isArray(data)) {
-        setFavoriteBoards(data);
+      const { data } = await axiosInstance.get("/api/post/favorites");
+      if (Array.isArray(data.favorites)) {
+        setFavoriteBoards(data.favorites);
       } else {
         setFavoriteBoards([]);
       }
@@ -52,19 +44,18 @@ const Favorites = () => {
       {isOpen && (
         favoriteBoards.length > 0 ? (
           <ul className="Favorites-List">
-            {favoriteBoards.map((board, index) => {
-              const route = boardRoutes[board];
-              return route ? (
-                <li key={index} className="Favorites-Item">
+            {favoriteBoards.map((board) => (
+              board.boardType && (
+                <li key={board.id} className="Favorites-Item">
                   <Link
-                    to={`/main/community/${route}`}
+                    to={`/main/community/${board.boardType.toLowerCase()}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    {board}
+                    {board.boardName}
                   </Link>
                 </li>
-              ) : null;
-            })}
+              )
+            ))}
           </ul>
         ) : (
           <div style={{ marginTop: "10px", color: "#666", fontSize: "14px" }}>
