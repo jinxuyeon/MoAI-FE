@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
 import CommentBox from "./CommentBox";
@@ -12,6 +12,7 @@ const PostDetail = () => {
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -44,6 +45,8 @@ const PostDetail = () => {
     );
   };
 
+
+
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
 
@@ -69,6 +72,14 @@ const PostDetail = () => {
 
   return (
     <div className="post-detail-container">
+       <div style={{ marginTop: "0px", textAlign: "right" }}>
+        <button
+          onClick={() => navigate(`/main/community/${post.boardType.toLowerCase()}`)}
+          className="back-to-list-button"
+        >
+          나가기
+        </button>
+      </div>
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
 
@@ -79,6 +90,8 @@ const PostDetail = () => {
           />
         )}
       </div>
+
+
 
       <div className="post-meta">
         {post.boardType === "SECRET" ? (
