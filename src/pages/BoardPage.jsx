@@ -20,6 +20,7 @@ const BoardPage = () => {
     switch (boardType) {
       case "free":
       case "notice_c":
+      case "notice":
       case "secret":
       case "review":
         return <BasicBoardBox boardType={boardType} handleWriteClick = {handleWriteClick} />;

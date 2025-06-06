@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
 import CommentBox from "./CommentBox";
@@ -72,13 +72,8 @@ const PostDetail = () => {
 
   return (
     <div className="post-detail-container">
-       <div style={{ marginTop: "0px", textAlign: "right" }}>
-        <button
-          onClick={() => navigate(`/main/community/${post.boardType.toLowerCase()}`)}
-          className="back-to-list-button"
-        >
-          나가기
-        </button>
+      <div style={{ marginTop: "0px", textAlign: "right" }}>
+
       </div>
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
@@ -123,6 +118,16 @@ const PostDetail = () => {
         </button>
       </div>
 
+
+
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Link
+          to={`/main/community/${post.boardType.toLowerCase()}`}
+          className="back-to-list-button"
+        >
+          목록으로
+        </Link>
+      </div>
 
       <div className="comment-header-line">
         <span className="comment-header">💬 댓글 {comments.length}</span>

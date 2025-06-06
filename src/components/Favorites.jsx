@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import axiosInstance from "./utils/AxiosInstance";
 import "./Favorites.css";
+import { getBoardLabel } from "./utils/boardUtils";
 
 const Favorites = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [favoriteBoards, setFavoriteBoards] = useState([]);
-
   const fetchFavorites = async () => {
     try {
       const { data } = await axiosInstance.get("/api/post/favorites");
@@ -51,7 +51,7 @@ const Favorites = () => {
                     to={`/main/community/${board.boardType.toLowerCase()}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    {board.boardName}
+                    {getBoardLabel(board.boardType)}
                   </Link>
                 </li>
               )

@@ -3,21 +3,8 @@ import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import axiosInstance from "../utils/AxiosInstance";
 import "./BasicBoardBox.css";
+import { getBoardLabel } from "../utils/boardUtils";
 
-const getBoardTitle = (boardType) => {
-  switch (boardType.toLowerCase()) {
-    case "free":
-      return "자유 게시판";
-    case "notice_c":
-      return "학과 공지사항";
-    case "secret":
-      return "비밀 게시판";
-    case "review":
-      return "후기 게시판";
-    default:
-      return "게시판";
-  }
-};
 
 const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   const [postData, setPostData] = useState({
@@ -29,8 +16,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   });
   const [marked, setMarked] = useState(false);
 
-  const boardTitle = getBoardTitle(boardType);
-
+  const boardTitle = getBoardLabel(boardType);
   const fetchData = async (page = 0) => {
     try {
       const res = await axiosInstance.get("/api/post", {
@@ -61,7 +47,6 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   };
 
   const handleToggleFavorite = async () => {
-    const boardName = getBoardTitle(boardType);
     try {
       if (marked) {
         await axiosInstance.delete("/api/post/favorites", {
@@ -71,7 +56,6 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
       } else {
         await axiosInstance.post("/api/post/favorites", {
           boardType,
-          boardName,
         });
         setMarked(true);
       }

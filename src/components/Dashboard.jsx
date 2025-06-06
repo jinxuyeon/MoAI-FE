@@ -59,7 +59,7 @@ const Dashboard = () => {
 
               <section className="div-container">
                 <div className="half-board-area">
-                  <BasicBoard title="선배님 고민있어으예 ~" posts={postsSummary.Posts_free} type ={"FREE"} />
+                  <BasicBoard title="조교가 말한다" posts={postsSummary.Posts_notice} type ={"NOTICE"} />
                 </div>
                 <div className="half-board-area">
                   <BasicBoard title="취업, 면접 후기" posts={postsSummary.Posts_review} type ={"REVIEW"} />

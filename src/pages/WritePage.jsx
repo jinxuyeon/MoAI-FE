@@ -3,40 +3,34 @@ import Header from "../components/Header";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import axiosInstance from "../components/utils/AxiosInstance";
+import { getBoardLabel } from "../components/utils/boardUtils";
 
 import "./WritePage.css";
 import {
   FileImage,
   Paperclip,
   Link as LinkIcon,
-  Menu,
   AArrowUp,
   AArrowDown,
 } from "lucide-react";
 
+
 const WritePage = () => {
   const { boardType } = useParams();
+  const label = getBoardLabel(boardType);
   const navigate = useNavigate();
 
-  const [showSelect, setShowSelect] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState(null);
   const editorRef = useRef(null);
   const imageInputRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const boardList = [
-    { label: "공지사항", value: "NOTICE" },
-    { label: "책장터", value: "MARKET" },
-    { label: "자유게시판", value: "FREE" },
-    { label: "비밀게시판", value: "SECRET" },
-    { label: "강의게시판", value: "LECTURE" },
-    { label: "취업, 면접 게시판 ", value: "REVIEW" },
-  ];
-
   useEffect(() => {
     if (boardType) {
-      const matched = boardList.find((b) => b.value === boardType.toUpperCase());
-      if (matched) setSelectedBoard(matched);
+      setSelectedBoard({
+        value: boardType.toUpperCase(),
+        label: getBoardLabel(boardType),
+      });
     }
   }, [boardType]);
 
@@ -60,22 +54,17 @@ const WritePage = () => {
       });
       const { uploadUrl, fileUrl } = res.data;
 
-      const putRes = await axios.put(uploadUrl, file, {
+      await axios.put(uploadUrl, file, {
         headers: {
           "Content-Type": file.type,
-          "Authorization": undefined, // <- 명시적으로 제거
+          Authorization: undefined,
         },
       });
 
       const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 500px; width: 100%; height: auto; margin: 8px 0;" />`;
-
       insertHTML(imgTag);
     } catch (err) {
       console.error("❌ 이미지 업로드 실패:", err);
-      if (err.response) {
-        console.error("🔍 S3 응답 본문:", err.response.data);
-        console.error("🔍 S3 상태 코드:", err.response.status);
-      }
       alert("이미지 업로드 실패: 콘솔 로그를 확인하세요.");
     }
   };
@@ -99,6 +88,7 @@ const WritePage = () => {
       alert("게시판, 제목, 내용을 모두 입력해 주세요.");
       return;
     }
+
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = content;
     const firstImg = tempDiv.querySelector("img");
@@ -114,7 +104,7 @@ const WritePage = () => {
 
       if (res.status === 200 || res.status === 201) {
         alert("글이 등록되었습니다.");
-        navigate(`/board/${selectedBoard.value.toLowerCase()}`);
+        navigate(`/main/community/${selectedBoard.value.toLowerCase()}`);
       } else {
         alert("등록 실패. 다시 시도해주세요.");
       }
@@ -182,36 +172,9 @@ const WritePage = () => {
       <Header title="Community" />
       <div className="write-layout">
         <div className="write-main">
-          <h2 className="write-title">카페 글쓰기</h2>
+          <h2 className="write-title">[{selectedBoard?.label}] 게시글 작성</h2>
           <div className="write-section">
             <div className="write-box">
-              <div className="custom-dropdown">
-                <div
-                  className="custom-select-box"
-                  onClick={() => setShowSelect(!showSelect)}
-                >
-                  <span>
-                    {selectedBoard ? selectedBoard.label : "게시판을 선택해 주세요."}
-                  </span>
-                  <Menu size={18} />
-                </div>
-                {showSelect && (
-                  <div className="dropdown-menu">
-                    {boardList.map((board) => (
-                      <div
-                        key={board.value}
-                        className="dropdown-item"
-                        onClick={() => {
-                          setSelectedBoard(board);
-                          setShowSelect(false);
-                        }}
-                      >
-                        {board.label}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
               <input
                 type="text"
                 className="write-input"
