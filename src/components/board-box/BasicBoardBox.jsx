@@ -5,7 +5,7 @@ import axiosInstance from "../utils/AxiosInstance";
 import "./BasicBoardBox.css";
 import { getBoardLabel } from "../utils/boardUtils";
 import { UserContext } from "../utils/UserContext";
-
+import SearchBar from "../SearchBar";
 
 const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   const { user } = useContext(UserContext);
@@ -17,15 +17,19 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
     pageSize: 10,
   });
   const [marked, setMarked] = useState(false);
+  const [searchParams, setSearchParams] = useState({ filter: "title", query: "" });
 
   const boardTitle = getBoardLabel(boardType);
-  const fetchData = async (page = 0) => {
+
+  const fetchData = async (page = 0, filter = searchParams.filter, query = searchParams.query) => {
     try {
       const res = await axiosInstance.get("/api/post", {
         params: {
           boardType,
           page,
           size: postData.pageSize,
+          filter,
+          query,
         },
       });
 
@@ -66,10 +70,15 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
     }
   };
 
+  const handleSearch = ({ filter, query }) => {
+    setSearchParams({ filter, query });
+    fetchData(0, filter, query);
+  };
+
   const canWrite =
     !["NOTICE_C", "NOTICE"].includes(boardType.toUpperCase()) ||
     (user?.roles || []).includes("ADMIN");
-    
+
   return (
     <div className="FreeBoardBox">
       <div className="free-header">
@@ -86,15 +95,11 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
             }}
             title="즐겨찾기 추가/제거"
           >
-            <Star
-              size={20}
-              fill={marked ? "#facc15" : "none"}
-              stroke="#f59e0b"
-            />
+            <Star size={20} fill={marked ? "#facc15" : "none"} stroke="#f59e0b" />
           </button>
         </div>
       </div>
-      {/* 🔹 글쓰기 버튼은 조건부 렌더링 */}
+
       {canWrite && (
         <div>
           <button className="create-btn" onClick={handleWriteClick}>
@@ -102,6 +107,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
           </button>
         </div>
       )}
+
 
       <div className="free-list">
         {postData.posts.length === 0 ? (
@@ -112,8 +118,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
               <div className="free-list-content-with-thumbnail">
                 {post.imageUrls && (
                   <img
-                    src={post.
-                      thumbNailUrl}
+                    src={post.thumbNailUrl}
                     alt="썸네일"
                     className="free-thumbnail"
                     loading="lazy"
@@ -143,12 +148,11 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
           ))
         )}
       </div>
+      <SearchBar onSearch={handleSearch} />
 
       <div className="pagination">
         {postData.currentPage > 0 && (
-          <button onClick={() => handlePageChange(postData.currentPage - 1)}>
-            &lt; 이전
-          </button>
+          <button onClick={() => handlePageChange(postData.currentPage - 1)}>&lt; 이전</button>
         )}
         {Array.from({ length: postData.totalPages }, (_, index) => (
           <button
@@ -160,9 +164,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
           </button>
         ))}
         {postData.currentPage < postData.totalPages - 1 && (
-          <button onClick={() => handlePageChange(postData.currentPage + 1)}>
-            다음 &gt;
-          </button>
+          <button onClick={() => handlePageChange(postData.currentPage + 1)}>다음 &gt;</button>
         )}
       </div>
     </div>

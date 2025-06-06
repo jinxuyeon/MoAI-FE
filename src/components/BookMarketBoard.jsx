@@ -49,9 +49,7 @@ const BookMarketBoard = ({ type, title, posts }) => {
                 <div key={currentPost.id} className="book-post">
                     <img
                         src={
-                            currentPost.
-                                thumbNailUrl ||
-                            "https://via.placeholder.com/200x250?text=No+Image"
+                            currentPost.thumbNailUrl || "/icons/no-img-text.png"
                         }
                         alt="책 이미지"
                         width={200}

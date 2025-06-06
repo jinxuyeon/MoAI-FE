@@ -1,9 +1,7 @@
 import "./BasicBoard.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Star } from "lucide-react";
 import axios from "axios";
-
 const BasicBoard = ({ type, posts, title }) => {
   const [favorites, setFavorites] = useState([]);
   const isFavorited = favorites.includes(title);
@@ -20,20 +18,6 @@ const BasicBoard = ({ type, posts, title }) => {
   useEffect(() => {
     fetchFavorites();
   }, []);
-
-  const toggleFavorite = async () => {
-    try {
-      if (isFavorited) {
-        await axios.delete("/api/favorites", { data: { boardName: title } });
-      } else {
-        await axios.post("/api/favorites", { boardName: title });
-      }
-      fetchFavorites(); // 상태 최신화
-      window.dispatchEvent(new Event("favoritesUpdated")); // 다른 컴포넌트 갱신
-    } catch (e) {
-      console.error("즐겨찾기 토글 실패", e);
-    }
-  };
 
   return (
     <section className="BasicBoard">
@@ -56,7 +40,8 @@ const BasicBoard = ({ type, posts, title }) => {
             </Link>
             <div className="meta">
               <p className="meta-content">
-                {post.writerNickname} | {post.createdDate?.slice(0, 10)}
+                {post.writerNickname} | {post.createdDate?.slice(0, 10)} | 댓글:{post.commentCount}
+                
               </p>
             </div>
           </div>

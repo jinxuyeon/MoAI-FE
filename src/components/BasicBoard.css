@@ -28,6 +28,7 @@
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid #f0f0f0;
+  gap: 5px;
 }
 
 .basic-post-item:last-child {
