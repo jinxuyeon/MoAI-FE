@@ -39,10 +39,11 @@ const Dashboard = () => {
               <h3>From the Office</h3>
             </div>
             <section className="inner-container">
-              <BasicBoard title="학과사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
+              <BasicBoard title="학과 사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
             </section>
           </div>
 
+         
           <div>
             <div className="title-container">
               <h3>Join the Conversation</h3>

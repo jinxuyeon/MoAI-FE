@@ -82,16 +82,16 @@ const Friends = () => {
                     />
                 ) : null}
             </div>
-            
+
             {isOpen && (
                 <ul className="Friends-List">
                     {myFriendList.length > 0 ? (
                         myFriendList.map((friend, index) => (
                             <li key={index} className="Friends-Item">
                                 <ProfileTemplate
-                                profileImageUrl={friend.profileImageUrl}
-                                name =  {friend.name}
-                                id = {friend.id}
+                                    profileImageUrl={friend.profileThumbnails}
+                                    name={friend.nickName}
+                                    id={friend.id}
                                 />
                             </li>
                         ))

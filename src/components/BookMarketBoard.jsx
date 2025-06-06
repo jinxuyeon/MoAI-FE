@@ -13,7 +13,6 @@ const BookMarketBoard = ({ type, title, posts }) => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setFade(false);
-
             setTimeout(() => {
                 setCurrentIndex((prevIndex) =>
                     posts.length > 0 ? (prevIndex + 1) % posts.length : 0
@@ -38,31 +37,29 @@ const BookMarketBoard = ({ type, title, posts }) => {
 
     return (
         <section className="BookMarketBoard">
-
             <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
                 <h4 className="title">{title}</h4>
             </Link>
-            <div
-                className={`info-container single ${fade ? "fade-in" : "fade-out"
-                    }`}
-            >
+
+            <div className={`info-container single ${fade ? "fade-in" : "fade-out"}`}>
                 <div key={currentPost.id} className="book-post">
                     <img
-                        src={
-                            currentPost.thumbNailUrl || "/icons/no-img-text.png"
-                        }
+                        src={currentPost.thumbNailUrl || "/icons/no-img-text.png"}
                         alt="책 이미지"
-                        width={200}
-                        height={250}
+                        style={{ width: 200, height: 250, objectFit: "cover", borderRadius: 8 }}
                     />
                     <div className="post-info">
                         <h4>{currentPost.title}</h4>
-                        <p className="price">
-                            {formatPrice(currentPost.price)}
-                        </p>
+                        <p className="price">{formatPrice(currentPost.price)}</p>
+                        <div className="meta-info">
+                            <span className="writer">{currentPost.writerNickname}</span>
+                            <span className="date">{currentPost.createdDate?.slice(0, 10)}</span>
+                            <span className="comments">댓글: {currentPost.commentCount}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div className="nav-button-group">
                 <button
                     className="mini-button"
@@ -70,8 +67,7 @@ const BookMarketBoard = ({ type, title, posts }) => {
                         setFade(false);
                         setTimeout(() => {
                             setCurrentIndex(
-                                (prev) =>
-                                    (prev - 1 + posts.length) % posts.length
+                                (prev) => (prev - 1 + posts.length) % posts.length
                             );
                             setFade(true);
                         }, 300);
@@ -85,9 +81,7 @@ const BookMarketBoard = ({ type, title, posts }) => {
                     onClick={() => {
                         setFade(false);
                         setTimeout(() => {
-                            setCurrentIndex(
-                                (prev) => (prev + 1) % posts.length
-                            );
+                            setCurrentIndex((prev) => (prev + 1) % posts.length);
                             setFade(true);
                         }, 300);
                     }}

@@ -18,6 +18,13 @@
     padding-bottom: 5px;
 }
 
+.BookMarketBoard .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+}
 
 .info-container.single {
     display: flex;
@@ -46,6 +53,50 @@
     align-items: center;
 }
 
+.post-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 100%;
+}
+
+.post-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.price {
+    font-weight: bold;
+    color: #2a9d8f;
+    font-size: 0.95rem;
+}
+
+.meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 6px;
+}
+
+.meta-info .writer {
+    font-weight: bold;
+}
+
+.meta-info .date {
+    color: #888;
+}
+
+.meta-info .comment {
+    color: #999;
+}
+
 .nav-button-group {
     align-content: center;
     display: flex;
@@ -70,7 +121,9 @@
     transform: scale(1.1);
 }
 
-.BookMarketBoard img{
+.BookMarketBoard img {
     border-radius: 8px;
-
+    max-width: 200px;
+    height: auto;
+    object-fit: cover;
 }

@@ -40,17 +40,16 @@ const MarketUploadModal = ({ onClose }) => {
         }
     };
     const handleSubmit = async () => {
-        if (!title || !price || !description || !imgUrl) {
+        if (!title || !price || !description) { // ✅ 이미지 제외
             alert("모든 항목을 입력하세요.");
             return;
         }
-
         try {
             const res = await axiosInstance.post("/api/post/post-up", {
                 boardType: "MARKET",
                 title,
                 content: `<p>${description}</p>`.trim(),  // ✅ 가격은 content에서 제거
-                imageUrls: imgUrl,
+                imageUrls: imgUrl ?? null, 
                 price: Number(price),                    // ✅ price 필드에 따로 전달
             });
 

@@ -49,12 +49,13 @@ const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
                     chatRooms.map((room, idx) => (
                         <div key={idx} className="room-button-container">
                             <button className="room-button" onClick={() => handleFriendSelect(room)}>
+                                
                                 <img
-                                    src={room.partner.profileImageUrl || "/default-profile.png"}
+                                    src={room.partner.profileThumbnails || "/default-profile.png"}
                                     alt="프로필"
                                     className="profile-img"
                                 />
-                                {room.partner.name}
+                                {room.partner.nickName}
                                 {room.newMailCount > 0 && (
                                     <span className="new-mail-count">{room.newMailCount}</span>
                                 )}

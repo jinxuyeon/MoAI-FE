@@ -41,7 +41,6 @@ const BasicBoard = ({ type, posts, title }) => {
             <div className="meta">
               <p className="meta-content">
                 {post.writerNickname} | {post.createdDate?.slice(0, 10)} | 댓글:{post.commentCount}
-                
               </p>
             </div>
           </div>
