@@ -1,8 +1,9 @@
 import ProfileTemplate from "../ProfileTemplate";
 import "./CommentBox.css";
 import MenuButton from "./MenuButton";
+import axiosInstance from "../utils/AxiosInstance";
 
-const CommentBox = ({ comment, handleCommentLike, boardType }) => {
+const CommentBox = ({ comment, handleCommentLike, boardType, onDeleteSuccess }) => {
   const formattedDate = new Date(comment.createdDate).toLocaleString("ko-KR", {
     year: "numeric",
     month: "2-digit",
@@ -11,6 +12,21 @@ const CommentBox = ({ comment, handleCommentLike, boardType }) => {
     minute: "2-digit",
     hour12: false,
   });
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm("정말로 이 댓글을 삭제하시겠습니까?");
+    if (!confirmed) return;
+
+    try {
+      await axiosInstance.delete(`/api/comment/${comment.id}`);
+      if (onDeleteSuccess) {
+        onDeleteSuccess(comment.id); // 상위 컴포넌트에서 댓글 리스트 갱신
+      }
+    } catch (error) {
+      console.error("❌ 댓글 삭제 실패:", error);
+      alert("댓글 삭제 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <div className={`CommentBox ${comment.isAuthor ? "my-comment" : ""}`}>
@@ -33,7 +49,7 @@ const CommentBox = ({ comment, handleCommentLike, boardType }) => {
           {comment.isAuthor && (
             <MenuButton
               onEdit={() => console.log("✏️ 수정")}
-              onDelete={() => console.log("🗑️ 삭제")}
+              onDelete={handleDelete}
             />
           )}
         </div>

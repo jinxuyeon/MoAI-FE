@@ -45,6 +45,19 @@ const PostDetail = () => {
     );
   };
 
+  const handlePostDelete = async () => {
+    const confirmed = window.confirm("정말로 이 게시글을 삭제하시겠습니까?");
+    if (!confirmed) return;
+
+    try {
+      await axiosInstance.delete(`/api/post/${postId}`);
+      navigate(`/main/community/${post.boardType.toLowerCase()}`);
+    } catch (err) {
+      console.error("❌ 게시글 삭제 실패:", err);
+      alert("게시글 삭제 중 오류가 발생했습니다.");
+    }
+  };
+
 
 
   const handleCommentSubmit = async () => {
@@ -81,7 +94,7 @@ const PostDetail = () => {
         {post.isAuthor && (
           <MenuButton
             onEdit={() => console.log("✏️ 수정")}
-            onDelete={() => console.log("🗑️ 삭제")}
+            onDelete={handlePostDelete}
           />
         )}
       </div>
@@ -152,7 +165,14 @@ const PostDetail = () => {
       <ul className="comment-list">
         {comments.map((c) => (
           <li key={c.id} className="comment-item">
-            <CommentBox comment={c} handleCommentLike={handleCommentLike} boardType={post.boardType} />
+            <CommentBox
+              comment={c}
+              handleCommentLike={handleCommentLike}
+              boardType={post.boardType}
+              onDeleteSuccess={(deletedId) => {
+                setComments((prev) => prev.filter((comment) => comment.id !== deletedId));
+              }}
+            />
           </li>
         ))}
       </ul>

@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { EllipsisVertical } from "lucide-react";
-import "./MenuButton.css"; // 스타일은 따로 관리
+import "./MenuButton.css";
 
 const MenuButton = ({ onEdit, onDelete }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef(null);
+
+  // 외부 클릭 감지
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    // cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
 
   return (
-    <div className="menu-button-container">
+    <div className="menu-button-container" ref={menuRef}>
       <button
         className="menu-button-icon"
-        onClick={() => setShowMenu(prev => !prev)}
+        onClick={() => setShowMenu((prev) => !prev)}
       >
-        <EllipsisVertical size={17} color="grey"/>
+        <EllipsisVertical size={17} color="grey" />
       </button>
 
       {showMenu && (
