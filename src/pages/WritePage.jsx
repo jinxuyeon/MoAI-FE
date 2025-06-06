@@ -31,7 +31,6 @@ const WritePage = () => {
     { label: "비밀게시판", value: "SECRET" },
     { label: "강의게시판", value: "LECTURE" },
     { label: "취업, 면접 게시판 ", value: "REVIEW" },
-
   ];
 
   useEffect(() => {
@@ -57,24 +56,33 @@ const WritePage = () => {
 
     try {
       const res = await axiosInstance.get("/api/aws/S3/presign", {
-        params: { filename: file.name },
+        params: { filename: file.name, contentType: file.type },
       });
       const { uploadUrl, fileUrl } = res.data;
-      await axios.put(uploadUrl, file, {
-        headers: { "Content-Type": file.type },
+
+      const putRes = await axios.put(uploadUrl, file, {
+        headers: {
+          "Content-Type": file.type,
+          "Authorization": undefined, // <- 명시적으로 제거
+        },
       });
 
-      const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 100%; margin: 8px 0;" />`;
+      const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 500px; width: 100%; height: auto; margin: 8px 0;" />`;
+
       insertHTML(imgTag);
     } catch (err) {
-      alert("이미지 업로드 실패");
+      console.error("❌ 이미지 업로드 실패:", err);
+      if (err.response) {
+        console.error("🔍 S3 응답 본문:", err.response.data);
+        console.error("🔍 S3 상태 코드:", err.response.status);
+      }
+      alert("이미지 업로드 실패: 콘솔 로그를 확인하세요.");
     }
   };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     const fileTag = `<a href="#" style="color: #3498db;">📎 ${file.name}</a>`;
     insertHTML(fileTag);
   };
@@ -101,7 +109,7 @@ const WritePage = () => {
         boardType: selectedBoard.value,
         title,
         content,
-        imageUrls, 
+        imageUrls,
       });
 
       if (res.status === 200 || res.status === 201) {
@@ -118,10 +126,7 @@ const WritePage = () => {
   const changeFontSize = (delta) => {
     const selection = window.getSelection();
     if (!selection.rangeCount || selection.isCollapsed) return;
-
     const range = selection.getRangeAt(0);
-
-    // 이미 span으로 감싸져 있으면 그것 사용, 아니면 새로 감쌈
     let wrapper;
     if (
       range.startContainer.parentNode === range.endContainer.parentNode &&
@@ -133,18 +138,14 @@ const WritePage = () => {
       try {
         range.surroundContents(wrapper);
       } catch (e) {
-        // surroundContents 실패 시(겹친 태그 있을 때) fallback
         const span = document.createElement("span");
         span.appendChild(range.extractContents());
         range.insertNode(span);
         wrapper = span;
       }
     }
-
     const currentSize = parseFloat(window.getComputedStyle(wrapper).fontSize) || 16;
     wrapper.style.fontSize = `${Math.max(1, currentSize + delta)}px`;
-
-    // 선택 영역 유지
     const newRange = document.createRange();
     newRange.selectNodeContents(wrapper);
     selection.removeAllRanges();
@@ -182,7 +183,6 @@ const WritePage = () => {
       <div className="write-layout">
         <div className="write-main">
           <h2 className="write-title">카페 글쓰기</h2>
-
           <div className="write-section">
             <div className="write-box">
               <div className="custom-dropdown">
@@ -195,7 +195,6 @@ const WritePage = () => {
                   </span>
                   <Menu size={18} />
                 </div>
-
                 {showSelect && (
                   <div className="dropdown-menu">
                     {boardList.map((board) => (
@@ -213,93 +212,43 @@ const WritePage = () => {
                   </div>
                 )}
               </div>
-
               <input
                 type="text"
                 className="write-input"
                 placeholder="제목을 입력해 주세요."
               />
             </div>
-
             <div className="editor-box flat">
               <div className="toolbar-row flat">
-                <button
-                  title="사진"
-                  className="toolbar-button"
-                  onClick={() => imageInputRef.current.click()}
-                >
+                <button title="사진" className="toolbar-button" onClick={() => imageInputRef.current.click()}>
                   <FileImage size={24} />
                   <span className="toolbar-label">사진</span>
                 </button>
-
-                <button
-                  title="파일"
-                  className="toolbar-button"
-                  onClick={() => fileInputRef.current.click()}
-                >
+                <button title="파일" className="toolbar-button" onClick={() => fileInputRef.current.click()}>
                   <Paperclip size={24} />
                   <span className="toolbar-label">파일</span>
                 </button>
-
-                <button
-                  title="링크"
-                  className="toolbar-button"
-                  onClick={applyLink}
-                >
+                <button title="링크" className="toolbar-button" onClick={applyLink}>
                   <LinkIcon size={24} />
                   <span className="toolbar-label">링크</span>
                 </button>
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={imageInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleImageUpload}
-                />
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleFileUpload}
-                />
+                <input type="file" accept="image/*" ref={imageInputRef} style={{ display: "none" }} onChange={handleImageUpload} />
+                <input type="file" ref={fileInputRef} style={{ display: "none" }} onChange={handleFileUpload} />
               </div>
-
               <hr className="divider" />
-
               <div className="toolbar-row flat">
-                <button title="굵게" onClick={() => applyStyle("bold")}>
-                  <b>B</b>
-                </button>
-                <button title="기울임" onClick={() => applyStyle("italic")}>
-                  <i>I</i>
-                </button>
-                <button title="밑줄" onClick={() => applyStyle("underline")}>
-                  <u>U</u>
-                </button>
-                <button title="글자 키우기" onClick={increaseFontSize}>
-                  <AArrowUp size={20} />
-                </button>
-                <button title="글자 줄이기" onClick={decreaseFontSize}>
-                  <AArrowDown size={20} />
-                </button>
+                <button title="굵게" onClick={() => applyStyle("bold")}><b>B</b></button>
+                <button title="기울임" onClick={() => applyStyle("italic")}><i>I</i></button>
+                <button title="밑줄" onClick={() => applyStyle("underline")}><u>U</u></button>
+                <button title="글자 키우기" onClick={increaseFontSize}><AArrowUp size={20} /></button>
+                <button title="글자 줄이기" onClick={decreaseFontSize}><AArrowDown size={20} /></button>
               </div>
-
               <hr className="divider" />
-
-              <div
-                ref={editorRef}
-                className="write-textarea editable"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-              ></div>
+              <div ref={editorRef} className="write-textarea editable" contentEditable={true} suppressContentEditableWarning={true}></div>
             </div>
           </div>
-
           <div className="write-actions">
-            <button className="submit-post" onClick={handleSubmit}>
-              등록
-            </button>
+            <button className="submit-post" onClick={handleSubmit}>등록</button>
           </div>
         </div>
       </div>

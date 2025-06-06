@@ -37,7 +37,8 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
                     <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <img
-                                src={userInfo.profileImageUrl || "/default-profile.png"}
+                                src={userInfo.
+                                    profileThumbnails || "/default-profile.png"}
                                 alt="프로필"
                                 className="modal-profile-img"
                             />

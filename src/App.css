@@ -26,6 +26,10 @@
     /*기본 폰트사이즈*/
 }
 
+.body-container{
+    min-height: 100vh;
+}
+
 
 .footer{
     width: 100%;

@@ -16,7 +16,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    
+     image-rendering: auto; /* 브라우저가 최적화 렌더링 결정 */
   }
   
   /* 이미지 없을 경우 */

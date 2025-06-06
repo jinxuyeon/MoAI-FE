@@ -100,7 +100,7 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
             <div key={post.id} className="market-item">
               <Link to={`/main/community/market/post/${post.id}`}>
                 <img
-                  src={post.imageUrls || "https://placehold.co/200x200?text=No+Image"}
+                  src={post.thumbNailUrl || "https://placehold.co/200x200?text=No+Image"}
                   alt="썸네일"
                   className="market-thumbnail"
                 />

@@ -12,17 +12,17 @@ import Footer from "./components/Footer";
 import MailPage from "./pages/MailPage.jsx";
 import { UserProvider } from "./components/utils/UserContext.jsx";
 import NoticeWrite from "./components/board-box/NoticeWrite";
-
 import WritePage from "./pages/WritePage";
 import LectureBoardPage from "./pages/LectureBoardPage";
 import LectureWritePage from "./pages/LectureWritePage";
 import AdminPage from "./pages/AdminPage.jsx";
-
+import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthChecked, setIsAuthChecked] = useState(false); // 추가
     const navigate = useNavigate();
-    const location = useLocation(); // 현재 URL 경로 가져오기
+    const location = useLocation();
 
     const isTokenExpired = (token) => {
         try {
@@ -36,21 +36,22 @@ function App() {
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
-
         if (token && !isTokenExpired(token)) {
             setIsAuthenticated(true);
-            console.log("인증완료");
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         } else {
             setIsAuthenticated(false);
-            console.log("인증실패");
             localStorage.removeItem("accessToken");
             delete axios.defaults.headers.common["Authorization"];
         }
+        setIsAuthChecked(true); // 인증 체크 완료
     }, []);
 
-    // 현재 페이지가 로그인 또는 회원가입 페이지인지 확인
     const hideFooterRoutes = ["/login", "/login/register", "/chat-mail", "/mypage"];
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
+
+    // 인증 상태 확인 전이면 아무것도 렌더링하지 않음
+    if (!isAuthChecked) return null;
 
     return (
         <UserProvider>
@@ -64,18 +65,52 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
                     <Route path="/login/register" element={<RegisterPage />} />
-                    <Route path="/main/community/:boardType" element={isAuthenticated ? <BoardPage /> : <BoardPage />} />
-                    <Route path="/main" element={isAuthenticated ? <MainPage /> : <MainPage />} />
-                    <Route path="/mypage" element={isAuthenticated ? <MyPage /> : <MyPage />} />
-                    <Route path="/chat-mail" element={isAuthenticated ? <MailPage /> : <MailPage />} />
-                    <Route path="/main/notice/write" element={<NoticeWrite />} />
-                    <Route path="/board/:boardType" element={<BoardPage />} />
-                    <Route path="/main/lecture/:lectureId" element={<LectureBoardPage />} />
-                    <Route path="/write/:boardType" element={<WritePage />} />
-                    <Route path="/main/lecture/:lectureId/write" element={<LectureWritePage />} />
-                    <Route path="/admin" element={<AdminPage />} />
-                    <Route path="/main/community/:boardType/post/:postId" element={<BoardPage />} />
 
+                    {/* 인증이 필요한 경로들 */}
+                    <Route
+                        path="/main"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MainPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/mypage"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MyPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/chat-mail"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MailPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/main/notice/write"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><NoticeWrite /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/main/community/:boardType"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/main/community/:boardType/post/:postId"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/main/lecture/:lectureId"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><LectureBoardPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/main/lecture/:lectureId/write"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><LectureWritePage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/write/:boardType"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><WritePage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/admin"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><AdminPage /></PrivateRoute>}
+                    />
+                    <Route
+                        path="/board/:boardType"
+                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                    />
                 </Routes>
             </div>
             {shouldShowFooter && <Footer />}

@@ -40,14 +40,14 @@ const BookMarketBoard = ({ type, title, posts }) => {
         <section className="BookMarketBoard">
             <h3>{title}</h3>
             <div
-                className={`info-container single ${
-                    fade ? "fade-in" : "fade-out"
-                }`}
+                className={`info-container single ${fade ? "fade-in" : "fade-out"
+                    }`}
             >
                 <div key={currentPost.id} className="book-post">
                     <img
                         src={
-                            currentPost.imageUrls ||
+                            currentPost.
+                                thumbNailUrl ||
                             "https://via.placeholder.com/200x250?text=No+Image"
                         }
                         alt="책 이미지"
