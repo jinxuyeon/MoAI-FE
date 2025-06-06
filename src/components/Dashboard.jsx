@@ -39,7 +39,7 @@ const Dashboard = () => {
               <h3>From the Office</h3>
             </div>
             <section className="inner-container">
-              <BasicBoard title="학과사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type ={"NOTICE_C"}/>
+              <BasicBoard title="학과사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
             </section>
           </div>
 
@@ -50,19 +50,19 @@ const Dashboard = () => {
             <section className="inner-container">
               <section className="div-container">
                 <div className="half-board-area">
-                  <BasicBoard title="자유게시판" posts={postsSummary.Posts_free} type ={"FREE"}/>
+                  <BasicBoard title="조교가 말한다" posts={postsSummary.Posts_notice} type={"NOTICE"} />
                 </div>
                 <div className="half-board-area">
-                  <BasicBoard title="비밀게시판" posts={postsSummary.Posts_secret} type ={"SECRET"}/>
+                  <BasicBoard title="비밀게시판" posts={postsSummary.Posts_secret} type={"SECRET"} />
                 </div>
               </section>
 
               <section className="div-container">
                 <div className="half-board-area">
-                  <BasicBoard title="조교가 말한다" posts={postsSummary.Posts_notice} type ={"NOTICE"} />
+                  <BasicBoard title="자유게시판" posts={postsSummary.Posts_free} type={"FREE"} />
                 </div>
                 <div className="half-board-area">
-                  <BasicBoard title="취업, 면접 후기" posts={postsSummary.Posts_review} type ={"REVIEW"} />
+                  <BasicBoard title="취업, 면접 후기" posts={postsSummary.Posts_review} type={"REVIEW"} />
                 </div>
               </section>
             </section>
@@ -77,7 +77,7 @@ const Dashboard = () => {
               <h3>Find the items you need</h3>
             </div>
             <div className="inner-container">
-              <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type ={"MARKET"}  />
+              <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type={"MARKET"} />
             </div>
           </div>
         </div>
