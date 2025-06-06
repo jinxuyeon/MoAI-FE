@@ -45,7 +45,8 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   };
 
   useEffect(() => {
-    fetchData(0);
+    setSearchParams({ filter: "title", query: "" }); // 🔹 검색 조건 초기화
+    fetchData(0, "title", ""); // 🔹 초기 게시글 로딩 (전체 목록)
   }, [boardType]);
 
   const handlePageChange = (page) => {
@@ -151,22 +152,61 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
       <SearchBar onSearch={handleSearch} />
 
       <div className="pagination">
+        {/* << 처음 */}
+        {postData.currentPage > 2 && (
+          <button onClick={() => handlePageChange(0)}>&laquo; 처음</button>
+        )}
+
+        {/* < 이전 */}
         {postData.currentPage > 0 && (
           <button onClick={() => handlePageChange(postData.currentPage - 1)}>&lt; 이전</button>
         )}
-        {Array.from({ length: postData.totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index)}
-            className={postData.currentPage === index ? "active-page" : ""}
-          >
-            {index + 1}
-          </button>
-        ))}
+
+        {/* 페이지 번호들 */}
+        {(() => {
+          const totalPages = postData.totalPages;
+          const currentPage = postData.currentPage;
+          const pageButtons = [];
+
+          const startPage = Math.max(0, currentPage - 2);
+          const endPage = Math.min(totalPages - 1, currentPage + 2);
+
+          // ... 앞 생략
+          if (startPage > 0) {
+            pageButtons.push(<span key="start-ellipsis">...</span>);
+          }
+
+          for (let i = startPage; i <= endPage; i++) {
+            pageButtons.push(
+              <button
+                key={i}
+                onClick={() => handlePageChange(i)}
+                className={i === currentPage ? "active-page" : ""}
+              >
+                {i + 1}
+              </button>
+            );
+          }
+
+          // ... 뒤 생략
+          if (endPage < totalPages - 1) {
+            pageButtons.push(<span key="end-ellipsis">...</span>);
+          }
+
+          return pageButtons;
+        })()}
+
+        {/* 다음 > */}
         {postData.currentPage < postData.totalPages - 1 && (
           <button onClick={() => handlePageChange(postData.currentPage + 1)}>다음 &gt;</button>
         )}
+
+        {/* >> 마지막 */}
+        {postData.currentPage < postData.totalPages - 3 && (
+          <button onClick={() => handlePageChange(postData.totalPages - 1)}>&raquo; 마지막</button>
+        )}
       </div>
+
     </div>
   );
 };
