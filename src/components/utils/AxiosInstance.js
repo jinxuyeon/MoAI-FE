@@ -2,8 +2,8 @@ import axios from "axios";
 import refreshAccessToken from "./refreshAccessToken";
 
 const axiosInstance = axios.create({
-    //baseURL: "http://localhost:8080", // API 기본 URL
-    baseURL: "http://58.238.182.100:9000", // API 기본 URL
+    baseURL: "http://localhost:8080", // API 기본 URL
+    //baseURL: "http://58.238.182.100:9000", // API 기본 URL
     headers: {
         "Content-Type": "application/json",
     },
@@ -32,6 +32,7 @@ axiosInstance.interceptors.response.use(
                 return axiosInstance.request(error.config);
             } catch (refreshError) {
                 console.error("리프레시 토큰 만료 또는 실패", refreshError);
+                window.location.href = "/login";
                 return Promise.reject(refreshError); // 에러를 상위로 던져서 호출한 곳에서 처리하도록 합니다.
             }
         }

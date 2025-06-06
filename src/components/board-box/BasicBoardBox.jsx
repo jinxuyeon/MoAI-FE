@@ -19,7 +19,7 @@ const getBoardTitle = (boardType) => {
   }
 };
 
-const BasicBoardBox = ({ boardType }) => {
+const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   const [postData, setPostData] = useState({
     posts: [],
     totalCount: 0,
@@ -84,7 +84,7 @@ const BasicBoardBox = ({ boardType }) => {
     <div className="FreeBoardBox">
       <div className="free-header">
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h2 className="Free-title">{boardTitle}</h2>
+          <h1 className="Free-title">{boardTitle}</h1>
           <button
             onClick={handleToggleFavorite}
             style={{
@@ -103,6 +103,9 @@ const BasicBoardBox = ({ boardType }) => {
             />
           </button>
         </div>
+      </div>
+      <div>
+        <button className="create-btn" onClick={handleWriteClick}>글쓰기</button>
       </div>
 
       <div className="free-list">

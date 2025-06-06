@@ -1,5 +1,7 @@
 .MarketBox {
     /* 필요시 padding 추가 */
+    display: flex;
+    flex-direction: column;
 }
 
 /* 헤더 영역 */
@@ -10,9 +12,6 @@
     margin-bottom: 20px;
 }
 
-.market-title {
-    font-size: 24px;
-}
 
 /* 그리드 레이아웃 */
 .market-grid {
@@ -89,4 +88,16 @@
 
 .star-toggle-button svg {
   transform: translateY(2px);
+}
+
+
+.MarketBox .create-btn {
+  background-color: #3399ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 16px;
 }

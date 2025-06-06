@@ -46,39 +46,41 @@ const MyPage = () => {
             alert("자기소개 저장에 실패했습니다.");
         }
     };
+const handleImageSelect = async (file) => {
+    const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
 
-    const handleImageSelect = async (file) => {
-        try {
-            if (!file) {
-                const res = await axiosInstance.delete(
-                    "/api/member/delete-profile-image"
-                );
-                const updatedImageUrl = res.data.imageUrl;
-                setUser((prev) => ({
-                    ...prev,
-                    profileImageUrl: updatedImageUrl,
-                }));
-                alert("프로필 이미지가 삭제되었습니다!");
-                return;
-            }
-            const formData = new FormData();
-            formData.append("profileImage", file);
-            const res = await axiosInstance.post(
-                "/api/member/set-profile-image",
-                formData,
-                {
-                    headers: { "Content-Type": "multipart/form-data" },
-                }
-            );
+    try {
+        if (!file) {
+            const res = await axiosInstance.delete("/api/member/delete-profile-image");
             const updatedImageUrl = res.data.imageUrl;
-            setUser((prev) => ({ ...prev, profileImageUrl: updatedImageUrl }));
-            alert("프로필 이미지가 저장되었습니다!");
-        } catch (err) {
-            console.error("프로필 이미지 업로드 실패:", err);
-            alert("프로필 이미지 저장에 실패했습니다.");
+            setUser((prev) => ({
+                ...prev,
+                profileImageUrl: updatedImageUrl,
+            }));
+            alert("프로필 이미지가 삭제되었습니다!");
+            return;
         }
-    };
 
+        // ✅ 파일 크기 체크
+        if (file.size > MAX_FILE_SIZE) {
+            alert("이미지 크기는 4MB 이하만 가능합니다.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("profileImage", file);
+        const res = await axiosInstance.post("/api/member/set-profile-image", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        const updatedImageUrl = res.data.imageUrl;
+        setUser((prev) => ({ ...prev, profileImageUrl: updatedImageUrl }));
+        alert("프로필 이미지가 저장되었습니다!");
+    } catch (err) {
+        console.error("프로필 이미지 업로드 실패:", err);
+        alert("프로필 이미지 저장에 실패했습니다.");
+    }
+};
     const handleAddItem = () => {
         if (newItem.trim() === "") return;
         setChecklist([...checklist, { text: newItem, checked: false }]);

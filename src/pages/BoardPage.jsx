@@ -22,13 +22,13 @@ const BoardPage = () => {
       case "notice_c":
       case "secret":
       case "review":
-        return <BasicBoardBox boardType={boardType} />;
+        return <BasicBoardBox boardType={boardType} handleWriteClick = {handleWriteClick} />;
       case "market":
-        return <MarketBox boardType={boardType} />;
+        return <MarketBox boardType={boardType} setShowUploadModal={setShowUploadModal}/>;
       case "popular":
         return <div>인기게시판 컴포넌트</div>;
       case "lecture":
-        return <LectureCategoryBox />;
+        return <LectureCategoryBox handleCreateLecture = {handleCreateLecture}/>;
       default:
         return <div>존재하지 않는 게시판입니다.</div>;
     }
@@ -37,6 +37,10 @@ const BoardPage = () => {
   const handleWriteClick = () => {
     navigate(`/write/${boardType}`);
   };
+
+  const handleCreateLecture = ()=>{
+    navigate("/create-lecture")
+  }
 
   return (
     <div className="BoardPage">
@@ -49,29 +53,6 @@ const BoardPage = () => {
           <div className="navibar-container">
             <NaviBar currentBoard={boardType} />
           </div>
-
-          {/* ✅ 게시글 상세 페이지가 아닐 때만 버튼 렌더링 */}
-          {!isPostDetail && (
-            boardType === "lecture" ? (
-              <button
-                className="write-button"
-                onClick={() => navigate("/create-lecture")}
-              >
-                생성
-              </button>
-            ) : boardType === "market" ? (
-              <button
-                className="write-button"
-                onClick={() => setShowUploadModal(true)}
-              >
-                물품등록
-              </button>
-            ) : (
-              <button className="write-button" onClick={handleWriteClick}>
-                글쓰기
-              </button>
-            )
-          )}
 
           <div className="board-container">
             {isPostDetail ? <PostDetail /> : renderBoard()}

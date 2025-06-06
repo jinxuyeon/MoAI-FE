@@ -69,9 +69,8 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h2 className="market-title" style={{ margin: 0 }}>
-            {boardTitle}
-          </h2>
+          <h1 className="Free-title">{boardTitle}</h1>
+
           <button
             onClick={toggleFavorite}
             title="즐겨찾기 추가/제거"
@@ -91,7 +90,9 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
           </button>
         </div>
       </div>
-
+      <div>
+        <button className="create-btn" onClick={setShowUploadModal}>물품 등록</button>
+      </div>
       <div className="market-grid">
         {posts.length === 0 ? (
           <p className="empty-message">등록된 물품이 없습니다.</p>

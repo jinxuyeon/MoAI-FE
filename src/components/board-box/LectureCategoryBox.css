@@ -1,15 +1,14 @@
 .LectureCategoryBox {
+    display: flex;
+    flex-direction: column;
 }
 
-.lecture-category-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+
 
 .lecture-card-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* ✅ 4열 */
+    grid-template-columns: repeat(4, 1fr);
+    /* ✅ 4열 */
     gap: 20px;
 }
 
@@ -26,7 +25,7 @@
 
 .lecture-card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 .lecture-color-box {
@@ -76,27 +75,37 @@
     color: white;
     border-color: #007bff;
 }
+
 .lecture-category-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.lecture-category-title {
-  margin: 0;
-  font-size: 1.5rem;
-}
+
 
 .star-toggle-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
-  padding: 0;
-  display: flex;
-  align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 .star-toggle-button svg {
-  transform: translateY(2px);
+    transform: translateY(2px);
+}
+
+
+.LectureCategoryBox .create-btn {
+  background-color: #3399ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 16px;
 }

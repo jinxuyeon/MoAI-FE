@@ -38,7 +38,10 @@ const BookMarketBoard = ({ type, title, posts }) => {
 
     return (
         <section className="BookMarketBoard">
-            <h3>{title}</h3>
+
+            <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
+                <h4 className="title">{title}</h4>
+            </Link>
             <div
                 className={`info-container single ${fade ? "fade-in" : "fade-out"
                     }`}
@@ -94,7 +97,6 @@ const BookMarketBoard = ({ type, title, posts }) => {
                     ▶
                 </button>
             </div>
-            <Link to="/main/community/market">장터 더보기</Link>
         </section>
     );
 };

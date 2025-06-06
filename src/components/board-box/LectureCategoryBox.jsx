@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import axiosInstance from "../utils/AxiosInstance";
 import "./LectureCategoryBox.css";
 
-const LectureCategoryBox = () => {
+const LectureCategoryBox = ({handleCreateLecture}) => {
   const lectureList = [
     { id: 1, title: "영상처리및실습", professor: "박현준", color: "#007bff" },
     { id: 2, title: "데이터분석과 시각화", professor: "윤병수", color: "#28a745" },
@@ -76,7 +76,7 @@ const LectureCategoryBox = () => {
         className="lecture-category-header"
         style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
       >
-        <h2 className="lecture-category-title">{boardTitle}</h2>
+        <h1 className="lecture-category-title">{boardTitle}</h1>
         <button
           className="star-toggle-button"
           onClick={toggleFavorite}
@@ -91,6 +91,9 @@ const LectureCategoryBox = () => {
         >
           <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
         </button>
+      </div>
+      <div>
+        <button  className="create-btn" onClick={handleCreateLecture}>강의 생성</button>
       </div>
 
       <div className="lecture-card-grid">
