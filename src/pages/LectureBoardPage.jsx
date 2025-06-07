@@ -4,6 +4,7 @@ import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
 import { Book } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import LectureMainbox from "../components/LectureMainbox";
 
 const userId = "user123";
 
@@ -17,19 +18,20 @@ const lectureList = [
 
 const dummyData = {
   질문: [
-    { title: "질문입니다", writerNickname: "학생A", createdDate: "2025-06-01", viewCount: 5 },
+    { title: "질문입니다", writerNickname: "학생A", createdDate: "2025-06-01", viewCount: 5 ,thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"},
     { title: "이 부분이 헷갈려요", writerNickname: "학생B", createdDate: "2025-06-02", viewCount: 10 }
   ],
   후기: [
-    { title: "좋은 강의였습니다", writerNickname: "학생C", createdDate: "2025-06-01", viewCount: 20 }
+    { title: "좋은 강의였습니다", writerNickname: "학생C", createdDate: "2025-06-01", viewCount: 20,thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s" }
   ],
   자료실: [
-    { title: "강의자료 공유합니다", writerNickname: "학생D", createdDate: "2025-06-03", viewCount: 7 }
+    { title: "강의자료 공유합니다", writerNickname: "학생D", createdDate: "2025-06-03", viewCount: 7 ,thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s" }
   ],
   공지사항: [
-    { title: "다음 주 시험 일정 안내", writerNickname: "조교", createdDate: "2025-06-04", viewCount: 100 }
+    { title: "다음 주 시험 일정 안내", writerNickname: "조교", createdDate: "2025-06-04", viewCount: 100 ,thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"}
   ]
 };
+
 
 const quotes = [
   "성공은 작은 노력들이 반복될 때 이루어진다. – 로버트 콜리어",
@@ -48,6 +50,17 @@ const quotes = [
   "늦었다고 생각할 때가 진짜 시작할 때다. – 속담",
   "작은 성취에 감사할 줄 아는 사람은 큰 성공도 얻는다."
 ];
+
+// 💡 페이지 정보 설정
+const postData = {
+  currentPage: 0, // 현재 페이지 인덱스
+  totalPages: 2,  // 총 페이지 수 (임의로 설정 가능)
+};
+const handlePageChange = (newPage) => {
+  console.log("페이지 이동:", newPage);
+  // 여기에 실제 페이지 변경 처리 로직 넣기
+};
+
 
 const LectureBoardPage = () => {
   const { lectureId } = useParams();
@@ -141,33 +154,8 @@ const LectureBoardPage = () => {
           </div>
 
           <div className="lecture-content-wrapper">
-            <div className="lecture-main-box">
-              {posts.length > 0 ? (
-                <table className="lecture-table">
-                  <thead>
-                    <tr>
-                      <th style={{ width: "60%" }}>제목</th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회수</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {posts.map((post, index) => (
-                      <tr key={index}>
-                        <td>{post.title}</td>
-                        <td>{post.writerNickname}</td>
-                        <td>{post.createdDate}</td>
-                        <td>{post.viewCount}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="placeholder-text">게시글이 없습니다.</p>
-              )}
-            </div>
-
+          <LectureMainbox posts={posts} postData={postData} handlePageChange={handlePageChange}/>
+            
             <div className="lecture-sidebar">
               <div className="dday-box">
                 <div className="dday-header">
