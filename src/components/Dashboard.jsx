@@ -5,6 +5,7 @@ import BasicBoard from "./BasicBoard";
 import { House, Volume2, ShoppingCart } from "lucide-react";
 import axiosInstance from "./utils/AxiosInstance";
 import { useEffect, useState } from "react";
+import LectureCard from "./LectureCard";
 
 const Dashboard = () => {
   const [postsSummary, setPostsSummary] = useState(null);
@@ -42,8 +43,14 @@ const Dashboard = () => {
               <BasicBoard title="학과 사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
             </section>
           </div>
-
-         
+          <div>
+  <div className="title-container">
+    <h3>강의실 바로가기</h3>
+  </div>
+  <section className="inner-container">
+    <LectureCard />
+  </section>
+</div>
           <div>
             <div className="title-container">
               <h3>Join the Conversation</h3>
