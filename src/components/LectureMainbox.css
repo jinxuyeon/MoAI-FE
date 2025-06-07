@@ -1,0 +1,66 @@
+.lecture-main-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;         /* ✅ 가로 최대 너비 제한 */
+    overflow-x: auto;
+  }
+  
+  .lecture-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  .lecture-table th,
+.lecture-table td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 8px;
+  text-align: left;
+}
+
+.lecture-table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.lecture-table tr:hover {
+  background-color: #f5f7fa;
+  cursor: pointer;
+}
+
+.placeholder-text {
+    padding: 20px;
+    color: #999;
+    text-align: center;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 6px;
+  }
+  
+  .pagination button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagination button.active-page {
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+  }
+  
+  
+  .pagination span {
+    margin: 0 6px;
+    color: #999;
+  }
+  
