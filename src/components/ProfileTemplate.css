@@ -140,6 +140,21 @@
   background-color: #dcdcdc;
 }
 
+.friend-message {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.friend-message.success {
+    color: green;
+}
+
+.friend-message.error {
+    color: red;
+}
+
+
 /* 애니메이션 */
 @keyframes fadeIn {
   from {

@@ -122,3 +122,19 @@
   object-fit: cover;
 }
 
+/* FriendModal.css */
+
+
+.friend-message {
+    font-size: 0.8rem;
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.friend-message.success {
+    color: green;
+}
+
+.friend-message.error {
+    color: red;
+}
