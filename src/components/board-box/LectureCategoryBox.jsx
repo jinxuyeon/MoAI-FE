@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import axiosInstance from "../utils/AxiosInstance";
 import "./LectureCategoryBox.css";
+import { UserContext } from "../utils/UserContext";
 
-const LectureCategoryBox = ({handleCreateLecture}) => {
+const LectureCategoryBox = ({ handleCreateLecture, onBack }) => {
+  const { user } = useContext(UserContext); // ✅ 현재 로그인 사용자 정보
+
   const lectureList = [
     { id: 1, title: "영상처리및실습", professor: "박현준", color: "#007bff" },
     { id: 2, title: "데이터분석과 시각화", professor: "윤병수", color: "#28a745" },
@@ -22,45 +25,37 @@ const LectureCategoryBox = ({handleCreateLecture}) => {
   const boardTitle = "강의목록";
   const boardType = "lecture";
 
-  const [favorites, setFavorites] = useState([]);
   const [isFavorited, setIsFavorited] = useState(false);
 
   const fetchFavorites = async () => {
     try {
       const response = await axiosInstance.get("/api/post/favorites");
-      if (Array.isArray(response.data.favorites)) {
-        setFavorites(response.data.favorites);
-        const matched = response.data.favorites.find(fav => fav.boardName === boardTitle);
-        setIsFavorited(Boolean(matched));
-      } else {
-        setFavorites([]);
-        setIsFavorited(false);
-      }
+      const matched = response.data.favorites?.find(fav => fav.boardName === boardTitle);
+      setIsFavorited(Boolean(matched));
     } catch (e) {
       console.error("즐겨찾기 불러오기 실패", e);
       setIsFavorited(false);
     }
   };
 
-   const toggleFavorite = async () => {
-  try {
-    if (isFavorited) {
-      // 삭제 요청: favoriteId 대신 boardType을 params로 넘김
-      await axiosInstance.delete("/api/post/favorite", {
-        params: { boardType: boardType },
-      });
-    } else {
-      await axiosInstance.post("/api/post/favorites", {
-        boardName: boardTitle,
-        boardType: boardType,
-      });
+  const toggleFavorite = async () => {
+    try {
+      if (isFavorited) {
+        await axiosInstance.delete("/api/post/favorite", {
+          params: { boardType },
+        });
+      } else {
+        await axiosInstance.post("/api/post/favorites", {
+          boardName: boardTitle,
+          boardType,
+        });
+      }
+      await fetchFavorites();
+      window.dispatchEvent(new Event("favoritesUpdated"));
+    } catch (e) {
+      console.error("즐겨찾기 토글 실패", e);
     }
-    await fetchFavorites();
-    window.dispatchEvent(new Event("favoritesUpdated"));
-  } catch (e) {
-    console.error("즐겨찾기 토글 실패", e);
-  }
-};
+  };
 
   useEffect(() => {
     fetchFavorites();
@@ -70,31 +65,38 @@ const LectureCategoryBox = ({handleCreateLecture}) => {
     setCurrentPage(page);
   };
 
+  const isProfessor = user?.roles?.includes("PROFESSOR"); // ✅ 역할 판별
+
   return (
     <div className="LectureCategoryBox">
-      <div
-        className="lecture-category-header"
-        style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
-      >
-        <h1 className="lecture-category-title">{boardTitle}</h1>
-        <button
-          className="star-toggle-button"
-          onClick={toggleFavorite}
-          title="즐겨찾기 추가/제거"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            marginLeft: "8px",
-            padding: 0,
-          }}
-        >
-          <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
+      <div className="lecture-category-header" style={{ marginBottom: "10px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <h1 className="lecture-category-title">{boardTitle}</h1>
+          <button
+            className="star-toggle-button"
+            onClick={toggleFavorite}
+            title="즐겨찾기 추가/제거"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              marginLeft: "8px",
+            }}
+          >
+            <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
+          </button>
+        </div>
+        <button className="back-button" onClick={onBack} style={{ marginTop: "10px" }}>
+          ← 대시보드로 돌아가기
         </button>
       </div>
-      <div>
-        <button  className="create-btn" onClick={handleCreateLecture}>강의 생성</button>
-      </div>
+
+      {isProfessor && ( // ✅ 교수만 강의 생성 가능
+        <div>
+          <button className="create-btn" onClick={handleCreateLecture}>강의 생성</button>
+        </div>
+      )}
 
       <div className="lecture-card-grid">
         {visibleLectures.map((lecture) => (

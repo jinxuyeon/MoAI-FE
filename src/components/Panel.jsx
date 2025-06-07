@@ -50,9 +50,7 @@ const Panel = ({ mode = "main" }) => {
       {mode === "study" && (
         <>
           {/* Study 전용 위젯 구성 */}
-          <button>강의실 찾아보기</button>
           <MyLectureList/>
-
           여기 위젯 추가 가능
         </>
       )}
