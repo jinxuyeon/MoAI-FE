@@ -6,7 +6,7 @@ const LectureCard = () => {
   const navigate = useNavigate();
 
   const goToLecturePage = () => {
-    navigate("/main/lecture");
+    navigate("/main/study-dashboard");
   };
 
   return (

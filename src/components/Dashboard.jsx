@@ -44,13 +44,13 @@ const Dashboard = () => {
             </section>
           </div>
           <div>
-  <div className="title-container">
-    <h3>강의실 바로가기</h3>
-  </div>
-  <section className="inner-container">
-    <LectureCard />
-  </section>
-</div>
+            <div className="title-container">
+              <h3>강의실 바로가기</h3>
+            </div>
+            <section className="inner-container">
+              <LectureCard />
+            </section>
+          </div>
           <div>
             <div className="title-container">
               <h3>Join the Conversation</h3>

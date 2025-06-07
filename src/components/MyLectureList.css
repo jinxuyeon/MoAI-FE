@@ -1,0 +1,44 @@
+.MyLectureList {
+    padding: 10px 16px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.lecture-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lecture-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s ease;
+}
+
+.lecture-item:hover {
+    background-color: #f0f0f0;
+}
+
+.lecture-title {
+    font-weight: 500;
+    color: #222;
+}
+
+.lecture-professor {
+    color: #666;
+}
