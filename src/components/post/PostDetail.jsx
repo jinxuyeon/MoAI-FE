@@ -86,7 +86,7 @@ const PostDetail = () => {
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
         {post.isAuthor && (
-          <MenuButton onEdit={() => {}} onDelete={handlePostDelete} />
+          <MenuButton onEdit={() => { }} onDelete={handlePostDelete} />
         )}
       </div>
 
@@ -108,10 +108,10 @@ const PostDetail = () => {
         <div className="market-horizontal-layout">
           <div className="market-image-box">
             <img
-  src={post.imageUrls || "/icons/no-img-text.png"}
-  alt="상품 이미지"
-  className="market-main-image"
-/>
+              src={post.imageUrls || "/icons/no-img-text.png"}
+              alt="상품 이미지"
+              className="market-main-image"
+            />
 
           </div>
           <div className="market-info-box">
@@ -141,18 +141,18 @@ const PostDetail = () => {
       )}
 
       <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px", marginTop: "20px" }}>
-  <div className="like-container">
-    <button className="like-toggle-button" onClick={handleLike}>
-      {liked ? "❤️" : "🤍"}
-    </button>
-  </div>
-  <Link
-    to={`/main/community/${post.boardType.toLowerCase()}`}
-    className="back-to-list-button"
-  >
-    목록으로
-  </Link>
-</div>
+        <div className="like-container">
+          <button className="like-toggle-button" onClick={handleLike}>
+            {liked ? "❤️" : "🤍"}
+          </button>
+        </div>
+        <Link
+          to={`/main/community/${post.boardType.toLowerCase()}`}
+          className="back-to-list-button"
+        >
+          목록으로
+        </Link>
+      </div>
 
 
       <div className="comment-header-line">

@@ -2,7 +2,6 @@ import { useState } from "react";
 import AdminPanel from "../components/AdminPanel";
 import "./AdminPage.css";
 import RolesBox from "../components/admin-box/RolesBox";
-
 const AdminPage = () => {
   const [selectedMenu, setSelectedMenu] = useState("ROLES");
 

@@ -1,48 +1,76 @@
+// MailPage.jsx
 import "./Mailpage.css";
 import Header from "../components/Header";
 import MailSide from "../components/MailSide";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
-import { useEffect } from "react";
 import ChatBox from "../components/ChatBox";
+import useChatDeque from "../components/hooks/useChatDeque";
+
 const MailPage = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [message, setMessage] = useState("");
     const [chatRooms, setChatRooms] = useState([]);
-    const [chatMessages, setChatMessages] = useState([]);
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const isFetchingRef = useRef(false);
+
+    const {
+        messages: chatMessages,
+        resetMessages,
+        addOldMessages,
+        addNewMessage,
+    } = useChatDeque();
+
+
+
+    const handleLoadMore = (beforeId) => {
+        if (selectedRoom && hasMore && !isFetchingRef.current) {
+
+            console.log("디버깅깅")
+            fetchChatMessages(selectedRoom.roomId, beforeId);
+        }
+    };
 
     const fetchChatRooms = async () => {
         try {
-            const response = await axiosInstance.get("/api/mail/my-room");
-            if (response.status === 200 && response.data.roomDtos) {
-                setChatRooms(response.data.roomDtos);
+            const res = await axiosInstance.get("/api/mail/my-room");
+            if (res.status === 200 && res.data.roomDtos) {
+                setChatRooms(res.data.roomDtos);
             }
-        } catch (error) {
-            console.error("채팅방 목록 불러오기 실패:", error);
+        } catch (err) {
+            console.error("❌ 채팅방 목록 실패:", err);
         }
     };
 
-    const fetchChatMessages = async (roomId) => {
+    const fetchChatMessages = async (roomId, beforeId = null) => {
+        if (isFetchingRef.current) return;
+        isFetchingRef.current = true;
+
         try {
-            const response = await axiosInstance.get(`/api/mail/messages/${roomId}`);
+            const params = beforeId ? { beforeId, size: 20 } : { size: 20 };
+
+            const response = await axiosInstance.get(`/api/mail/messages/${roomId}`, {
+                params,
+            });
+
             if (response.status === 200 && response.data.messages) {
-                setChatMessages(response.data.messages);
+                const ordered = response.data.messages.reverse();
+
+                if (!beforeId) {
+                    resetMessages(ordered);
+                } else {
+                    addOldMessages(ordered);
+                }
+
+                setHasMore(!response.data.last);
             }
         } catch (error) {
             console.error("채팅 메시지 불러오기 실패:", error);
+        } finally {
+            isFetchingRef.current = false;
         }
     };
-
-    useEffect(() => {
-        fetchChatRooms();
-    }, []);
-
-    useEffect(() => {
-        if (selectedRoom) {
-            console.log(selectedRoom)
-            fetchChatMessages(selectedRoom.roomId);
-        }
-    }, [selectedRoom]);
 
     const handleSend = async () => {
         try {
@@ -53,19 +81,31 @@ const MailPage = () => {
                     partnerId: selectedRoom.partner.id
                 }
             );
-            if (response.status === 200 && response.data.roomDtos) {
-                setChatRooms(response.data.roomDtos);
+
+            if (response.status === 200 && response.data.sentMessage) {
+                addNewMessage(response.data.sentMessage);
             }
-            setMessage("")
-            fetchChatMessages(selectedRoom.roomId);
+            setMessage("");
         } catch (error) {
-            console.error("메시지 보내기 실패:", error);
+            console.error("❌ 메시지 전송 실패:", error);
         }
     };
 
+    useEffect(() => {
+        fetchChatRooms();
+    }, []);
+
+    useEffect(() => {
+        if (selectedRoom) {
+            setPage(0);
+            setHasMore(true);
+            fetchChatMessages(selectedRoom.roomId);
+        }
+    }, [selectedRoom]);
+
     return (
         <div className="MailPage">
-            <Header title={"Chat-mail"} />
+            <Header title="Chat-mail" />
             <div className="layout">
                 <aside className="mail-side">
                     <MailSide
@@ -76,21 +116,19 @@ const MailPage = () => {
                     />
                 </aside>
                 <section className="chat-section">
-                    {/* 친구가 선택되지 않은 경우 이미지 보여주기 */}
                     {!selectedRoom && (
                         <div className="no-friend-selected">
-                            <img
-                                className="no-select-img"
-                                src="icons/no_select.png"
-                                alt="No friend selected"
-                            />
+                            <img className="no-select-img" src="icons/no_select.png" alt="No friend selected" />
                         </div>
                     )}
-
-                    {/* 친구가 선택된 경우 채팅박스와 입력창 보여주기 */}
                     {selectedRoom && (
                         <>
-                            <ChatBox selectedRoom={selectedRoom} chatMessages={chatMessages} />
+                            <ChatBox
+                                selectedRoom={selectedRoom}
+                                chatMessages={chatMessages}
+                                hasMore={hasMore}
+                                onLoadMore={handleLoadMore}
+                            />
                             <div className="chat-input-box">
                                 <input
                                     type="text"
@@ -104,7 +142,6 @@ const MailPage = () => {
                         </>
                     )}
                 </section>
-
             </div>
         </div>
     );
