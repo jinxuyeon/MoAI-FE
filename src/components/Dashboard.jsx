@@ -2,7 +2,7 @@ import "./Dashboard.css";
 import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
 import BasicBoard from "./BasicBoard";
-import { House, Volume2, ShoppingCart } from "lucide-react";
+import { House, Volume2, ShoppingCart, BookOpen, LayoutList } from "lucide-react";
 import axiosInstance from "./utils/AxiosInstance";
 import { useEffect, useState } from "react";
 import LectureCard from "./LectureCard";
@@ -43,17 +43,21 @@ const Dashboard = () => {
               <BasicBoard title="학과 사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
             </section>
           </div>
-          <div>
+
+          <div className="lectureCard-container">
             <div className="title-container">
-              <h3>강의실 바로가기</h3>
+              <BookOpen size={20} color="var(--normal-text-color)" />
+              <h3>Start Learning</h3>
             </div>
             <section className="inner-container">
               <LectureCard />
             </section>
           </div>
+
           <div>
             <div className="title-container">
-              <h3>Join the Conversation</h3>
+              <LayoutList size={20} color="var(--normal-text-color)" />
+              <h3>Share and Discover Ideas</h3>
             </div>
             <section className="inner-container">
               <section className="div-container">

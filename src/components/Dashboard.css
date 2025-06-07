@@ -27,9 +27,9 @@
 
 .title-container{
     display:flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 .home-icon{
 }
@@ -39,6 +39,9 @@
     font-size: 0.9rem;
 }
 
+.lectureCard-section{
+    display: flex;
+}
 
 .Dashboard .rightside-container {
     display: flex;

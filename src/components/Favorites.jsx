@@ -37,7 +37,7 @@ const Favorites = () => {
       <div className="Favorites-Header">
         <button className="Favorites-Button" onClick={() => setIsOpen(!isOpen)}>
           <span className="Favorites-Text">즐겨찾기</span>
-          <Star size={18} stroke="black" fill="none" style={{ marginLeft: "6px" }} />
+          <Star size={22}  stroke="black" fill="none" style={{ marginLeft: "6px" }} />
         </button>
       </div>
 

@@ -42,22 +42,27 @@ const BookMarketBoard = ({ type, title, posts }) => {
             </Link>
 
             <div className={`info-container single ${fade ? "fade-in" : "fade-out"}`}>
-                <div key={currentPost.id} className="book-post">
-                    <img
-                        src={currentPost.thumbNailUrl || "/icons/no-img-text.png"}
-                        alt="책 이미지"
-                        style={{ width: 200, height: 250, objectFit: "cover", borderRadius: 8 }}
-                    />
-                    <div className="post-info">
-                        <h4>{currentPost.title}</h4>
-                        <p className="price">{formatPrice(currentPost.price)}</p>
-                        <div className="meta-info">
-                            <span className="writer">{currentPost.writerNickname}</span>
-                            <span className="date">{currentPost.createdDate?.slice(0, 10)}</span>
-                            <span className="comments">댓글: {currentPost.commentCount}</span>
+                <Link
+                    className="post-link"
+                    to={`/main/community/${currentPost.boardType.toLowerCase()}/post/${currentPost.id}`}
+                >
+                    <div key={currentPost.id} className="book-post">
+                        <img
+                            src={currentPost.thumbNailUrl || "/icons/no-img-text.png"}
+                            alt="책 이미지"
+                            style={{ width: 200, height: 250, objectFit: "cover", borderRadius: 8 }}
+                        />
+                        <div className="post-info">
+                            <h4>{currentPost.title}</h4>
+                            <p className="price">{formatPrice(currentPost.price)}</p>
+                            <div className="meta-info">
+                                <span className="writer">{currentPost.writerNickname}</span>
+                                <span className="date">{currentPost.createdDate?.slice(0, 10)}</span>
+                                <span className="comments">댓글: {currentPost.commentCount}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
 
             <div className="nav-button-group">

@@ -2,18 +2,29 @@ import { useState } from "react";
 import "./ProfileTemplate.css";
 import axiosInstance from "./utils/AxiosInstance";
 import { sendFriendRequest } from "./utils/friendApi";
+import { ROLE_TITLES_MAP } from "./utils/RoleUtils";
+
+// 역할별 아이콘 매핑 함수
+const getRoleIcon = (roles) => {
+    if (roles.includes("PROFESSOR")) return "👑";
+    if (roles.includes("MANAGER")) return "😄";
+    if (roles.includes("ADMIN")) return "🔧";
+    if (roles.includes("SYSTEM")) return "🤖";
+    if (roles.includes("STUDENT")) return "🎓";
+    return null;
+};
 
 const ProfileTemplate = ({ profileImageUrl, name, id }) => {
     const [showModal, setShowModal] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [friendMessage, setFriendMessage] = useState("");
-    const [isFriendError, setIsFriendError] = useState(false); // 성공/실패 색상 구분
+    const [isFriendError, setIsFriendError] = useState(false);
 
     const fetchUserInfo = async () => {
         try {
             const res = await axiosInstance.get(`/api/member/summary/${id}`);
             setUserInfo(res.data);
-            setFriendMessage(""); // 이전 메시지 초기화
+            setFriendMessage("");
             setIsFriendError(false);
             setShowModal(true);
         } catch (err) {
@@ -28,8 +39,7 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
             setFriendMessage("✅ 친구 요청이 전송되었습니다.");
             setIsFriendError(false);
         } catch (error) {
-            const message =
-                error.response?.data?.message || "친구 요청 중 오류가 발생했습니다.";
+            const message = error.response?.data?.message || "친구 요청 중 오류가 발생했습니다.";
             console.error("친구 요청 실패:", message);
             setFriendMessage(`❌ ${message}`);
             setIsFriendError(true);
@@ -39,13 +49,13 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
     return (
         <>
             <div className="ProfileTemplate">
-                <div className="search-result-profile">
+                <div className="search-result-profile" onClick={fetchUserInfo}>
                     <img
                         src={profileImageUrl || "/default-profile.png"}
                         alt="프로필"
                         className="profile-img"
                     />
-                    <span className="profile-name" onClick={fetchUserInfo}>
+                    <span className="profile-name" >
                         {name}
                     </span>
                 </div>
@@ -61,22 +71,44 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
                                 className="modal-profile-img"
                             />
                             <div className="modal-name-block">
-                                <h3>{userInfo.nickname}</h3>
+                                <h3>
+                                    {userInfo.nickname}
+                                    {getRoleIcon(userInfo.roles) && (
+                                        <span
+                                            className="role-icon"
+                                            title={userInfo.roles
+                                                .map((r) => ROLE_TITLES_MAP[r])
+                                                .filter(Boolean)
+                                                .join(", ")}
+                                        >
+                                            {getRoleIcon(userInfo.roles)}
+                                        </span>
+                                    )}
+                                </h3>
                                 <span className="modal-username">{userInfo.email}</span>
                             </div>
                         </div>
 
                         <div className="modal-body">
                             <p><strong>소개:</strong> {userInfo.intro || "소개 정보가 없습니다."}</p>
-                            <p><strong>권한:</strong> {userInfo.roles.join(", ")}</p>
+                            {userInfo.roles.some(role => ROLE_TITLES_MAP[role]) && (
+                                <div className="user-roles">
+                                    <strong>칭호:</strong>
+                                    {userInfo.roles
+                                        .filter(role => ROLE_TITLES_MAP[role])
+                                        .map((role) => (
+                                            <span className={`role-badge role-${role.toLowerCase()}`} key={role}>
+                                                {ROLE_TITLES_MAP[role]}
+                                            </span>
+                                        ))}
+                                </div>
+                            )}
                             <div className="modal-actions">
                                 <button className="action-button" onClick={handleAddFriend}>
                                     친구 추가
                                 </button>
                                 <button className="action-button">쪽지 보내기</button>
                             </div>
-
-                            {/* ✅ 친구 추가 결과 메시지 출력 */}
                             {friendMessage && (
                                 <p className={`friend-message ${isFriendError ? "error" : "success"}`}>
                                     {friendMessage}
