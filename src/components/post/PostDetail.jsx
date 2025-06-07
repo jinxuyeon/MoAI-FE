@@ -36,8 +36,8 @@ const PostDetail = () => {
   };
 
   const handleCommentLike = (commentId) => {
-    setComments(prev =>
-      prev.map(c =>
+    setComments((prev) =>
+      prev.map((c) =>
         c.id === commentId
           ? { ...c, liked: !c.liked, likes: (c.likes || 0) + (c.liked ? -1 : 1) }
           : c
@@ -57,8 +57,6 @@ const PostDetail = () => {
       alert("게시글 삭제 중 오류가 발생했습니다.");
     }
   };
-
-
 
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
@@ -85,21 +83,12 @@ const PostDetail = () => {
 
   return (
     <div className="post-detail-container">
-      <div style={{ marginTop: "0px", textAlign: "right" }}>
-
-      </div>
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
-
         {post.isAuthor && (
-          <MenuButton
-            onEdit={() => console.log("✏️ 수정")}
-            onDelete={handlePostDelete}
-          />
+          <MenuButton onEdit={() => {}} onDelete={handlePostDelete} />
         )}
       </div>
-
-
 
       <div className="post-meta">
         {post.boardType === "SECRET" ? (
@@ -114,33 +103,57 @@ const PostDetail = () => {
         {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
       </div>
 
-      {post.image_urls && (
-        <img src={post.image_urls} alt="썸네일" className="post-image" />
+      {/* ✅ 게시판 타입이 MARKET이면 예외적으로 수평 배치 */}
+      {post.boardType === "MARKET" ? (
+        <div className="market-horizontal-layout">
+          <div className="market-image-box">
+            <img
+  src={post.imageUrls || "/icons/no-img-text.png"}
+  alt="상품 이미지"
+  className="market-main-image"
+/>
+
+          </div>
+          <div className="market-info-box">
+            <h3 className="market-title">{post.title}</h3>
+            <p className="market-price">
+              {post.price != null ? `${post.price.toLocaleString()}원` : "가격 미정"}
+            </p>
+            <div
+              className="market-description"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
+          </div>
+        </div>
+      ) : (
+        // 기본 게시판 본문
+        <>
+          {post.image_urls && (
+            <img src={post.image_urls} alt="썸네일" className="post-image" />
+          )}
+          <section className="post-content-box">
+            <div
+              className="post-content"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
+          </section>
+        </>
       )}
 
-      <section className="post-content-box">
-        <div
-          className="post-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        ></div>
-      </section>
+      <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px", marginTop: "20px" }}>
+  <div className="like-container">
+    <button className="like-toggle-button" onClick={handleLike}>
+      {liked ? "❤️" : "🤍"}
+    </button>
+  </div>
+  <Link
+    to={`/main/community/${post.boardType.toLowerCase()}`}
+    className="back-to-list-button"
+  >
+    목록으로
+  </Link>
+</div>
 
-      <div className="like-container">
-        <button className="like-toggle-button" onClick={handleLike}>
-          {liked ? "❤️" : "🤍"}
-        </button>
-      </div>
-
-
-
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Link
-          to={`/main/community/${post.boardType.toLowerCase()}`}
-          className="back-to-list-button"
-        >
-          목록으로
-        </Link>
-      </div>
 
       <div className="comment-header-line">
         <span className="comment-header">💬 댓글 {comments.length}</span>
@@ -169,9 +182,9 @@ const PostDetail = () => {
               comment={c}
               handleCommentLike={handleCommentLike}
               boardType={post.boardType}
-              onDeleteSuccess={(deletedId) => {
-                setComments((prev) => prev.filter((comment) => comment.id !== deletedId));
-              }}
+              onDeleteSuccess={(deletedId) =>
+                setComments((prev) => prev.filter((comment) => comment.id !== deletedId))
+              }
             />
           </li>
         ))}
