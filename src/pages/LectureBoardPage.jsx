@@ -15,6 +15,22 @@ const lectureList = [
   { id: 5, title: "비판적사고와 논리", professor: "안현수" },
 ];
 
+const dummyData = {
+  질문: [
+    { title: "질문입니다", writerNickname: "학생A", createdDate: "2025-06-01", viewCount: 5 },
+    { title: "이 부분이 헷갈려요", writerNickname: "학생B", createdDate: "2025-06-02", viewCount: 10 }
+  ],
+  후기: [
+    { title: "좋은 강의였습니다", writerNickname: "학생C", createdDate: "2025-06-01", viewCount: 20 }
+  ],
+  자료실: [
+    { title: "강의자료 공유합니다", writerNickname: "학생D", createdDate: "2025-06-03", viewCount: 7 }
+  ],
+  공지사항: [
+    { title: "다음 주 시험 일정 안내", writerNickname: "조교", createdDate: "2025-06-04", viewCount: 100 }
+  ]
+};
+
 const quotes = [
   "성공은 작은 노력들이 반복될 때 이루어진다. – 로버트 콜리어",
   "지금 하는 일이 미래를 만든다. – 마하트마 간디",
@@ -30,7 +46,7 @@ const quotes = [
   "가장 어두운 밤도 결국 끝나고 해는 떠오른다. – 빅터 위고",
   "변화는 고통을 동반하지만, 성장은 그 안에 있다.",
   "늦었다고 생각할 때가 진짜 시작할 때다. – 속담",
-  "작은 성취에 감사할 줄 아는 사람은 큰 성공도 얻는다.",
+  "작은 성취에 감사할 줄 아는 사람은 큰 성공도 얻는다."
 ];
 
 const LectureBoardPage = () => {
@@ -39,40 +55,14 @@ const LectureBoardPage = () => {
   const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
   const [selectedTab, setSelectedTab] = useState("질문");
   const [posts, setPosts] = useState([]);
-  const [weeklyStats, setWeeklyStats] = useState({
-    질문: 0,
-    후기: 0,
-    자료실: 0,
-    공지사항: 0,
-  });
+  const [weeklyStats] = useState({ 질문: 2, 후기: 1, 자료실: 1, 공지사항: 1 });
 
   const [cheerMessage, setCheerMessage] = useState("");
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`/api/lecture-posts?lectureId=${lectureId}&category=${selectedTab}`);
-        const data = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.error("게시글 불러오기 실패:", error);
-      }
-    };
-
-    const fetchWeeklyStats = async () => {
-      try {
-        const res = await fetch(`/api/lecture-posts/stats?lectureId=${lectureId}`);
-        const data = await res.json();
-        setWeeklyStats(data);
-      } catch (error) {
-        console.error("이번주 활동 데이터 불러오기 실패:", error);
-      }
-    };
-
-    fetchPosts();
-    fetchWeeklyStats();
-  }, [lectureId, selectedTab]);
+    setPosts(dummyData[selectedTab] || []);
+  }, [selectedTab]);
 
   useEffect(() => {
     const changeQuote = () => {
@@ -81,12 +71,10 @@ const LectureBoardPage = () => {
         const random = quotes[Math.floor(Math.random() * quotes.length)];
         setCheerMessage(random);
         setFade(true);
-      }, 300); // 페이드 아웃 후 교체
+      }, 300);
     };
-
-    changeQuote(); // 최초 1회 실행
-    const interval = setInterval(changeQuote, 6000); // 6초마다
-
+    changeQuote();
+    const interval = setInterval(changeQuote, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -105,7 +93,6 @@ const LectureBoardPage = () => {
   return (
     <div className="LectureBoardPage">
       <Header title="Community" />
-
       <div className="lecture-board-container">
         <div className="lecture-sidebar-left">
           <h3 className="sidebar-title">
@@ -156,13 +143,26 @@ const LectureBoardPage = () => {
           <div className="lecture-content-wrapper">
             <div className="lecture-main-box">
               {posts.length > 0 ? (
-                <ul>
-                  {posts.map((post, index) => (
-                    <li key={index} style={{ marginBottom: "12px" }}>
-                      📌 {post.title}
-                    </li>
-                  ))}
-                </ul>
+                <table className="lecture-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: "60%" }}>제목</th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회수</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {posts.map((post, index) => (
+                      <tr key={index}>
+                        <td>{post.title}</td>
+                        <td>{post.writerNickname}</td>
+                        <td>{post.createdDate}</td>
+                        <td>{post.viewCount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               ) : (
                 <p className="placeholder-text">게시글이 없습니다.</p>
               )}
