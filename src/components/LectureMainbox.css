@@ -4,7 +4,6 @@
     padding: 16px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 900px;         /* ✅ 가로 최대 너비 제한 */
     overflow-x: auto;
   }
   

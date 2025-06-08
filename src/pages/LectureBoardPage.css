@@ -1,3 +1,4 @@
+/* 전체 레이아웃 */
 .LectureBoardPage {
   background-color: white;
   min-height: 100vh;
@@ -5,15 +6,23 @@
 
 .lecture-board-container {
   display: flex;
-  align-items: stretch;
   min-height: 100vh;
 }
 
 .lecture-main-content {
   flex: 1;
-  padding: 20px;
 }
 
+.content-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+}
+.main-area{
+  width: 100%;
+}
+/* 헤더 */
 .lecture-header {
   display: flex;
   justify-content: space-between;
@@ -38,6 +47,7 @@
   margin-top: 3px;
 }
 
+/* 탭 및 글쓰기 */
 .tab-and-write-row {
   display: flex;
   justify-content: space-between;
@@ -48,7 +58,6 @@
 .tab-buttons {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
 }
 
 .tab-button {
@@ -72,26 +81,23 @@
 
 .lecture-write-button {
   background-color: #3399ff;
+  color: white;
   border: none;
   border-radius: 8px;
-  color: white;
   padding: 6px 16px;
   cursor: pointer;
   height: 32px;
-  margin-left: 570px;
+  margin-left: auto;
 }
 
 .lecture-write-button:hover {
   background-color: #2980b9;
 }
 
-.lecture-content-wrapper {
-  display: flex;
-  gap: 24px;
-}
-
+/* 사이드바 */
 .lecture-sidebar {
-  width: 250px;
+  width: 100%;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -100,9 +106,9 @@
 .dday-box,
 .activity-box {
   background-color: white;
-  padding: 16px;
-  border-radius: 10px;
   border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
 }
 
 .dday-header {
@@ -114,7 +120,6 @@
 .dday-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .dday-name {
@@ -125,8 +130,8 @@
 .dday-message {
   font-size: 14px;
   color: #333;
-  white-space: pre-wrap;
   line-height: 1.5;
+  white-space: pre-wrap;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -146,17 +151,12 @@
 
 .activity-box ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
 }
 
-.lecture-link {
-  display: block;
-  padding: 8px 0;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.lecture-link:hover {
-  text-decoration: underline;
+.no-posts {
+  padding: 20px 0;
+  text-align: center;
+  color: #888;
 }

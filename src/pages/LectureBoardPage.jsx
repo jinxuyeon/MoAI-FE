@@ -12,14 +12,15 @@ const dummyData = {
       writerNickname: "학생A",
       createdDate: "2025-06-01",
       viewCount: 5,
-      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"
+      thumbnailUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s",
     },
     {
       title: "이 부분이 헷갈려요",
       writerNickname: "학생B",
       createdDate: "2025-06-02",
-      viewCount: 10
-    }
+      viewCount: 10,
+    },
   ],
   후기: [
     {
@@ -27,8 +28,9 @@ const dummyData = {
       writerNickname: "학생C",
       createdDate: "2025-06-01",
       viewCount: 20,
-      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"
-    }
+      thumbnailUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s",
+    },
   ],
   자료실: [
     {
@@ -36,8 +38,9 @@ const dummyData = {
       writerNickname: "학생D",
       createdDate: "2025-06-03",
       viewCount: 7,
-      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"
-    }
+      thumbnailUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s",
+    },
   ],
   공지사항: [
     {
@@ -45,9 +48,10 @@ const dummyData = {
       writerNickname: "조교",
       createdDate: "2025-06-04",
       viewCount: 100,
-      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s"
-    }
-  ]
+      thumbnailUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREALx6wkLmmRB8XmM59g-lUM2JATWOw2Qag&s",
+    },
+  ],
 };
 
 const quotes = [
@@ -70,13 +74,13 @@ const quotes = [
 
 const postData = {
   currentPage: 0,
-  totalPages: 2
+  totalPages: 2,
 };
 
 const LectureBoardPage = () => {
   const { lectureId } = useParams();
   const navigate = useNavigate();
-  const lecture = findLectureById(lectureId);
+  const lecture = findLectureById(Number(lectureId));
 
   const [selectedTab, setSelectedTab] = useState("질문");
   const [posts, setPosts] = useState([]);
@@ -126,34 +130,39 @@ const LectureBoardPage = () => {
             </div>
           </div>
 
-          <div className="tab-and-write-row">
-            <div className="tab-buttons">
-              {["질문", "후기", "자료실", "공지사항"].map((tab) => (
-                <button
-                  key={tab}
-                  className={`tab-button ${selectedTab === tab ? "active-tab" : ""}`}
-                  onClick={() => setSelectedTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-              <button
-                className="lecture-write-button"
-                onClick={() => navigate(`/main/lecture/${lectureId}/write`)}
-              >
-                글쓰기
-              </button>
-            </div>
-          </div>
+          <div className="content-container">
+            <section className="main-area">
+              <div className="tab-and-write-row">
+                <div className="tab-buttons">
+                  {["질문", "후기", "자료실", "공지사항"].map((tab) => (
+                    <button
+                      key={tab}
+                      className={`tab-button ${selectedTab === tab ? "active-tab" : ""}`}
+                      onClick={() => setSelectedTab(tab)}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                  <button
+                    className="lecture-write-button"
+                    onClick={() => navigate(`/main/lecture/${lectureId}/write`)}
+                  >
+                    글쓰기
+                  </button>
+                </div>
+              </div>
+              {posts.length === 0 ? (
+              <p className="no-posts">게시글이 없습니다.</p>
+            ) : (
+              <LectureMainbox
+                posts={posts}
+                postData={postData}
+                handlePageChange={(newPage) => console.log("페이지 이동:", newPage)}
+              />
+            )}
+            </section>
 
-          <div className="lecture-content-wrapper">
-            <LectureMainbox
-              posts={posts}
-              postData={postData}
-              handlePageChange={(newPage) => console.log("페이지 이동:", newPage)}
-            />
-
-            <div className="lecture-sidebar">
+            <aside className="lecture-sidebar">
               <div className="dday-box">
                 <div className="dday-header">
                   <div className="dday-left">
@@ -174,7 +183,7 @@ const LectureBoardPage = () => {
                   <li>공지사항 {weeklyStats["공지사항"]}건</li>
                 </ul>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </div>
