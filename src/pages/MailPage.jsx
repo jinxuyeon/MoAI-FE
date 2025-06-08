@@ -1,4 +1,3 @@
-// MailPage.jsx
 import "./Mailpage.css";
 import Header from "../components/Header";
 import MailSide from "../components/MailSide";
@@ -11,10 +10,13 @@ const MailPage = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [message, setMessage] = useState("");
     const [chatRooms, setChatRooms] = useState([]);
-    const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const isFetchingRef = useRef(false);
+    const selectedRoomRef = useRef(null);
 
+    useEffect(() => {
+        selectedRoomRef.current = selectedRoom;
+    }, [selectedRoom]);
     const {
         messages: chatMessages,
         resetMessages,
@@ -22,13 +24,10 @@ const MailPage = () => {
         addNewMessage,
     } = useChatDeque();
 
-
-
     const handleLoadMore = (beforeId) => {
-        if (selectedRoom && hasMore && !isFetchingRef.current) {
-
-            console.log("디버깅깅")
-            fetchChatMessages(selectedRoom.roomId, beforeId);
+        const roomId = selectedRoomRef.current?.roomId;
+        if (roomId && hasMore && !isFetchingRef.current) {
+            fetchChatMessages(roomId, beforeId);
         }
     };
 
@@ -49,20 +48,18 @@ const MailPage = () => {
 
         try {
             const params = beforeId ? { beforeId, size: 20 } : { size: 20 };
-
-            const response = await axiosInstance.get(`/api/mail/messages/${roomId}`, {
-                params,
-            });
+            const response = await axiosInstance.get(
+                `/api/mail/messages/${roomId}`,
+                { params }
+            );
 
             if (response.status === 200 && response.data.messages) {
                 const ordered = response.data.messages.reverse();
-
                 if (!beforeId) {
                     resetMessages(ordered);
                 } else {
                     addOldMessages(ordered);
                 }
-
                 setHasMore(!response.data.last);
             }
         } catch (error) {
@@ -73,12 +70,14 @@ const MailPage = () => {
     };
 
     const handleSend = async () => {
+        if (!message.trim()) return;
+
         try {
             const response = await axiosInstance.post(
                 `/api/mail/send-mail/${selectedRoom.roomId}`,
                 {
                     content: message,
-                    partnerId: selectedRoom.partner.id
+                    partnerId: selectedRoom.partner.id,
                 }
             );
 
@@ -97,7 +96,7 @@ const MailPage = () => {
 
     useEffect(() => {
         if (selectedRoom) {
-            setPage(0);
+            resetMessages([]); // 🔥 메시지 초기화
             setHasMore(true);
             fetchChatMessages(selectedRoom.roomId);
         }
@@ -116,12 +115,15 @@ const MailPage = () => {
                     />
                 </aside>
                 <section className="chat-section">
-                    {!selectedRoom && (
+                    {!selectedRoom ? (
                         <div className="no-friend-selected">
-                            <img className="no-select-img" src="icons/no_select.png" alt="No friend selected" />
+                            <img
+                                className="no-select-img"
+                                src="icons/no_select.png"
+                                alt="No friend selected"
+                            />
                         </div>
-                    )}
-                    {selectedRoom && (
+                    ) : (
                         <>
                             <ChatBox
                                 selectedRoom={selectedRoom}
@@ -135,7 +137,9 @@ const MailPage = () => {
                                     placeholder="메시지를 입력하세요..."
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
-                                    onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                                    onKeyDown={(e) =>
+                                        e.key === "Enter" && handleSend()
+                                    }
                                 />
                                 <button onClick={handleSend}>전송</button>
                             </div>
