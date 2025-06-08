@@ -6,7 +6,7 @@ const MainPage = () => {
 
     return (
         <div className="MainPage">
-            <Header title={"Dashborad"} />
+            <Header title={"Dashboard"} />
             <div className="Panel-Dashboard-Container">
                 <div className="Panel-container">
                     <Panel hideWidgets = {false}/>

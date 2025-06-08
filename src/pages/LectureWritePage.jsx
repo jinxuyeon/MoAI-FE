@@ -3,8 +3,8 @@ import Header from "../components/Header";
 import { useRef, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import axios from "axios";
-import "./WritePage.css"; 
-import "./LectureBoardPage.jsx"; 
+import "./WritePage.css";
+import "./LectureBoardPage.jsx";
 
 import {
   FileImage,
@@ -53,18 +53,22 @@ const LectureWritePage = () => {
 
     try {
       const res = await axiosInstance.get("/api/aws/S3/presign", {
-        params: { filename: file.name },
+        params: { filename: file.name, contentType: file.type },
       });
       const { uploadUrl, fileUrl } = res.data;
 
       await axios.put(uploadUrl, file, {
-        headers: { "Content-Type": file.type },
+        headers: {
+          "Content-Type": file.type,
+          Authorization: undefined,
+        },
       });
 
-      const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 100%; margin: 8px 0;" />`;
+      const imgTag = `<img src="${fileUrl}" alt="${file.name}" style="max-width: 500px; width: 100%; height: auto; margin: 8px 0;" />`;
       insertHTML(imgTag);
     } catch (err) {
-      alert("이미지 업로드 실패");
+      console.error("❌ 이미지 업로드 실패:", err);
+      alert("이미지 업로드 실패: 콘솔 로그를 확인하세요.");
     }
   };
 
@@ -150,7 +154,6 @@ const LectureWritePage = () => {
 
   return (
     <div className="WritePage">
-      <Header title="Community" />
       <div className="write-layout">
         <div className="write-main">
           <h2 className="write-title">

@@ -92,14 +92,7 @@ function App() {
                         path="/main/community/:boardType/post/:postId"
                         element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
                     />
-                    <Route
-                        path="/main/lecture/:lectureId"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><LectureBoardPage /></PrivateRoute>}
-                    />
-                    <Route
-                        path="/main/lecture/:lectureId/write"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><LectureWritePage /></PrivateRoute>}
-                    />
+
                     <Route
                         path="/write/:boardType"
                         element={<PrivateRoute isAuthenticated={isAuthenticated}><WritePage /></PrivateRoute>}
@@ -121,7 +114,10 @@ function App() {
                             path="lectures"
                             element={<LectureCategoryBox />}
                         />
-                        <Route path="lectures/:lectureId" element={<LectureBoardPage />} /> 
+                        <Route path=":lectureId" element={<LectureBoardPage />} /> {/* ✅ 추가 */}
+
+                        <Route path=":lectureId/write" element={<LectureWritePage />} />
+
                     </Route>
                 </Routes>
             </div>

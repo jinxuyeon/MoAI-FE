@@ -7,7 +7,7 @@ import "./StudyDashboardPage.css";
 const StudyDashboardPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLecturePage = location.pathname.startsWith("/main/study-dashboard/lectures");
+  const isSubPage = location.pathname !== "/main/study-dashboard";
 
   const handleFindLecture = () => {
     navigate("/main/study-dashboard/lectures");
@@ -21,11 +21,7 @@ const StudyDashboardPage = () => {
           <Panel mode="study" />
         </div>
         <div className="Dashboard-container">
-          {isLecturePage ? (
-            <Outlet />
-          ) : (
-            <StudyDashboard onFindLectureClick={handleFindLecture} />
-          )}
+          {isSubPage ? <Outlet /> : <StudyDashboard onFindLectureClick={handleFindLecture} />}
         </div>
       </div>
     </div>

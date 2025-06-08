@@ -37,9 +37,6 @@ const BoardPage = () => {
     navigate(`/write/${boardType}`);
   };
 
-  const handleCreateLecture = ()=>{
-    navigate("/create-lecture")
-  }
 
   return (
     <div className="BoardPage">
