@@ -11,7 +11,6 @@ import axios from "axios";
 import Footer from "./components/Footer";
 import MailPage from "./pages/MailPage.jsx";
 import { UserProvider } from "./components/utils/UserContext.jsx";
-import NoticeWrite from "./components/board-box/NoticeWrite";
 import WritePage from "./pages/WritePage";
 import LectureBoardPage from "./pages/LectureBoardPage";
 import LectureWritePage from "./pages/LectureWritePage";
@@ -81,10 +80,6 @@ function App() {
                         element={<PrivateRoute isAuthenticated={isAuthenticated}><MailPage /></PrivateRoute>}
                     />
                     <Route
-                        path="/main/notice/write"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><NoticeWrite /></PrivateRoute>}
-                    />
-                    <Route
                         path="/main/community/:boardType"
                         element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
                     />
@@ -117,7 +112,6 @@ function App() {
                         <Route path=":lectureId" element={<LectureBoardPage />} /> {/* ✅ 추가 */}
 
                         <Route path=":lectureId/write" element={<LectureWritePage />} />
-
                     </Route>
                 </Routes>
             </div>

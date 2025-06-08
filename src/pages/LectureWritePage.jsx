@@ -1,10 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 import { useRef, useState } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import axios from "axios";
 import "./WritePage.css";
-import "./LectureBoardPage.jsx";
 
 import {
   FileImage,
@@ -15,23 +13,21 @@ import {
   AArrowDown,
 } from "lucide-react";
 
-const tabList = ["질문", "후기", "자료실", "공지사항"];
+// 프론트 카테고리 → 백엔드 enum 매핑
+const boardTypeMap = {
+  질문: "LECTURE_Q",
+  공지사항: "LECTURE_N",
+  자료실: "LECTURE_REF",
+  후기: "LECTURE_R",
+};
+
+const tabList = Object.keys(boardTypeMap);
 
 const LectureWritePage = () => {
   const { lectureId } = useParams();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("질문");
   const [showTabSelect, setShowTabSelect] = useState(false);
-
-  const lectureList = [
-    { id: 1, title: "영상처리및실습" },
-    { id: 2, title: "데이터분석과 시각화" },
-    { id: 3, title: "네트워크보안" },
-    { id: 4, title: "캡스톤디자인" },
-    { id: 5, title: "비판적사고와 논리" }
-  ];
-
-  const lecture = lectureList.find((lec) => String(lec.id) === String(lectureId));
 
   const editorRef = useRef(null);
   const imageInputRef = useRef(null);
@@ -88,26 +84,39 @@ const LectureWritePage = () => {
 
   const handleSubmit = async () => {
     const { title, content } = getFormData();
-    if (!title || !content) {
-      alert("제목과 내용을 입력해 주세요.");
+    if (!selectedTab || !title || !content) {
+      alert("카테고리, 제목, 내용을 모두 입력해 주세요.");
       return;
     }
 
+    const boardTypeEnum = boardTypeMap[selectedTab];
+    if (!boardTypeEnum) {
+      alert("올바르지 않은 게시판 카테고리입니다.");
+      return;
+    }
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = content;
+    const firstImg = tempDiv.querySelector("img");
+    const imageUrls = firstImg ? firstImg.src : null;
+
     try {
-      const res = await axiosInstance.post("/api/lecture-post", {
-        lectureId,
-        category: selectedTab,
+      const res = await axiosInstance.post("/api/post/lecture-post-up", {
+        lectureId: Number(lectureId),
+        boardType: boardTypeEnum,
         title,
         content,
+        imageUrls,
       });
 
       if (res.status === 200 || res.status === 201) {
         alert("글이 등록되었습니다.");
-        navigate(`/main/lecture/${lectureId}`);
+        navigate(`/main/study-dashboard/${lectureId}`);
       } else {
         alert("등록 실패. 다시 시도해주세요.");
       }
     } catch (err) {
+      console.error("❌ 등록 오류:", err);
       alert("서버 오류가 발생했습니다.");
     }
   };
@@ -156,13 +165,10 @@ const LectureWritePage = () => {
     <div className="WritePage">
       <div className="write-layout">
         <div className="write-main">
-          <h2 className="write-title">
-            {lecture ? `${lecture.title} 강의 게시판 글쓰기` : "강의 게시판 글쓰기"}
-          </h2>
+          <h2 className="write-title">강의 게시판 글쓰기</h2>
 
           <div className="write-section">
             <div className="write-box">
-              {/* 카테고리 드롭다운 */}
               <div className="custom-dropdown">
                 <div className="custom-select-box" onClick={() => setShowTabSelect(!showTabSelect)}>
                   <span>{selectedTab}</span>
@@ -186,15 +192,9 @@ const LectureWritePage = () => {
                 )}
               </div>
 
-              {/* 제목 입력 */}
-              <input
-                type="text"
-                className="write-input"
-                placeholder="제목을 입력해 주세요."
-              />
+              <input type="text" className="write-input" placeholder="제목을 입력해 주세요." />
             </div>
 
-            {/* 에디터 */}
             <div className="editor-box flat">
               <div className="toolbar-row flat">
                 <button className="toolbar-button" onClick={() => imageInputRef.current.click()} title="사진">
@@ -209,7 +209,6 @@ const LectureWritePage = () => {
                   <LinkIcon size={24} />
                   <span className="toolbar-label">링크</span>
                 </button>
-
                 <input type="file" accept="image/*" ref={imageInputRef} style={{ display: "none" }} onChange={handleImageUpload} />
                 <input type="file" ref={fileInputRef} style={{ display: "none" }} onChange={handleFileUpload} />
               </div>
@@ -236,9 +235,7 @@ const LectureWritePage = () => {
           </div>
 
           <div className="write-actions">
-            <button className="submit-post" onClick={handleSubmit}>
-              등록
-            </button>
+            <button className="submit-post" onClick={handleSubmit}>등록</button>
           </div>
         </div>
       </div>
