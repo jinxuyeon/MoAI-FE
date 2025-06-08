@@ -1,112 +1,79 @@
 import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
 import axiosInstance from "../utils/AxiosInstance";
 import "./LectureCategoryBox.css";
 import { UserContext } from "../utils/UserContext";
+import LectureCreateModal from "../modals/LectureCreateModal";
 
-const LectureCategoryBox = ({ handleCreateLecture }) => {
-  const { user } = useContext(UserContext); // ✅ 현재 로그인 사용자 정보
-
-  const lectureList = [
-    { id: 1, title: "영상처리및실습", professor: "박현준", color: "#007bff" },
-    { id: 2, title: "데이터분석과 시각화", professor: "윤병수", color: "#28a745" },
-    { id: 3, title: "네트워크보안", professor: "이광일", color: "#ffc107" },
-    { id: 4, title: "캡스톤디자인", professor: "김재훈", color: "#dc3545" },
-    { id: 5, title: "비판적사고와 논리", professor: "안현수", color: "#17a2b8" },
-  ];
-
+const LectureCategoryBox = () => {
+  const { user } = useContext(UserContext);
+  const [lectures, setLectures] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleLectures = lectureList.slice(startIndex, startIndex + itemsPerPage);
-  const totalPages = Math.ceil(lectureList.length / itemsPerPage);
-
+  const visibleLectures = lectures.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(lectures.length / itemsPerPage);
+  const [showModal, setShowModal] = useState(false);
   const boardTitle = "강의목록";
-  const boardType = "lecture";
 
-  const [isFavorited, setIsFavorited] = useState(false);
+  const isProfessorOrAdmin = user?.roles?.some(role =>
+    ["PROFESSOR", "ADMIN"].includes(role)
+  );
 
-  const fetchFavorites = async () => {
+  const fetchLectures = async () => {
     try {
-      const response = await axiosInstance.get("/api/post/favorites");
-      const matched = response.data.favorites?.find(fav => fav.boardName === boardTitle);
-      setIsFavorited(Boolean(matched));
-    } catch (e) {
-      console.error("즐겨찾기 불러오기 실패", e);
-      setIsFavorited(false);
-    }
-  };
-
-  const toggleFavorite = async () => {
-    try {
-      if (isFavorited) {
-        await axiosInstance.delete("/api/post/favorite", {
-          params: { boardType },
-        });
-      } else {
-        await axiosInstance.post("/api/post/favorites", {
-          boardName: boardTitle,
-          boardType,
-        });
-      }
-      await fetchFavorites();
-      window.dispatchEvent(new Event("favoritesUpdated"));
-    } catch (e) {
-      console.error("즐겨찾기 토글 실패", e);
+      const res = await axiosInstance.get("/api/lecture-room/list");
+      setLectures(res.data.data || []);
+    } catch (err) {
+      console.error("강의 목록 불러오기 실패:", err);
     }
   };
 
   useEffect(() => {
-    fetchFavorites();
+    fetchLectures();
   }, []);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const isProfessor = user?.roles?.includes("PROFESSOR"); // ✅ 역할 판별
-
   return (
     <div className="LectureCategoryBox">
       <div className="lecture-category-header" style={{ marginBottom: "10px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <h1 className="lecture-category-title">{boardTitle}</h1>
-          <button
-            className="star-toggle-button"
-            onClick={toggleFavorite}
-            title="즐겨찾기 추가/제거"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              marginLeft: "8px",
-            }}
-          >
-            <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
-          </button>
         </div>
       </div>
 
-      {isProfessor && ( // ✅ 교수만 강의 생성 가능
-        <div>
-          <button className="create-btn" onClick={handleCreateLecture}>강의 생성</button>
-        </div>
+      {isProfessorOrAdmin && (
+        <>
+          <button className="create-btn" onClick={() => setShowModal(true)}>강의 생성</button>
+          {showModal && (
+            <LectureCreateModal
+              onClose={() => setShowModal(false)}
+              onSuccess={() => {
+                setCurrentPage(1);
+                fetchLectures();
+              }}
+            />
+          )}
+        </>
       )}
 
       <div className="lecture-card-grid">
         {visibleLectures.map((lecture) => (
           <Link
-             to={`/main/study-dashboard/lectures/${lecture.id}`}
+            to={`/main/study-dashboard/lectures/${lecture.id}`}
             key={lecture.id}
             className="lecture-card"
             state={{ lecture }}
+            title={lecture.intro || ""}
           >
-            <div className="lecture-color-box" style={{ backgroundColor: lecture.color }} />
+            <div className="lecture-color-box" style={{ backgroundColor: lecture.themeColor }} />
             <div className="lecture-info">
               <h3>{lecture.title}</h3>
-              <p>{lecture.professor} 교수님</p>
+              <p>{lecture.professorName} 교수님</p>
+              <p>{lecture.grade}학년 {lecture.semester}학기</p>
             </div>
           </Link>
         ))}
