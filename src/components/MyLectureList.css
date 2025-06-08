@@ -1,0 +1,37 @@
+.MyLectureList {
+  background-color: #fff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.list-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.lecture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lecture-list li {
+  margin-bottom: 8px;
+}
+
+.lecture-link {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.lecture-link:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}

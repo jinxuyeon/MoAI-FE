@@ -3,6 +3,17 @@
   min-height: 100vh;
 }
 
+.lecture-board-container {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.lecture-main-content {
+  flex: 1;
+  padding: 20px;
+}
+
 .lecture-header {
   display: flex;
   justify-content: space-between;
@@ -34,27 +45,6 @@
   margin-bottom: 16px;
 }
 
-.lecture-write-button {
-  background-color: #3399ff;   
-  border: none;
-  border-radius: 8px;         
-  color: white;
-  padding: 6px 16px;           
-  cursor: pointer;
-  height: 32px;             
-  margin-left: 570px;        
-}
-
-.lecture-write-button:hover {
-  background-color: #2980b9;
-}
-
-.lecture-content-wrapper {
-  display: flex;
-  gap: 24px;
-}
-
-
 .tab-buttons {
   display: flex;
   gap: 8px;
@@ -78,6 +68,26 @@
 .active-tab {
   background-color: #1d4ed8;
   color: white;
+}
+
+.lecture-write-button {
+  background-color: #3399ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 6px 16px;
+  cursor: pointer;
+  height: 32px;
+  margin-left: 570px;
+}
+
+.lecture-write-button:hover {
+  background-color: #2980b9;
+}
+
+.lecture-content-wrapper {
+  display: flex;
+  gap: 24px;
 }
 
 .lecture-sidebar {
@@ -115,83 +125,28 @@
 .dday-message {
   font-size: 14px;
   color: #333;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.dday-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.fade-in {
+  opacity: 1;
 }
 
-.dday-number {
-  font-size: 40px;
-  font-weight: 900;
-  color: #e74c3c;
+.fade-out {
+  opacity: 0;
 }
 
-.dday-add-button {
-  margin-top: 6px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #3498db;
-  cursor: pointer;
-}
-
-.dday-input-form {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.dday-input-form input[type="text"],
-.dday-input-form input[type="date"] {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.dday-save-button {
-  padding: 6px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.dday-save-button:hover {
-  background-color: #2980b9;
-}
-
-.lecture-board-container {
-  display: flex;
-  align-items: stretch;
-  min-height: 100vh;
-}
-
-.lecture-sidebar-left {
-  width: 220px;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-  background-color: white;
-}
-
-.lecture-main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-.sidebar-title {
-  font-size: 18px;
+.activity-box h4 {
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-.lecture-list {
+.activity-box ul {
   list-style: none;
-  padding: 0;
+  padding-left: 0;
   margin: 0;
 }
 
@@ -201,55 +156,7 @@
   color: #007bff;
   text-decoration: none;
 }
+
 .lecture-link:hover {
   text-decoration: underline;
-}
-
-.lecture-sidebar-link {
-  text-decoration: none;
-  color: #000;
-}
-.lecture-sidebar-link:hover {
-  text-decoration: underline;
-  color: #007bff;
-}
-.activity-box ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-.activity-box h4 {
-  font-size: 1.2rem;  
-  font-weight: bold;  
-  margin-bottom: 8px; 
-}
-
-.dday-message {
-  font-size: 14px;
-  color: #333;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
-}
-.dday-message {
-  font-size: 14px;
-  color: #333;
-  white-space: pre-wrap;
-  line-height: 1.5;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 1;
-}
-
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
 }

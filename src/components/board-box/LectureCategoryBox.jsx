@@ -98,7 +98,7 @@ const LectureCategoryBox = ({ handleCreateLecture }) => {
       <div className="lecture-card-grid">
         {visibleLectures.map((lecture) => (
           <Link
-            to={`/main/lecture/${lecture.id}`}
+             to={`/main/study-dashboard/lectures/${lecture.id}`}
             key={lecture.id}
             className="lecture-card"
             state={{ lecture }}

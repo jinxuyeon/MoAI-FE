@@ -121,6 +121,7 @@ function App() {
                             path="lectures"
                             element={<LectureCategoryBox />}
                         />
+                        <Route path="lectures/:lectureId" element={<LectureBoardPage />} /> 
                     </Route>
                 </Routes>
             </div>

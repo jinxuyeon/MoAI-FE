@@ -7,7 +7,7 @@ import "./StudyDashboardPage.css";
 const StudyDashboardPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLecturePage = location.pathname.endsWith("/lectures"); 
+  const isLecturePage = location.pathname.startsWith("/main/study-dashboard/lectures");
 
   const handleFindLecture = () => {
     navigate("/main/study-dashboard/lectures");
