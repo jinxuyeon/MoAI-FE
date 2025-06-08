@@ -7,7 +7,6 @@ const boardTypeMap = {
     SECRET: "비밀게시판",
     REVIEW: "취업,면접 후기",
     MARKET: "책장터",
-    LECTURE: "강의게시판",
 };
 
 

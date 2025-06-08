@@ -18,6 +18,7 @@ import LectureWritePage from "./pages/LectureWritePage";
 import AdminPage from "./pages/AdminPage.jsx";
 import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
+import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAuthChecked, setIsAuthChecked] = useState(false); // 추가
@@ -115,7 +116,12 @@ function App() {
                     <Route
                         path="/main/study-dashboard"
                         element={<PrivateRoute isAuthenticated={isAuthenticated}><StudyDashboardPage /></PrivateRoute>}
-                    />
+                    >
+                        <Route
+                            path="lectures"
+                            element={<LectureCategoryBox />}
+                        />
+                    </Route>
                 </Routes>
             </div>
             {shouldShowFooter && <Footer />}

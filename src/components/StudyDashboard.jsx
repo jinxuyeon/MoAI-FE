@@ -59,14 +59,7 @@ const StudyDashboard = ({ onFindLectureClick }) => {
           </ul>
         </div>
 
-        <div className="dashboard-card">
-          <h3>🔍 강의 찾기</h3>
-          <div className="dashboard-action">
-            <button className="lecture-btn" onClick={onFindLectureClick}>
-              강의실 찾아보기
-            </button>
-          </div>
-        </div>
+    
       </div>
     </div>
   );

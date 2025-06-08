@@ -5,7 +5,7 @@ import axiosInstance from "../utils/AxiosInstance";
 import "./LectureCategoryBox.css";
 import { UserContext } from "../utils/UserContext";
 
-const LectureCategoryBox = ({ handleCreateLecture, onBack }) => {
+const LectureCategoryBox = ({ handleCreateLecture }) => {
   const { user } = useContext(UserContext); // ✅ 현재 로그인 사용자 정보
 
   const lectureList = [
@@ -87,9 +87,6 @@ const LectureCategoryBox = ({ handleCreateLecture, onBack }) => {
             <Star size={20} fill={isFavorited ? "#facc15" : "none"} stroke="#f59e0b" />
           </button>
         </div>
-        <button className="back-button" onClick={onBack} style={{ marginTop: "10px" }}>
-          ← 대시보드로 돌아가기
-        </button>
       </div>
 
       {isProfessor && ( // ✅ 교수만 강의 생성 가능

@@ -6,7 +6,7 @@ import Calendar from "./Calendar";
 import axiosInstance from "./utils/AxiosInstance";
 import { UserContext } from "./utils/UserContext";
 import { useContext, useRef } from "react";
-import MyLectureList from "./MyLectureList";
+import StudyNavi from "./StudyNavi";
 const Panel = ({ mode = "main" }) => {
   const { user, isLoading } = useContext(UserContext);
 
@@ -50,7 +50,7 @@ const Panel = ({ mode = "main" }) => {
       {mode === "study" && (
         <>
           {/* Study 전용 위젯 구성 */}
-          <MyLectureList/>
+          <StudyNavi/>
           여기 위젯 추가 가능
         </>
       )}

@@ -1,31 +1,28 @@
-import { useState } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Panel from "../components/Panel";
 import StudyDashboard from "../components/StudyDashboard";
 import "./StudyDashboardPage.css";
-import LectureCategoryBox from "../components/board-box/LectureCategoryBox";
 
 const StudyDashboardPage = () => {
-  const [showLectureList, setShowLectureList] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLecturePage = location.pathname.endsWith("/lectures"); 
 
   const handleFindLecture = () => {
-    setShowLectureList(true); // 강의실 목록으로 이동
-  };
-
-  const handleBackToDashboard = () => {
-    setShowLectureList(false); // 대시보드로 돌아가기
+    navigate("/main/study-dashboard/lectures");
   };
 
   return (
     <div className="StudyDashboardPage">
-      <Header title={"Dashbard-study"} />
+      <Header title={"Dashboard-study"} />
       <div className="Panel-Dashboard-Container">
         <div className="Panel-container">
           <Panel mode="study" />
         </div>
         <div className="Dashboard-container">
-          {showLectureList ? (
-            <LectureCategoryBox onBack={handleBackToDashboard} />
+          {isLecturePage ? (
+            <Outlet />
           ) : (
             <StudyDashboard onFindLectureClick={handleFindLecture} />
           )}

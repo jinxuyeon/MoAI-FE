@@ -16,7 +16,6 @@
     min-width: 10px;
     border-right: 1px solid var(--base-border-color);
     z-index: 10;
-    
 
 }
 
@@ -25,4 +24,5 @@
     width: 300px;
     min-width: 10px;
     margin-bottom: 400px;
+    padding: 30px;
 }

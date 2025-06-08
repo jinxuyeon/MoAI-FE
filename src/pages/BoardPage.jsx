@@ -28,8 +28,6 @@ const BoardPage = () => {
         return <MarketBox boardType={boardType} setShowUploadModal={setShowUploadModal}/>;
       case "popular":
         return <div>인기게시판 컴포넌트</div>;
-      case "lecture":
-        return <LectureCategoryBox handleCreateLecture = {handleCreateLecture}/>;
       default:
         return <div>존재하지 않는 게시판입니다.</div>;
     }
