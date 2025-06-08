@@ -32,16 +32,18 @@ const BasicBoard = ({ type, posts, title }) => {
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.id} className="basic-post-item">
-            <Link
-              className="post-link"
-              to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
-            >
-              <strong>{post.title}</strong>
-            </Link>
+            <div className="title-area">
+              <Link
+                className="post-link"
+                to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
+              >
+                <strong>{post.title}</strong>
+              </Link>
+            </div>
             <div className="meta">
-              <p className="meta-content">
+              <div className="meta-content">
                 {post.writerNickname} | {post.createdDate?.slice(0, 10)} | 댓글:{post.commentCount}
-              </p>
+              </div>
             </div>
           </div>
         ))

@@ -4,6 +4,7 @@ import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
 import LectureMainbox from "../components/LectureMainbox";
 import { findLectureById } from "../components/utils/lectureUtils";
+import ProfileTemplate from "../components/ProfileTemplate";
 
 const dummyData = {
   질문: [

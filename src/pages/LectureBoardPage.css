@@ -4,63 +4,65 @@
   min-height: 100vh;
 }
 
-.lecture-board-container {
+.LectureBoardPage .lecture-board-container {
   display: flex;
   min-height: 100vh;
 }
 
-.lecture-main-content {
+.LectureBoardPage .lecture-main-content {
   flex: 1;
 }
 
-.content-container {
+.LectureBoardPage .content-container {
   display: flex;
   gap: 30px;
   justify-content: center;
   align-items: flex-start;
 }
-.main-area{
+
+.LectureBoardPage .main-area {
   width: 100%;
 }
+
 /* 헤더 */
-.lecture-header {
+.LectureBoardPage .lecture-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.lecture-title-wrapper {
+.LectureBoardPage .lecture-title-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.lecture-title {
+.LectureBoardPage .lecture-title {
   font-size: 24px;
   font-weight: bold;
 }
 
-.lecture-professor {
+.LectureBoardPage .lecture-professor {
   font-size: 14px;
   color: #666;
   margin-top: 3px;
 }
 
 /* 탭 및 글쓰기 */
-.tab-and-write-row {
+.LectureBoardPage .tab-and-write-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
 
-.tab-buttons {
+.LectureBoardPage .tab-buttons {
   display: flex;
   gap: 8px;
 }
 
-.tab-button {
+.LectureBoardPage .tab-button {
   padding: 8px 16px;
   background-color: #f1f3f5;
   border: none;
@@ -70,16 +72,16 @@
   transition: background-color 0.2s;
 }
 
-.tab-button:hover {
+.LectureBoardPage .tab-button:hover {
   background-color: #e2e6ea;
 }
 
-.active-tab {
+.LectureBoardPage .active-tab {
   background-color: #1d4ed8;
   color: white;
 }
 
-.lecture-write-button {
+.LectureBoardPage .lecture-write-button {
   background-color: #3399ff;
   color: white;
   border: none;
@@ -90,12 +92,12 @@
   margin-left: auto;
 }
 
-.lecture-write-button:hover {
+.LectureBoardPage .lecture-write-button:hover {
   background-color: #2980b9;
 }
 
 /* 사이드바 */
-.lecture-sidebar {
+.LectureBoardPage .lecture-sidebar {
   width: 100%;
   max-width: 300px;
   display: flex;
@@ -103,31 +105,31 @@
   gap: 20px;
 }
 
-.dday-box,
-.activity-box {
+.LectureBoardPage .dday-box,
+.LectureBoardPage .activity-box {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 16px;
 }
 
-.dday-header {
+.LectureBoardPage .dday-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dday-left {
+.LectureBoardPage .dday-left {
   display: flex;
   flex-direction: column;
 }
 
-.dday-name {
+.LectureBoardPage .dday-name {
   font-size: 20px;
   font-weight: bold;
 }
 
-.dday-message {
+.LectureBoardPage .dday-message {
   font-size: 14px;
   color: #333;
   line-height: 1.5;
@@ -135,27 +137,27 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-.fade-in {
+.LectureBoardPage .fade-in {
   opacity: 1;
 }
 
-.fade-out {
+.LectureBoardPage .fade-out {
   opacity: 0;
 }
 
-.activity-box h4 {
+.LectureBoardPage .activity-box h4 {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.activity-box ul {
+.LectureBoardPage .activity-box ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.no-posts {
+.LectureBoardPage .no-posts {
   padding: 20px 0;
   text-align: center;
   color: #888;
