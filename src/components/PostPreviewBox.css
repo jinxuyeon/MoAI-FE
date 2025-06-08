@@ -1,0 +1,70 @@
+
+.PostPreviewBox{
+    width: 100%;
+    height: 150px;
+    border: 1px solid var(--base-border-color);
+    border-radius: 1rem;
+    list-style: none;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.PostPreviewBox .layout-box{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.PostPreviewBox .content-box{
+    min-height: 75%;
+    border-bottom: 1px solid var(--base-border-color);
+}
+
+.PostPreviewBox .inner-box{
+    padding: 20px 24px;
+}
+
+.PostPreviewBox .meta-box{
+    padding: 10px 24px;
+}
+
+.PostPreviewBox .meta-info{
+    font-size: 0.7rem;
+    margin: 0;
+}
+
+.PostPreviewBox .hash-tag{
+    font-size: 0.8rem;
+}
+.PostPreviewBox .link{
+    text-decoration: none;
+
+}
+.PostPreviewBox .link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.PostPreviewBox .link:visited {
+  color: inherit;
+}
+
+.PostPreviewBox .link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.PostPreviewBox .link:active {
+  color: inherit;
+  text-decoration: none;
+}
+.PostPreviewBox p{
+    color: rgb(73, 80, 87);
+    font-size: 0.8rem;
+}
+
+.PostPreviewBox .title{
+    font-size: 1rem;
+    color: black;
+    margin: 0;
+}

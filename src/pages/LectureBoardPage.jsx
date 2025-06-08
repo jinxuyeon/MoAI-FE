@@ -5,9 +5,16 @@ import { useState, useEffect } from "react";
 import LectureMainbox from "../components/LectureMainbox";
 import axiosInstance from "../components/utils/AxiosInstance";
 import ProfileTemplate from "../components/ProfileTemplate";
+import PostPreviewBox from "../components/PostPreviewBox";
 
 const tabList = ["질문", "후기", "자료실", "공지사항"];
 
+const tabToTypeMap = {
+  질문: "LECTURE_Q",
+  후기: "LECTURE_R",
+  자료실: "LECTURE_REF",
+  공지사항: "LECTURE_N"
+};
 const postData = {
   currentPage: 0,
   totalPages: 2,
@@ -44,8 +51,9 @@ const LectureBoardPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axiosInstance.get("/api/lecture-post", {
-          params: { lectureId, category: selectedTab },
+        const postType = tabToTypeMap[selectedTab];
+        const res = await axiosInstance.get("/api/lecture-room/posts", {
+          params: { lectureId, type: postType },
         });
         setPosts(res.data.data);
       } catch (err) {
@@ -139,11 +147,7 @@ const LectureBoardPage = () => {
               {posts.length === 0 ? (
                 <p className="no-posts">게시글이 없습니다.</p>
               ) : (
-                <LectureMainbox
-                  posts={posts}
-                  postData={postData}
-                  handlePageChange={(newPage) => console.log("페이지 이동:", newPage)}
-                />
+                posts.map((post) => <PostPreviewBox key={post.id} post={post} />)
               )}
             </section>
 
