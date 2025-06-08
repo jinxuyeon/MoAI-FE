@@ -4,8 +4,9 @@ import { useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 import { Trash2 } from "lucide-react";
 
-const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
+const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms, selectedFriend }) => {
     const [showModal, setShowModal] = useState(false);
+
     const handleFriendSelect = async (room) => {
         try {
             await axiosInstance.put(`/api/mail/read-room/${room.roomId}`);
@@ -33,23 +34,26 @@ const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms }) => {
         <div className="MailSide">
             <button
                 className="add-chat-button"
-                onClick={() => {
-                    setShowModal(true);
-                }}
+                onClick={() => setShowModal(true)}
             >
                 + 대화 추가하기
             </button>
 
-            {showModal && <MailModal
-                fetchChatRooms={fetchChatRooms}
-                setOpenModal={setShowModal} />}
+            {showModal && (
+                <MailModal
+                    fetchChatRooms={fetchChatRooms}
+                    setOpenModal={setShowModal}
+                />
+            )}
 
             <div className="chat-room-list">
                 {chatRooms.length > 0 ? (
                     chatRooms.map((room, idx) => (
                         <div key={idx} className="room-button-container">
-                            <button className="room-button" onClick={() => handleFriendSelect(room)}>
-                                
+                            <button
+                                className={`room-button ${selectedFriend?.roomId === room.roomId ? "active" : ""}`}
+                                onClick={() => handleFriendSelect(room)}
+                            >
                                 <img
                                     src={room.partner.profileThumbnails || "/default-profile.png"}
                                     alt="프로필"

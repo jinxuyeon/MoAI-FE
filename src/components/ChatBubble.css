@@ -1,8 +1,7 @@
 .ChatBubble {
     display: flex;
-    margin: 8px;
+    margin: 6px 10px;
     width: 100%;
-    
 }
 
 .ChatBubble.mine {
@@ -16,29 +15,39 @@
 }
 
 .ChatBubble .content-box {
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 16px;
     padding: 10px 14px;
+    border-radius: 16px;
     word-break: break-word;
     white-space: pre-wrap;
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
+/* 내 메시지 스타일 */
+.ChatBubble.mine .content-box {
+    background-color: var(--point-text-color-blue, #00bcd4);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* 친구 메시지 스타일 */
 .ChatBubble.theirs .content-box {
-    background-color: #ffffff; /* 상대 메시지 색 */
+    background-color: #f2f2f2;
+    color: #333;
+    border-bottom-left-radius: 4px;
     border: 1px solid #ddd;
 }
 
 .content {
-    display: inline;
-    font-size: 16px;
+    font-size: 15px;
     margin: 0;
+    line-height: 1.5;
 }
 
 .chat-date {
+    align-self: flex-end;
     font-size: 12px;
-    color: #888;
-    margin-bottom: 4px;
-    display: block;
+    color: #aaa;
+    margin-top: 6px;
 }

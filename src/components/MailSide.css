@@ -1,49 +1,75 @@
+
 .MailSide {
     display: flex;
     flex-direction: column;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+    background-color: #fff;
+    height: 100%;
 }
 
 .add-chat-button {
-    margin: 10px;
+    margin-bottom: 10px;
     padding: 10px;
-    font-size: 16px;
-    border: none;
-    background-color: var(--point-green);
+    background-color: var(--point-text-color-blue);
     color: white;
-    border-radius: 8px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 15px;
 }
 
 .add-chat-button:hover {
-    background-color: var(--point-focus-green);
+    background-color: #0097a7;
 }
 
-.room-button-container{
+.chat-room-list {
     display: flex;
-    background-color: #F0F0F0;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.room-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .room-button {
     display: flex;
     align-items: center;
-    align-content: center;
     gap: 10px;
-    width: 100%;
     padding: 10px;
-    font-size: 1rem;
+    flex: 1;
     border: none;
-    text-align: left;
+    background-color: white;
     cursor: pointer;
-    transition: background-color 0.5s;
-}
-.room-button-exit{
-    background-color: #ccc;
-    border: none;
+    border-radius: 6px;
+    transition: background-color 0.1s;
+    font-size: 16px;
 }
 
 .room-button:hover {
-    background-color: #ccc;
+    background-color: #f0f0f0;
+}
+
+.room-button.active {
+    background-color: var(--point-text-color-blue);
+    color: white;
+    font-weight: bold;
+}
+
+.room-button-exit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    margin-left: 5px;
+}
+
+.room-button-exit:hover {
+    color: red;
 }
 
 .profile-img {
@@ -53,103 +79,17 @@
     object-fit: cover;
 }
 
-/* 모달 오버레이 */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-/* 모달 본체 */
-.modal-content {
-    background-color: white;
-    width: 280px;
-    max-height: 400px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-.modal-header {
-    padding: 16px;
-    background-color: white;
-    border-bottom: 1px solid #ccc;
-}
-
-.modal-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-}
-
-.modal-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.modal-tab-btn {
-    flex: 1;
-    padding: 8px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    background-color: #eee;
-    border-radius: 6px;
-}
-
-.modal-tab-btn.active {
-    background-color: var(--point-green);
-    color: white;
-    font-weight: bold;
-}
-
-.search-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.modal-search-result-area {
-    min-height: 200px;
-    overflow-y: auto;
-}
-
-.no-result {
-    color: #777;
-    padding: 20px;
-    text-align: center;
-}
-
 .new-mail-count {
     background-color: red;
     color: white;
-    border-radius: 10px;
-    padding: 2px 6px;
-    margin-left: 8px;
     font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: auto;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.no-room {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
 }
