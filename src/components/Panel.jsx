@@ -15,13 +15,15 @@ const Panel = ({ mode = "main" }) => {
 
   const testhandle = async () => {
     try {
-      const response = await axiosInstance.get("/api/post/favorites");
-      alert("조회 성공");
+      const response = await axiosInstance.get("/api/jobs");
+      console.log("조회 성공 ✅", response.data);
+      alert(`조회 성공! 총 ${response.data.length}건`);
     } catch (error) {
-      console.error("❌ 즐겨찾기 조회 실패:", error);
+      console.error("조회 실패 ❌", error);
       alert("조회 실패");
     }
   };
+
 
   return (
     <div className="Panel">
@@ -45,16 +47,18 @@ const Panel = ({ mode = "main" }) => {
           <Favorites />
           <Friends />
           <Calendar />
+
+          <button onClick={testhandle}>버튼</button>
         </>
       )}
 
       {mode === "study" && (
         <>
           {/* Study 전용 위젯 구성 */}
-          <StudyNavi/>
-          <MyLectureList/>
+          <StudyNavi />
+          <MyLectureList />
           여기 위젯 추가 가능
-          
+
         </>
       )}
     </div>
