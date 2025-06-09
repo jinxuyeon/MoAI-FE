@@ -43,8 +43,9 @@ const Dashboard = () => {
               <BasicBoard title="학과 사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
             </section>
           </div>
+          <div>
 
-          <div className="lectureCard-container">
+            <div className="lectureCard-container">
             <div className="title-container">
               <BookOpen size={20} color="var(--normal-text-color)" />
               <h3>Start Learning</h3>
@@ -53,6 +54,9 @@ const Dashboard = () => {
               <LectureRoomCard />
             </section>
           </div>
+
+          </div>
+          
 
           <div>
             <div className="title-container">
@@ -82,7 +86,8 @@ const Dashboard = () => {
         </div>
 
         <div className="rightside-container">
-          <div>
+          <JobInfoBoard />
+           <div>
             <div className="title-container">
               <ShoppingCart size={20} color="var(--normal-text-color)" />
               <h3>Find the items you need</h3>
@@ -91,8 +96,6 @@ const Dashboard = () => {
               <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type={"MARKET"} />
             </div>
           </div>
-          <JobInfoBoard />
-
         </div>
       </div>
     </div>

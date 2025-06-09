@@ -46,6 +46,20 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
         }
     };
 
+
+    const handleRemoveFriend = async () => {
+        try {
+            await axiosInstance.delete(`/api/friend/${userInfo.id}`);
+            setFriendMessage("✅ 친구가 삭제되었습니다.");
+            setIsFriendError(false);
+            setUserInfo((prev) => ({ ...prev, isFriend: false })); // 상태 업데이트
+        } catch (error) {
+            console.error("친구 삭제 실패:", error);
+            setFriendMessage("❌ 친구 삭제 중 오류가 발생했습니다.");
+            setIsFriendError(true);
+        }
+    };
+    
     return (
         <>
             <div className="ProfileTemplate">
@@ -104,11 +118,18 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
                                 </div>
                             )}
                             <div className="modal-actions">
-                                <button className="action-button" onClick={handleAddFriend}>
-                                    친구 추가
-                                </button>
+                                {userInfo.isFriend ? (
+                                    <button className="remove-friend-button" onClick={handleRemoveFriend}>
+                                        친구 삭제
+                                    </button>
+                                ) : (
+                                    <button className="action-button" onClick={handleAddFriend}>
+                                        친구 추가
+                                    </button>
+                                )}
                                 <button className="action-button">쪽지 보내기</button>
                             </div>
+
                             {friendMessage && (
                                 <p className={`friend-message ${isFriendError ? "error" : "success"}`}>
                                     {friendMessage}
