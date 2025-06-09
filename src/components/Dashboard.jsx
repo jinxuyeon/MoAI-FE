@@ -82,7 +82,6 @@ const Dashboard = () => {
         </div>
 
         <div className="rightside-container">
-          <JobInfoBoard />
           <div>
             <div className="title-container">
               <ShoppingCart size={20} color="var(--normal-text-color)" />
@@ -92,6 +91,8 @@ const Dashboard = () => {
               <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type={"MARKET"} />
             </div>
           </div>
+          <JobInfoBoard />
+
         </div>
       </div>
     </div>

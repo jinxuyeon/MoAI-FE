@@ -17,6 +17,7 @@
     border-radius: 5px;
     display: flex;
     width: 50%;
+    overflow: hidden;
 }
 
 

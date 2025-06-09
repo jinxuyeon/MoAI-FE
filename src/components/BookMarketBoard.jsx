@@ -18,7 +18,7 @@ const BookMarketBoard = ({ type, title, posts }) => {
                     posts.length > 0 ? (prevIndex + 1) % posts.length : 0
                 );
                 setFade(true);
-            }, 500);
+            }, 800);
         }, 8000);
 
         return () => clearInterval(intervalId);

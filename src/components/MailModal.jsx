@@ -37,16 +37,20 @@ const MailModal = ({ setOpenModal, fetchChatRooms }) => {
     };
 
     const createMailRoom = async (targetId) => {
-        try {
-            await axiosInstance.post(`/api/mail/new?id=${targetId}`);
-            alert("채팅방이 생성되었습니다.");
-            fetchChatRooms();
-            setOpenModal(false);
-        } catch (error) {
+    try {
+        await axiosInstance.post(`/api/mail/new?id=${targetId}`);
+        alert("채팅방이 생성되었습니다.");
+        fetchChatRooms();
+        setOpenModal(false);
+    } catch (error) {
+        if (error.response?.status === 409) {
+            alert("이미 같은 채팅방이 존재합니다.");
+        } else {
             console.error("채팅방 생성 실패:", error);
             alert("채팅방 생성에 실패했습니다.");
         }
-    };
+    }
+};
 
     return (
         <div className="Modal">

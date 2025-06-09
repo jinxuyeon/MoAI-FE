@@ -4,19 +4,16 @@ import "./LectureCategoryBox.css";
 import { UserContext } from "../utils/UserContext";
 import LectureCreateModal from "../modals/LectureCreateModal";
 import LectureCard from "../LectureCard";
+import SearchBar from "../SearchBar";
 
 const LectureCategoryBox = () => {
     const { user } = useContext(UserContext);
     const [lectures, setLectures] = useState([]);
+    const [filteredLectures, setFilteredLectures] = useState([]);
+    const [searchParams, setSearchParams] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const visibleLectures = lectures.slice(
-        startIndex,
-        startIndex + itemsPerPage
-    );
-    const totalPages = Math.ceil(lectures.length / itemsPerPage);
     const [showModal, setShowModal] = useState(false);
+    const itemsPerPage = 12;
     const boardTitle = "강의목록";
 
     const isProfessorOrAdmin = user?.roles?.some((role) =>
@@ -36,30 +33,53 @@ const LectureCategoryBox = () => {
         fetchLectures();
     }, []);
 
+    const handleSearch = ({ filter, query }) => {
+        const lowerQuery = query.toLowerCase();
+
+        const filtered = lectures.filter((lecture) => {
+            if (filter === "title") {
+                return lecture.title?.toLowerCase().includes(lowerQuery);
+            } else if (filter === "writer") {
+                return lecture.writerNickname?.toLowerCase().includes(lowerQuery);
+            }
+            return true;
+        });
+
+        setSearchParams({ filter, query });
+        setFilteredLectures(filtered);
+        setCurrentPage(1);
+    };
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
+    const activeLectures = searchParams ? filteredLectures : lectures;
+    const totalPages = Math.ceil(activeLectures.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const visibleLectures = activeLectures.slice(startIndex, startIndex + itemsPerPage);
+
     return (
         <div className="LectureCategoryBox">
-            <div
-                className="lecture-category-header"
-                style={{ marginBottom: "10px" }}
-            >
+            <div className="lecture-category-header" style={{ marginBottom: "10px" }}>
                 <div
                     style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        gap: "8px",
+                        width: "100%",
                     }}
                 >
                     <h1 className="lecture-category-title">{boardTitle}</h1>
+                    <SearchBar onSearch={handleSearch} />
                 </div>
             </div>
 
             {isProfessorOrAdmin && (
                 <>
-                    <div>
+                    <div style={{ marginTop: "10px" }}>
                         <button
                             className="create-btn"
                             onClick={() => setShowModal(true)}
@@ -95,9 +115,7 @@ const LectureCategoryBox = () => {
                     <button
                         key={index}
                         onClick={() => handlePageChange(index + 1)}
-                        className={
-                            currentPage === index + 1 ? "active-page" : ""
-                        }
+                        className={currentPage === index + 1 ? "active-page" : ""}
                     >
                         {index + 1}
                     </button>

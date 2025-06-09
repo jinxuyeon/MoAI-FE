@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "./utils/AxiosInstance";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // 깔끔한 아이콘 사용
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./JobInfoBoard.css";
 
 const JobInfoBoard = () => {
@@ -11,8 +11,6 @@ const JobInfoBoard = () => {
   const fetchJobs = async () => {
     try {
       const res = await axiosInstance.get("/api/jobs");
-      console.log("✅ 채용 정보 응답 전체:", res);
-      console.log("🧩 첫 번째 채용 데이터 구조:", res.data[0]);
       setJobs(res.data);
     } catch (error) {
       console.error("❌ 채용 정보 불러오기 실패:", error);
@@ -32,16 +30,24 @@ const JobInfoBoard = () => {
   };
 
   const handleNext = () => {
-    if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    } else {
+      setCurrentPage(0); // 마지막 페이지면 처음으로
+    }
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toISOString().split("T")[0];
   };
 
   return (
     <section className="JobInfoBoard">
       <h3>최신 채용 정보</h3>
       <div className="job-list">
-        {visibleJobs.map((job, index) => (
+        {visibleJobs.map((job) => (
           <a
-            key={index}
+            key={job.id}
             href={job.targetUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -50,9 +56,16 @@ const JobInfoBoard = () => {
             <div className="job-card">
               <div className="job-title">{job.title}</div>
               <div className="job-meta">
-                지역: {job.region} | 고용형태: {job.employmentType} | 회사명: {job.company}
+                <span>📍 {job.region}</span> |{" "}
+                <span>💼 {job.employmentType}</span> |{" "}
+                <span>🏢 {job.company}</span>
               </div>
-              <p className="job-preview">{job.description}</p>
+              <div className="job-preview">
+                {job.description.length > 30
+                  ? `${job.description.slice(0, 30)}...`
+                  : job.description}
+              </div>
+              <div className="job-date">🗓️ {formatDate(job.createdAt)}</div>
             </div>
           </a>
         ))}
@@ -62,7 +75,9 @@ const JobInfoBoard = () => {
         <button onClick={handlePrev} disabled={currentPage === 0}>
           <ChevronLeft size={20} />
         </button>
-        <span>{currentPage + 1} / {totalPages}</span>
+        <span>
+          {currentPage + 1} / {totalPages}
+        </span>
         <button onClick={handleNext} disabled={currentPage >= totalPages - 1}>
           <ChevronRight size={20} />
         </button>

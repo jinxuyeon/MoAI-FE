@@ -58,7 +58,7 @@ const CommentBox = ({
         <div className="comment-header-row">
           <p className="comment-date">{formattedDate}</p>
           {comment.isAuthor && (
-            <MenuButton onEdit={() => {}} onDelete={handleDelete} />
+            <MenuButton onEdit={() => { }} onDelete={handleDelete} />
           )}
         </div>
 
@@ -71,7 +71,7 @@ const CommentBox = ({
 
           {comment.hasChildren && (
             <button className="toggle-replies-btn" onClick={onToggleReplies}>
-              {showReplies ? "🔽 숨기기" : "▶ 답글 보기"}
+              {showReplies ? "▲" : "▼"}
             </button>
           )}
         </div>

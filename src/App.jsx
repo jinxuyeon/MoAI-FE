@@ -23,7 +23,6 @@ import AdminPage from "./pages/AdminPage.jsx";
 import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
 import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
-import PostDetail from "./components/post/PostDetail.jsx";
 import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
