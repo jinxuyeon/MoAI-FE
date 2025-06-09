@@ -10,7 +10,7 @@ const LectureRoomCard = () => {
   };
 
   return (
-    <div className="lecture-card" onClick={goToLecturePage}>
+    <div className="LectureRoomCard" onClick={goToLecturePage}>
       <BookOpen size={32} color="#4F46E5" />
       <div>
         <h4>강의실</h4>

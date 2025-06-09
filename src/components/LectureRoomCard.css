@@ -1,5 +1,5 @@
 /* LectureCard.css */
-.lecture-card {
+.LectureRoomCard {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -7,22 +7,23 @@
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border: 1px solid var( --base-border-color);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.lecture-card:hover {
+.LectureRoomCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.lecture-card h4 {
+.LectureRoomCard h4 {
   margin: 0;
   font-size: 18px;
   color: #1F2937;
 }
 
-.lecture-card p {
+.LectureRoomCard p {
   margin: 2px 0 0;
   font-size: 14px;
   color: #6B7280;

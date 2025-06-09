@@ -7,6 +7,18 @@ import { getBoardLabel } from "../utils/boardUtils";
 import { UserContext } from "../utils/UserContext";
 import SearchBar from "../SearchBar";
 
+// 날짜+시간 포맷
+const formatDateTime = (datetimeStr) => {
+  if (!datetimeStr) return "";
+  const date = new Date(datetimeStr);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  const hh = String(date.getHours()).padStart(2, "0");
+  const mi = String(date.getMinutes()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd} ${hh}:${mi}`;
+};
+
 const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   const { user } = useContext(UserContext);
   const [postData, setPostData] = useState({
@@ -45,8 +57,8 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   };
 
   useEffect(() => {
-    setSearchParams({ filter: "title", query: "" }); // 🔹 검색 조건 초기화
-    fetchData(0, "title", ""); // 🔹 초기 게시글 로딩 (전체 목록)
+    setSearchParams({ filter: "title", query: "" });
+    fetchData(0, "title", "");
   }, [boardType]);
 
   const handlePageChange = (page) => {
@@ -109,7 +121,6 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
         </div>
       )}
 
-
       <div className="free-list">
         {postData.posts.length === 0 ? (
           <p>게시글이 없습니다.</p>
@@ -136,7 +147,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
                       </div>
                       <div className="free-author-date">
                         {post.boardType === "SECRET" ? "익명" : post.writerNickname} |{" "}
-                        {post.createdDate?.slice(0, 10)}
+                        {formatDateTime(post.createdDate)}
                       </div>
                     </div>
                   </Link>
@@ -152,26 +163,19 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
       <SearchBar onSearch={handleSearch} />
 
       <div className="pagination">
-        {/* << 처음 */}
         {postData.currentPage > 2 && (
           <button onClick={() => handlePageChange(0)}>&laquo; 처음</button>
         )}
-
-        {/* < 이전 */}
         {postData.currentPage > 0 && (
           <button onClick={() => handlePageChange(postData.currentPage - 1)}>&lt; 이전</button>
         )}
-
-        {/* 페이지 번호들 */}
         {(() => {
           const totalPages = postData.totalPages;
           const currentPage = postData.currentPage;
           const pageButtons = [];
-
           const startPage = Math.max(0, currentPage - 2);
           const endPage = Math.min(totalPages - 1, currentPage + 2);
 
-          // ... 앞 생략
           if (startPage > 0) {
             pageButtons.push(<span key="start-ellipsis">...</span>);
           }
@@ -188,25 +192,19 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
             );
           }
 
-          // ... 뒤 생략
           if (endPage < totalPages - 1) {
             pageButtons.push(<span key="end-ellipsis">...</span>);
           }
 
           return pageButtons;
         })()}
-
-        {/* 다음 > */}
         {postData.currentPage < postData.totalPages - 1 && (
           <button onClick={() => handlePageChange(postData.currentPage + 1)}>다음 &gt;</button>
         )}
-
-        {/* >> 마지막 */}
         {postData.currentPage < postData.totalPages - 3 && (
           <button onClick={() => handlePageChange(postData.totalPages - 1)}>&raquo; 마지막</button>
         )}
       </div>
-
     </div>
   );
 };

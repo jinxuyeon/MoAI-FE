@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
 import CommentBox from "./CommentBox";
@@ -12,27 +12,60 @@ const PostDetail = () => {
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [replyingTo, setReplyingTo] = useState(null);
+  const [replyContent, setReplyContent] = useState("");
+  const [childComments, setChildComments] = useState({});
+  const [expandedReplies, setExpandedReplies] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const res = await axiosInstance.get(`/api/post/${postId}`);
-        setPost(res.data);
-
-        const sortedComments = [...(res.data.comments || [])].sort(
-          (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-        );
-        setComments(sortedComments);
-      } catch (err) {
-        console.error("❌ 게시글 상세 불러오기 실패:", err);
-      }
-    };
     fetchPost();
+    fetchComments();
   }, [postId]);
 
-  const handleLike = () => {
-    setLiked(!liked);
+  const fetchPost = async () => {
+    try {
+      const res = await axiosInstance.get(`/api/post/${postId}`);
+      setPost(res.data.dto);
+    } catch (err) {
+      console.error("❌ 게시글 상세 불러오기 실패:", err);
+    }
+  };
+
+  const fetchComments = async () => {
+    try {
+      const res = await axiosInstance.get(`/api/post/${postId}/comments`);
+      const commentList = res.data.comments || [];
+      const sorted = [...commentList].sort(
+        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+      );
+      setComments(sorted);
+    } catch (err) {
+      console.error("❌ 댓글 불러오기 실패:", err);
+    }
+  };
+
+  const fetchReplies = async (parentId) => {
+    try {
+      const res = await axiosInstance.get(`/api/post/${parentId}/replies`);
+      const replies = res.data.replies || [];
+      setChildComments((prev) => ({ ...prev, [parentId]: replies }));
+      setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
+    } catch (err) {
+      console.error("❌ 대댓글 불러오기 실패:", err);
+    }
+  };
+
+  const toggleReplies = async (parentId) => {
+    if (expandedReplies[parentId]) {
+      setExpandedReplies((prev) => ({ ...prev, [parentId]: false }));
+    } else {
+      if (!childComments[parentId]) {
+        await fetchReplies(parentId);
+      } else {
+        setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
+      }
+    }
   };
 
   const handleCommentLike = (commentId) => {
@@ -46,9 +79,7 @@ const PostDetail = () => {
   };
 
   const handlePostDelete = async () => {
-    const confirmed = window.confirm("정말로 이 게시글을 삭제하시겠습니까?");
-    if (!confirmed) return;
-
+    if (!window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) return;
     try {
       await axiosInstance.delete(`/api/post/${postId}`);
       navigate(`/main/community/${post.boardType.toLowerCase()}`);
@@ -60,24 +91,68 @@ const PostDetail = () => {
 
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
-
     try {
       await axiosInstance.post(`/api/post/${postId}/comments`, {
         content: newComment,
       });
-
-      const res = await axiosInstance.get(`/api/post/${postId}`);
-      setPost(res.data);
-
-      const latestComments = res.data.comments || [];
-      setComments(latestComments.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate)));
-
       setNewComment("");
+      await fetchComments();
     } catch (err) {
       console.error("❌ 댓글 등록 실패:", err);
       alert("댓글 등록 실패");
     }
   };
+
+  const handleReplySubmit = async (parentId) => {
+    if (!replyContent.trim()) return;
+    try {
+      await axiosInstance.post(`/api/post/${postId}/comments`, {
+        content: replyContent,
+        parentId,
+      });
+      setReplyContent("");
+      setReplyingTo(null);
+      await fetchReplies(parentId); // 해당 대댓글만 갱신
+    } catch (e) {
+      console.error("답글 등록 실패:", e);
+    }
+  };
+
+  const renderCommentTree = (comment) => (
+    <CommentBox
+      key={comment.id}
+      comment={comment}
+      boardType={post.boardType}
+      handleCommentLike={handleCommentLike}
+      onDeleteSuccess={(deletedId) => {
+        setComments((prev) => prev.filter((c) => c.id !== deletedId));
+        setChildComments((prev) => {
+          const updated = { ...prev };
+          Object.keys(updated).forEach((key) => {
+            updated[key] = updated[key].filter((r) => r.id !== deletedId);
+          });
+          return updated;
+        });
+      }}
+      onReplyClick={(id) => {
+        setReplyingTo(id === replyingTo ? null : id);
+        setReplyContent("");
+      }}
+      isReplying={replyingTo === comment.id}
+      replyContent={replyContent}
+      setReplyContent={setReplyContent}
+      onSubmitReply={handleReplySubmit}
+      showReplies={expandedReplies[comment.id]}
+      onToggleReplies={() => toggleReplies(comment.id)}
+    >
+      {expandedReplies[comment.id] &&
+        (childComments[comment.id] || []).map((child) => (
+          <div key={child.id} className="nested-reply" style={{ marginLeft: "20px" }}>
+            {renderCommentTree(child)}
+          </div>
+        ))}
+    </CommentBox>
+  );
 
   if (!post) return <div className="PostDetail">게시글을 찾을 수 없습니다.</div>;
 
@@ -85,9 +160,7 @@ const PostDetail = () => {
     <div className="PostDetail">
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
-        {post.isAuthor && (
-          <MenuButton onEdit={() => { }} onDelete={handlePostDelete} />
-        )}
+        {post.isAuthor && <MenuButton onEdit={() => {}} onDelete={handlePostDelete} />}
       </div>
 
       <div className="post-meta">
@@ -103,7 +176,6 @@ const PostDetail = () => {
         {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
       </div>
 
-      {/* ✅ 게시판 타입이 MARKET이면 예외적으로 수평 배치 */}
       {post.boardType === "MARKET" ? (
         <div className="market-horizontal-layout">
           <div className="market-image-box">
@@ -112,7 +184,6 @@ const PostDetail = () => {
               alt="상품 이미지"
               className="market-main-image"
             />
-
           </div>
           <div className="market-info-box">
             <h3 className="market-title">{post.title}</h3>
@@ -126,7 +197,6 @@ const PostDetail = () => {
           </div>
         </div>
       ) : (
-        // 기본 게시판 본문
         <>
           {post.image_urls && (
             <img src={post.image_urls} alt="썸네일" className="post-image" />
@@ -139,21 +209,6 @@ const PostDetail = () => {
           </section>
         </>
       )}
-
-      <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px", marginTop: "20px" }}>
-        <div className="like-container">
-          <button className="like-toggle-button" onClick={handleLike}>
-            {liked ? "❤️" : "🤍"}
-          </button>
-        </div>
-        <Link
-          to={`/main/community/${post.boardType.toLowerCase()}`}
-          className="back-to-list-button"
-        >
-          목록으로
-        </Link>
-      </div>
-
 
       <div className="comment-header-line">
         <span className="comment-header">💬 댓글 {comments.length}</span>
@@ -178,14 +233,7 @@ const PostDetail = () => {
       <ul className="comment-list">
         {comments.map((c) => (
           <li key={c.id} className="comment-item">
-            <CommentBox
-              comment={c}
-              handleCommentLike={handleCommentLike}
-              boardType={post.boardType}
-              onDeleteSuccess={(deletedId) =>
-                setComments((prev) => prev.filter((comment) => comment.id !== deletedId))
-              }
-            />
+            {renderCommentTree(c)}
           </li>
         ))}
       </ul>
