@@ -1,7 +1,7 @@
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,50 +9,83 @@
 }
 
 .modal-box {
-  background: white;
-  padding: 20px;
+  background: #fff;
+  padding: 24px 20px;
   border-radius: 12px;
-  width: 400px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 360px;
+  max-width: 95%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-family: "Pretendard", sans-serif;
 }
 
 .modal-box h2 {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .modal-box label {
   display: block;
-  margin-top: 12px;
-  font-weight: bold;
+  margin: 12px 0 6px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .modal-box input,
 .modal-box textarea,
 .modal-box select {
   width: 100%;
-  margin-top: 4px;
-  padding: 8px;
+  padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.modal-box textarea {
+  min-height: 60px;
+  max-height: 100px;
 }
 
 .color-palette {
   display: flex;
-  gap: 6px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .color-box {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 6px;
   border: 2px solid transparent;
   cursor: pointer;
+  transition: border 0.2s;
 }
 
 .color-box.selected {
-  border-color: black;
+  border-color: #000;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.custom-color-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  margin-left: auto;
+  margin-top: 8px;
+}
+
+.custom-color-picker input[type="color"] {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .modal-actions {
@@ -61,34 +94,30 @@
   margin-top: 20px;
 }
 
-.color-box {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  position: relative;
-}
-
-.color-box.selected {
-  border-color: #000;
-  box-shadow: 0 0 0 2px white;
-}
-
-.custom-color-picker {
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-  font-size: 12px;
-  color: #555;
-}
-
-.custom-color-picker input[type="color"] {
-  margin-left: 6px;
+.modal-actions button {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 14px;
   border: none;
-  background: none;
+  border-radius: 6px;
   cursor: pointer;
-  width: 32px;
-  height: 32px;
-  padding: 0;
+}
+
+.modal-actions button:first-child {
+  background-color: #007bff;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.modal-actions button:last-child {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #ddd;
 }
