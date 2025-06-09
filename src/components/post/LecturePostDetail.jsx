@@ -1,4 +1,4 @@
-import "./LecturePostDetail.css"
+import "./LecturePostDetail.css";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
@@ -51,14 +51,12 @@ const LecturePostDetail = () => {
     };
 
     const handlePostDelete = async () => {
-        const confirmed = window.confirm(
-            "정말로 이 게시글을 삭제하시겠습니까?"
-        );
+        const confirmed = window.confirm("정말로 이 게시글을 삭제하시겠습니까?");
         if (!confirmed) return;
 
         try {
             await axiosInstance.delete(`/api/post/${postId}`);
-            navigate(`/main/community/${post.boardType.toLowerCase()}`);
+            navigate(`/main/study-dashboard/${post.lectureRoomId}`);
         } catch (err) {
             console.error("❌ 게시글 삭제 실패:", err);
             alert("게시글 삭제 중 오류가 발생했습니다.");
@@ -73,7 +71,7 @@ const LecturePostDetail = () => {
                 content: newComment,
             });
 
-            const res = await axiosInstance.get(`/api/post/${postId}`);
+            const res = await axiosInstance.get(`/api/post/${lectureId}/${postId}`);
             setPost(res.data);
 
             const latestComments = res.data.comments || [];
@@ -91,11 +89,7 @@ const LecturePostDetail = () => {
     };
 
     if (!post)
-        return (
-            <div className="LecturePostDetail">
-                게시글을 찾을 수 없습니다.
-            </div>
-        );
+        return <div className="LecturePostDetail">게시글을 찾을 수 없습니다.</div>;
 
     return (
         <div className="LecturePostDetail">
@@ -107,7 +101,7 @@ const LecturePostDetail = () => {
             </div>
 
             <div className="post-meta">
-                {post.boardType === "SECRET" ? (
+                {post.lecturePostType === "SECRET" ? (
                     <div className="anonymous-writer">익명</div>
                 ) : (
                     <ProfileTemplate
@@ -119,47 +113,20 @@ const LecturePostDetail = () => {
                 {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
             </div>
 
-            {/* ✅ 게시판 타입이 MARKET이면 예외적으로 수평 배치 */}
-            {post.boardType === "MARKET" ? (
-                <div className="market-horizontal-layout">
-                    <div className="market-image-box">
-                        <img
-                            src={post.imageUrls || "/icons/no-img-text.png"}
-                            alt="상품 이미지"
-                            className="market-main-image"
-                        />
-                    </div>
-                    <div className="market-info-box">
-                        <h3 className="market-title">{post.title}</h3>
-                        <p className="market-price">
-                            {post.price != null
-                                ? `${post.price.toLocaleString()}원`
-                                : "가격 미정"}
-                        </p>
-                        <div
-                            className="market-description"
-                            dangerouslySetInnerHTML={{ __html: post.content }}
-                        ></div>
-                    </div>
+            {/* 질문-답변 QnA 형식 */}
+            <section className="lecture-qna-box">
+                <div className="question-box">
+                    <h4>🧑 질문</h4>
+                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
-            ) : (
-                // 기본 게시판 본문
-                <>
-                    {post.image_urls && (
-                        <img
-                            src={post.image_urls}
-                            alt="썸네일"
-                            className="post-image"
-                        />
-                    )}
-                    <section className="post-content-box">
-                        <div
-                            className="post-content"
-                            dangerouslySetInnerHTML={{ __html: post.content }}
-                        ></div>
-                    </section>
-                </>
-            )}
+
+                {post.answer && (
+                    <div className="answer-box">
+                        <h4>👨‍🏫 교수님 답변</h4>
+                        <div dangerouslySetInnerHTML={{ __html: post.answer }} />
+                    </div>
+                )}
+            </section>
 
             <div
                 style={{
@@ -176,7 +143,7 @@ const LecturePostDetail = () => {
                     </button>
                 </div>
                 <Link
-                    to={`/main/community/${post.boardType.toLowerCase()}`}
+                    to={`/main/study-dashboard/${post.lectureRoomId}`}
                     className="back-to-list-button"
                 >
                     목록으로
@@ -184,9 +151,7 @@ const LecturePostDetail = () => {
             </div>
 
             <div className="comment-header-line">
-                <span className="comment-header">
-                    💬 댓글 {comments.length}
-                </span>
+                <span className="comment-header">💬 댓글 {comments.length}</span>
             </div>
 
             <div className="comment-form">
@@ -211,12 +176,10 @@ const LecturePostDetail = () => {
                         <CommentBox
                             comment={c}
                             handleCommentLike={handleCommentLike}
-                            boardType={post.boardType}
+                            boardType={post.lecturePostType}
                             onDeleteSuccess={(deletedId) =>
                                 setComments((prev) =>
-                                    prev.filter(
-                                        (comment) => comment.id !== deletedId
-                                    )
+                                    prev.filter((comment) => comment.id !== deletedId)
                                 )
                             }
                         />

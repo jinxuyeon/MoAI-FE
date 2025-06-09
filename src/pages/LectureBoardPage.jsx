@@ -87,7 +87,6 @@ const LectureBoardPage = () => {
   if (loading) {
     return (
       <div className="LectureBoardPage">
-        <Header title="Community" />
         <div style={{ padding: "40px" }}>
           <h2>로딩 중...</h2>
         </div>
@@ -98,7 +97,6 @@ const LectureBoardPage = () => {
   if (error || !lecture) {
     return (
       <div className="LectureBoardPage">
-        <Header title="Community" />
         <div style={{ padding: "40px" }}>
           <h2>❌ 강의 정보를 불러올 수 없습니다.</h2>
           <p>lectureId: {lectureId}</p>

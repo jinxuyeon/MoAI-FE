@@ -1,6 +1,7 @@
 .LecturePostDetail {
   padding: 24px;
-  max-width: 700px;
+  width: 100%;
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -228,4 +229,36 @@
   align-items: flex-start;
   margin-top: 1.5rem;
   flex-wrap: wrap;
+}
+
+.LecturePostDetail .lecture-qna-box {
+  display: flex;
+  gap: 24px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.LecturePostDetail .question-box,
+.LecturePostDetail .answer-box {
+  flex: 1;
+  min-width: 300px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9fafb;
+}
+
+.LecturePostDetail .question-box h4,
+.LecturePostDetail .answer-box h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.LecturePostDetail .question-box div,
+.LecturePostDetail .answer-box div {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
 }
