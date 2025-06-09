@@ -5,7 +5,7 @@ import BasicBoard from "./BasicBoard";
 import { House, Volume2, ShoppingCart, BookOpen, LayoutList } from "lucide-react";
 import axiosInstance from "./utils/AxiosInstance";
 import { useEffect, useState } from "react";
-import LectureCard from "./LectureCard";
+import LectureRoomCard from "./LectureRoomCard";
 
 const Dashboard = () => {
   const [postsSummary, setPostsSummary] = useState(null);
@@ -50,7 +50,7 @@ const Dashboard = () => {
               <h3>Start Learning</h3>
             </div>
             <section className="inner-container">
-              <LectureCard />
+              <LectureRoomCard />
             </section>
           </div>
 

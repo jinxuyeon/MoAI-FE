@@ -44,7 +44,8 @@ const FriendModal = ({
             setIsFriendError(false);
         } catch (error) {
             const message =
-                error.response?.data?.message || "친구 요청 중 오류가 발생했습니다.";
+                error.response?.data?.message ||
+                "친구 요청 중 오류가 발생했습니다.";
             setResultMessage(`❌ ${message}`);
             setIsFriendError(true);
         }
@@ -59,8 +60,8 @@ const FriendModal = ({
     const handleAccept = async (idToAccept) => {
         try {
             await acceptFriendRequest(idToAccept);
-            setRequestMemberList(prev =>
-                prev.filter(request => request.id !== idToAccept)
+            setRequestMemberList((prev) =>
+                prev.filter((request) => request.id !== idToAccept)
             );
             fetchMyFriendInfo();
         } catch (error) {
@@ -71,8 +72,8 @@ const FriendModal = ({
     const handleDecline = async (idToDecline) => {
         try {
             await declineFriendRequest(idToDecline);
-            setRequestMemberList(prev =>
-                prev.filter(request => request.id !== idToDecline)
+            setRequestMemberList((prev) =>
+                prev.filter((request) => request.id !== idToDecline)
             );
         } catch (error) {
             console.error("친구 요청 거절 실패:", error);
@@ -85,18 +86,26 @@ const FriendModal = ({
                 <div className="container">
                     <div className="header">
                         <h3>🖐️ 친구 추가</h3>
-                        <button className="request-tap-btn" onClick={() => handleTabChange("send")}>
+                        <button
+                            className="request-tap-btn"
+                            onClick={() => handleTabChange("send")}
+                        >
                             검색
                         </button>
-                        <button className="request-tap-btn" onClick={() => {
-                            handleTabChange("receive");
-                            setHasFriendrequest(false);
-                        }}>
+                        <button
+                            className="request-tap-btn"
+                            onClick={() => {
+                                handleTabChange("receive");
+                                setHasFriendrequest(false);
+                            }}
+                        >
                             받은요청
                             <Reddot count={requestMemberList.length} />
                         </button>
                         <button
-                            style={{ backgroundImage: "url('/icons/exit-image.svg')" }}
+                            style={{
+                                backgroundImage: "url('/icons/exit-image.svg')",
+                            }}
                             className="exit-btn"
                             onClick={() => setOpenModal(false)}
                         />
@@ -112,7 +121,11 @@ const FriendModal = ({
                                     placeholder="닉네임으로 친구를 찾아보세요"
                                 />
                                 {resultMessage && (
-                                    <p className={`friend-message ${isFriendError ? "error" : "success"}`}>
+                                    <p
+                                        className={`friend-message ${
+                                            isFriendError ? "error" : "success"
+                                        }`}
+                                    >
                                         {resultMessage}
                                     </p>
                                 )}
@@ -122,13 +135,19 @@ const FriendModal = ({
                                     <>
                                         <div className="search-result-profile">
                                             <img
-                                                src={result.profileThumbnails || "/default-profile.png"}
+                                                src={
+                                                    result.profileThumbnails ||
+                                                    "/default-profile.png"
+                                                }
                                                 alt="프로필"
                                                 className="profile-img"
                                             />
                                             <p>{result.nickName}</p>
                                         </div>
-                                        <button className="request-btn" onClick={handleAddFriend}>
+                                        <button
+                                            className="request-btn"
+                                            onClick={handleAddFriend}
+                                        >
                                             +요청
                                         </button>
                                     </>
@@ -139,21 +158,37 @@ const FriendModal = ({
                         <div className="requests-box">
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (
-                                    <div className="request-container" key={index}>
+                                    <div
+                                        className="request-container"
+                                        key={index}
+                                    >
                                         <div className="search-result-profile">
                                             <img
-                                                src={request.profileImageUrl || "/default-profile.png"}
+                                                src={
+                                                    request.profileThumbnails ||
+                                                    "/default-profile.png"
+                                                }
                                                 alt="프로필"
                                                 className="profile-img"
                                             />
                                             <span>{request.nickName}</span>
                                         </div>
                                         <div>
-                                            <button className="request-btn accept" onClick={() => handleAccept(request.id)}>
+                                            <button
+                                                className="request-btn accept"
+                                                onClick={() =>
+                                                    handleAccept(request.id)
+                                                }
+                                            >
                                                 수락
                                             </button>
                                             |
-                                            <button className="request-btn decline" onClick={() => handleDecline(request.id)}>
+                                            <button
+                                                className="request-btn decline"
+                                                onClick={() =>
+                                                    handleDecline(request.id)
+                                                }
+                                            >
                                                 거절
                                             </button>
                                         </div>
