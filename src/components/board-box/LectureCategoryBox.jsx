@@ -4,6 +4,7 @@ import axiosInstance from "../utils/AxiosInstance";
 import "./LectureCategoryBox.css";
 import { UserContext } from "../utils/UserContext";
 import LectureCreateModal from "../modals/LectureCreateModal";
+import LectureCard from "../LectureCard";
 
 const LectureCategoryBox = () => {
   const { user } = useContext(UserContext);
@@ -61,23 +62,12 @@ const LectureCategoryBox = () => {
       )}
 
       <div className="lecture-card-grid">
-        {visibleLectures.map((lecture) => (
-          <Link
-            to={`/main/study-dashboard/${lecture.id}`}
-            key={lecture.id}
-            className="lecture-card"
-            state={{ lecture }}
-            title={lecture.intro || ""}
-          >
-            <div className="lecture-color-box" style={{ backgroundColor: lecture.themeColor }} />
-            <div className="lecture-info">
-              <h3>{lecture.title}</h3>
-              <p>{lecture.professorName} 교수님</p>
-              <p>{lecture.grade}학년 {lecture.semester}학기</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+  {visibleLectures.map((lecture) => (
+    <LectureCard key={lecture.id} lecture={lecture} />
+  ))}
+</div>
+
+
 
       <div className="pagination">
         {currentPage > 1 && (

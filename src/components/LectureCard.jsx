@@ -1,22 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { BookOpen } from "lucide-react";
 import "./LectureCard.css";
+import { Link } from "react-router-dom";
 
-const LectureCard = () => {
-  const navigate = useNavigate();
-
-  const goToLecturePage = () => {
-    navigate("/main/study-dashboard");
-  };
-
+const LectureCard = ({ lecture }) => {
   return (
-    <div className="lecture-card" onClick={goToLecturePage}>
-      <BookOpen size={32} color="#4F46E5" />
-      <div>
-        <h4>강의실</h4>
-        <p>수강 중인 강의와 자료를 확인하세요</p>
-      </div>
-    </div>
+    <Link
+      to={`/main/study-dashboard/${lecture.id}`}
+      className="dashboard-card lecture-card"
+      state={{ lecture }}
+      title={lecture.intro || ""}
+      style={{ borderLeft: `5px solid ${lecture.themeColor}` }} // ✅ 직접 색상 지정
+    >
+      <h3>{lecture.title}</h3>
+      <p>{lecture.professorName} 교수님</p>
+      <p>{lecture.grade}학년 {lecture.semester}학기</p>
+    </Link>
   );
 };
 
