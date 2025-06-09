@@ -1,6 +1,19 @@
+.StudyNavi {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
+.study-link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
 
-.StudyNavi{
-    display: flex;
-    flex-direction: column;
+.study-link:hover {
+  color: #1d4ed8; /* hover 시 파란색 */
 }

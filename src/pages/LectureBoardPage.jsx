@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
 import ProfileTemplate from "../components/ProfileTemplate";
 import PostPreviewBox from "../components/PostPreviewBox";
+import { Star } from "lucide-react";
 
 const tabList = ["질문", "후기", "자료실", "공지사항"];
 
@@ -13,10 +14,6 @@ const tabToTypeMap = {
   후기: "LECTURE_R",
   자료실: "LECTURE_REF",
   공지사항: "LECTURE_N"
-};
-const postData = {
-  currentPage: 0,
-  totalPages: 2,
 };
 
 const LectureBoardPage = () => {
@@ -31,6 +28,7 @@ const LectureBoardPage = () => {
   const [fade, setFade] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchLecture = async () => {
@@ -46,6 +44,38 @@ const LectureBoardPage = () => {
     };
     fetchLecture();
   }, [lectureId]);
+
+  useEffect(() => {
+  const fetchFavorite = async () => {
+    try {
+      const res = await axiosInstance.get("/api/lecture-room/mark"); // ✅ 수정된 경로
+      setIsFavorite(res.data.favorites.includes(Number(lectureId)));
+    } catch (e) {
+      console.error("즐겨찾기 조회 실패", e);
+    }
+  };
+  fetchFavorite();
+}, [lectureId]);
+
+  const toggleFavorite = async () => {
+  try {
+    if (isFavorite) {
+      await axiosInstance.delete("/api/lecture-room/mark", {
+        params: { lectureRoomId: lectureId },
+      });
+    } else {
+      await axiosInstance.post("/api/lecture-room/mark", null, {
+        params: { lectureRoomId: lectureId },
+      });
+    }
+
+    setIsFavorite(!isFavorite);
+    window.dispatchEvent(new Event("favoritesUpdated"));
+  } catch (e) {
+    console.error("❌ 즐겨찾기 변경 실패", e);
+    console.error("🔍 서버 응답 내용:", e.response?.data || "(응답 없음)");
+  }
+};
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -111,12 +141,21 @@ const LectureBoardPage = () => {
         <div className="lecture-main-content">
           <div className="lecture-header">
             <div className="lecture-title-wrapper">
-              <h2 className="lecture-title">{lecture.title} </h2>
-              <ProfileTemplate profileImageUrl={lecture.
-                professorThumbnail
-              } name={lecture.professorNickname} id={lecture.professorId} />
-              <span className="lecture-professor">{lecture.professorName
-              } 교수님</span>
+              <button className="Lecture-Favorite-Button" onClick={toggleFavorite}>
+                <Star
+                  size={22}
+                  stroke="black"
+                  fill={isFavorite ? "gold" : "none"}
+                  style={{ marginLeft: "6px" }}
+                />
+              </button>
+              <h2 className="lecture-title">{lecture.title}</h2>
+              <ProfileTemplate
+                profileImageUrl={lecture.professorThumbnail}
+                name={lecture.professorNickname}
+                id={lecture.professorId}
+              />
+              <span className="lecture-professor">{lecture.professorName} 교수님</span>
             </div>
           </div>
 
