@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
 import axiosInstance from "../components/utils/AxiosInstance";
@@ -28,13 +27,14 @@ const LectureBoardPage = () => {
   const [fade, setFade] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isMarked, setIsMarked] = useState(false);
 
   useEffect(() => {
     const fetchLecture = async () => {
       try {
         const res = await axiosInstance.get(`/api/lecture-room/${lectureId}`);
         setLecture(res.data.data);
+        setIsMarked(res.data.data.isMarked); // ✅ 여기에 바로 반영
       } catch (err) {
         console.error("강의 정보 불러오기 실패", err);
         setError("강의 정보를 불러올 수 없습니다.");
@@ -45,37 +45,38 @@ const LectureBoardPage = () => {
     fetchLecture();
   }, [lectureId]);
 
+
   useEffect(() => {
-  const fetchFavorite = async () => {
-    try {
-      const res = await axiosInstance.get("/api/lecture-room/mark"); // ✅ 수정된 경로
-      setIsFavorite(res.data.favorites.includes(Number(lectureId)));
-    } catch (e) {
-      console.error("즐겨찾기 조회 실패", e);
-    }
-  };
-  fetchFavorite();
-}, [lectureId]);
+    const fetchFavorite = async () => {
+      try {
+        const res = await axiosInstance.get("/api/lecture-room/mark"); // ✅ 수정된 경로
+        setIsFavorite(res.data.favorites.includes(Number(lectureId)));
+      } catch (e) {
+        console.error("즐겨찾기 조회 실패", e);
+      }
+    };
+    fetchFavorite();
+  }, [lectureId]);
 
   const toggleFavorite = async () => {
-  try {
-    if (isFavorite) {
-      await axiosInstance.delete("/api/lecture-room/mark", {
-        params: { lectureRoomId: lectureId },
-      });
-    } else {
-      await axiosInstance.post("/api/lecture-room/mark", null, {
-        params: { lectureRoomId: lectureId },
-      });
-    }
+    try {
+      if (isMarked) {
+        await axiosInstance.delete("/api/lecture-room/mark", {
+          params: { lectureRoomId: lectureId },
+        });
+      } else {
+        await axiosInstance.post("/api/lecture-room/mark", null, {
+          params: { lectureRoomId: lectureId },
+        });
+      }
 
-    setIsFavorite(!isFavorite);
-    window.dispatchEvent(new Event("favoritesUpdated"));
-  } catch (e) {
-    console.error("❌ 즐겨찾기 변경 실패", e);
-    console.error("🔍 서버 응답 내용:", e.response?.data || "(응답 없음)");
-  }
-};
+      setIsMarked(!isMarked); // ✅ 변수명 수정
+      window.dispatchEvent(new Event("favoritesUpdated"));
+    } catch (e) {
+      console.error("❌ 즐겨찾기 변경 실패", e);
+      console.error("🔍 서버 응답 내용:", e.response?.data || "(응답 없음)");
+    }
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -145,7 +146,7 @@ const LectureBoardPage = () => {
                 <Star
                   size={22}
                   stroke="black"
-                  fill={isFavorite ? "gold" : "none"}
+                  fill={isMarked ? "gold" : "none"} // ✅ 상태 적용
                   style={{ marginLeft: "6px" }}
                 />
               </button>
