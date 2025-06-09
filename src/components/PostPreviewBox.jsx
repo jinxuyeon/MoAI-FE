@@ -27,7 +27,7 @@ const PostPreviewBox = ({ post }) => {
 
     return (
         <div className="PostPreviewBox">
-            <Link to={`/main/study-dashboard/${post.lectureRoomId}/post/${post.id}`} className="link">
+            <Link to={`/main/study-dashboard/${post.lectureRoomId}/${post.id}`} className="link">
                 <div className="layout-box">
                     <section className="content-box">
                         <div className="inner-box">

@@ -1,57 +1,57 @@
-.PostDetail {
+.LecturePostDetail {
   padding: 24px;
   max-width: 700px;
   margin: auto;
 }
 
-.PostDetail .post-title-with-like {
+.LecturePostDetail .post-title-with-like {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.PostDetail .post-title {
+.LecturePostDetail .post-title {
   font-size: 24px;
   margin-right: 8px;
   margin-bottom: 4px;
 }
 
-.PostDetail .like-container {
+.LecturePostDetail .like-container {
   display: flex;
   justify-content: center;
 }
 
-.PostDetail .like-toggle-button {
+.LecturePostDetail .like-toggle-button {
   font-size: 24px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.PostDetail .post-meta {
+.LecturePostDetail .post-meta {
   color: #777;
   font-size: 14px;
   margin-bottom: 16px;
 }
 
-.PostDetail .post-image {
+.LecturePostDetail .post-image {
   width: 100%;
   height: auto;
   margin-bottom: 16px;
   border-radius: 8px;
 }
 
-.PostDetail .post-content-box {
+.LecturePostDetail .post-content-box {
   min-height: 500px;
 }
 
-.PostDetail .post-content {
+.LecturePostDetail .post-content {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 24px;
 }
 
-.PostDetail .post-content img {
+.LecturePostDetail .post-content img {
   max-width: 100%;
   height: auto;
   display: block;
@@ -59,31 +59,31 @@
   border-radius: 8px;
 }
 
-.PostDetail .comment-header-line {
+.LecturePostDetail .comment-header-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.PostDetail .comment-header {
+.LecturePostDetail .comment-header {
   font-size: 18px;
   font-weight: bold;
 }
 
-.PostDetail .comment-form {
+.LecturePostDetail .comment-form {
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
 }
 
-.PostDetail .comment-form input {
+.LecturePostDetail .comment-form input {
   flex: 1;
   padding: 8px;
   font-size: 14px;
 }
 
-.PostDetail .comment-form button {
+.LecturePostDetail .comment-form button {
   background-color: #3399ff;
   color: white;
   border: none;
@@ -92,25 +92,25 @@
   cursor: pointer;
 }
 
-.PostDetail .comment-list {
+.LecturePostDetail .comment-list {
   list-style: none;
   padding: 0;
   margin-bottom: 16px;
 }
 
-.PostDetail .comment-item {
+.LecturePostDetail .comment-item {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
 
-.PostDetail .post-menu-container {
+.LecturePostDetail .post-menu-container {
   position: relative;
   display: inline-block;
   margin-right: 8px;
 }
 
-.PostDetail .post-menu-button {
+.LecturePostDetail .post-menu-button {
   background: none;
   border: none;
   font-size: 20px;
@@ -118,7 +118,7 @@
   padding: 4px 8px;
 }
 
-.PostDetail .post-menu-dropdown {
+.LecturePostDetail .post-menu-dropdown {
   position: absolute;
   right: 0;
   top: 30px;
@@ -132,7 +132,7 @@
   min-width: 80px;
 }
 
-.PostDetail .post-menu-item {
+.LecturePostDetail .post-menu-item {
   padding: 8px 12px;
   background: none;
   border: none;
@@ -141,11 +141,11 @@
   font-size: 14px;
 }
 
-.PostDetail .post-menu-item:hover {
+.LecturePostDetail .post-menu-item:hover {
   background-color: #f0f0f0;
 }
 
-.PostDetail .back-to-list-button {
+.LecturePostDetail .back-to-list-button {
   display: inline-block;
   padding: 8px 16px;
   background-color: #3498db;
@@ -158,34 +158,34 @@
   cursor: pointer;
 }
 
-.PostDetail .back-to-list-button:hover {
+.LecturePostDetail .back-to-list-button:hover {
   background-color: #e5e7eb;
 }
 
-.PostDetail .market-detail {
+.LecturePostDetail .market-detail {
   padding: 2rem;
 }
 
-.PostDetail .market-post-header {
+.LecturePostDetail .market-post-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.PostDetail .market-content-wrapper {
+.LecturePostDetail .market-content-wrapper {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
 }
 
-.PostDetail .market-image-box {
+.LecturePostDetail .market-image-box {
   flex: 1;
   min-width: 300px;
   text-align: center;
 }
 
-.PostDetail .market-main-image {
+.LecturePostDetail .market-main-image {
   width: 100%;
   max-width: 500px;
   height: auto;
@@ -194,35 +194,35 @@
   border: 1px solid #ccc;
 }
 
-.PostDetail .market-info-box {
+.LecturePostDetail .market-info-box {
   flex: 1;
   min-width: 250px;
 }
 
-.PostDetail .market-text-box {
+.LecturePostDetail .market-text-box {
   flex: 1;
 }
 
-.PostDetail .market-title {
+.LecturePostDetail .market-title {
   font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.PostDetail .market-price {
+.LecturePostDetail .market-price {
   font-size: 1.2rem;
   color: #1d4ed8;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
-.PostDetail .market-description {
+.LecturePostDetail .market-description {
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
 }
 
-.PostDetail .market-horizontal-layout {
+.LecturePostDetail .market-horizontal-layout {
   display: flex;
   gap: 2rem;
   align-items: flex-start;

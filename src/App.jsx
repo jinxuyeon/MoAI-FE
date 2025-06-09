@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Route, Routes, useNavigate, Navigate, useLocation } from "react-router-dom";
+import {
+    Route,
+    Routes,
+    Navigate,
+    useLocation,
+} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import BoardPage from "./pages/BoardPage";
@@ -18,10 +23,11 @@ import AdminPage from "./pages/AdminPage.jsx";
 import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
 import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
+import PostDetail from "./components/post/PostDetail.jsx";
+import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAuthChecked, setIsAuthChecked] = useState(false); // 추가
-    const navigate = useNavigate();
     const location = useLocation();
 
     const isTokenExpired = (token) => {
@@ -47,7 +53,12 @@ function App() {
         setIsAuthChecked(true); // 인증 체크 완료
     }, []);
 
-    const hideFooterRoutes = ["/login", "/login/register", "/chat-mail", "/mypage"];
+    const hideFooterRoutes = [
+        "/login",
+        "/login/register",
+        "/chat-mail",
+        "/mypage",
+    ];
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
     // 인증 상태 확인 전이면 아무것도 렌더링하지 않음
@@ -60,58 +71,115 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            isAuthenticated ? <Navigate to="/main" replace /> : <Navigate to="/login" replace />
+                            isAuthenticated ? (
+                                <Navigate to="/main" replace />
+                            ) : (
+                                <Navigate to="/login" replace />
+                            )
                         }
                     />
-                    <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+                    <Route
+                        path="/login"
+                        element={
+                            <LoginPage
+                                setIsAuthenticated={setIsAuthenticated}
+                            />
+                        }
+                    />
                     <Route path="/login/register" element={<RegisterPage />} />
 
                     {/* 인증이 필요한 경로들 */}
                     <Route
                         path="/main"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MainPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <MainPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/mypage"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MyPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <MyPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/chat-mail"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><MailPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <MailPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/main/community/:boardType"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <BoardPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/main/community/:boardType/post/:postId"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <BoardPage />
+                            </PrivateRoute>
+                        }
                     />
 
                     <Route
                         path="/write/:boardType"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><WritePage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <WritePage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/admin"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><AdminPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <AdminPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route
                         path="/board/:boardType"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><BoardPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <BoardPage />
+                            </PrivateRoute>
+                        }
                     />
 
                     <Route
                         path="/main/study-dashboard"
-                        element={<PrivateRoute isAuthenticated={isAuthenticated}><StudyDashboardPage /></PrivateRoute>}
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <StudyDashboardPage />
+                            </PrivateRoute>
+                        }
                     >
                         <Route
                             path="lectures"
                             element={<LectureCategoryBox />}
                         />
-                        <Route path=":lectureId" element={<LectureBoardPage />} /> {/* ✅ 추가 */}
-
-                        <Route path=":lectureId/write" element={<LectureWritePage />} />
+                        <Route
+                            path=":lectureId"
+                            element={<LectureBoardPage />}
+                        />{" "}
+                        {/* ✅ 추가 */}
+                        <Route
+                            path=":lectureId/write"
+                            element={<LectureWritePage />}
+                        />
+                        <Route
+                            path=":lectureId/:postId"
+                            element={<LecturePostDetail />}
+                        />
                     </Route>
                 </Routes>
             </div>

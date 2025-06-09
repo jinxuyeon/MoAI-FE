@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "./LectureBoardPage.css";
 import { useState, useEffect } from "react";
-import LectureMainbox from "../components/LectureMainbox";
 import axiosInstance from "../components/utils/AxiosInstance";
 import ProfileTemplate from "../components/ProfileTemplate";
 import PostPreviewBox from "../components/PostPreviewBox";

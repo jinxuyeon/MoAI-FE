@@ -79,10 +79,10 @@ const PostDetail = () => {
     }
   };
 
-  if (!post) return <div className="post-detail-container">게시글을 찾을 수 없습니다.</div>;
+  if (!post) return <div className="PostDetail">게시글을 찾을 수 없습니다.</div>;
 
   return (
-    <div className="post-detail-container">
+    <div className="PostDetail">
       <div className="post-title-with-like">
         <h2 className="post-title">{post.title}</h2>
         {post.isAuthor && (
