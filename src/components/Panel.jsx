@@ -8,6 +8,8 @@ import { UserContext } from "./utils/UserContext";
 import { useContext, useRef } from "react";
 import StudyNavi from "./StudyNavi";
 import MyLectureList from "./MyLectureList";
+import TimerWidget from "./TimerWidget";
+
 const Panel = ({ mode = "main" }) => {
   const { user, isLoading } = useContext(UserContext);
 
@@ -57,7 +59,7 @@ const Panel = ({ mode = "main" }) => {
           {/* Study 전용 위젯 구성 */}
           <StudyNavi />
           <MyLectureList />
-          여기 위젯 추가 가능
+          <TimerWidget />
 
         </>
       )}
