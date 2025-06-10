@@ -16,21 +16,31 @@ const LecturePostDetail = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const res = await axiosInstance.get(`/api/post/${lectureId}/${postId}`);
-                setPost(res.data);
-
-                const sortedComments = [...(res.data.comments || [])].sort(
-                    (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-                );
-                setComments(sortedComments);
-            } catch (err) {
-                console.error("❌ 게시글 상세 불러오기 실패:", err);
-            }
-        };
         fetchPost();
+        fetchComments();
     }, [postId]);
+
+    const fetchPost = async () => {
+        try {
+            const res = await axiosInstance.get(`/api/post/${lectureId}/${postId}`);
+            setPost(res.data);
+        } catch (err) {
+            console.error("❌ 게시글 상세 불러오기 실패:", err);
+        }
+    };
+
+    const fetchComments = async () => {
+        try {
+            const res = await axiosInstance.get(`/api/post/lecture/${postId}/comments`);
+            const commentList = res.data.comments || [];
+            const sorted = [...commentList].sort(
+                (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+            );
+            setComments(sorted);
+        } catch (err) {
+            console.error("❌ 댓글 불러오기 실패:", err);
+        }
+    };
 
     const handleLike = () => {
         setLiked(!liked);
@@ -67,21 +77,12 @@ const LecturePostDetail = () => {
         if (!newComment.trim()) return;
 
         try {
-            await axiosInstance.post(`/api/post/${postId}/comments`, {
+            await axiosInstance.post(`/api/lecture-room/${postId}/comments`, {
                 content: newComment,
             });
 
-            const res = await axiosInstance.get(`/api/post/${lectureId}/${postId}`);
-            setPost(res.data);
-
-            const latestComments = res.data.comments || [];
-            setComments(
-                latestComments.sort(
-                    (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-                )
-            );
-
             setNewComment("");
+            await fetchComments();
         } catch (err) {
             console.error("❌ 댓글 등록 실패:", err);
             alert("댓글 등록 실패");
@@ -113,7 +114,6 @@ const LecturePostDetail = () => {
                 {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
             </div>
 
-            {/* 질문-답변 QnA 형식 */}
             <section className="lecture-qna-box">
                 <div className="question-box">
                     <h4>🧑 질문</h4>
