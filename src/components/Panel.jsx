@@ -48,7 +48,6 @@ const Panel = ({ mode = "main" }) => {
           <Friends />
           <Calendar />
 
-          <button onClick={testhandle}>버튼</button>
         </>
       )}
 
