@@ -13,6 +13,10 @@ const LecturePostDetail = () => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
+    const [replyingTo, setReplyingTo] = useState(null);
+    const [replyContent, setReplyContent] = useState("");
+    const [childComments, setChildComments] = useState({});
+    const [expandedReplies, setExpandedReplies] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,6 +43,44 @@ const LecturePostDetail = () => {
             setComments(sorted);
         } catch (err) {
             console.error("❌ 댓글 불러오기 실패:", err);
+        }
+    };
+
+    const fetchReplies = async (parentId) => {
+        try {
+            const res = await axiosInstance.get(`/api/post/${parentId}/replies`);
+            setChildComments((prev) => ({ ...prev, [parentId]: res.data.replies || [] }));
+            setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
+        } catch (err) {
+            console.error("❌ 대댓글 불러오기 실패:", err);
+        }
+    };
+
+    const toggleReplies = async (parentId) => {
+        if (expandedReplies[parentId]) {
+            setExpandedReplies((prev) => ({ ...prev, [parentId]: false }));
+        } else {
+            if (!childComments[parentId]) {
+                await fetchReplies(parentId);
+            } else {
+                setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
+            }
+        }
+    };
+
+    const handleReplySubmit = async (parentId) => {
+        if (!replyContent.trim()) return;
+        try {
+            await axiosInstance.post(`/api/lecture-room/${postId}/comments`, {
+                content: replyContent,
+                parentId,
+            });
+            setReplyContent("");
+            setReplyingTo(null);
+            await fetchReplies(parentId);
+        } catch (err) {
+            console.error("❌ 답글 등록 실패:", err);
+            alert("답글 등록 실패");
         }
     };
 
@@ -88,6 +130,42 @@ const LecturePostDetail = () => {
             alert("댓글 등록 실패");
         }
     };
+
+    const renderCommentTree = (comment) => (
+        <CommentBox
+            key={comment.id}
+            comment={comment}
+            boardType={post.lecturePostType}
+            handleCommentLike={handleCommentLike}
+            onDeleteSuccess={(deletedId) => {
+                setComments((prev) => prev.filter((c) => c.id !== deletedId));
+                setChildComments((prev) => {
+                    const updated = { ...prev };
+                    Object.keys(updated).forEach((key) => {
+                        updated[key] = updated[key].filter((r) => r.id !== deletedId);
+                    });
+                    return updated;
+                });
+            }}
+            onReplyClick={(id) => {
+                setReplyingTo(id === replyingTo ? null : id);
+                setReplyContent("");
+            }}
+            isReplying={replyingTo === comment.id}
+            replyContent={replyContent}
+            setReplyContent={setReplyContent}
+            onSubmitReply={handleReplySubmit}
+            showReplies={expandedReplies[comment.id]}
+            onToggleReplies={() => toggleReplies(comment.id)}
+        >
+            {expandedReplies[comment.id] &&
+                (childComments[comment.id] || []).map((child) => (
+                    <div key={child.id} className="nested-reply" style={{ marginLeft: "20px" }}>
+                        {renderCommentTree(child)}
+                    </div>
+                ))}
+        </CommentBox>
+    );
 
     if (!post)
         return <div className="LecturePostDetail">게시글을 찾을 수 없습니다.</div>;
@@ -173,16 +251,7 @@ const LecturePostDetail = () => {
             <ul className="comment-list">
                 {comments.map((c) => (
                     <li key={c.id} className="comment-item">
-                        <CommentBox
-                            comment={c}
-                            handleCommentLike={handleCommentLike}
-                            boardType={post.lecturePostType}
-                            onDeleteSuccess={(deletedId) =>
-                                setComments((prev) =>
-                                    prev.filter((comment) => comment.id !== deletedId)
-                                )
-                            }
-                        />
+                        {renderCommentTree(c)}
                     </li>
                 ))}
             </ul>
