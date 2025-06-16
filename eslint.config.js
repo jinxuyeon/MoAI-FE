@@ -10,7 +10,7 @@ export default [
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: { ...globals.browser, ...globals.node }, // 브라우저 및 Node.js 전역 변수 인식
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },

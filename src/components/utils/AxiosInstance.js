@@ -2,8 +2,7 @@ import axios from "axios";
 import refreshAccessToken from "./refreshAccessToken";
 
 const axiosInstance = axios.create({
-    //baseURL: "http://localhost:8080", // API 기본 URL
-    baseURL: "http://58.238.182.100:9000", // API 기본 URL
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
     },
