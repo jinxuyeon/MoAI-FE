@@ -10,7 +10,7 @@ const JobInfoBoard = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await axiosInstance.get("/api/jobs");
+      const res = await axiosInstance.get("/jobs");
       setJobs(res.data);
     } catch (error) {
       console.error("❌ 채용 정보 불러오기 실패:", error);

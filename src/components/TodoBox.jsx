@@ -13,7 +13,7 @@ const TodoBox = () => {
     useEffect(() => {
         const fetchTodos = async () => {
             try {
-                const res = await axiosInstance.get("/api/member/todo/my");
+                const res = await axiosInstance.get("/member/todo/my");
                 setTodolist(res.data.todos);
             } catch (error) {
                 console.error("❌ 투두 목록 불러오기 실패:", error);
@@ -37,7 +37,7 @@ const TodoBox = () => {
         };
 
         try {
-            const res = await axiosInstance.post("/api/member/todo/add", newTodo);
+            const res = await axiosInstance.post("/member/todo/add", newTodo);
             const savedTodo = res.data.savedTodo;
             setTodolist([...todolist, savedTodo]);
             setNewItem("");
@@ -52,7 +52,7 @@ const TodoBox = () => {
         const newStatus = target.status === "PENDING" ? "DONE" : "PENDING";
 
         try {
-            await axiosInstance.post(`/api/member/todo/${target.id}/status`, {
+            await axiosInstance.post(`/member/todo/${target.id}/status`, {
                 status: newStatus,
             });
 
@@ -70,7 +70,7 @@ const TodoBox = () => {
     const deleteItem = async (index) => {
         const target = todolist[index];
         try {
-            await axiosInstance.delete(`/api/member/todo/${target.id}`);
+            await axiosInstance.delete(`/member/todo/${target.id}`);
             const updated = [...todolist];
             updated.splice(index, 1);
             setTodolist(updated);

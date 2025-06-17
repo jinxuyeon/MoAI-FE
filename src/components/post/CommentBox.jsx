@@ -32,7 +32,7 @@ const CommentBox = ({
     if (!confirmed) return;
 
     try {
-      await axiosInstance.delete(`/api/comment/${comment.id}`);
+      await axiosInstance.delete(`/comment/${comment.id}`);
       if (onDeleteSuccess) onDeleteSuccess(comment.id);
     } catch (error) {
       console.error("❌ 댓글 삭제 실패:", error);

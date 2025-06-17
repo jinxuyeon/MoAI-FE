@@ -32,7 +32,7 @@ const LectureBoardPage = () => {
   useEffect(() => {
     const fetchLecture = async () => {
       try {
-        const res = await axiosInstance.get(`/api/lecture-room/${lectureId}`);
+        const res = await axiosInstance.get(`/lecture-room/${lectureId}`);
         setLecture(res.data.data);
         setIsMarked(res.data.data.isMarked); // ✅ 응답 값에서 바로 반영
       } catch (err) {
@@ -48,11 +48,11 @@ const LectureBoardPage = () => {
   const toggleFavorite = async () => {
     try {
       if (isMarked) {
-        await axiosInstance.delete("/api/lecture-room/mark", {
+        await axiosInstance.delete("/lecture-room/mark", {
           params: { lectureRoomId: lectureId },
         });
       } else {
-        await axiosInstance.post("/api/lecture-room/mark", null, {
+        await axiosInstance.post("/lecture-room/mark", null, {
           params: { lectureRoomId: lectureId },
         });
       }
@@ -69,7 +69,7 @@ const LectureBoardPage = () => {
     const fetchPosts = async () => {
       try {
         const postType = tabToTypeMap[selectedTab];
-        const res = await axiosInstance.get("/api/lecture-room/posts", {
+        const res = await axiosInstance.get("/lecture-room/posts", {
           params: { lectureId, type: postType },
         });
         setPosts(res.data.data);

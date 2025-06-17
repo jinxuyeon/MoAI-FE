@@ -22,7 +22,7 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
 
     const fetchUserInfo = async () => {
         try {
-            const res = await axiosInstance.get(`/api/member/summary/${id}`);
+            const res = await axiosInstance.get(`/member/summary/${id}`);
             setUserInfo(res.data);
             setFriendMessage("");
             setIsFriendError(false);
@@ -49,7 +49,7 @@ const ProfileTemplate = ({ profileImageUrl, name, id }) => {
 
     const handleRemoveFriend = async () => {
         try {
-            await axiosInstance.delete(`/api/friend/${userInfo.id}`);
+            await axiosInstance.delete(`/friend/${userInfo.id}`);
             setFriendMessage("✅ 친구가 삭제되었습니다.");
             setIsFriendError(false);
             setUserInfo((prev) => ({ ...prev, isFriend: false })); // 상태 업데이트

@@ -56,7 +56,7 @@ const MyPage = () => {
         }
 
         try {
-            const res = await axiosInstance.post("/api/member/set-nickname", {
+            const res = await axiosInstance.post("/member/set-nickname", {
                 nickname: trimmed,
             });
 
@@ -82,7 +82,7 @@ const MyPage = () => {
         }
 
         try {
-            await axiosInstance.post("/api/member/set-intro", { intro });
+            await axiosInstance.post("/member/set-intro", { intro });
             setUser((prev) => ({ ...prev, intro }));
             alert("자기소개가 저장되었습니다!");
         } catch (error) {
@@ -96,7 +96,7 @@ const MyPage = () => {
 
         try {
             if (!file) {
-                const res = await axiosInstance.delete("/api/member/delete-profile-image");
+                const res = await axiosInstance.delete("/member/delete-profile-image");
                 const updatedImageUrl = res.data.imageUrl;
                 setUser((prev) => ({
                     ...prev,
@@ -113,7 +113,7 @@ const MyPage = () => {
 
             const formData = new FormData();
             formData.append("profileImage", file);
-            const res = await axiosInstance.post("/api/member/set-profile-image", formData, {
+            const res = await axiosInstance.post("/member/set-profile-image", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

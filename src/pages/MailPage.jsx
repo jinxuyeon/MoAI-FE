@@ -33,7 +33,7 @@ const MailPage = () => {
 
     const fetchChatRooms = async () => {
         try {
-            const res = await axiosInstance.get("/api/mail/my-room");
+            const res = await axiosInstance.get("/mail/my-room");
             if (res.status === 200 && res.data.roomDtos) {
                 setChatRooms(res.data.roomDtos);
             }
@@ -49,7 +49,7 @@ const MailPage = () => {
         try {
             const params = beforeId ? { beforeId, size: 20 } : { size: 20 };
             const response = await axiosInstance.get(
-                `/api/mail/messages/${roomId}`,
+                `/mail/messages/${roomId}`,
                 { params }
             );
 
@@ -74,7 +74,7 @@ const MailPage = () => {
 
         try {
             const response = await axiosInstance.post(
-                `/api/mail/send-mail/${selectedRoom.roomId}`,
+                `/mail/send-mail/${selectedRoom.roomId}`,
                 {
                     content: message,
                     partnerId: selectedRoom.partner.id,

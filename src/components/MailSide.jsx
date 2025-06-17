@@ -9,7 +9,7 @@ const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms, selectedFriend }
 
     const handleFriendSelect = async (room) => {
         try {
-            await axiosInstance.put(`/api/mail/read-room/${room.roomId}`);
+            await axiosInstance.put(`/mail/read-room/${room.roomId}`);
             await fetchChatRooms();
             setSelectedRoom(room);
             setShowModal(false);
@@ -20,7 +20,7 @@ const MailSide = ({ setSelectedRoom, chatRooms, fetchChatRooms, selectedFriend }
 
     const handleExitRoom = async (roomId) => {
         try {
-            const response = await axiosInstance.delete(`/api/mail/exit-room/${roomId}`);
+            const response = await axiosInstance.delete(`/mail/exit-room/${roomId}`);
             if (response.status === 200) {
                 console.log(response.data.message);
                 await fetchChatRooms();

@@ -38,7 +38,7 @@ const MailModal = ({ setOpenModal, fetchChatRooms }) => {
 
     const createMailRoom = async (targetId) => {
     try {
-        await axiosInstance.post(`/api/mail/new?id=${targetId}`);
+        await axiosInstance.post(`/mail/new?id=${targetId}`);
         alert("채팅방이 생성되었습니다.");
         fetchChatRooms();
         setOpenModal(false);

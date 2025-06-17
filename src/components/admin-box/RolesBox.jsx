@@ -11,7 +11,7 @@ const RolesBox = () => {
 
   const handleSearch = async () => {
     try {
-      const res = await axiosInstance.get("/api/admin/search-users", {
+      const res = await axiosInstance.get("/admin/search-users", {
         params: {
           username: filters.username || null,
           name: filters.name || null,
@@ -28,7 +28,7 @@ const RolesBox = () => {
 
   const handleGrantRole = async (userId) => {
     try {
-      await axiosInstance.post("/api/admin/grant-role", null, {
+      await axiosInstance.post("/admin/grant-role", null, {
         params: {
           userId,
           role: selectedRole,
@@ -44,7 +44,7 @@ const RolesBox = () => {
 
   const handleRevokeRole = async (userId) => {
     try {
-      await axiosInstance.delete("/api/admin/revoke-role", {
+      await axiosInstance.delete("/admin/revoke-role", {
         params: {
           userId,
           role: selectedRole,
