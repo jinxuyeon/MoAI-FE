@@ -22,7 +22,7 @@ const LectureCategoryBox = () => {
 
     const fetchLectures = async () => {
         try {
-            const res = await axiosInstance.get("/api/lecture-room/list");
+            const res = await axiosInstance.get("/lecture-room/list");
             setLectures(res.data.data || []);
         } catch (err) {
             console.error("강의 목록 불러오기 실패:", err);

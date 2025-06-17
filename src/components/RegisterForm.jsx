@@ -19,7 +19,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.post("/api/member/join", formData);
+      const response = await axiosInstance.post("/member/join", formData);
       console.log("회원가입 성공:", response.data);
       alert("회원가입 성공!");
       navigate("/login");

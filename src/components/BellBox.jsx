@@ -14,7 +14,7 @@ const BellBox = ({ notices, setNotices }) => {
     // ✅ 알림 클릭 → 읽음 처리 + 이동
     const handleNoticeClick = async (notice) => {
         try {
-            await axiosInstance.post(`/api/notice/read/${notice.id}`);
+            await axiosInstance.post(`/notice/read/${notice.id}`);
             setNotices((prev) => prev.filter((n) => n.id !== notice.id));
             if (notice.targetUrl) {
                 navigate(notice.targetUrl);
@@ -27,7 +27,7 @@ const BellBox = ({ notices, setNotices }) => {
     // ✅ 개별 알림 삭제
     const handleDelete = async (id) => {
         try {
-            const response = await axiosInstance.post(`/api/notice/read/${id}`);
+            const response = await axiosInstance.post(`/notice/read/${id}`);
             if (response.status === 200) {
                 console.log("알림 제거 성공", response.data);
                 setNotices((prevNotices) => prevNotices.filter((notice) => notice.id !== id));
@@ -42,7 +42,7 @@ const BellBox = ({ notices, setNotices }) => {
         const noticeIds = notices.map((notice) => notice.id);
         if (noticeIds.length === 0) return; 
         try {
-            const response = await axiosInstance.post(`/api/notice/read-all`, { noticeIds });
+            const response = await axiosInstance.post(`/notice/read-all`, { noticeIds });
             if (response.status === 200) {
                 console.log("모든 알림 읽음 처리 성공", response.data);
                 setNotices([]); 

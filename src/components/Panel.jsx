@@ -17,7 +17,7 @@ const Panel = ({ mode = "main" }) => {
 
   const testhandle = async () => {
     try {
-      const response = await axiosInstance.get("/api/jobs");
+      const response = await axiosInstance.get("/jobs");
       console.log("조회 성공 ✅", response.data);
       alert(`조회 성공! 총 ${response.data.length}건`);
     } catch (error) {

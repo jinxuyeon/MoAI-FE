@@ -48,7 +48,7 @@ const LectureWritePage = () => {
     if (!file) return;
 
     try {
-      const res = await axiosInstance.get("/api/aws/S3/presign", {
+      const res = await axiosInstance.get("/aws/S3/presign", {
         params: { filename: file.name, contentType: file.type },
       });
       const { uploadUrl, fileUrl } = res.data;
@@ -101,7 +101,7 @@ const LectureWritePage = () => {
     const imageUrls = firstImg ? firstImg.src : null;
 
     try {
-      const res = await axiosInstance.post("/api/post/lecture-post-up", {
+      const res = await axiosInstance.post("/post/lecture-post-up", {
         lectureId: Number(lectureId),
         boardType: boardTypeEnum,
         title,

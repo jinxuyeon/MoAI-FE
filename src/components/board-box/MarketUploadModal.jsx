@@ -15,7 +15,7 @@ const MarketUploadModal = ({ onClose }) => {
         if (!file) return;
 
         try {
-            const res = await axiosInstance.get("/api/aws/S3/presign", {
+            const res = await axiosInstance.get("/aws/S3/presign", {
                 params: {
                     filename: file.name,
                     contentType: file.type,
@@ -45,7 +45,7 @@ const MarketUploadModal = ({ onClose }) => {
             return;
         }
         try {
-            const res = await axiosInstance.post("/api/post/post-up", {
+            const res = await axiosInstance.post("/post/post-up", {
                 boardType: "MARKET",
                 title,
                 content: `<p>${description}</p>`.trim(),  // ✅ 가격은 content에서 제거

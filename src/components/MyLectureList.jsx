@@ -10,7 +10,7 @@ const MyLectureList = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const res = await axiosInstance.get("/api/lecture-room/mark");
+        const res = await axiosInstance.get("/lecture-room/mark");
         console.log("✅ 즐겨찾기 응답:", res.data);
 
         const favorites = res.data?.markedLecture ?? []; // ✅ 수정된 필드명 반영

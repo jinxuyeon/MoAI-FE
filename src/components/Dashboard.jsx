@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   const handleInitPosts = async () => {
     try {
-      const res = await axiosInstance.get("/api/post/summary-multiple");
+      const res = await axiosInstance.get("/post/summary-multiple");
       setPostsSummary(res.data);
     } catch (err) {
       console.error("❌ 게시판 요약 데이터 요청 실패:", err);
