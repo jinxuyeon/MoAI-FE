@@ -22,7 +22,7 @@ const LoginForm = ({ setIsAuthenticated }) => {
         e.preventDefault();
         try {
             const response = await axiosInstance.post(
-                "/api/member/login",
+                "/member/login",
                 formData
             );
             if (response.status === 200) {
@@ -35,7 +35,7 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 setAuthData();
                 setIsAuthenticated(true);
 
-                const meRes = await axiosInstance.get("/api/member/me");
+                const meRes = await axiosInstance.get("/member/me");
                 setUser(meRes.data.meDto);
                 navigate("/main");
             }

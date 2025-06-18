@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
 
   
   useEffect(() => {
-    axiosInstance.get("/api/member/me")
+    axiosInstance.get("/member/me")
       .then(res => {
         setUser(res.data.meDto);
         setIsLoading(false); // 성공 시

@@ -1,22 +1,9 @@
 import "./BasicBoard.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
 const BasicBoard = ({ type, posts, title }) => {
-  const [favorites, setFavorites] = useState([]);
-  const isFavorited = favorites.includes(title);
-
-  const fetchFavorites = async () => {
-    try {
-      const { data } = await axios.get("/api/favorites");
-      if (Array.isArray(data)) setFavorites(data);
-    } catch (e) {
-      console.error("즐겨찾기 불러오기 실패", e);
-    }
-  };
 
   useEffect(() => {
-    fetchFavorites();
   }, []);
 
   return (

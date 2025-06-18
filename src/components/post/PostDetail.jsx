@@ -25,7 +25,7 @@ const PostDetail = () => {
 
   const fetchPost = async () => {
     try {
-      const res = await axiosInstance.get(`/api/post/${postId}`);
+      const res = await axiosInstance.get(`/post/${postId}`);
       setPost(res.data.dto);
     } catch (err) {
       console.error("❌ 게시글 상세 불러오기 실패:", err);
@@ -34,7 +34,7 @@ const PostDetail = () => {
 
   const fetchComments = async () => {
     try {
-      const res = await axiosInstance.get(`/api/post/${postId}/comments`);
+      const res = await axiosInstance.get(`/post/${postId}/comments`);
       const commentList = res.data.comments || [];
       const sorted = [...commentList].sort(
         (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
@@ -47,7 +47,7 @@ const PostDetail = () => {
 
   const fetchReplies = async (parentId) => {
     try {
-      const res = await axiosInstance.get(`/api/post/${parentId}/replies`);
+      const res = await axiosInstance.get(`/post/${parentId}/replies`);
       const replies = res.data.replies || [];
       setChildComments((prev) => ({ ...prev, [parentId]: replies }));
       setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
@@ -81,7 +81,7 @@ const PostDetail = () => {
   const handlePostDelete = async () => {
     if (!window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) return;
     try {
-      await axiosInstance.delete(`/api/post/${postId}`);
+      await axiosInstance.delete(`/post/${postId}`);
       navigate(`/main/community/${post.boardType.toLowerCase()}`);
     } catch (err) {
       console.error("❌ 게시글 삭제 실패:", err);
@@ -92,7 +92,7 @@ const PostDetail = () => {
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
     try {
-      await axiosInstance.post(`/api/post/${postId}/comments`, {
+      await axiosInstance.post(`/post/${postId}/comments`, {
         content: newComment,
       });
       setNewComment("");
@@ -106,7 +106,7 @@ const PostDetail = () => {
   const handleReplySubmit = async (parentId) => {
     if (!replyContent.trim()) return;
     try {
-      await axiosInstance.post(`/api/post/${postId}/comments`, {
+      await axiosInstance.post(`/post/${postId}/comments`, {
         content: replyContent,
         parentId,
       });

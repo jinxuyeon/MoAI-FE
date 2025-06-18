@@ -26,7 +26,7 @@ const LecturePostDetail = () => {
 
     const fetchPost = async () => {
         try {
-            const res = await axiosInstance.get(`/api/post/${lectureId}/${postId}`);
+            const res = await axiosInstance.get(`/post/${lectureId}/${postId}`);
             setPost(res.data);
         } catch (err) {
             console.error("❌ 게시글 상세 불러오기 실패:", err);
@@ -35,7 +35,7 @@ const LecturePostDetail = () => {
 
     const fetchComments = async () => {
         try {
-            const res = await axiosInstance.get(`/api/post/lecture/${postId}/comments`);
+            const res = await axiosInstance.get(`/post/lecture/${postId}/comments`);
             const commentList = res.data.comments || [];
             const sorted = [...commentList].sort(
                 (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
@@ -48,7 +48,7 @@ const LecturePostDetail = () => {
 
     const fetchReplies = async (parentId) => {
         try {
-            const res = await axiosInstance.get(`/api/post/${parentId}/replies`);
+            const res = await axiosInstance.get(`/post/${parentId}/replies`);
             setChildComments((prev) => ({ ...prev, [parentId]: res.data.replies || [] }));
             setExpandedReplies((prev) => ({ ...prev, [parentId]: true }));
         } catch (err) {
@@ -71,7 +71,7 @@ const LecturePostDetail = () => {
     const handleReplySubmit = async (parentId) => {
         if (!replyContent.trim()) return;
         try {
-            await axiosInstance.post(`/api/lecture-room/${postId}/comments`, {
+            await axiosInstance.post(`/lecture-room/${postId}/comments`, {
                 content: replyContent,
                 parentId,
             });
@@ -107,7 +107,7 @@ const LecturePostDetail = () => {
         if (!confirmed) return;
 
         try {
-            await axiosInstance.delete(`/api/post/${postId}`);
+            await axiosInstance.delete(`/post/${postId}`);
             navigate(`/main/study-dashboard/${post.lectureRoomId}`);
         } catch (err) {
             console.error("❌ 게시글 삭제 실패:", err);
@@ -119,7 +119,7 @@ const LecturePostDetail = () => {
         if (!newComment.trim()) return;
 
         try {
-            await axiosInstance.post(`/api/lecture-room/${postId}/comments`, {
+            await axiosInstance.post(`/lecture-room/${postId}/comments`, {
                 content: newComment,
             });
 

@@ -23,7 +23,7 @@ const LectureCreateModal = ({ onClose, onSuccess }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axiosInstance.post("/api/lecture-room", {
+            await axiosInstance.post("/lecture-room", {
                 title,
                 grade,
                 semester,

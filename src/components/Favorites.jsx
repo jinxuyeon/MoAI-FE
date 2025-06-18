@@ -10,7 +10,7 @@ const Favorites = () => {
   const [favoriteBoards, setFavoriteBoards] = useState([]);
   const fetchFavorites = async () => {
     try {
-      const { data } = await axiosInstance.get("/api/post/favorites");
+      const { data } = await axiosInstance.get("/post/favorites");
       if (Array.isArray(data.favorites)) {
         setFavoriteBoards(data.favorites);
       } else {

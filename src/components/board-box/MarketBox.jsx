@@ -16,7 +16,7 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
 
   const fetchPosts = async (page = 0, filter = searchParams.filter, query = searchParams.query) => {
     try {
-      const res = await axiosInstance.get("/api/post", {
+      const res = await axiosInstance.get("/post", {
         params: { boardType, page, size: 10, filter, query },
       });
 
@@ -37,11 +37,11 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
   const toggleFavorite = async () => {
     try {
       if (isFavorited) {
-        await axiosInstance.delete("/api/post/favorites", {
+        await axiosInstance.delete("/post/favorites", {
           params: { boardType },
         });
       } else {
-        await axiosInstance.post("/api/post/favorites", {
+        await axiosInstance.post("/post/favorites", {
           boardName: boardTitle,
           boardType,
         });

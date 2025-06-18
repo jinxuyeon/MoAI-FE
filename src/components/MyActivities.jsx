@@ -14,7 +14,7 @@ const MyActivities = () => {
 
     const fetchMyPosts = async () => {
       try {
-        const res = await axiosInstance.get("/api/post/my-posts");
+        const res = await axiosInstance.get("/post/my-posts");
         setMyPosts(res.data);
       } catch (err) {
         console.error("내 작성글 불러오기 실패:", err);
@@ -23,7 +23,7 @@ const MyActivities = () => {
 
     const fetchMyComments = async () => {
       try {
-        const res = await axiosInstance.get("/api/comment/my-comments");
+        const res = await axiosInstance.get("/comment/my-comments");
         setMyComments(res.data);
       } catch (err) {
         console.error("내 댓글 불러오기 실패:", err);

@@ -49,7 +49,7 @@ const WritePage = () => {
     if (!file) return;
 
     try {
-      const res = await axiosInstance.get("/api/aws/S3/presign", {
+      const res = await axiosInstance.get("/aws/S3/presign", {
         params: { filename: file.name, contentType: file.type },
       });
       const { uploadUrl, fileUrl } = res.data;
@@ -95,7 +95,7 @@ const WritePage = () => {
     const imageUrls = firstImg ? firstImg.src : null;
 
     try {
-      const res = await axiosInstance.post("/api/post/post-up", {
+      const res = await axiosInstance.post("/post/post-up", {
         boardType: selectedBoard.value,
         title,
         content,

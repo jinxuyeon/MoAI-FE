@@ -35,7 +35,7 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
 
   const fetchData = async (page = 0, filter = searchParams.filter, query = searchParams.query) => {
     try {
-      const res = await axiosInstance.get("/api/post", {
+      const res = await axiosInstance.get("/post", {
         params: {
           boardType,
           page,
@@ -68,12 +68,12 @@ const BasicBoardBox = ({ boardType, handleWriteClick }) => {
   const handleToggleFavorite = async () => {
     try {
       if (marked) {
-        await axiosInstance.delete("/api/post/favorites", {
+        await axiosInstance.delete("/post/favorites", {
           params: { boardType },
         });
         setMarked(false);
       } else {
-        await axiosInstance.post("/api/post/favorites", {
+        await axiosInstance.post("/post/favorites", {
           boardType,
         });
         setMarked(true);

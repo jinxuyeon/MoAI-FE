@@ -26,7 +26,7 @@ function Header({ title }) {
 
   const handleSearch = async () => {
     try {
-      const response = await axiosInstance.get(`/api/member/my-notices`);
+      const response = await axiosInstance.get(`/member/my-notices`);
       if (response.status === 200) {
         setNotices(response.data.notices);
       }
@@ -37,7 +37,7 @@ function Header({ title }) {
 
   const checkMail = async () => {
     try {
-      const response = await axiosInstance.get("/api/mail/check-new");
+      const response = await axiosInstance.get("/mail/check-new");
       if (response.status === 200) {
         console.log("메일 개수 확인:", response.data.newMailCount);
         setNewMailCount(response.data.newMailCount);
