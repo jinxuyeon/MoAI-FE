@@ -6,7 +6,7 @@ import "./MarketBox.css";
 import SearchBar from "../SearchBar";
 
 const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
-  const boardTitle = "장터 게시판";
+  const boardTitle = "장터";
 
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
