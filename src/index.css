@@ -3,16 +3,13 @@
     src: url("components/fonts/Pretendard-Light.otf") format("opentype");
 }
 
-
-
 html,
 body {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden; /*지우지마마*/
-    font-family: Pretendard-Light ;
+    font-family: Pretendard-Light;
     font-size: 0.9rem;
-
 }
 
 * {
@@ -22,4 +19,17 @@ body {
     overflow-wrap: break-word;
     word-wrap: break-word;
     white-space: normal; /* 공백을 유지하면서 줄바꿈 */
+}
+
+/* 스크린 리더 속성 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
