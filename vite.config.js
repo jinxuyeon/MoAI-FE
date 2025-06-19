@@ -9,7 +9,7 @@ const baseURL = process.env.VITE_API_BASE_URL;
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: "/frontend/", // 배포 시 사용할 기본 경로
+    // base: "/frontend/", // 배포 시 사용할 기본 경로
     plugins: [react()],
 
     // 개발 서버 설정
