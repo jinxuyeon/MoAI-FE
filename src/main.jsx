@@ -4,15 +4,12 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
+const basename = import.meta.env.MODE === "production" ? "/frontend" : "/";
 
-
-createRoot(document.getElementById('root')).render(
-  //<StrictMode>
-    // <BrowserRouter basename="/frontend">
-    <BrowserRouter>
+createRoot(document.getElementById("root")).render(
+    //<StrictMode>
+    <BrowserRouter basename={basename}>
         <App />
     </BrowserRouter>
-  //</StrictMode>,
-)
-
-
+    //</StrictMode>,
+);

@@ -11,6 +11,7 @@ const baseURL = process.env.VITE_API_BASE_URL;
 export default defineConfig({
     // base: "/frontend/", // 배포 시 사용할 기본 경로
     plugins: [react()],
+    base: process.env.NODE_ENV === "production" ? "/frontend/" : "/",
 
     // 개발 서버 설정
     server: {
