@@ -1,17 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import dotenv from "dotenv";
 
 // .env 파일 로드
 dotenv.config();
 
-const baseURL = process.env.VITE_API_BASE_URL
+const baseURL = process.env.VITE_API_BASE_URL;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+    // base: "/frontend/", // 배포 시 사용할 기본 경로
+    plugins: [react()],
 
-  // 개발 서버 설정
+    // 개발 서버 설정
     server: {
         proxy: {
             // CORS 문제 해결을 위한 프록시 설정
@@ -23,4 +24,4 @@ export default defineConfig({
             },
         },
     },
-})
+});
