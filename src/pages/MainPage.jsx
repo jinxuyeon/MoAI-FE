@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Panel from "../components/Panel";
 import Dashboard from "../components/Dashboard";
-import "./Mainpage.css";
+import "./MainPage.css";
 const MainPage = () => {
 
     return (
