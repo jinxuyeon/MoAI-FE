@@ -4,7 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-const basename = import.meta.env.MODE === "production" ? "/frontend" : "/";
+// ✅ 현재 Nginx는 루트(/)에서 서비스하므로 basename은 "/"로 고정
+const basename = "/";
 
 createRoot(document.getElementById("root")).render(
     //<StrictMode>
