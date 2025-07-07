@@ -1,4 +1,4 @@
-import "./Mailpage.css";
+import "./MailPage.css";
 import Header from "../components/Header";
 import MailSide from "../components/MailSide";
 import { useRef, useState, useEffect } from "react";
