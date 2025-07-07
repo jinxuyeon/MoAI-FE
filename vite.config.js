@@ -7,22 +7,18 @@ dotenv.config();
 
 const baseURL = process.env.VITE_API_BASE_URL;
 
-// https://vite.dev/config/
 export default defineConfig({
-    // base: "/frontend/", // 배포 시 사용할 기본 경로
-    plugins: [react()],
-    base: process.env.NODE_ENV === "production" ? "/frontend/" : "/",
-
-    // 개발 서버 설정
-    server: {
-        proxy: {
-            // CORS 문제 해결을 위한 프록시 설정
-            "/api": {
-                target: baseURL,
-                changeOrigin: true, // 요청 헤더의 origin을 target URL로 변경
-                secure: false, // HTTP도 허용 (배포 환경에서는 true로 설정하여 HTTPS 사용)
-                credentials: true, // 쿠키 등 인증 정보 포함한 요청 허용
-            },
-        },
+  plugins: [react()],
+  // 프로덕션이든 개발이든 항상 base는 '/'로 고정
+  base: "/",
+  server: {
+    proxy: {
+      "/api": {
+        target: baseURL,
+        changeOrigin: true,
+        secure: false,
+        credentials: true,
+      },
     },
+  },
 });
