@@ -48,7 +48,7 @@ const Panel = ({ mode = "main" }) => {
         <>
           <Favorites />
           <Friends />
-          <Calendar />
+          {/* <Calendar /> */}
 
         </>
       )}

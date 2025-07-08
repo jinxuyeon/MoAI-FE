@@ -24,6 +24,7 @@ import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
 import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
 import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
+import TestPage from "./pages/TestPage.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAuthChecked, setIsAuthChecked] = useState(false); // 추가
@@ -150,6 +151,14 @@ function App() {
                         element={
                             <PrivateRoute isAuthenticated={isAuthenticated}>
                                 <BoardPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/test"
+                        element={
+                            <PrivateRoute isAuthenticated={isAuthenticated}>
+                                <TestPage/>
                             </PrivateRoute>
                         }
                     />

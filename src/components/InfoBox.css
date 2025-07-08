@@ -1,0 +1,55 @@
+.InfoBox {
+  width: 100%;
+}
+
+.InfoBox .top {
+  display: flex;
+  flex-direction: column;
+}
+
+.InfoBox .list-area {
+  height: auto;
+  border-radius: 24px;
+  margin: 20px 0px 0px;
+  border: 1px solid var(--base-border-color);
+  box-shadow: var(--board-shadow-color);
+}
+
+.InfoBox .filter-area {
+  display: flex;
+  margin: 10px 0px 0px;
+  gap: 4px;
+}
+
+.InfoBox button {
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 120%;
+  padding: 6px 10px;
+  border-radius: 60px;
+  border: 1px solid rgb(92, 92, 92);
+  color: #2d2929;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.InfoBox button.active {
+  background-color: #5c5c5c; /* 눌린 상태: 회색 배경 */
+  border-color: #5c5c5c;
+  color: white; /* 글자 흰색 */
+}
+
+.InfoBox ol,
+.InfoBox ul {
+  list-style: none;
+  padding: 22px 30px;
+  display: block;
+  margin: 0;
+}
+
+.InfoBox .item {
+  padding: 13px 0px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;;
+}

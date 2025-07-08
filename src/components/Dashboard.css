@@ -11,13 +11,13 @@
     flex-direction: row;
     width: 100%;
     min-width: 10px;
-    gap: 40px;
+    gap: 5%;
     justify-content: center;
 }
 
 .Dashboard .main-container {
     display: flex;
-    max-width: 800px; /* 변경: 고정 width -> 최대 width */
+    max-width: 1100px; /* 변경: 고정 width -> 최대 width */
     width: 100%; /* 추가: 부모 요소에 맞게 크기 조정 */
     min-width: 10px;
     flex-direction: column;
@@ -31,7 +31,11 @@
     align-items: center;
     padding-bottom: 10px;
 }
-.home-icon{
+
+.Dashboard .div-area{
+    display: flex;
+    gap: 30px;
+
 }
 .Dashboard h3{
     color: var(--normal-text-color);
@@ -57,6 +61,7 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+    width: 100%;
 }
 
 .Dashboard .board-area {
