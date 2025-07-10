@@ -1,5 +1,6 @@
 /* LectureCard.css */
 .LectureRoomCard {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -10,6 +11,7 @@
   border: 1px solid var( --base-border-color);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: center;
 }
 
 .LectureRoomCard:hover {

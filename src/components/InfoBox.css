@@ -1,0 +1,88 @@
+.InfoBox {
+  width: 100%;
+}
+
+.InfoBox .top {
+  display: flex;
+  flex-direction: column;
+}
+
+.InfoBox .filter-area {
+  display: flex;
+  margin: 10px 0 0;
+  gap: 4px;
+}
+
+.InfoBox button {
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 120%;
+  padding: 6px 10px;
+  border-radius: 60px;
+  border: 1px solid rgb(92, 92, 92);
+  color: #2d2929;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.InfoBox button.active {
+  background-color: #5c5c5c; /* 눌린 상태: 회색 배경 */
+  border-color: #5c5c5c;
+  color: white; /* 글자 흰색 */
+}
+
+.InfoBox .list-area {
+  min-height: 390px; /* 고정 높이로 깜빡임 방지 */
+  max-height: 500px;
+  overflow-y: auto; /* 스크롤 가능 */
+  border-radius: 24px;
+  margin: 20px 0 0;
+  border: 1px solid var(--base-border-color);
+  box-shadow: var(--board-shadow-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.InfoBox .list {
+  list-style: none;
+  padding: 22px 30px;
+  margin: 0;
+}
+
+.InfoBox .item {
+  padding: 13px 0;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 56px; /* 제목 + 메타 높이 + 간격 감안 */
+}
+
+.InfoBox .item.skeleton {
+  background: transparent;
+  height: auto; /* 고정 높이 제거해서 내부 스켈레톤 높이에 따름 */
+  padding: 13px 0; /* 실제 아이템과 동일한 패딩 */
+  border-bottom: 1px solid #f0f0f0; /* 실제 아이템과 동일한 보더 */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.InfoBox .item.skeleton .skeleton-title,
+.InfoBox .item.skeleton .skeleton-meta {
+  background-size: 200% 100%;
+  border-radius: 4px;
+}
+
+.InfoBox .item.skeleton .skeleton-title {
+  width: 80%;
+  height: 16px;
+}
+
+.InfoBox .item.skeleton .skeleton-meta {
+  width: 40%;
+  height: 12px;
+}
+
+
