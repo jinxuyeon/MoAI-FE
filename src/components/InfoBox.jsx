@@ -1,31 +1,84 @@
 import "./InfoBox.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "./utils/AxiosInstance";
 
-const InfoBox = ({ data }) => {
+const InfoBox = ({ boardTypes, title }) => {
   const boardTitles = {
-    자유게시판: "자유게시판",
-    비밀게시판: "비밀게시판",
-    조교가말한다: "조교가 말한다",
-    후기: "취업, 면접 후기",
+    ALL: "전체",
+    NOTICE: "공지사항",
+    NOTICE_C: "조교가 말한다",
+    FREE: "자유게시판",
+    SECRET: "비밀게시판",
+    REVIEW: "취업, 면접 후기",
   };
 
-  const [selectedBoard, setSelectedBoard] = useState("자유게시판");
-  const selectedPosts = data[selectedBoard] || [];
+  const [selectedBoard, setSelectedBoard] = useState("ALL");
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const PAGE_SIZE = 5;
+
+  const fetchAllPosts = async () => {
+  try {
+    setLoading(true);
+    const response = await axiosInstance.post(`/post/summary-multi`, {
+      types: boardTypes, // ["FREE", "REVIEW"] 등
+      pageSize: PAGE_SIZE,
+    });
+    const allPosts = response.data?.Posts || [];
+    setPosts(allPosts);
+  } catch (error) {
+    console.error("전체 게시글 요약 가져오기 실패:", error);
+    setPosts([]);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  const fetchSingleBoard = async (type) => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(`/post/${type}/summary`, {
+        params: {
+          pageSize: PAGE_SIZE,
+        },
+      });
+      setPosts(response.data?.Posts || []);
+    } catch (error) {
+      console.error("게시글 요약 가져오기 실패:", error);
+      setPosts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedBoard === "ALL") {
+      fetchAllPosts();
+    } else {
+      fetchSingleBoard(selectedBoard);
+    }
+  }, [selectedBoard]);
 
   return (
     <div className="InfoBox">
       <div className="inner">
         <div className="top">
-          <h1>커뮤니티</h1>
+          <h1>{title}</h1>
           <div className="filter-area">
-            {Object.keys(boardTitles).map((key) => (
+            <button
+              onClick={() => setSelectedBoard("ALL")}
+              className={selectedBoard === "ALL" ? "active" : ""}
+            >
+              전체
+            </button>
+            {boardTypes.map((type) => (
               <button
-                key={key}
-                onClick={() => setSelectedBoard(key)}
-                className={selectedBoard === key ? "active" : ""}
+                key={type}
+                onClick={() => setSelectedBoard(type)}
+                className={selectedBoard === type ? "active" : ""}
               >
-                {boardTitles[key]}
+                {boardTitles[type] || type}
               </button>
             ))}
           </div>
@@ -33,10 +86,17 @@ const InfoBox = ({ data }) => {
 
         <div className="list-area">
           <ul className="list">
-            {selectedPosts.length === 0 ? (
+            {loading ? (
+              [...Array(PAGE_SIZE)].map((_, i) => (
+                <li key={i} className="item skeleton">
+                  <div className="skeleton-title" />
+                  <div className="skeleton-meta" />
+                </li>
+              ))
+            ) : posts.length === 0 ? (
               <li className="item">게시글이 없습니다.</li>
             ) : (
-              selectedPosts.map((post) => (
+              posts.map((post) => (
                 <li key={post.id} className="item">
                   <Link
                     className="post-link"

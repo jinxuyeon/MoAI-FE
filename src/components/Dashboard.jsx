@@ -34,15 +34,13 @@ const Dashboard = () => {
             <House size={32} />
             <h1>Home</h1>
           </div>
-
-          {/* 학과 공지 */}
+          
           <div>
-            <div className="title-container">
-              <Volume2 size={20} color="var(--normal-text-color)" />
-              <h3>From the Office</h3>
-            </div>
             <section className="inner-container">
-              <BasicBoard title="학과 사무실에서 알려드립니다" posts={postsSummary.Posts_notice_c} type={"NOTICE_C"} />
+              <InfoBox
+                boardTypes={["NOTICE", "NOTICE_C"]} // 공지사항 관련 타입들
+                title="공지사항"
+              />
             </section>
           </div>
 
@@ -54,24 +52,16 @@ const Dashboard = () => {
             <div className="inner-container">
               <BookMarketBoard title="장터" posts={postsSummary.Posts_market} type={"MARKET"} />
             </div>
-
           </div>
 
-          {/* ✅ 커뮤니티 영역 InfoBox로 대체 */}
           <div>
             <section className="inner-container">
               <InfoBox
-                data={{
-                  자유게시판: postsSummary.Posts_free,
-                  비밀게시판: postsSummary.Posts_secret,
-                  조교가말한다: postsSummary.Posts_notice,
-                  후기: postsSummary.Posts_review,
-                }}
+                boardTypes={["FREE", "SECRET", "REVIEW"]} // 커뮤니티 게시판 타입들
+                title="커뮤니티"
               />
             </section>
           </div>
-
-
         </div>
 
         {/* 오른쪽 사이드바 */}
