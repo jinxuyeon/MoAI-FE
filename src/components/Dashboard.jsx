@@ -1,27 +1,30 @@
 import "./Dashboard.css";
-import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
-import { House } from "lucide-react";
-import LectureRoomCard from "./LectureRoomCard";
 import InfoBox from "./InfoBox";
+import LectureRoomCard from "./cards-widget/LectureRoomCard";
+import MyPageCard from "./cards-widget/MyPageCard";
 
 const Dashboard = () => {
   return (
     <div className="Dashboard">
       <div className="Content-container">
         <div className="main-container">
-          
-
-          <div>
+          <div className="div-area info-area">
             <section className="inner-container">
               <InfoBox boardTypes={["NOTICE", "NOTICE_C"]} title="공지사항" />
+            </section>
+            <section className="inner-container">
+              <InfoBox
+                boardTypes={["FREE", "SECRET", "REVIEW"]}
+                title="커뮤니티"
+              />
             </section>
           </div>
 
           <div className="div-area">
             <div className="left-half">
               <section className="inner-container">
-                <LectureRoomCard />
+                <MyPageCard />
               </section>
               <section className="inner-container">
                 <LectureRoomCard />
@@ -34,20 +37,17 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div>
-            <section className="inner-container">
-              <InfoBox
-                boardTypes={["FREE", "SECRET", "REVIEW"]}
-                title="커뮤니티"
-              />
-            </section>
+        </div>
+        <aside>
+          <ul><div>
+            <li>첫 번째 메뉴<br />sdfsdfsdsdfsd</li>
           </div>
-        </div>
+          <div>
+            <li>두 번째 메뉴</li>
 
-        {/* 오른쪽 사이드바 */}
-        <div className="rightside-container">
-          <JobInfoBoard />
-        </div>
+          </div>
+          </ul>
+        </aside>
       </div>
     </div>
   );

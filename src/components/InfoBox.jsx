@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import PostTag from "./PostTag";
-import { size } from "lodash";
 
 const InfoBox = ({ boardTypes, title }) => {
   const boardTitles = {
@@ -66,7 +65,12 @@ const InfoBox = ({ boardTypes, title }) => {
     <div className="InfoBox">
       <div className="inner">
         <div className="top">
-          <h1>{title}</h1>
+          <div className="title-area">
+            <h1>{title}</h1>
+            <button className="more-btn">
+                +
+            </button>
+          </div>
           <div className="filter-area">
             <button
               onClick={() => setSelectedBoard("ALL")}
