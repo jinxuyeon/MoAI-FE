@@ -1,5 +1,5 @@
 import "./Header.css";
-import { LogOut, Menu, } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import Bellbox from "./BellBox";
 import MailBox from "./MailBox";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import axiosInstance from "./utils/AxiosInstance";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./utils/UserContext";
 
-function Header({ title }) {
+function Header({ title, onMenuClick }) {
   const { user } = useContext(UserContext);
 
   const [notices, setNotices] = useState([]);
@@ -39,7 +39,6 @@ function Header({ title }) {
     try {
       const response = await axiosInstance.get("/mail/check-new");
       if (response.status === 200) {
-        console.log("메일 개수 확인:", response.data.newMailCount);
         setNewMailCount(response.data.newMailCount);
       }
     } catch (error) {
@@ -54,8 +53,8 @@ function Header({ title }) {
 
   return (
     <div className="header-container">
-      <button className="menu-btn">
-        <Menu  size={30} />
+      <button className="menu-btn" onClick={onMenuClick}>
+        <Menu size={30} />
       </button>
       <Link to="/main" className="logo_btn"></Link>
       <h2 style={{ marginLeft: "10px" }}>{title}</h2>
@@ -68,11 +67,7 @@ function Header({ title }) {
           <MailBox newMailCount={newMailCount} />
         </div>
 
-        <button
-          className="logout-btn"
-          title="로그아웃"
-          onClick={handleLogout}
-        >
+        <button className="logout-btn" title="로그아웃" onClick={handleLogout}>
           <LogOut />
         </button>
       </div>

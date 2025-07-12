@@ -1,43 +1,47 @@
 .MainPage {
-    height: 100%;
-    width: 100%;
-    flex-grow: 1;
-
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  position: relative; /* 오버레이 기준 */
 }
 
 .MainPage .Panel-Dashboard-Container {
-    flex-grow: 1;
-    display: flex;
+  flex-grow: 1;
+  display: flex;
 }
 
 .MainPage .Panel-container {
-    width: 280px;
-    min-width: 10px;
-    border-right: 1px solid var(--base-border-color);
-    z-index:10;
-
+  width: 280px;
+  min-width: 10px;
+  border-right: 1px solid var(--base-border-color);
+  z-index: 10;
 }
 
 .MainPage .Dashboard-container {
-    flex-grow: 1;
-    width: 300px;
-    min-width: 10px;
-    margin-bottom: 400px;
+  flex-grow: 1;
+  width: 300px;
+  min-width: 10px;
+  margin-bottom: 400px;
 }
 
-/* 반응형 레이아웃 760고정정 */
+/* 반응형 레이아웃 760px 이하일 때 */
 @media (max-width: 760px) {
-    .MainPage .Panel-Dashboard-Container {
-        flex-direction: column;
-        overflow-y: auto;
-        min-width: 10px;
-    }
+  .MainPage .Panel-Dashboard-Container {
+    flex-direction: column;
+    overflow-y: auto;
+    min-width: 10px;
+  }
 
-    .MainPage .Panel-container {
-        border-right: none
-    }
+  .MainPage .Panel-container {
+    border-right: none;
+  }
 
-    .MainPage .Panel-Dashboard-Container>div {
-        width: 100%;
-    }
+  .MainPage .Panel-Dashboard-Container > div {
+    width: 100%;
+  }
+
+  .MainPage .Dashboard-container {
+    margin-bottom: 0;
+    width: 100%;
+  }
 }
