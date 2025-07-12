@@ -15,7 +15,7 @@ const StudyDashboardPage = () => {
 
   return (
     <div className="StudyDashboardPage">
-      <Header title={"Dashboard-study"} />
+      <Header title={"스터디룸"} />
       <div className="Panel-Dashboard-Container">
         <div className="Panel-container">
           <Panel mode="study" />
