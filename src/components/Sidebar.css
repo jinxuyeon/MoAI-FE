@@ -1,0 +1,73 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0; /* 고정 */
+  width: 30%;
+  max-width: 430px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  z-index: 100;
+
+  /* 초기 상태: 화면 바깥으로 숨김 + 투명 */
+  transform: translateX(-100%);
+  opacity: 0;
+
+  /* 트랜지션 */
+  transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
+.sidebar.open {
+  /* 화면 안으로 들어오고 불투명 */
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar .content-area {
+  height: 400px;
+  padding: 20px;
+}
+
+.sidebar .close-area {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid var(--base-border-color);
+}
+
+.sidebar .close-btn {
+  margin-left: 15px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: inherit; /* 기본 아이콘 색상 */
+  transition: color 0.2s ease;
+  outline: none;
+}
+
+/* 클릭 시 X 아이콘 파란색 */
+.sidebar .close-btn:hover {
+  color: var(--point-text-color-blue)
+}
+.sidebar-backdrop {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 15;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.sidebar-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}

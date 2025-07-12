@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
@@ -16,6 +16,8 @@ const PostDetail = () => {
   const [replyContent, setReplyContent] = useState("");
   const [childComments, setChildComments] = useState({});
   const [expandedReplies, setExpandedReplies] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const lastSubmitTime = useRef(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,17 +35,18 @@ const PostDetail = () => {
   };
 
   const fetchComments = async () => {
-    try {
-      const res = await axiosInstance.get(`/post/${postId}/comments`);
-      const commentList = res.data.comments || [];
-      const sorted = [...commentList].sort(
-        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-      );
-      setComments(sorted);
-    } catch (err) {
-      console.error("❌ 댓글 불러오기 실패:", err);
-    }
-  };
+  try {
+    const res = await axiosInstance.get(`/post/${postId}/comments`);
+    const commentList = res.data.comments || [];
+    const sorted = [...commentList].sort(
+      (a, b) => new Date(a.createdDate) - new Date(b.createdDate) // 최신 댓글이 아래로
+    );
+    setComments(sorted);
+  } catch (err) {
+    console.error("❌ 댓글 불러오기 실패:", err);
+  }
+};
+
 
   const fetchReplies = async (parentId) => {
     try {
@@ -90,7 +93,17 @@ const PostDetail = () => {
   };
 
   const handleCommentSubmit = async () => {
-    if (!newComment.trim()) return;
+    const now = Date.now();
+    if (
+      !newComment.trim() ||
+      isSubmitting ||
+      now - lastSubmitTime.current < 1000
+    )
+      return;
+
+    setIsSubmitting(true);
+    lastSubmitTime.current = now;
+
     try {
       await axiosInstance.post(`/post/${postId}/comments`, {
         content: newComment,
@@ -100,6 +113,8 @@ const PostDetail = () => {
     } catch (err) {
       console.error("❌ 댓글 등록 실패:", err);
       alert("댓글 등록 실패");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -112,7 +127,7 @@ const PostDetail = () => {
       });
       setReplyContent("");
       setReplyingTo(null);
-      await fetchReplies(parentId); // 해당 대댓글만 갱신
+      await fetchReplies(parentId);
     } catch (e) {
       console.error("답글 등록 실패:", e);
     }
@@ -223,11 +238,14 @@ const PostDetail = () => {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
+              e.stopPropagation();
               handleCommentSubmit();
             }
           }}
         />
-        <button onClick={handleCommentSubmit}>작성</button>
+        <button onClick={handleCommentSubmit} disabled={isSubmitting}>
+          {isSubmitting ? "작성 중..." : "작성"}
+        </button>
       </div>
 
       <ul className="comment-list">

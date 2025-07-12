@@ -1,34 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import Panel from "../components/Panel";
 import Dashboard from "../components/Dashboard";
+import Sidebar from "../components/Sidebar"; // 경로 맞게 수정
 import "./MainPage.css";
 
 const MainPage = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 760);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => { //화면 작을때 걍 패널 안보여주고 사이드바에다 넣을것임
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 760);
-    };
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   return (
     <div className="MainPage">
-      <Header title={""} />
+      <Header onMenuClick={toggleSidebar} />
+
       <div className="Panel-Dashboard-Container">
-        {!isMobile && (
-          <div className="Panel-container">
-            <Panel hideWidgets={false} />
-          </div>
-        )}
+        <div className="Panel-container">
+          <Panel hideWidgets={false} />
+        </div>
+
         <div className="Dashboard-container">
           <Dashboard />
         </div>
       </div>
+
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
     </div>
   );
 };

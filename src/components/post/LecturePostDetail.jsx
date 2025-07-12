@@ -1,5 +1,5 @@
 import "./LecturePostDetail.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import "./PostDetail.css";
@@ -17,6 +17,9 @@ const LecturePostDetail = () => {
     const [replyContent, setReplyContent] = useState("");
     const [childComments, setChildComments] = useState({});
     const [expandedReplies, setExpandedReplies] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const lastSubmitTime = useRef(0);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,17 +37,17 @@ const LecturePostDetail = () => {
     };
 
     const fetchComments = async () => {
-        try {
-            const res = await axiosInstance.get(`/post/lecture/${postId}/comments`);
-            const commentList = res.data.comments || [];
-            const sorted = [...commentList].sort(
-                (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-            );
-            setComments(sorted);
-        } catch (err) {
-            console.error("❌ 댓글 불러오기 실패:", err);
-        }
-    };
+    try {
+        const res = await axiosInstance.get(`/post/lecture/${postId}/comments`);
+        const commentList = res.data.comments || [];
+        const sorted = [...commentList].sort( // 여기 수정
+            (a, b) => new Date(a.createdDate) - new Date(b.createdDate)
+        );
+        setComments(sorted);
+    } catch (err) {
+        console.error("❌ 댓글 불러오기 실패:", err);
+    }
+};
 
     const fetchReplies = async (parentId) => {
         try {
@@ -116,18 +119,23 @@ const LecturePostDetail = () => {
     };
 
     const handleCommentSubmit = async () => {
-        if (!newComment.trim()) return;
+        const now = Date.now();
+        if (!newComment.trim() || isSubmitting || now - lastSubmitTime.current < 1000) return;
+
+        setIsSubmitting(true);
+        lastSubmitTime.current = now;
 
         try {
             await axiosInstance.post(`/lecture-room/${postId}/comments`, {
                 content: newComment,
             });
-
             setNewComment("");
             await fetchComments();
         } catch (err) {
             console.error("❌ 댓글 등록 실패:", err);
             alert("댓글 등록 실패");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -241,11 +249,14 @@ const LecturePostDetail = () => {
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             e.preventDefault();
+                            e.stopPropagation();
                             handleCommentSubmit();
                         }
                     }}
                 />
-                <button onClick={handleCommentSubmit}>작성</button>
+                <button onClick={handleCommentSubmit} disabled={isSubmitting}>
+                    {isSubmitting ? "작성 중..." : "작성"}
+                </button>
             </div>
 
             <ul className="comment-list">

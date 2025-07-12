@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import PostTag from "./PostTag";
+import { size } from "lodash";
 
 const InfoBox = ({ boardTypes, title }) => {
   const boardTitles = {
     ALL: "전체",
-    NOTICE: "공지사항",
-    NOTICE_C: "조교알림",
+    NOTICE: "조교알림",
+    NOTICE_C: "공지사항",
     FREE: "자유게시판",
     SECRET: "비밀게시판",
     REVIEW: "취업, 면접 후기",

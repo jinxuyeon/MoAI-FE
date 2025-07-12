@@ -10,10 +10,7 @@ const Dashboard = () => {
     <div className="Dashboard">
       <div className="Content-container">
         <div className="main-container">
-          <div className="title-container">
-            <House size={32} />
-            <h1>Home</h1>
-          </div>
+          
 
           <div>
             <section className="inner-container">
