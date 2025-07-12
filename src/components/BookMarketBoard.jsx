@@ -1,28 +1,63 @@
 import "./BookMarketBoard.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "./utils/AxiosInstance";
 
 const formatPrice = (price) => {
     return new Intl.NumberFormat("ko-KR").format(price || 0) + " 원";
 };
 
-const BookMarketBoard = ({ type, title, posts }) => {
+const BookMarketBoard = ({ boardType, title }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [fade, setFade] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [posts, setPosts] = useState([]);
+
+    const PAGE_SIZE = 10;
+
+    const fetchPosts = async () => {
+        try {
+            setLoading(true);
+            const response = await axiosInstance.get(`/post/${boardType}/summary`, {
+                params: { pageSize: PAGE_SIZE },
+            });
+            setPosts(response.data?.Posts || []);
+        } catch (error) {
+            console.error("마켓 게시글 요약 가져오기 실패:", error);
+            setPosts([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
+        if (boardType) {
+            fetchPosts();
+        }
+    }, [boardType]);
+
+    useEffect(() => {
+        if (posts.length === 0) return;
+
         const intervalId = setInterval(() => {
             setFade(false);
             setTimeout(() => {
-                setCurrentIndex((prevIndex) =>
-                    posts.length > 0 ? (prevIndex + 1) % posts.length : 0
-                );
+                setCurrentIndex((prev) => (prev + 1) % posts.length);
                 setFade(true);
-            }, 800);
+            }, 300);
         }, 8000);
 
         return () => clearInterval(intervalId);
-    }, [posts.length]);
+    }, [posts]);
+
+    if (loading) {
+        return (
+            <section className="BookMarketBoard">
+                <h3>{title}</h3>
+                <p>불러오는 중...</p>
+            </section>
+        );
+    }
 
     if (posts.length === 0) {
         return (
@@ -37,7 +72,7 @@ const BookMarketBoard = ({ type, title, posts }) => {
 
     return (
         <section className="BookMarketBoard">
-            <Link to={`/main/community/${type.toLowerCase()}`} className="more-link">
+            <Link to={`/main/community/${boardType.toLowerCase()}`} className="more-link">
                 <h4 className="title">{title}</h4>
             </Link>
 
@@ -50,7 +85,12 @@ const BookMarketBoard = ({ type, title, posts }) => {
                         <img
                             src={currentPost.thumbNailUrl || "/icons/no-img-text.png"}
                             alt="책 이미지"
-                            style={{ width: 200, height: 250, objectFit: "cover", borderRadius: 8 }}
+                            style={{
+                                width: 200,
+                                height: 250,
+                                objectFit: "cover",
+                                borderRadius: 8,
+                            }}
                         />
                         <div className="post-info">
                             <h4>{currentPost.title}</h4>
@@ -71,16 +111,13 @@ const BookMarketBoard = ({ type, title, posts }) => {
                     onClick={() => {
                         setFade(false);
                         setTimeout(() => {
-                            setCurrentIndex(
-                                (prev) => (prev - 1 + posts.length) % posts.length
-                            );
+                            setCurrentIndex((prev) => (prev - 1 + posts.length) % posts.length);
                             setFade(true);
                         }, 300);
                     }}
                 >
                     ◀
                 </button>
-
                 <button
                     className="mini-button"
                     onClick={() => {
