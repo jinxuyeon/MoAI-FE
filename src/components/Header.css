@@ -23,6 +23,16 @@
   /* 기본 링크 스타일 제거 */
 }
 
+.header-container .menu-btn{
+  display: flex;
+  margin-left: 15px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 
 .logout-btn {
   display: flex;

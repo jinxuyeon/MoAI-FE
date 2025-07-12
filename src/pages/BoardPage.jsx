@@ -41,7 +41,7 @@ const BoardPage = () => {
   return (
     <div className="BoardPage">
       <div className="header-with-button">
-        <Header title={"Community"} />
+        <Header title={"게시판"} />
       </div>
 
       <div className="layout-container">

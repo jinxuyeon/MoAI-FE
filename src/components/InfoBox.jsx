@@ -2,12 +2,13 @@ import "./InfoBox.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
+import PostTag from "./PostTag";
 
 const InfoBox = ({ boardTypes, title }) => {
   const boardTitles = {
     ALL: "전체",
     NOTICE: "공지사항",
-    NOTICE_C: "조교가 말한다",
+    NOTICE_C: "조교알림",
     FREE: "자유게시판",
     SECRET: "비밀게시판",
     REVIEW: "취업, 면접 후기",
@@ -19,38 +20,38 @@ const InfoBox = ({ boardTypes, title }) => {
   const PAGE_SIZE = 5;
 
   const fetchAllPosts = async () => {
-  try {
-    setLoading(true);
-    const response = await axiosInstance.post(`/post/summary-multi`, {
-      types: boardTypes, // ["FREE", "REVIEW"] 등
-      pageSize: PAGE_SIZE,
-    });
-    const allPosts = response.data?.Posts || [];
-    setPosts(allPosts);
-  } catch (error) {
-    console.error("전체 게시글 요약 가져오기 실패:", error);
-    setPosts([]);
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      setLoading(true);
+      const response = await axiosInstance.post(`/post/summary-multi`, {
+        types: boardTypes, // ["FREE", "REVIEW"] 등
+        pageSize: PAGE_SIZE,
+      });
+      const allPosts = response.data?.Posts || [];
+      setPosts(allPosts);
+    } catch (error) {
+      console.error("전체 게시글 요약 가져오기 실패:", error);
+      setPosts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchSingleBoard = async (type) => {
-  try {
-    setLoading(true);
-    const response = await axiosInstance.get(`/post/${type}/summary`, {
-      params: {
-        pageSize:PAGE_SIZE, // ✅ 7개로 고정
-      },
-    });
-    setPosts(response.data?.Posts || []);
-  } catch (error) {
-    console.error("게시글 요약 가져오기 실패:", error);
-    setPosts([]);
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(`/post/${type}/summary`, {
+        params: {
+          pageSize: PAGE_SIZE, // ✅ 7개로 고정
+        },
+      });
+      setPosts(response.data?.Posts || []);
+    } catch (error) {
+      console.error("게시글 요약 가져오기 실패:", error);
+      setPosts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (selectedBoard === "ALL") {
@@ -102,6 +103,8 @@ const InfoBox = ({ boardTypes, title }) => {
                     className="post-link"
                     to={`/main/community/${post.boardType.toLowerCase()}/post/${post.id}`}
                   >
+                    {/* 태그 삽입 */}
+                    <PostTag type={post.boardType} />
                     <strong>{post.title}</strong>
                   </Link>
                   <div className="meta">
