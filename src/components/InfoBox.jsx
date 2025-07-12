@@ -36,21 +36,21 @@ const InfoBox = ({ boardTypes, title }) => {
 };
 
   const fetchSingleBoard = async (type) => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get(`/post/${type}/summary`, {
-        params: {
-          pageSize: PAGE_SIZE,
-        },
-      });
-      setPosts(response.data?.Posts || []);
-    } catch (error) {
-      console.error("게시글 요약 가져오기 실패:", error);
-      setPosts([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    const response = await axiosInstance.get(`/post/${type}/summary`, {
+      params: {
+        pageSize:PAGE_SIZE, // ✅ 7개로 고정
+      },
+    });
+    setPosts(response.data?.Posts || []);
+  } catch (error) {
+    console.error("게시글 요약 가져오기 실패:", error);
+    setPosts([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     if (selectedBoard === "ALL") {
