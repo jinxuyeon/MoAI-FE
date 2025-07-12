@@ -2,7 +2,8 @@
   position: fixed;
   top: 0;
   left: 0; /* 고정 */
-  width: 400px;
+  width: 30%;
+  max-width: 430px;
   height: 100vh;
   background-color: white;
   box-shadow: 2px 0 8px rgba(0,0,0,0.1);
@@ -49,7 +50,7 @@
 
 /* 클릭 시 X 아이콘 파란색 */
 .sidebar .close-btn:hover {
-  color: #007bff;
+  color: var(--point-text-color-blue)
 }
 .sidebar-backdrop {
   position: fixed;
