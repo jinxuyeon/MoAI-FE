@@ -3,12 +3,9 @@ import { X } from "lucide-react";
 import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
-    setClicked(true);
     onClose();
-    setTimeout(() => setClicked(false), 200); // 잠깐 색 유지 후 리셋
   };
 
   return (
@@ -20,7 +17,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             onClick={handleClick}
             aria-label="Close sidebar"
           >
-            <X size={30} color={clicked ? "#007bff" : "currentColor"} />
+            <X size={30}  />
           </button>
         </div>
         <div className="content-area">
