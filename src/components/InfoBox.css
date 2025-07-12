@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.InfoBox h1 {
+  font-size: 1.6rem;
+}
+
 .InfoBox .top {
   display: flex;
   flex-direction: column;
@@ -10,13 +14,14 @@
 .InfoBox .filter-area {
   display: flex;
   margin: 10px 0 0;
-  gap: 4px;
+  gap: 5px;
 }
 
-.InfoBox button {
+/* 기본 버튼 스타일 */
+.InfoBox .filter-area button {
   outline: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 0.9rem;
   line-height: 120%;
   padding: 6px 10px;
   border-radius: 60px;
@@ -26,10 +31,19 @@
   transition: all 0.2s ease-in-out;
 }
 
-.InfoBox button.active {
+/* 활성화된 버튼 (진한 회색) */
+.InfoBox .filter-area button.active {
   background-color: #5c5c5c;
   border-color: #5c5c5c;
   color: white;
+}
+
+/* hover: 활성화된 버튼 제외, 마우스 올렸을 때 옅은 회색 배경 */
+.InfoBox .filter-area button:not(.active):hover {
+  background-color: #5c5c5c;
+  border-color: #5c5c5c;
+  color: white;
+
 }
 
 .InfoBox .list-area {
@@ -37,7 +51,7 @@
   max-height: 500px;
   overflow-y: auto;
   border-radius: 24px;
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   border: 1px solid var(--base-border-color);
   box-shadow: var(--board-shadow-color);
   transition: all 0.2s ease-in-out;
@@ -85,7 +99,7 @@
   height: 12px;
 }
 
-/* ✅ 링크 스타일 제거 */
+/* 링크 스타일 제거 */
 .InfoBox .post-link {
   text-decoration: none;
   color: inherit;
