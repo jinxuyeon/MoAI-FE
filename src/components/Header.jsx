@@ -1,5 +1,5 @@
 import "./Header.css";
-import { LogOut } from "lucide-react";
+import { LogOut, Menu, } from "lucide-react";
 import Bellbox from "./BellBox";
 import MailBox from "./MailBox";
 import { Link, useNavigate } from "react-router-dom";
@@ -54,6 +54,9 @@ function Header({ title }) {
 
   return (
     <div className="header-container">
+      <button className="menu-btn">
+        <Menu  size={30} />
+      </button>
       <Link to="/main" className="logo_btn"></Link>
       <h2 style={{ marginLeft: "10px" }}>{title}</h2>
       <div className="header-space">

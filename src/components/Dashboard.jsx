@@ -14,26 +14,26 @@ const Dashboard = () => {
             <House size={32} />
             <h1>Home</h1>
           </div>
+
           <div>
             <section className="inner-container">
-              <InfoBox
-                boardTypes={["NOTICE", "NOTICE_C"]}
-                title="공지사항"
-              />
+              <InfoBox boardTypes={["NOTICE", "NOTICE_C"]} title="공지사항" />
             </section>
           </div>
+
           <div className="div-area">
-            <div>
+            <div className="left-half">
               <section className="inner-container">
                 <LectureRoomCard />
               </section>
-
               <section className="inner-container">
                 <LectureRoomCard />
               </section>
             </div>
-            <div className="inner-container">
-              <BookMarketBoard title="장터" boardType="MARKET" />
+            <div className="right-half">
+              <section className="inner-container">
+                <BookMarketBoard title="장터" boardType="MARKET" />
+              </section>
             </div>
           </div>
 
