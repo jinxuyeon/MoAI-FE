@@ -9,7 +9,6 @@ export const ROLE_OPTIONS = [
 ];
 
 
-
 export const ROLE_TITLES = [
   { label: "STUDENT", value: "학생" },
   { label: "PROFESSOR", value: "교수" },

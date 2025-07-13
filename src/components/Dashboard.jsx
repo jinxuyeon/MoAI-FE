@@ -1,40 +1,20 @@
 import "./Dashboard.css";
-import JobInfoBoard from "./JobInfoBoard";
 import BookMarketBoard from "./BookMarketBoard";
-import { House } from "lucide-react";
-import LectureRoomCard from "./LectureRoomCard";
 import InfoBox from "./InfoBox";
+import LectureRoomCard from "./cards-widget/LectureRoomCard";
+import MyPageCard from "./cards-widget/MyPageCard";
+import QuickLinks from "./QuickLinks";
 
 const Dashboard = () => {
   return (
     <div className="Dashboard">
       <div className="Content-container">
         <div className="main-container">
-          
-
-          <div>
+          <QuickLinks/>
+          <div className="div-area info-area">
             <section className="inner-container">
               <InfoBox boardTypes={["NOTICE", "NOTICE_C"]} title="공지사항" />
             </section>
-          </div>
-
-          <div className="div-area">
-            <div className="left-half">
-              <section className="inner-container">
-                <LectureRoomCard />
-              </section>
-              <section className="inner-container">
-                <LectureRoomCard />
-              </section>
-            </div>
-            <div className="right-half">
-              <section className="inner-container">
-                <BookMarketBoard title="장터" boardType="MARKET" />
-              </section>
-            </div>
-          </div>
-
-          <div>
             <section className="inner-container">
               <InfoBox
                 boardTypes={["FREE", "SECRET", "REVIEW"]}
@@ -42,12 +22,46 @@ const Dashboard = () => {
               />
             </section>
           </div>
-        </div>
 
-        {/* 오른쪽 사이드바 */}
-        <div className="rightside-container">
-          <JobInfoBoard />
+          <div className="div-area">
+            <div className="left-half">
+              <section className="inner-container">
+                <MyPageCard />
+              </section>
+              <section className="inner-container">
+                <LectureRoomCard />
+              </section>
+            </div>
+            <div className="left-half">
+              <section className="inner-container">
+                <MyPageCard />
+              </section>
+              <section className="inner-container">
+                <LectureRoomCard />
+              </section>
+            </div>
+
+            <div className="right-half">
+              <section className="inner-container">
+                <BookMarketBoard title="장터" boardType="MARKET" />
+              </section>
+            </div>
+          </div>
+
         </div>
+        <aside>
+          <ul>
+            <li>
+              <div>첫 번째 메뉴sdfㄴㅇㄴㅇㅇㅇㅇㅇㅇㄹㅇㄴsdfsdsdfsd</div>
+            </li>
+            <li>
+              <div>두 번째
+                <br />
+                <br /> 메ㄹㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ뉴</div>
+            </li>
+          </ul>
+        </aside>
+
       </div>
     </div>
   );

@@ -4,6 +4,7 @@
     padding: 20px;
     padding-left: 50px;
     display: flex;
+    margin-top: 20px;
 }
 
 .Dashboard .Content-container {
@@ -11,13 +12,13 @@
     flex-direction: row;
     width: 100%;
     min-width: 10px;
-    gap: 5%;
+    gap: 2%;
     justify-content: center;
 }
 
 .Dashboard .main-container {
     display: flex;
-    max-width: 1100px;
+    max-width: 1500px;
     width: 100%;
     min-width: 10px;
     flex-direction: column;
@@ -95,15 +96,58 @@
     height: auto;
 }
 
-@media (max-width: 1080px) {
+
+.Dashboard aside {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.Dashboard aside ul {
+  position: relative;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.Dashboard aside ul::before {
+  content: "";
+  position: absolute;
+  top: 10px; /* ✅ 위에서 10px 떨어진 지점부터 시작 */
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-left: 1px solid var(--base-border-color); /* ✅ 원하는 border 색상 */
+  z-index: 0;
+}
+
+.Dashboard aside li {
+    margin-bottom: 0;
+    position: relative;
+    padding-left: 1.2em;
+    font-size: 1rem;
+    /* 마커 이후 텍스트 들여쓰기 */
+    margin-bottom: 10px;
+}
+
+.Dashboard aside li::before {
+    transform: translateY(-30%);
+    content: "•";
+    position: absolute;
+    left: -0.24em;
+    /* 마커 위치를 왼쪽 border 위로 겹치게 조정 */
+    top: 0;
+    color: var(--base-border-color);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+@media (max-width: 1180px) {
     .Dashboard {
         padding-left: 20px;
     }
 
     .Dashboard .Content-container {
         gap: var(--medium-screen-gap);
-        display: flex;
-        flex-direction: column;
+        display: block;
         width: 100%;
     }
 
@@ -115,18 +159,22 @@
     .Dashboard .rightside-container {
         width: 100%;
     }
+
+    .Dashboard .info-area {
+        gap: 20px;
+    }
 }
 
 @media (max-width: 760px) {
-    .Dashboard {
-        padding: var(--small-screen-gap);
+    .Dashboard .info-area {
+        flex-direction: column;
+        gap: 20px;
     }
 
     .Dashboard .div-container {
         flex-direction: column;
         gap: var(--small-screen-gap);
     }
-
 
     .Dashboard .half-board-area {
         max-width: 100%;

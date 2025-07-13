@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { X } from "lucide-react";
+import { X, User, Bell, Mail, LogOut, Shield } from "lucide-react";
 import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -20,8 +19,29 @@ const Sidebar = ({ isOpen, onClose }) => {
             <X size={30}  />
           </button>
         </div>
-        <div className="content-area">
-          <h1>사이드 바 입니다</h1>
+           <div className="content-area">
+          <ul className="sidebar-menu">
+            <li >
+              <User size={18} />
+              <span>마이페이지</span>
+            </li>
+            <li >
+              <Shield size={18} />
+              <span>관리자 페이지</span>
+            </li>
+            <li >
+              <Bell size={18} />
+              <span>알림함</span>
+            </li>
+            <li >
+              <Mail size={18} />
+              <span>메일함</span>
+            </li>
+            <li >
+              <LogOut size={18} />
+              <span>로그아웃</span>
+            </li>
+          </ul>
         </div>
       </div>
 
