@@ -42,7 +42,7 @@
 /* ✅ 각 영역 절반 너비 */
 .Dashboard .left-half,
 .Dashboard .right-half {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -178,5 +178,9 @@
 
     .Dashboard .half-board-area {
         max-width: 100%;
+    }
+
+    .Dashboard .div-area{
+        flex-direction: column;
     }
 }
