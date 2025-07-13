@@ -3,12 +3,14 @@ import BookMarketBoard from "./BookMarketBoard";
 import InfoBox from "./InfoBox";
 import LectureRoomCard from "./cards-widget/LectureRoomCard";
 import MyPageCard from "./cards-widget/MyPageCard";
+import QuickLinks from "./QuickLinks";
 
 const Dashboard = () => {
   return (
     <div className="Dashboard">
       <div className="Content-container">
         <div className="main-container">
+          <QuickLinks/>
           <div className="div-area info-area">
             <section className="inner-container">
               <InfoBox boardTypes={["NOTICE", "NOTICE_C"]} title="공지사항" />
