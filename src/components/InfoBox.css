@@ -28,7 +28,12 @@
   width: 20px;
   height: 20px;
   font-size: 1.5rem;
+  cursor: pointer;
   background-color: transparent;
+}
+.InfoBox .more-btn:hover{
+  color: #626262;
+  border: 2px solid #626262;
 }
 
 .InfoBox .filter-area {
