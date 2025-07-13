@@ -49,31 +49,31 @@
 /* 반응형 */
 @media (max-width: 768px) {
   .QuickLinks {
-    gap: 25px;
+    gap: 2%;
     padding: 16px 0;
   }
 
   .quick-link {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 
   .quick-link .icon {
-    transform: scale(1.1);
+    transform: scale(1);
   }
 
   .quick-link:hover .icon {
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 
   .quick-link .label {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .QuickLinks {
-    gap: 15px;
+    gap: 1%;
   }
 
   .quick-link {
