@@ -30,6 +30,15 @@ const Dashboard = () => {
                 <LectureRoomCard />
               </section>
             </div>
+            <div className="left-half">
+              <section className="inner-container">
+                <MyPageCard />
+              </section>
+              <section className="inner-container">
+                <LectureRoomCard />
+              </section>
+            </div>
+
             <div className="right-half">
               <section className="inner-container">
                 <BookMarketBoard title="장터" boardType="MARKET" />
@@ -39,15 +48,18 @@ const Dashboard = () => {
 
         </div>
         <aside>
-          <ul><div>
-            <li>첫 번째 메뉴<br />sdfsdfsdsdfsd</li>
-          </div>
-          <div>
-            <li>두 번째 메뉴</li>
-
-          </div>
+          <ul>
+            <li>
+              <div>첫 번째 메뉴sdfㄴㅇㄴㅇㅇㅇㅇㅇㅇㄹㅇㄴsdfsdsdfsd</div>
+            </li>
+            <li>
+              <div>두 번째
+                <br />
+                <br /> 메ㄹㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ뉴</div>
+            </li>
           </ul>
         </aside>
+
       </div>
     </div>
   );
