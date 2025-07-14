@@ -16,7 +16,7 @@ const boardData = [
   { type: "FREE", label: "자유게시판", icon: <MessagesSquare size={22} />, color: "green" }, // 변경됨!
   { type: "SECRET", label: "비밀게시판", icon: <ShieldCheck size={22} />, color: "purple" },
   { type: "REVIEW", label: "후기", icon: <MessageCircle size={22} />, color: "rose" },
-  { type: "BOOK", label: "책장터", icon: <BookOpen size={22} />, color: "indigo" },
+  { type: "MARKET", label: "책장터", icon: <BookOpen size={22} />, color: "indigo" },
 ];
 
 const NaviBar = ({ currentBoard }) => {
