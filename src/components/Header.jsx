@@ -12,6 +12,7 @@ function Header({ title, onMenuClick }) {
 
   const [notices, setNotices] = useState([]);
   const [newMailCount, setNewMailCount] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 760);
 
   const navigate = useNavigate();
 
@@ -49,6 +50,13 @@ function Header({ title, onMenuClick }) {
   useEffect(() => {
     handleSearch();
     checkMail();
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 760);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -63,10 +71,9 @@ function Header({ title, onMenuClick }) {
           {user?.roles?.includes("ADMIN") && (
             <button onClick={goToAdminPage}>관리자 페이지</button>
           )}
-          <Bellbox notices={notices} setNotices={setNotices} />
-          <MailBox newMailCount={newMailCount} />
+          {!isMobile && <Bellbox notices={notices} setNotices={setNotices} />}
+          {!isMobile && <MailBox newMailCount={newMailCount} />}
         </div>
-
         <button className="logout-btn" title="로그아웃" onClick={handleLogout}>
           <LogOut />
         </button>
