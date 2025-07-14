@@ -10,14 +10,14 @@
 ## To Reviewer
 
 _제가 수정한 부분이 잘 나오려면 백엔드에
-{
-  "id": 1,
-  "type": "comment", // 또는 like, friend 등
-  "senderName": "S님",
-  "content": "윤주드로!!!!",
-  "targetUrl": "/main/community/free/123",
-  "createdAt": "2024-07-14T12:34:56Z"
-}
+  {
+    "id": 1,
+    "type": "comment",           // 알림 유형: "comment" | "like" | "friend"
+    "content": "S님이 댓글을 남겼습니다.",
+    "targetUrl": "/post/123",    // 클릭 시 이동할 주소
+    "createdAt": "2025-07-14T18:03:12.000Z", // 생성 시간 (ISO 형식)
+    "read": false                // 읽음 여부
+  }
 이런 구조여야합니담_
 그리고 npm install date-fns 해야합니다!
 
