@@ -1,28 +1,54 @@
-.NaviBar {
-    height: 40px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--base-blue-color);
-    margin-bottom: 50px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+/* 네비게이션 전체 컨테이너 */
+.circle-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 28px;
+  padding: 20px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-/* 모든 링크 기본 스타일 */
-.navi-link {
-    color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.45s ease; /* 부드러운 애니메이션 */
-    transform-origin: center;
+.circle-nav::-webkit-scrollbar {
+  display: none;
 }
 
-/* 활성화된 메뉴 항목 */
-.navi-link.active {
-    color: black;
-    font-weight: bold;
-    font-size: 20px;       /* 글자 크기 증가 */
-    transform: scale(1.0); /* 약간 커지게 */
+/* 각 네비게이션 아이템 (동그라미) */
+.circle-nav-item {
+  min-width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  border: 2px solid #ccc;
+  color: #444;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
 }
+
+.circle-nav-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 현재 선택된 탭 강조 */
+.circle-nav-item.active {
+  background-color: #f3f4f6;
+  font-weight: bold;
+}
+
+/* 아이콘 컬러 지정용 클래스 */
+.blue   { border-color: #3b82f6; color: #3b82f6; }
+.green  { border-color: #10b981; color: #10b981; }
+.orange { border-color: #f97316; color: #f97316; }
+.purple { border-color: #8b5cf6; color: #8b5cf6; }
+.rose   { border-color: #f43f5e; color: #f43f5e; }
+.indigo { border-color: #6366f1; color: #6366f1; }
