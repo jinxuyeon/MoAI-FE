@@ -16,12 +16,10 @@ const RegisterPage = () => {
                         src="/icons/logo.svg"
                         alt="logo_img"
                     />
-                    <RegisterForm/>
+                    <RegisterForm />
                 </div>
             </div>
         </div>
-
-
     );
 };
 

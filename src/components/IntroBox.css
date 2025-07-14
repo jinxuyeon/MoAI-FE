@@ -1,15 +1,15 @@
-.intro-container{
+.intro-container {
     display: flex;
     flex-direction: column;
     padding: 80px;
     gap: 50px;
 }
-.intro{
-    font-size: 4.5em;
+.intro {
+    font-size: var(--font-size-5xl);
     font-weight: 600;
     color: white;
 }
-.intro-sub{
+.intro-sub {
     color: white;
     font-weight: 10;
 }

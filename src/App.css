@@ -1,39 +1,72 @@
+html {
+    font-size: 16px; /* 기본 폰트 사이즈 */
+}
+
 :root {
-    --base-blue-color : #82BBFC;  /* 로그인 페이지 테마 색 */
-    --point-text-color-blue:#0969da;
-    --point-green : #1f883d;
-    --point-focus-green:#1a7f37;
-    --base-border-color : #d1d9e0;  /* 회색 경계선 색 */
-    --base-point-color:#f6f8fa;  
-    --board-shadow-color:0px 1px 1px 0px #25292e1a, 0px 1px 6px 0px #25292e1f;   /* 게시판 그림자 */
-    --red-dot-color:#f56565;
+    --base-blue-color: #82bbfc; /* 로그인 페이지 테마 색 */
+    --point-text-color-blue: #0969da;
+    --point-green: #1f883d;
+    --point-focus-green: #1a7f37;
+    --base-border-color: #d1d9e0; /* 회색 경계선 색 */
+    --base-point-color: #f6f8fa;
+    --board-shadow-color: 0px 1px 1px 0px #25292e1a, 0px 1px 6px 0px #25292e1f; /* 게시판 그림자 */
+    --red-dot-color: #f56565;
 
-    --normal-text-color:#59636e;
+    --normal-text-color: #59636e;
 
-
-
-
-    /*게시판 내부 폰트 사이즈*/
-    --board-title-size: 0.95rem;
     /* 반응형 변수 */
-    --breakpoint-mobile: 650px;
-    --medium-screen-padding: 15px;
-    --small-screen-padding: 8px;
     --medium-screen-gap: 15px;
     --small-screen-gap: 8px;
 
-    font-size: 16px; 
-    /*기본 폰트사이즈*/
+    /* 폰트 사이즈 */
+    --font-size-xs: 0.75rem; /* 12px */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-lg: 1.125rem; /* 18px */
+    --font-size-xl: 1.25rem; /* 20px */
+    --font-size-2xl: 1.5rem; /* 24px */
+    --font-size-3xl: 1.875rem; /* 30px */
+    --font-size-4xl: 2.25rem; /* 36px */
+    --font-size-5xl: 3rem; /* 48px */
 }
 
-.body-container{
+/* 태블릿 크기 */
+@media (min-width: 768px) {
+    :root {
+        --font-size-xs: 0.875rem;
+        --font-size-sm: 1rem;
+        --font-size-base: 1.125rem;
+        --font-size-lg: 1.25rem;
+        --font-size-xl: 1.5rem;
+        --font-size-2xl: 1.875rem;
+        --font-size-3xl: 2.25rem;
+        --font-size-4xl: 2.5rem;
+        --font-size-5xl: 3.5rem;
+    }
+}
+
+/* 데스크탑 크기 */
+@media (min-width: 1024px) {
+    :root {
+        --font-size-xs: 1rem;
+        --font-size-sm: 1.125rem;
+        --font-size-base: 1.25rem;
+        --font-size-lg: 1.5rem;
+        --font-size-xl: 1.75rem;
+        --font-size-2xl: 2.25rem;
+        --font-size-3xl: 2.75rem;
+        --font-size-4xl: 3.25rem;
+        --font-size-5xl: 4rem;
+    }
+}
+
+.body-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-
-.footer{
+.footer {
     width: 100%;
     background-color: var(--base-blue-color);
     max-height: 2em;
@@ -41,4 +74,3 @@
     text-align: center;
     align-content: center;
 }
-
