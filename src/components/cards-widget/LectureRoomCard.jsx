@@ -14,7 +14,6 @@ const LectureRoomCard = () => {
       <BookOpen size={32} color="#4F46E5" />
       <div>
         <h4>강의실</h4>
-        <p>수강 중인 강의와 자료를 확인하세요</p>
       </div>
     </div>
   );

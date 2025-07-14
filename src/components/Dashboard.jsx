@@ -4,13 +4,14 @@ import InfoBox from "./InfoBox";
 import LectureRoomCard from "./cards-widget/LectureRoomCard";
 import MyPageCard from "./cards-widget/MyPageCard";
 import QuickLinks from "./QuickLinks";
+import Calendar from "./Calendar";
 
 const Dashboard = () => {
   return (
     <div className="Dashboard">
       <div className="Content-container">
         <div className="main-container">
-          <QuickLinks/>
+          <QuickLinks />
           <div className="div-area info-area">
             <section className="inner-container">
               <InfoBox boardTypes={["NOTICE", "NOTICE_C"]} title="공지사항" />
@@ -25,16 +26,15 @@ const Dashboard = () => {
 
           <div className="div-area">
             <div className="left-half">
+              <Calendar />
+            </div>
+
+            <div className="left-half">
               <section className="inner-container">
                 <MyPageCard />
               </section>
               <section className="inner-container">
                 <LectureRoomCard />
-              </section>
-            </div>
-            <div className="left-half">
-              <section className="inner-container">
-                <MyPageCard />
               </section>
               <section className="inner-container">
                 <LectureRoomCard />

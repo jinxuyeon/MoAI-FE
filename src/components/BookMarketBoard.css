@@ -4,7 +4,7 @@
     box-sizing: border-box;
     border-radius: 6px;
     padding: 15px;
-    width: 100%;
+    width: 400px;
     position: relative;
     z-index: 0; /* 낮은 값 */
 }
@@ -128,4 +128,13 @@
     max-width: 200px;
     height: auto;
     object-fit: cover;
+}
+
+@media (max-width: 760px) {
+    .BookMarketBoard{
+    max-width: none;
+    width: 100%
+
+}
+
 }
