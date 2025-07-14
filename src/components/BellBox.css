@@ -1,99 +1,141 @@
 .BellBox {
-    font-size: 15px;
-    position: relative;
-    display: inline-block;
+  font-size: 15px;
+  position: relative;
+  display: inline-block;
 }
 
 .bell-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: none;
-    border-radius: 5px;
-    padding: 2px;
-    background-color: #e8e6e6;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .bell-btn:hover {
-    opacity: 0.5;
+  background-color: #e2e8f0;
 }
 
-/* 알림 리스트 스타일 */
 .notice-dropdown {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 40px;
-    right: 0;
-    max-height: 300px;
-    width: 250px;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 10px;
-    z-index: 10;
-    overflow: auto;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  max-height: 320px;
+  width: 260px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 10;
+  overflow-y: auto;
+  gap: 10px;
+}
+
+.notice-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 6px;
+}
+
+.mark-all-btn {
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s ease;
+}
+
+.mark-all-btn:hover {
+  background-color: #e5e7eb;
+}
+
+.notice-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 10px;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.notice-item.unread {
+  background-color: #e0f2fe; /* 강조 */
+  font-weight: bold;
+}
+
+.notice-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.notice-link {
+  cursor: pointer;
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.notice-link:hover {
+  text-decoration: underline;
+}
+
+.notice-time {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: #e11d48;
+}
+
+.x {
+  width: 16px;
+  height: 16px;
 }
 
 .notice-empty {
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    color: gray;
-}
-.notice-item{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    font-size: 13px;
-    border: 1px solid plum;
-    border-radius: 5px;
-    padding: 4px;
-    gap: 5px;
-}
-.delete-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    height: auto;
-    padding: 2px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-.delete-btn:hover {
-    opacity: 0.5;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
 }
 
-
-.x{
-    width: 15px;
-    height: 15px;
-}
-.notice-link {
-    cursor: pointer;
-    color: #2a7de1;
-    text-decoration: underline;
-    flex: 1;
-    word-break: break-word;
-}
-
-
-
-/* 작은 화면에서 스타일 조정 */
 @media (max-width: 500px) {
-    .notice-dropdown {
-        left: 50%;
-        width: 150px;
-        transform: translateX(-50%);
-    }
+  .notice-dropdown {
+    left: 50%;
+    width: 180px;
+    transform: translateX(-50%);
+  }
 
-    .notice-item {
-        font-size: 14px;
-    }
+  .notice-item {
+    font-size: 13px;
+  }
 }
