@@ -74,7 +74,7 @@
     text-align: center;
     color: #6e6c6c;
     text-decoration: none;
-    font-size: 18px;
+    font-size: var(--font-size-sm);
     display: block;
 }
 
