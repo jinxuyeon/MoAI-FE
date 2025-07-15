@@ -5,6 +5,7 @@ import LectureRoomCard from "./cards-widget/LectureRoomCard";
 import MyPageCard from "./cards-widget/MyPageCard";
 import QuickLinks from "./QuickLinks";
 import Calendar from "./Calendar";
+import Friends from "./Friends";
 
 const Dashboard = () => {
   return (
@@ -37,7 +38,7 @@ const Dashboard = () => {
                 <LectureRoomCard />
               </section>
               <section className="inner-container">
-                <LectureRoomCard />
+                <Friends/>
               </section>
             </div>
 
