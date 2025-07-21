@@ -6,24 +6,25 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./utils/UserContext";
+import Sidebar from "./Sidebar";
 
-function Header({ title, onMenuClick }) {
+function Header({ title }) {
   const { user } = useContext(UserContext);
-
   const [notices, setNotices] = useState([]);
   const [newMailCount, setNewMailCount] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 760);
-
+  const [sidebarOpen, setSidebarOpen] = useState(false); // ✅ 추가
   const navigate = useNavigate();
+
+  const openSidebar = () => setSidebarOpen(true); // ✅ 추가
+  const closeSidebar = () => setSidebarOpen(false); // ✅ 추가
 
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
   };
 
-  const goToAdminPage = () => {
-    navigate("/admin");
-  };
+  const goToAdminPage = () => navigate("/admin");
 
   const handleSearch = async () => {
     try {
@@ -61,7 +62,7 @@ function Header({ title, onMenuClick }) {
 
   return (
     <div className="header-container">
-      <button className="menu-btn" onClick={onMenuClick}>
+      <button className="menu-btn" onClick={openSidebar}> {/* ✅ 변경 */}
         <Menu size={30} />
       </button>
       <Link to="/main" className="logo_btn"></Link>
@@ -78,8 +79,10 @@ function Header({ title, onMenuClick }) {
           <LogOut />
         </button>
       </div>
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} /> {/* ✅ 변경 */}
     </div>
   );
 }
+
 
 export default Header;

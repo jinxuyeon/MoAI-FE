@@ -1,29 +1,44 @@
-import "./TestPage.css";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../components/utils/AxiosInstance";
+import { useState } from "react";
 
-const TestPage = () => {
+const WithdrawSection = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleVerify = async () => {
+  const handleWithdraw = async () => {
+    const confirm = window.confirm("정말 탈퇴하시겠습니까?");
+    if (!confirm) return;
+
+    setLoading(true);
     try {
-      const response = await axiosInstance.post(
-        "/member/verify-password",
-        { password: "1" } // 입력 없이 고정된 값
-      );
-      setResult(response.data.success ? "성공" : "실패");
+      const response = await axiosInstance.delete("/member");
+      setResult("✅ 탈퇴 성공: " + response.data);
+      localStorage.removeItem("token");
+      navigate("/login");
     } catch (error) {
-      console.error("비밀번호 인증 실패:", error);
-      setResult("실패");
+      console.error("탈퇴 오류:", error);
+      // 안전하게 에러 메시지 추출
+      const msg =
+        error.response && error.response.data
+          ? error.response.data
+          : "오류 발생";
+      setResult("❌ 탈퇴 실패: " + msg);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="TestPage">
-      <button onClick={handleVerify}>비밀번호 인증 요청</button>
-      {result && <p>결과: {result}</p>}
+    <div className="withdraw-section">
+      <h2>회원 탈퇴</h2>
+      <button onClick={handleWithdraw} disabled={loading}>
+        {loading ? "처리 중..." : "탈퇴하기"}
+      </button>
+      {result && <p>{result}</p>}
     </div>
   );
 };
 
-export default TestPage;
+export default WithdrawSection;
