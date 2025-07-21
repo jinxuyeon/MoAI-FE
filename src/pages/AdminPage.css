@@ -1,20 +1,19 @@
-/* ✅ 전체 관리자 페이지 레이아웃 */
+/* ✅ AdminPage 전체 레이아웃 */
 .AdminPage {
   display: flex;
   min-height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f4f6f8;
   color: #111827;
+  background-color: #f4f6f8;
 }
 
-/* ✅ 사이드 메뉴바 */
-.aside {
+/* ✅ 왼쪽 사이드 메뉴바 */
+.AdminPage .aside {
   width: 250px;
   background-color: #ffffff;
   padding: 24px 20px;
   border-right: 1px solid #e5e7eb;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.02);
-  border-radius: 12px;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -24,18 +23,23 @@
   gap: 16px;
 }
 
+.AdminPage .aside h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #2563eb;
+}
 
-/* ✅ 메인 콘텐츠 */
-.content-container {
+/* ✅ 오른쪽 콘텐츠 영역 */
+.AdminPage .content-container {
   flex-grow: 1;
   padding: 40px;
   overflow-y: auto;
   background-color: #f9fafb;
-  
 }
 
-/* ✅ 내부 카드형 박스 (예: RolesBox 안에서 사용) */
-.admin-card {
+/* ✅ 내부 카드형 UI */
+.AdminPage .admin-card {
   background-color: #ffffff;
   border-radius: 12px;
   padding: 24px;
@@ -44,17 +48,17 @@
   transition: box-shadow 0.2s ease;
 }
 
-.admin-card:hover {
+.AdminPage .admin-card:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* ✅ 반응형 모바일 레이아웃 */
+/* ✅ 반응형: 모바일에서는 상하 배치 */
 @media (max-width: 768px) {
   .AdminPage {
     flex-direction: column;
   }
 
-  .aside {
+  .AdminPage .aside {
     width: 100%;
     height: auto;
     border-right: none;
@@ -63,7 +67,7 @@
     padding: 20px 16px;
   }
 
-  .content-container {
+  .AdminPage .content-container {
     padding: 24px 16px;
   }
 }
