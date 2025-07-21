@@ -1,32 +1,128 @@
+/* 전체 박스 */
 .RolesBox {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
+/* 제목 */
+.RolesBox h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1f2937;
+}
+
+/* 필터 폼 */
 .filter-form {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .filter-form input,
-.filter-form select,
-.filter-form button {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.filter-form select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  flex: 1 1 150px;
 }
 
+.filter-form button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filter-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* 권한 선택 드롭다운 */
+.role-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.role-control label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.role-control select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+/* 테이블 */
 .user-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.user-table thead {
+  background-color: #f3f4f6;
 }
 
 .user-table th,
 .user-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
   text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.user-table td button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+/* 부여 버튼 - 파랑 */
+.user-table td button:first-child {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.user-table td button:first-child:hover {
+  background-color: #2563eb;
+}
+
+/* 회수 버튼 - 빨강 */
+.user-table td button:last-child {
+  background-color: #ef4444;
+  color: white;
+}
+
+.user-table td button:last-child:hover {
+  background-color: #dc2626;
+}
+
+/* 검색 결과 없음 */
+.RolesBox p {
+  color: #6b7280;
+  margin-top: 12px;
+  font-size: 14px;
 }
