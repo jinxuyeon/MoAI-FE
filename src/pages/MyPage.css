@@ -1,45 +1,107 @@
-/* 전체 페이지 레이아웃 */
-.MyPage {
+.page-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-/* 최상단 컨테이너 (Header 아래쪽) */
-.MyPage .container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-/* 내부 컨테이너: 좌측 프로필 + 우측 메인 */
-.MyPage .inner-container {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  background-color: white;
-}
-
-/* ---------------- 프로필 섹션 ---------------- */
 .profile-section {
-  width: 50%;
-  max-width: 280px;
-  min-width: 280px;
-  padding: 30px 0px 10px;
+  flex: 3;
+  min-width: 0;
+  padding: 24px;                    
+  border: 1px solid #eee;           
+  border-radius: 12px;              
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
-  border-right: 1px solid #ddd;
 }
 
+
+.setting-sections {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================== */
+
+/* 프로필 이미지 영역 */
 .proflie-img-box {
   display: flex;
   align-content: center;
   justify-content: center;
+  margin-bottom: 16px;  
 }
 
-/* 프로필 섹션 내 라벨 */
+/* 프로필 정보 텍스트 */
+/* 프로필 텍스트 및 자기소개 스타일 */
+.profile-info {
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 자기소개 라벨 */
+.profile-info label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  width: 70%;
+  text-align: left;
+}
+
+/* 자기소개 입력창 */
+.profile-info textarea {
+  width: 70%;
+  min-height: 80px;
+  margin-bottom: 6px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* 자기소개 글자수 안내 */
+.profile-info small {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 8px;
+  align-self: flex-start;
+  margin-left: 15%;
+}
+
+/* 저장 버튼 */
+.profile-info .save-btn {
+  margin-top: 5px;
+  padding: 6px 12px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  align-self: center;
+  transition: background 0.2s ease-in-out;
+}
+
+.profile-info .save-btn:hover {
+  background: #2980b9;
+}
+
+
+/* 라벨 공통 스타일 */
 .profile-section label {
   font-size: 14px;
   font-weight: bold;
@@ -48,8 +110,8 @@
   text-align: left;
 }
 
-/* 프로필 입력 필드 */
-.profile-section input {
+/* 입력 필드 공통 스타일 */
+.profile-section input, .profile-section textarea {
   width: 70%;
   margin: 12px 0 10px;
   padding: 10px;
@@ -59,60 +121,164 @@
   align-self: center;
 }
 
+.section-card {
+    padding: 24px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.section-card h3 {
+    margin-bottom: 16px;
+}
+
+.section-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-card li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.nickname-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.nickname-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* 자기소개 라벨 */
+.profile-info label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  width: 70%;
+  text-align: left;
+}
+
 /* 자기소개 입력창 */
-.profile-section textarea {
+.profile-info textarea {
   width: 70%;
   min-height: 80px;
-  margin: 12px 0 10px;
+  margin-bottom: 6px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none;
   font-family: inherit;
   font-size: 14px;
-  align-self: center;
 }
 
-/* 닉네임 & 자기소개 저장 버튼 통일 스타일 */
-.save-btn {
+/* 자기소개 글자수 안내 */
+.profile-info small {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 8px;
+  align-self: flex-start;
+  margin-left: 15%;
+}
+
+/* 저장 버튼 */
+.profile-info .save-btn {
   margin-top: 5px;
-  padding: 5px;
+  padding: 6px 12px;
   background: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 15%;
-  font-size: 12px;
-  text-align: center;
+  font-size: 13px;
   align-self: center;
+  transition: background 0.2s ease-in-out;
 }
 
-
-/* 개인정보 섹션 제목 라벨 */
-.section-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 15px 0 10px;
-  width: 70%;
-  text-align: left;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 5px;
+/* 마우스 오버 효과=========*/
+.interactive-item {
+  transition: transform 0.15s ease, font-size 0.15s ease;
+  cursor: pointer;
 }
 
-/* 라벨 간 공백 용도 */
-.spacer-label {
-  display: block;
-  height: 15px;
+.interactive-item:hover {
+  transform: scale(1.03);
+  font-weight: 500;
+  color: #2c3e50;
 }
+/* 반응형 레이아웃: 760px 이하 */
+@media (max-width: 760px) {
+  .page-container {
+    flex-direction: column;
+    padding: var(--small-screen-padding);
+    gap: var(--small-screen-gap);
+  }
 
-/* ---------------- 메인 컨텐츠 ---------------- */
-.main-content {
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  justify-content: center;
-  align-content: center;
+  .profile-section {
+    width: 100%;
+    padding: var(--small-screen-padding);
+    align-items: center;
+  }
+
+  .setting-sections {
+    width: 100%;
+  }
+
+  .section-card {
+    padding: var(--small-screen-padding);
+  }
+
+  .section-card h3 {
+    font-size: 16px;
+  }
+
+  .section-card li {
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .profile-info label,
+  .profile-info input,
+  .profile-info textarea {
+    width: 90%;
+  }
+
+  .profile-info small {
+    margin-left: 5%;
+  }
+
+  .profile-info .save-btn {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .nickname-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .nickname-row input {
+    width: 100%;
+  }
+
+  .proflie-img-box {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
 }

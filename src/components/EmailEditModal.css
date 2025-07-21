@@ -1,0 +1,92 @@
+.email-edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.email-edit-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  height: auto;
+}
+
+.email-edit-modal h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.email-edit-modal p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+/* 새 스타일: 단일 이메일 입력창 */
+.email-single-input-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 12px;
+  background-color: #fff;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.email-single-input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  padding: 8px 0;
+  outline: none;
+}
+
+/* 오류 메시지 */
+.email-error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: -12px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* 버튼 스타일 */
+.email-modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.email-modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.email-modal-buttons button:first-child {
+  background: #e6f0ff;
+  color: #007bff;
+}
+
+.email-modal-buttons button:last-child {
+  background: #f0f0f0;
+  color: #555;
+}
