@@ -1,231 +1,252 @@
 .PostDetail {
-  padding: 24px;
-  max-width: 700px;
-  margin: auto;
+    padding: 24px;
+    max-width: 700px;
+    margin: auto;
 }
 
 .PostDetail .post-title-with-like {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .PostDetail .post-title {
-  font-size: 24px;
-  margin-right: 8px;
-  margin-bottom: 4px;
+    font-size: 24px;
+    margin-right: 8px;
+    margin-bottom: 4px;
 }
 
-.PostDetail .like-container {
-  display: flex;
-  justify-content: center;
+.like-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.PostDetail .like-toggle-button {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
+.like-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    transition: transform 0.1s;
+}
+
+.like-toggle-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.like-toggle-button.liked {
+    color: #e74c3c;
+}
+
+.like-container span {
+    font-size: 16px;
+    margin-left: 2px;
+    color: #e74c3c;
+    font-weight: 500;
 }
 
 .PostDetail .post-meta {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 16px;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 16px;
 }
 
 .PostDetail .post-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 16px;
-  border-radius: 8px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 16px;
+    border-radius: 8px;
 }
 
 .PostDetail .post-content-box {
-  min-height: 500px;
+    min-height: 500px;
 }
 
 .PostDetail .post-content {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
 }
 
 .PostDetail .post-content img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 12px auto;
-  border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 12px auto;
+    border-radius: 8px;
 }
 
 .PostDetail .comment-header-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 .PostDetail .comment-header {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .PostDetail .comment-form {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
 .PostDetail .comment-form input {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
 }
 
 .PostDetail .comment-form button {
-  background-color: #3399ff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  font-size: 14px;
-  cursor: pointer;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .PostDetail .comment-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 16px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
 }
 
 .PostDetail .comment-item {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
 }
 
 .PostDetail .post-menu-container {
-  position: relative;
-  display: inline-block;
-  margin-right: 8px;
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
 }
 
 .PostDetail .post-menu-button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 4px 8px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
 }
 
 .PostDetail .post-menu-dropdown {
-  position: absolute;
-  right: 0;
-  top: 30px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  min-width: 80px;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
 }
 
 .PostDetail .post-menu-item {
-  padding: 8px 12px;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 .PostDetail .post-menu-item:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .PostDetail .back-to-list-button {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  text-align: center;
-  font-size: 14px;
-  cursor: pointer;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .PostDetail .back-to-list-button:hover {
-  background-color: #e5e7eb;
+    background-color: #e5e7eb;
 }
 
 .PostDetail .market-detail {
-  padding: 2rem;
+    padding: 2rem;
 }
 
 .PostDetail .market-post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .PostDetail .market-content-wrapper {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
 }
 
 .PostDetail .market-image-box {
-  flex: 1;
-  min-width: 300px;
-  text-align: center;
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
 }
 
 .PostDetail .market-main-image {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  border-radius: 10px;
-  object-fit: contain;
-  border: 1px solid #ccc;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    border: 1px solid #ccc;
 }
 
 .PostDetail .market-info-box {
-  flex: 1;
-  min-width: 250px;
+    flex: 1;
+    min-width: 250px;
 }
 
 .PostDetail .market-text-box {
-  flex: 1;
+    flex: 1;
 }
 
 .PostDetail .market-title {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .PostDetail .market-price {
-  font-size: 1.2rem;
-  color: #1d4ed8;
-  font-weight: 600;
-  margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #1d4ed8;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .PostDetail .market-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
 }
 
 .PostDetail .market-horizontal-layout {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
