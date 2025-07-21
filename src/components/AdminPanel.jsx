@@ -4,7 +4,7 @@ import "./AdminPanel.css";
 const AdminPanel = ({ onSelect }) => {
   return (
     <div className="AdminPanel">
-      <Link to="/main" className="home-link">홈으로가기</Link>
+      <Link to="/main" className="home-link">❮ HOME</Link>
 
       <h3>관리자 메뉴</h3>
       <button onClick={() => onSelect("ROLES")}>유저 권한 부여</button>

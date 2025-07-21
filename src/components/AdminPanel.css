@@ -1,17 +1,59 @@
+/* ✅ 전체 패널 컨테이너 */
 .AdminPanel {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  font-size: 14.5px;
 }
 
+/* ✅ 홈으로가기 링크 */
+.AdminPanel .home-link {
+  color: #3d63ea; /* 보라색 */
+  font-size: 20px;  
+  font-weight: 15PX;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.AdminPanel .home-link:hover {
+  color: #5b21b6;
+  text-decoration: underline;
+}
+
+/* ✅ 섹션 타이틀 */
+.AdminPanel h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 4px;
+}
+
+/* ✅ 메뉴 버튼 스타일 */
 .AdminPanel button {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 500;
+  text-align: left;
+  color: #374151;
+  transition: all 0.2s ease;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .AdminPanel button:hover {
-  background-color: #eaeaea;
+  background-color: #f3f4f6;
+  border-color: #a5b4fc;
+  color: #4f46e5;
+  transform: translateX(2px);
+}
+
+/* ✅ 클릭된 메뉴 강조용 클래스 (선택적으로 JS에서 제어 가능) */
+.AdminPanel button.active {
+  background-color: #eef2ff;
+  color: #3730a3;
+  border-color: #6366f1;
 }

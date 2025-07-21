@@ -1,10 +1,10 @@
 ## Summary
 
-**해당 PR에 대한 요약을 작성해주세요.**
+**관리자 페이지 ui 개선**
 
 ## Tasks
 
-- 해당 PR에 포함된 작업을 작성해주세요.
+-adminpage, adminpanel, adminbox 들의 css 와 pannel 홈으로 가기를 -> HOME으로 수정 (이 부분은  jsx)
 - 해당 PR에 포함된 작업을 작성해주세요.
 
 ## To Reviewer
