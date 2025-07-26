@@ -117,6 +117,7 @@ const PostDetail = () => {
         try {
             await axiosInstance.post(`/post/${postId}/comments`, {
                 content: newComment,
+                targetUrl : `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`
             });
             setNewComment("");
             await fetchComments();
