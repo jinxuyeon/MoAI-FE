@@ -4,6 +4,7 @@ import "./CommentBox.css";
 import MenuButton from "./MenuButton";
 axiosInstance;
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { getRelativeTime } from "../utils/dateUtils";
 
 const CommentBox = ({
     comment,
@@ -19,17 +20,7 @@ const CommentBox = ({
     showReplies, // 현재 열린 상태
     children, // 대댓글 컴포넌트들
 }) => {
-    const formattedDate = new Date(comment.createdDate).toLocaleString(
-        "ko-KR",
-        {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-        }
-    );
+    const formattedDate = getRelativeTime(comment.createdDate);
 
     const handleDelete = async () => {
         const confirmed = window.confirm("정말로 이 댓글을 삭제하시겠습니까?");
