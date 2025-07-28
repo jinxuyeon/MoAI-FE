@@ -146,8 +146,14 @@
 }
 
 .InfoBox .post-link {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: inherit;
+}
+
+.InfoBox .post-link:hover .post-title {
+  text-decoration: underline;
 }
 
 @media (max-width: 1480px) {
