@@ -3,6 +3,7 @@ import axiosInstance from "../utils/AxiosInstance";
 import "./CommentBox.css";
 import MenuButton from "./MenuButton";
 axiosInstance;
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const CommentBox = ({
     comment,
@@ -14,9 +15,9 @@ const CommentBox = ({
     replyContent,
     setReplyContent,
     onSubmitReply,
-    // onToggleReplies, // 🔽 대댓글 토글 함수
-    // showReplies, // 🔽 현재 열린 상태
-    // children, // 🔽 대댓글 컴포넌트들
+    onToggleReplies, // 대댓글 토글 함수
+    showReplies, // 현재 열린 상태
+    children, // 대댓글 컴포넌트들
 }) => {
     const formattedDate = new Date(comment.createdDate).toLocaleString(
         "ko-KR",
@@ -71,12 +72,26 @@ const CommentBox = ({
 
                 <div className="comment-actions">
                     <button
+                        className="reply-btn"
                         onClick={() =>
                             onReplyClick(comment.id, comment.writerNickname)
                         }
                     >
                         답글
                     </button>
+                    {onToggleReplies && comment.countChildren > 0 && (
+                        <button
+                            className="reply-toggle"
+                            onClick={onToggleReplies}
+                        >
+                            {`답글 ${comment.countChildren}개`}
+                            {showReplies ? (
+                                <ChevronDown className="chevron-icon" />
+                            ) : (
+                                <ChevronUp className="chevron-icon" />
+                            )}
+                        </button>
+                    )}
                 </div>
 
                 {isReplying && (
@@ -89,16 +104,14 @@ const CommentBox = ({
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                     e.preventDefault();
-                                    onSubmitReply(comment.id);
+                                    onSubmitReply();
                                 }
                             }}
                         />
-                        <button onClick={() => onSubmitReply(comment.id)}>
-                            작성
-                        </button>
+                        <button onClick={onSubmitReply}>작성</button>
                     </div>
                 )}
-                {/* {showReplies && children} */}
+                {children}
             </div>
         </div>
     );
