@@ -86,9 +86,9 @@ const CommentBox = ({
                         >
                             {`답글 ${comment.countChildren}개`}
                             {showReplies ? (
-                                <ChevronDown className="chevron-icon" />
-                            ) : (
                                 <ChevronUp className="chevron-icon" />
+                            ) : (
+                                <ChevronDown className="chevron-icon" />
                             )}
                         </button>
                     )}
