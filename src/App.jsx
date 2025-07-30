@@ -9,7 +9,7 @@ import {
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import BoardPage from "./pages/BoardPage";
-import MyPage from "./pages/MyPage";
+import MyPageV2 from "./pages/MyPageV2.jsx";
 import MainPage from "./pages/MainPage";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -25,6 +25,8 @@ import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
 import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
 import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 import TestPage from "./pages/TestPage.jsx";
+import Account from "./components/mypage/account.jsx";
+import MyActivity from "./components/mypage/MyActivity.jsx";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAuthChecked, setIsAuthChecked] = useState(false); // 추가
@@ -97,14 +99,10 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-                    <Route
-                        path="/mypage"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <MyPage />
-                            </PrivateRoute>
-                        }
-                    />
+                    <Route path="/mypage" element={<MyPageV2 />}>
+                        <Route path="activity" element={<MyActivity />} />
+                        <Route path="account" element={<Account />} />
+                    </Route>
                     <Route
                         path="/chat-mail"
                         element={
@@ -158,7 +156,7 @@ function App() {
                         path="/test"
                         element={
                             <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <TestPage/>
+                                <TestPage />
                             </PrivateRoute>
                         }
                     />
