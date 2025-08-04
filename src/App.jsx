@@ -21,7 +21,7 @@ import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
 import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 import TestPage from "./pages/TestPage.jsx";
 import MyActivity from "./components/mypage/MyActivity.jsx";
-import Account from "./components/mypage/account.jsx";
+import Account from "./components/mypage/Account.jsx";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
