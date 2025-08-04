@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import {
-    Route,
-    Routes,
-    Navigate,
-    useLocation,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import BoardPage from "./pages/BoardPage";
@@ -168,47 +163,25 @@ function App() {
                                 <StudyDashboardPage />
                             </PrivateRoute>
                         }
-                    />
+                    >
+                        <Route
+                            path="lectures"
+                            element={<LectureCategoryBox />}
+                        />
+                        <Route
+                            path=":lectureId"
+                            element={<LectureBoardPage />}
+                        />{" "}
+                        <Route
+                            path=":lectureId/write"
+                            element={<LectureWritePage />}
+                        />
+                        <Route
+                            path=":lectureId/:postId"
+                            element={<LecturePostDetail />}
+                        />
+                    </Route>
 
-                    {/* 강의 목록 페이지 */}
-                    <Route
-                        path="/main/study-dashboard/lectures"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <LectureCategoryBox />
-                            </PrivateRoute>
-                        }
-                    />
-
-                    {/* 강의 상세 페이지 */}
-                    <Route
-                        path="/main/study-dashboard/:lectureId"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <LectureBoardPage />
-                            </PrivateRoute>
-                        }
-                    />
-
-                    {/* 강의 글쓰기 페이지 */}
-                    <Route
-                        path="/main/study-dashboard/:lectureId/write"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <LectureWritePage />
-                            </PrivateRoute>
-                        }
-                    />
-
-                    {/* 강의 게시글 상세 페이지 */}
-                    <Route
-                        path="/main/study-dashboard/:lectureId/:postId"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <LecturePostDetail />
-                            </PrivateRoute>
-                        }
-                    />
                 </Routes>
             </div>
             {shouldShowFooter && <Footer />}
