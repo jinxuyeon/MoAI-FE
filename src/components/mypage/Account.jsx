@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
+import {  useEffect, useRef } from "react";
 import "./Account.css";
-import { UserContext } from "../utils/UserContext";
 import MyInfo from "./MyInfo";
 import { useLocation } from "react-router-dom";
 

@@ -20,8 +20,9 @@ import StudyDashboardPage from "./pages/StudyDashboardPage.jsx";
 import LectureCategoryBox from "./components/board-box/LectureCategoryBox.jsx";
 import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 import TestPage from "./pages/TestPage.jsx";
-import Account from "./components/mypage/account.jsx";
 import MyActivity from "./components/mypage/MyActivity.jsx";
+import Account from "./components/mypage/account.jsx";
+
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -94,7 +95,7 @@ function App() {
                         {/* ✅ Navigate는 Route의 element 속성 안에서만 사용 가능 */}
                         <Route index element={<Navigate to="activity" replace />} />
                         <Route path="activity" element={<MyActivity />} />
-                        <Route path="account" element={<Account />} />
+                        <Route path="account" element={<Account/>} />
                     </Route>
                     <Route
                         path="/chat-mail"
