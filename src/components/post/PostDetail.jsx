@@ -270,9 +270,9 @@ const PostDetail = () => {
                 목록으로
             </button>
 
-            <div className="comment-header-line">
+            <div className="comment-header-wrap">
                 <span className="comment-header">
-                    💬 댓글 {comments.length}
+                    💬 댓글 {comments.length}개
                 </span>
                 <div className="sort-controls">
                     <button
@@ -392,6 +392,7 @@ const PostDetail = () => {
                                                     handleReplySubmit(c.id)
                                                 }
                                             />
+                                            <div className="reply-divider"></div>
                                         </div>
                                     ))}
                             </CommentBox>
