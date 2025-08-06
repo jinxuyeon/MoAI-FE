@@ -148,8 +148,17 @@ const PostDetail = () => {
 
     // 답글(대댓글, 대대댓글) 등록 후 해당 부모의 대댓글 리스트를 다시 불러와 상태 갱신
     const handleReplySubmit = async (parentId) => {
-        if (!replyContent.trim()) return;
+        const now = Date.now();
+        if (
+            !replyContent.trim() ||
+            isSubmitting ||
+            now - lastSubmitTime.current < 1000
+        )
+            return;
+
         setIsSubmitting(true);
+        lastSubmitTime.current = now;
+
         try {
             await axiosInstance.post(`/post/${postId}/comments`, {
                 content: replyContent,
@@ -158,7 +167,7 @@ const PostDetail = () => {
             });
             setReplyContent("");
             setReplyingTo(null);
-            await fetchReplies(parentId); // 여기서 해당 부모 댓글 대댓글만 갱신
+            await fetchReplies(parentId);
         } catch (e) {
             console.error("답글 등록 실패:", e);
             alert("답글 등록 실패");
