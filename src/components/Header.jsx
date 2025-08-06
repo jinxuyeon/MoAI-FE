@@ -19,10 +19,20 @@ function Header({ title }) {
     const openSidebar = () => setSidebarOpen(true);
     const closeSidebar = () => setSidebarOpen(false);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+    try {
+
+        await axiosInstance.post("member/logout");
+
+        // 로그아웃 성공 시 클라이언트 상태 정리
         localStorage.clear();
         window.location.href = "/login";
-    };
+    } catch (error) {
+        console.error("Logout failed:", error);
+        // 로그아웃 실패 시에도 강제 리다이렉트 할지, 사용자에게 알릴지는 선택
+        window.location.href = "/login";
+    }
+};
 
     const goToAdminPage = () => navigate("/admin");
 
