@@ -125,3 +125,10 @@
     background-color: #ececec;
     margin-right: 15px;
 }
+
+.mention-tag {
+  color: var(--point-text-color-blue);
+  font-weight: 400;
+  margin-right: 4px;
+  font-size: var(--font-size-2xs);
+}

@@ -1,15 +1,29 @@
 import "./CommentBox.css";
-
 import ProfileTemplate from "../ProfileTemplate";
 import axiosInstance from "../utils/AxiosInstance";
 import MenuButton from "./MenuButton";
-axiosInstance;
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { getRelativeTime } from "../utils/dateUtils";
 
+// 멘션 파싱 함수
+const parseMentions = (text, isChild) => {
+    if (!text) return null;
+    // @ 다음에 영어, 숫자, 언더스코어, 한글까지 포함
+    const mentionRegex = /(@[a-zA-Z0-9_가-힣]+)/g;
+    const parts = text.split(mentionRegex);
+
+    return parts.map((part, index) =>
+        mentionRegex.test(part) ? (
+            <span key={index} className="mention-tag">
+                {part}
+            </span>
+        ) : (
+            <span key={index}>{part}</span>
+        )
+    );
+};
 const CommentBox = ({
     comment,
-    handleCommentLike,
     boardType,
     onDeleteSuccess,
     onReplyClick,
@@ -20,6 +34,7 @@ const CommentBox = ({
     onToggleReplies, // 대댓글 토글 함수
     showReplies, // 현재 열린 상태
     children, // 대댓글 컴포넌트들
+    isNestedReply = false, // 👈 추가된 props
 }) => {
     const formattedDate = getRelativeTime(comment.createdDate);
 
@@ -59,14 +74,14 @@ const CommentBox = ({
                 </div>
 
                 <div className="content-box">
-                    {comment.text || comment.content}
+                    {parseMentions(comment.text || comment.content, isNestedReply)}
                 </div>
 
                 <div className="comment-actions">
                     <button
                         className="reply-btn"
                         onClick={() =>
-                            onReplyClick(comment.id, comment.writerNickname)
+                            onReplyClick(comment.id, comment.writerNickname, isNestedReply)
                         }
                     >
                         답글
