@@ -1,24 +1,37 @@
 import { useContext, useState, useEffect } from "react";
 import axiosInstance from "../utils/AxiosInstance";
-import "./LectureCategoryBox.css";
 import { UserContext } from "../utils/UserContext";
-import LectureCreateModal from "../modals/LectureCreateModal";
-import LectureCard from "../LectureCard";
-import SearchBar from "../SearchBar";
+import "./LectureCategoryBox.css";
+
+const dowMap = {
+    MONDAY: '월',
+    TUESDAY: '화',
+    WEDNESDAY: '수',
+    THURSDAY: '목',
+    FRIDAY: '금',
+    SATURDAY: '토',
+    SUNDAY: '일'
+};
+
+const formatSchedule = (schedules) => {
+    if (!schedules || schedules.length === 0) return "시간 미정";
+
+    return schedules.map(schedule => {
+        const dow = dowMap[schedule.dow] || schedule.dow;
+        const startPeriod = schedule.startTime - 8;  // 9시 → 1교시
+        const endPeriod = schedule.endTime - 8;
+        return `${dow} ${startPeriod}~${endPeriod}`;
+    }).join(", ");
+};
 
 const LectureCategoryBox = () => {
     const { user } = useContext(UserContext);
     const [lectures, setLectures] = useState([]);
-    const [filteredLectures, setFilteredLectures] = useState([]);
-    const [searchParams, setSearchParams] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [showModal, setShowModal] = useState(false);
-    const itemsPerPage = 12;
-    const boardTitle = "강의목록";
-
-    const isProfessorOrAdmin = user?.roles?.some((role) =>
-        ["PROFESSOR", "ADMIN"].includes(role)
-    );
+    const [isVisible, setIsVisible] = useState(true);
+    const [timetableBlocks, setTimetableBlocks] = useState([]);
+    const [markedLectureIds, setMarkedLectureIds] = useState([]);
+    const [showConflictModal, setShowConflictModal] = useState(false);
+    const [showAlreadyAddedModal, setShowAlreadyAddedModal] = useState(false);
 
     const fetchLectures = async () => {
         try {
@@ -31,101 +44,127 @@ const LectureCategoryBox = () => {
 
     useEffect(() => {
         fetchLectures();
+
+        const handler = async () => {
+            try {
+                const res = await axiosInstance.get("/lecture-room/mark");
+                const lectures = res.data?.markedLecture ?? [];
+                const newBlocks = [];
+                const newMarkedIds = [];
+
+                lectures.forEach((lec) => {
+                    newMarkedIds.push(lec.id);
+                    const schedules = lec.schedules;
+                    if (!schedules || !Array.isArray(schedules)) return;
+                    schedules.forEach(({ dow, startTime, endTime }) => {
+                        for (let i = startTime; i < endTime; i++) {
+                            newBlocks.push(`${dow}-${i}`);
+                        }
+                    });
+                });
+
+                setTimetableBlocks(newBlocks);
+                setMarkedLectureIds(newMarkedIds);
+            } catch (err) {
+                console.error("시간표 데이터 불러오기 실패:", err);
+            }
+        };
+
+        window.addEventListener("favoritesUpdated", handler);
+        handler();
+
+        return () => window.removeEventListener("favoritesUpdated", handler);
     }, []);
 
-    const handleSearch = ({ filter, query }) => {
-        const lowerQuery = query.toLowerCase();
+    const addToFavorites = async (lecture) => {
+        if (markedLectureIds.includes(lecture.id)) {
+            setShowAlreadyAddedModal(true);
+            return;
+        }
 
-        const filtered = lectures.filter((lecture) => {
-            if (filter === "title") {
-                return lecture.title?.toLowerCase().includes(lowerQuery);
-            } else if (filter === "writer") {
-                return lecture.writerNickname?.toLowerCase().includes(lowerQuery);
+        const schedules = lecture.schedules;
+        if (!schedules || schedules.length === 0) return;
+
+        const hasConflict = schedules.some(({ dow, startTime, endTime }) => {
+            for (let i = startTime; i < endTime; i++) {
+                if (timetableBlocks.includes(`${dow}-${i}`)) {
+                    return true;
+                }
             }
-            return true;
+            return false;
         });
 
-        setSearchParams({ filter, query });
-        setFilteredLectures(filtered);
-        setCurrentPage(1);
+        if (hasConflict) {
+            setShowConflictModal(true);
+            return;
+        }
+
+        try {
+            await axiosInstance.post("/lecture-room/mark", null, {
+                params: { lectureRoomId: lecture.id }
+            });
+            console.log("즐겨찾기 추가 성공");
+            window.dispatchEvent(new Event("favoritesUpdated"));
+        } catch (err) {
+            console.error("즐겨찾기 추가 실패:", err.response || err);
+        }
     };
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
+    const handleLectureClick = (lecture) => {
+        addToFavorites(lecture);
     };
 
-    const activeLectures = searchParams ? filteredLectures : lectures;
-    const totalPages = Math.ceil(activeLectures.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const visibleLectures = activeLectures.slice(startIndex, startIndex + itemsPerPage);
+    if (!isVisible) return null;
 
     return (
         <div className="LectureCategoryBox">
-            <div className="lecture-category-header" style={{ marginBottom: "10px" }}>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        gap: "8px",
-                        width: "100%",
-                    }}
-                >
-                    <h1 className="lecture-category-title">{boardTitle}</h1>
-                    <SearchBar onSearch={handleSearch} />
-                </div>
+            <div className="table-header">
+                <div>강의명</div>
+                <div>학년</div>
+                <div>교수명</div>
+                <div>강의소개</div>
+                <div>강의시간</div>
+                <div>담은 수</div>
+                <button className="close-button" onClick={() => setIsVisible(false)}>
+                    닫기
+                </button>
             </div>
 
-            {isProfessorOrAdmin && (
-                <>
-                    <div style={{ marginTop: "10px" }}>
-                        <button
-                            className="create-btn"
-                            onClick={() => setShowModal(true)}
-                        >
-                            강의 생성
-                        </button>
+            <div className="table-body">
+                {lectures.map((lecture) => (
+                    <div
+                        key={lecture.id}
+                        className="table-row"
+                        onClick={() => handleLectureClick(lecture)}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <div className="title">{lecture.title}</div>
+                        <div>{lecture.grade}학년</div>
+                        <div>{lecture.professorName || "미정"}</div>
+                        <div>{lecture.intro || "강의 소개가 없습니다."}</div>
+                        <div>{formatSchedule(lecture.schedules)}</div>
+                        <div>{lecture.markedCount}명</div>
                     </div>
-                    {showModal && (
-                        <LectureCreateModal
-                            onClose={() => setShowModal(false)}
-                            onSuccess={() => {
-                                setCurrentPage(1);
-                                fetchLectures();
-                            }}
-                        />
-                    )}
-                </>
+                ))}
+            </div>
+
+            {showConflictModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <p>강의 시간이 중복됩니다.</p>
+                        <button onClick={() => setShowConflictModal(false)}>확인</button>
+                    </div>
+                </div>
             )}
 
-            <div className="lecture-card-grid">
-                {visibleLectures.map((lecture) => (
-                    <LectureCard key={lecture.id} lecture={lecture} />
-                ))}
-            </div>
-
-            <div className="pagination">
-                {currentPage > 1 && (
-                    <button onClick={() => handlePageChange(currentPage - 1)}>
-                        &lt; 이전
-                    </button>
-                )}
-                {Array.from({ length: totalPages }, (_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={currentPage === index + 1 ? "active-page" : ""}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
-                {currentPage < totalPages && (
-                    <button onClick={() => handlePageChange(currentPage + 1)}>
-                        다음 &gt;
-                    </button>
-                )}
-            </div>
+            {showAlreadyAddedModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <p>이미 추가한 강의입니다.</p>
+                        <button onClick={() => setShowAlreadyAddedModal(false)}>확인</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

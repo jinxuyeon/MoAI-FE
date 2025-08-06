@@ -3,17 +3,19 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Timetable from "../components/Timetable";
 import StudyNavi from "../components/StudyNavi";
+import LectureCategoryBox from "../components/board-box/LectureCategoryBox";
 import "./StudyDashboardPage.css";
 
 const StudyDashboardPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-
   const [credit, setCredit] = useState(0);
+  const [isLectureBoxVisible, setIsLectureBoxVisible] = useState(false); // ✅ 강의목록 표시 여부
 
   const handleCreditChange = (newCredit) => {
     setCredit(newCredit);
+  };
+
+  const toggleLectureBox = () => {
+    setIsLectureBoxVisible(!isLectureBoxVisible);
   };
 
   return (
@@ -33,12 +35,17 @@ const StudyDashboardPage = () => {
               <span className="Credit">{credit} 학점</span>
             </div>
           </div>
-          <StudyNavi />
+          <StudyNavi onToggleLectureBox={toggleLectureBox} /> 
         </div>
-        <div className="ContentSection">  {/* ✅ 오른쪽 컨텐츠 영역 추가 */}
-          <Outlet />  {/* ✅ 이거 필수 */}
+        <div className="ContentSection">
+          <Outlet />
         </div>
       </div>
+      {isLectureBoxVisible && (
+        <div className="BottomLectureBox">
+          <LectureCategoryBox />
+        </div>
+      )}
     </div>
   );
 };

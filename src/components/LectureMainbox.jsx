@@ -1,3 +1,4 @@
+//상세 강의페이지 안에 글
 import { useState } from "react";
 import "./LectureMainbox.css";
 

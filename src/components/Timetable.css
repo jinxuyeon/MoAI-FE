@@ -1,5 +1,5 @@
 .timetable-wrapper {
-  padding: 0 20px; /* 좌우 여백 유지 */
+  padding: 0 20px;
   width: 100%;
   box-sizing: border-box;
   overflow-x: auto;
@@ -23,7 +23,7 @@
   border: 1px solid #ccc;
   padding: 8px;
   font-size: 13px;
-  min-width: 100px; /* 👉 최소 폭은 유지하되, 자동으로 늘어나게 */
+  min-width: 100px; 
 }
 
 /* 시간 셀 (1교시, 2교시 등) */
@@ -38,7 +38,7 @@
 
 /* 기본 셀 디자인 */
 .timetable-cell {
-  height: 50px;  /* 👉 세로 폭도 살짝 줄임 */
+  height: 50px;  
   border: 1px solid #ccc;
   padding: 2px;
   vertical-align: middle;
@@ -49,7 +49,6 @@
 /* 강의가 있는 셀 (활성화 상태) */
 .timetable-cell.active {
   color: #333;
-  font-weight: normal;
   white-space: normal;
   text-overflow: initial;
 }
@@ -71,11 +70,13 @@
 
 /* 과목명 */
 .lecture-title {
-  font-weight: bold;
+  font-size: 12px;  
+  font-weight: bold !important;
 }
 
 /* 교수명 + 강의실 */
 .lecture-detail {
+  font-weight: bold !important;
   font-size: 11px;
   color: #555;
 }
@@ -85,3 +86,82 @@
   background-color: #ffffff;
   color: #333;
 }
+
+.block-content {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #333;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.block-content.hovered .delete-button {
+  opacity: 1;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 24px 36px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
+  text-align: center;
+  width: 300px;
+  animation: fadeIn 0.3s ease;
+}
+.modal p {
+  margin-bottom: 20px; 
+  font-size: 16px;
+  color: #333;
+}
+
+/* 모달 버튼 스타일 */
+.modal button {
+  margin: 0 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.modal button:first-of-type {
+  background-color: #ff6b6b; 
+  color: white;
+}
+
+.modal button:first-of-type:hover {
+  background-color: #ff4d4d;
+}
+
+.modal button:last-of-type {
+  background-color: #f0f0f0;  
+  color: #333;
+}
+
+.modal button:last-of-type:hover {
+  background-color: #e0e0e0;
+}
+

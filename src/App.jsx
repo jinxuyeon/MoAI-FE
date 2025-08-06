@@ -157,31 +157,47 @@ function App() {
                     {/* ✅ ✅ ✅ 여기부터가 스터디 대시보드 관련 수정 부분 ✅ ✅ ✅ */}
 
                     {/* 스터디 대시보드 메인 페이지 */}
-                    <Route
-                        path="/main/study-dashboard"
-                        element={
-                            <PrivateRoute isAuthenticated={isAuthenticated}>
-                                <StudyDashboardPage />
-                            </PrivateRoute>
-                        }
-                    >
-                        <Route
-                            path="lectures"
-                            element={<LectureCategoryBox />}
-                        />
-                        <Route
-                            path=":lectureId"
-                            element={<LectureBoardPage />}
-                        />{" "}
-                        <Route
-                            path=":lectureId/write"
-                            element={<LectureWritePage />}
-                        />
-                        <Route
-                            path=":lectureId/:postId"
-                            element={<LecturePostDetail />}
-                        />
-                    </Route>
+<Route
+    path="/main/study-dashboard"
+    element={
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+            <StudyDashboardPage />
+        </PrivateRoute>
+    }
+>
+    <Route
+        path="lectures"
+        element={<LectureCategoryBox />}
+    />
+</Route>
+
+
+<Route
+    path="/main/study-dashboard/:lectureId"
+    element={
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+            <LectureBoardPage />
+        </PrivateRoute>
+    }
+/>
+
+<Route
+    path="/main/study-dashboard/:lectureId/write"
+    element={
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+            <LectureWritePage />
+        </PrivateRoute>
+    }
+/>
+
+<Route
+    path="/main/study-dashboard/:lectureId/:postId"
+    element={
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+            <LecturePostDetail />
+        </PrivateRoute>
+    }
+/>
 
                 </Routes>
             </div>
