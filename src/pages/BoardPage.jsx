@@ -45,10 +45,6 @@ const BoardPage = () => {
 
       <div className="layout-container">
         <div className="content-container">
-          <div className="navibar-container">
-            <NaviBar currentBoard={boardType} />
-          </div>
-
           <div className="board-container">
             {isPostDetail ? <PostDetail /> : renderBoard()}
           </div>
