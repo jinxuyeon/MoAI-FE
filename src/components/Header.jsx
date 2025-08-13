@@ -1,14 +1,26 @@
 import "./Header.css";
-import { LogOut, Menu } from "lucide-react";
+
+import { Menu } from "lucide-react";
 import Bellbox from "./BellBox";
 import MailBox from "./MailBox";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./utils/AxiosInstance";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./utils/UserContext";
 import Sidebar from "./Sidebar";
+import {
+    FcAdvertising,
+    FcGraduationCap,
+    FcManager,
+    FcRating,
+    FcCollaboration,
+    FcLock,
+    FcSms,
+    FcPaid,
+} from "react-icons/fc";
+import MyProfile from "./Myprofile";
 
-function Header({ title }) {
+function Header() {
     const { user } = useContext(UserContext);
     const [notices, setNotices] = useState([]);
     const [newMailCount, setNewMailCount] = useState(0);
@@ -20,19 +32,29 @@ function Header({ title }) {
     const closeSidebar = () => setSidebarOpen(false);
 
     const handleLogout = async () => {
-    try {
+        try {
+            await axiosInstance.post("member/logout");
 
-        await axiosInstance.post("member/logout");
+            // 로그아웃 성공 시 클라이언트 상태 정리
+            localStorage.clear();
+            window.location.href = "/login";
+        } catch (error) {
+            console.error("Logout failed:", error);
+            // 로그아웃 실패 시에도 강제 리다이렉트 할지, 사용자에게 알릴지는 선택
+            window.location.href = "/login";
+        }
+    };
 
-        // 로그아웃 성공 시 클라이언트 상태 정리
-        localStorage.clear();
-        window.location.href = "/login";
-    } catch (error) {
-        console.error("Logout failed:", error);
-        // 로그아웃 실패 시에도 강제 리다이렉트 할지, 사용자에게 알릴지는 선택
-        window.location.href = "/login";
-    }
-};
+    const profileMenuItems = [
+        {
+            label: "마이 페이지",
+            onClick: () => navigate("/mypage"),
+        },
+        {
+            label: "로그아웃",
+            onClick: handleLogout,
+        },
+    ];
 
     const goToAdminPage = () => navigate("/admin");
 
@@ -101,7 +123,9 @@ function Header({ title }) {
                                 <div className="tooltip">
                                     <div className="gnb-sub">
                                         <Link className="submenu-item">
-                                            <div className="submenu-icon icon-blue" />
+                                            <div className="submenu-icon">
+                                                <FcAdvertising />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     전체 공지사항
@@ -116,7 +140,9 @@ function Header({ title }) {
                                             to="/main/community/notice_c"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-green" />
+                                            <div className="submenu-icon">
+                                                <FcGraduationCap />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     공지사항
@@ -130,7 +156,9 @@ function Header({ title }) {
                                             to="/main/community/notice"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-yellow" />
+                                            <div className="submenu-icon">
+                                                <FcManager />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     조교알림
@@ -169,7 +197,9 @@ function Header({ title }) {
                                             to="/main/community/popular"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-blue" />
+                                            <div className="submenu-icon">
+                                                <FcRating />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     인기 게시판
@@ -184,7 +214,9 @@ function Header({ title }) {
                                             to="/main/community/free"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-green" />
+                                            <div className="submenu-icon">
+                                                <FcCollaboration />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     자유 게시판
@@ -199,7 +231,9 @@ function Header({ title }) {
                                             to="/main/community/secret"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-yellow" />
+                                            <div className="submenu-icon">
+                                                <FcLock />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     비밀 게시판
@@ -214,7 +248,9 @@ function Header({ title }) {
                                             to="/main/community/review"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-purple" />
+                                            <div className="submenu-icon">
+                                                <FcSms />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     후기 게시판
@@ -248,7 +284,9 @@ function Header({ title }) {
                                             to="/main/community/market"
                                             className="submenu-item"
                                         >
-                                            <div className="submenu-icon icon-blue" />
+                                            <div className="submenu-icon">
+                                                <FcPaid />
+                                            </div>
                                             <div className="submenu-content">
                                                 <div className="submenu-title">
                                                     책 장터
@@ -279,34 +317,67 @@ function Header({ title }) {
                             </div>
                         </div>
                     </div>
-                    {/* <h2 style={{ marginLeft: "10px" }}>{title}</h2> */}
                 </div>
                 <div className="header-inner">
-                    <div className="header-space">
-                        <div className="util-box">
-                            {user?.roles?.includes("ADMIN") && (
-                                <button onClick={goToAdminPage}>
-                                    관리자 페이지
-                                </button>
+                    <div className="header-wrap">
+                        <div className="btn-wrap">
+                            {!isMobile && (
+                                <MailBox newMailCount={newMailCount} />
                             )}
+                        </div>
+                        <div className="btn-wrap">
                             {!isMobile && (
                                 <Bellbox
                                     notices={notices}
                                     setNotices={setNotices}
                                 />
                             )}
-                            {!isMobile && (
-                                <MailBox newMailCount={newMailCount} />
-                            )}
                         </div>
-                        <button
-                            className="logout-btn"
-                            title="로그아웃"
-                            onClick={handleLogout}
-                        >
-                            <LogOut />
-                        </button>
+                        <div className="btn-wrap more-gap">
+                            <button
+                                aria-label="프로필"
+                                className="header-btn profile"
+                            >
+                                <MyProfile
+                                    profileImageUrl={user?.profileImageUrl}
+                                />
+                            </button>
+                            <div className="profile-menu-list-area">
+                                <ul className="profile-menu-list">
+                                    {profileMenuItems.map((item, index) => (
+                                        <li
+                                            key={index}
+                                            className={`profile-menu-item ${
+                                                index ===
+                                                profileMenuItems.length - 1
+                                                    ? "logout"
+                                                    : ""
+                                            }`}
+                                        >
+                                            <button
+                                                className="profile-menu-btn"
+                                                onClick={item.onClick}
+                                            >
+                                                {item.label}
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                    {user?.roles?.includes("ADMIN") && (
+                        <div className="header-wrap">
+                            <div className="btn-wrap">
+                                <button
+                                    className="admin-btn"
+                                    onClick={goToAdminPage}
+                                >
+                                    관리자
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />{" "}
             </div>

@@ -30,7 +30,7 @@
 
 .header .menu-btn {
     display: flex;
-    margin-right: 16px;
+    margin-right: 14px;
     justify-content: center;
     align-items: center;
     background-color: transparent;
@@ -143,22 +143,10 @@
 .header .submenu-icon {
     width: 28px;
     height: 28px;
-    margin-right: 12px;
+    margin-right: 8px;
+    margin-left: 4px;
     border-radius: 8px;
     flex-shrink: 0;
-}
-
-.header .icon-blue {
-    background-color: #748ffc;
-}
-.header .icon-green {
-    background-color: #51cf66;
-}
-.header .icon-yellow {
-    background-color: #fcc419;
-}
-.header .icon-purple {
-    background-color: #b197fc;
 }
 
 .header .submenu-content {
@@ -179,37 +167,197 @@
 
 /* 헤더 우측 */
 
-.logout-btn {
+.header .header-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 100%;
+}
+
+.header .header-wrap + .header-wrap {
+    margin-left: 24px;
+}
+
+.header .btn-wrap {
+    display: flex;
+    flex: none;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.header .more-gap {
+    margin-left: 6px;
+}
+
+.header .more-gap .camera-icon {
+    display: none;
+}
+
+.header-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    /* 폰트 크기 조정 */
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    position: relative;
+    flex: none;
+    transition: background-color 0.2s ease;
 }
 
-.logout-btn:hover {
-    opacity: 0.5;
+.header-btn:hover {
+    background-color: var(--hover-gray-color);
 }
 
-.header-space {
-    flex-grow: 1;
+.header-btn svg {
+    flex: none;
+    user-select: none;
+}
+
+.header .profile {
+    background-size: cover;
+    background-position: 50%;
+    border: 1px solid rgba(18, 22, 25, 0.1);
+}
+
+.header .profile:hover {
+    background-color: inherit;
+}
+
+.header .profile .profile-pic-container {
+    width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    margin-right: 25px;
-    gap: 60px;
 }
 
-.util-box {
+.header .profile-menu-list-area {
+    display: none;
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    transform: translateY(100%);
+    z-index: 110;
+}
+
+.header .more-gap:hover .profile-menu-list-area {
+    display: block;
+}
+
+.header .profile-menu-list {
+    overflow: hidden;
+    width: 164px;
+    padding: 11px 0;
+    border: 1px solid #cfd1d5;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04), 0 16px 25px rgba(0, 0, 0, 0.1);
+}
+
+.header .profile-menu-item {
     display: flex;
-    justify-content: end;
-    align-content: center;
-    gap: 20px;
+    align-items: center;
+    height: 40px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.header .profile-menu-item:hover {
+    background-color: #f4f4f5;
+    color: #121619;
+}
+
+.header .logout {
+    border-top: 1px solid var(--light-border-color);
+}
+
+.header .profile-menu-btn {
+    color: #44474b;
+    font-size: var(--font-size-2xs);
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.header .admin-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -7px;
+    transform: translateY(-50%);
+    height: 20px;
+    border: 1px solid var(--base-border-color);
+    box-sizing: border-box;
+}
+
+.header .admin-btn {
+    font-size: var(--font-size-2xs);
+    font-weight: 600;
+    line-height: 16px;
+    color: var(--normal-text-color);
+    border-radius: 4px;
+    padding: 6px 8px;
+    border: 1px solid var(--base-border-color);
+    margin-left: 12px;
+}
+
+.header .admin-btn:hover {
+    background-color: rgba(51, 52, 54, 0.05);
+}
+
+.header .Reddot {
+    top: 12px;
+    right: 12px;
+    width: 11px;
+    height: 11px;
+    padding: 6px;
+}
+
+.header .Reddot .content {
+    font-size: 8px;
+}
+
+.header-shake {
+    animation: header-shake 2.15s infinite;
+}
+
+@keyframes header-shake {
+    0%,
+    49% {
+        transform: rotate(0deg);
+    }
+    7% {
+        transform: rotate(10deg);
+    }
+    14% {
+        transform: rotate(-10deg);
+    }
+    21% {
+        transform: rotate(14deg);
+    }
+    28% {
+        transform: rotate(-14deg);
+    }
+    35% {
+        transform: rotate(5deg);
+    }
+    42% {
+        transform: rotate(-5deg);
+    }
+    49%,
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1532px) {
+    .header .profile-menu-list-area {
+        right: calc((100vw - 1290px) / -2);
+        left: auto;
+    }
+}
+
+@media (max-width: 1279px) {
+    .header .profile-menu-list-area {
+        right: 0;
+        left: auto;
+    }
 }
