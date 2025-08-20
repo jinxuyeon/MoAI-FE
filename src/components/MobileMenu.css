@@ -10,10 +10,12 @@
     z-index: 120;
     display: none;
     flex-direction: column;
-    overflow-y: auto; /* 내부 스크롤 허용 */
-    -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
-    touch-action: pan-y; /* 터치 스크롤 전담 */
-    overscroll-behavior: contain; /* 스크롤 체이닝 방지 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .m-gnb.open {
