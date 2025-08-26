@@ -8,16 +8,18 @@ const PAGE_SIZE = 5;
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // 최초 로딩
+
   const [errMsg, setErrMsg] = useState("");
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [totalElements, setTotalElements] = useState(0);
   const navigate = useNavigate();
 
-  const fetchMyPosts = async (pageArg = 0) => {
+  const fetchMyPosts = async (pageArg = 0, isInitial = false) => {
     try {
-      setLoading(true);
+      if (isInitial) setLoading(true); // 최초 렌더링일 때만 로딩 표시
+
       setErrMsg("");
       const res = await axiosInstance.get("/post/my-posts", {
         params: { page: pageArg, pageSize: PAGE_SIZE },
@@ -37,12 +39,13 @@ const MyPosts = () => {
       console.error("내 글 목록 불러오기 실패:", e);
       setErrMsg("내가 쓴 글을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.");
     } finally {
-      setLoading(false);
+      if (isInitial) setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchMyPosts(0);
+    fetchMyPosts(0, true); // 최초 마운트 시에만 로딩 ON
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,6 +103,37 @@ const MyPosts = () => {
             ))
           )}
         </ul>
+      </div>
+
+      <div className="pager-bottom">
+        <button
+          type="button"
+          className={`pager-arrow ${!canPrev ? "disabled" : ""}`}
+          disabled={!canPrev}
+          onClick={(e) => {
+            e.preventDefault();
+            if (canPrev) fetchMyPosts(page - 1);
+          }}
+        >
+          {"<"}
+        </button>
+
+        <span className="pager-indicator">
+          {page + 1} / {totalPages}
+        </span>
+
+        <button
+          type="button"
+          className={`pager-arrow ${!canNext ? "disabled" : ""}`}
+          disabled={!canNext}
+          onClick={(e) => {
+            e.preventDefault();
+            if (canNext) fetchMyPosts(page + 1);
+          }}
+        >
+          {">"}
+        </button>
+
       </div>
 
 <div className="pager-bottom">
