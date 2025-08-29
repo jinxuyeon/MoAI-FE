@@ -22,6 +22,7 @@ import LecturePostDetail from "./components/post/LecturePostDetail.jsx";
 import TestPage from "./pages/TestPage.jsx";
 import MyActivity from "./components/mypage/MyActivity.jsx";
 import Account from "./components/mypage/Account.jsx";
+import Header from "./components/Header.jsx";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,6 +65,7 @@ function App() {
     return (
         <UserProvider>
             <div className="body-container">
+                <Header/>
                 <Routes>
                     <Route
                         path="/"
