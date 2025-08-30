@@ -62,13 +62,20 @@ function App() {
     ];
     const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
+
+    const hideHeaderRoutes = [
+        "/login",
+        "/login/register",
+    ];
+    const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname);
+
     if (!isAuthChecked) return null;
 
     return (
         <UserProvider>
             <div className="body-container">
                 <Toaster richColors />
-                <Header />
+                {shouldShowHeader && <Header />}
                 <Routes>
                     <Route
                         path="/"
