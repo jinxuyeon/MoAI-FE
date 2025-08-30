@@ -231,7 +231,6 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-
                 </Routes>
             </div>
             {shouldShowFooter && <Footer />}
