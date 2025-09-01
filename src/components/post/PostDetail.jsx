@@ -7,7 +7,7 @@ import ProfileTemplate from "../ProfileTemplate";
 import MenuButton from "./MenuButton";
 import { Heart, Check } from "lucide-react";
 import { likePost, unlikePost } from "../../api/posts/like"; // 좋아요 API 함수
-
+import { toast } from "sonner";
 const PostDetail = () => {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
@@ -120,61 +120,54 @@ const PostDetail = () => {
     };
 
     const handleCommentSubmit = async () => {
-        const now = Date.now();
-        if (
-            !newComment.trim() ||
-            isSubmitting ||
-            now - lastSubmitTime.current < 1000
-        )
-            return;
+    const now = Date.now();
+    if (!newComment.trim() || isSubmitting || now - lastSubmitTime.current < 1000) return;
 
-        setIsSubmitting(true);
-        lastSubmitTime.current = now;
+    setIsSubmitting(true);
+    lastSubmitTime.current = now;
 
-        try {
-            await axiosInstance.post(`/post/${postId}/comments`, {
-                content: newComment,
-                targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
-            });
-            setNewComment("");
-            await fetchComments();
-        } catch (err) {
-            console.error("❌ 댓글 등록 실패:", err);
-            alert("댓글 등록 실패");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    try {
+        await axiosInstance.post(`/post/${postId}/comments`, {
+            content: newComment,
+            targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
+        });
+        setNewComment("");
+        await fetchComments();
+    } catch (err) {
+        const message = err.response?.data?.message || "댓글 등록에 실패했습니다.";
+        toast.error(message); // sonner 토스트
+    } finally {
+        setIsSubmitting(false);
+    }
+};
 
-    // 답글(대댓글, 대대댓글) 등록 후 해당 부모의 대댓글 리스트를 다시 불러와 상태 갱신
     const handleReplySubmit = async (parentId) => {
-        const now = Date.now();
-        if (
-            !replyContent.trim() ||
-            isSubmitting ||
-            now - lastSubmitTime.current < 1000
-        )
-            return;
+    const now = Date.now();
+    if (!replyContent.trim() || isSubmitting || now - lastSubmitTime.current < 1000)
+        return;
 
-        setIsSubmitting(true);
-        lastSubmitTime.current = now;
+    setIsSubmitting(true);
+    lastSubmitTime.current = now;
 
-        try {
-            await axiosInstance.post(`/post/${postId}/comments`, {
-                content: replyContent,
-                parentId,
-                targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
-            });
-            setReplyContent("");
-            setReplyingTo(null);
-            await fetchReplies(parentId);
-        } catch (e) {
-            console.error("답글 등록 실패:", e);
-            alert("답글 등록 실패");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    try {
+        await axiosInstance.post(`/post/${postId}/comments`, {
+            content: replyContent,
+            parentId,
+            targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
+        });
+        setReplyContent("");
+        setReplyingTo(null);
+        await fetchReplies(parentId);
+    } catch (err) {
+        console.error("❌ 답글 등록 실패:", err);
+        // 서버에서 오는 메시지를 토스트로 표시
+        const message = err.response?.data?.message || "답글 등록에 실패했습니다.";
+        toast.error(message);
+    } finally {
+        setIsSubmitting(false);
+    }
+};
+
 
     const handleLikeBtnClick = async () => {
         try {
