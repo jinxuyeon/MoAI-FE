@@ -66,7 +66,7 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
       toast.error("물품 등록은 학생 이상만 가능합니다");
       return;
     }
-    setShowUploadModal();
+    setShowUploadModal(true);
   };
 
   useEffect(() => {
