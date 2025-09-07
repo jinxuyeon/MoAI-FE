@@ -3,22 +3,24 @@ export const roleHierarchy = ["USER", "STUDENT", "MANAGER", "PROFESSOR", "ADMIN"
 
 // 선택 UI 용
 export const ROLE_OPTIONS = [
+  { label: "USER", value: "USER" },
   { label: "STUDENT", value: "STUDENT" },
   { label: "PROFESSOR", value: "PROFESSOR" },
   { label: "MANAGER", value: "MANAGER" },
   { label: "SYSTEM", value: "SYSTEM" },
-  { label: "USER", value: "USER" },
   { label: "ADMIN", value: "ADMIN" },
 ];
 
 // 한글 타이틀
+// 서버 전송용 value, 화면 표시용 label
 export const ROLE_TITLES = [
-  { label: "STUDENT", value: "학생" },
-  { label: "PROFESSOR", value: "교수" },
-  { label: "MANAGER", value: "조교" },
-  { label: "SYSTEM", value: "시스템" },
-  { label: "ADMIN", value: "관리자" },
+  { value: "STUDENT", label: "학생" },
+  { value: "PROFESSOR", label: "교수" },
+  { value: "MANAGER", label: "조교" },
+  { value: "SYSTEM", label: "시스템" },
+  { value: "ADMIN", label: "관리자" },
 ];
+
 
 // 빠른 매핑
 export const ROLE_TITLES_MAP = {
