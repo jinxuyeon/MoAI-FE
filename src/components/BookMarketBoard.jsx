@@ -15,6 +15,7 @@ const BookMarketBoard = ({ boardType, title }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isSnapping, setIsSnapping] = useState(false);
+  const [canClick, setCanClick] = useState(true); // 버튼 연타 방지
 
   const PAGE_SIZE = 12;
 
@@ -72,21 +73,33 @@ const BookMarketBoard = ({ boardType, title }) => {
 
   const totalPages = Math.max(1, Math.ceil(posts.length / visibleCount));
 
+  // 이전/다음 버튼
   const handlePrev = () => {
-    if (posts.length === 0 || isSnapping || !isAnimating) return;
-    setIsAnimating(true);
+    if (!canClick || posts.length === 0 || isSnapping || !isAnimating) return;
+
+    setCanClick(false);
     setCurrentIndex((prev) => prev - 1);
+    setTimeout(() => setCanClick(true), 1000); // 1초 후 다시 클릭 가능
   };
 
   const handleNext = () => {
-    if (posts.length === 0 || isSnapping || !isAnimating) return;
-    setIsAnimating(true);
+    if (!canClick || posts.length === 0 || isSnapping || !isAnimating) return;
+
+    setCanClick(false);
     setCurrentIndex((prev) => prev + 1);
+    setTimeout(() => setCanClick(true), 500); // 1초 후 다시 클릭 가능
   };
 
   // 자동 롤링
   useEffect(() => {
-    if (loading || posts.length === 0 || totalPages <= 1 || isHovered || isSnapping || !isAnimating)
+    if (
+      loading ||
+      posts.length === 0 ||
+      totalPages <= 1 ||
+      isHovered ||
+      isSnapping ||
+      !isAnimating
+    )
       return;
     const intervalId = setInterval(() => handleNext(), 5000);
     return () => clearInterval(intervalId);
@@ -102,6 +115,7 @@ const BookMarketBoard = ({ boardType, title }) => {
   }, [totalPages, visibleCount]);
 
   const handleTransitionEnd = () => {
+    // 앞뒤 클론 페이지 snap 처리
     if (currentIndex === 0) {
       setIsSnapping(true);
       setIsAnimating(false);
@@ -162,7 +176,9 @@ const BookMarketBoard = ({ boardType, title }) => {
         <div
           className="slider-track"
           style={{
-            transform: `translateX(-${(currentIndex * 100) / (extendedPages.length || 1)}%)`,
+            transform: `translateX(-${
+              (currentIndex * 100) / (extendedPages.length || 1)
+            }%)`,
             transition: isAnimating ? "transform 0.4s ease" : "none",
             width: `${(extendedPages.length || 1) * 100}%`,
           }}
