@@ -12,7 +12,6 @@
 .InfoBox .top {
     display: flex;
     justify-content: space-between;
-    /* 왼쪽 그룹과 오른쪽 버튼 끝 정렬 */
     align-items: center;
 }
 
@@ -27,25 +26,6 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
-}
-
-/* 기존 게시판 버튼 */
-.InfoBox .go-to-board-btn {
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #fbfafa;
-    border-radius: 6px;
-    border: 1px solid rgb(253, 253, 253);
-    background-color: #3399ff;
-    transition: all 0.2s ease-in-out;
-}
-
-.InfoBox .go-to-board-btn:hover {
-    box-shadow: 0 0 0 2px #5c5c5c;
-    border: 1px solid #5c5c5c;
-    color: white;
-    background-color: #5c5c5c;
 }
 
 /* 필터 버튼 */
@@ -166,16 +146,14 @@
     text-decoration: underline;
 }
 
-/* More 버튼 - 오른쪽 끝, 작은 라운드 사각형 */
+/* More 버튼 */
 .InfoBox .more-btn {
     margin-right: 6px;
     width: 21px;
     height: 21px;
     border-radius: 6px;
-    border: none;
-    background-color: white;
-    border-radius: 6px;
     border: 1px solid rgb(92, 92, 92);
+    background-color: white;
     color: #2d2929;
     font-size: 18px;
     display: flex;
@@ -194,36 +172,6 @@
 .InfoBox .meta-area {
     display: flex;
     justify-content: space-between;
-}
-
-.InfoBox .stats {
-    display: flex;
-    column-gap: 4px;
-    align-items: center;
-}
-
-.InfoBox .view {
-    color: #7b90a6;
-}
-
-.InfoBox .like {
-    color: #ff6b6b;
-}
-
-.InfoBox .comment {
-    color: #38b6ff;
-}
-
-.InfoBox .stats svg {
-    color: inherit;
-    height: var(--spacing-2-5);
-    margin-right: -2px;
-    vertical-align: middle;
-}
-
-.InfoBox .stats span {
-    vertical-align: middle;
-    font-size: var(--font-size-3xs);
 }
 
 @media (max-width: 1480px) {

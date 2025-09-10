@@ -1,4 +1,3 @@
-// InquiryDetail.jsx
 import { useState } from "react";
 import "./InquiryDetail.css";
 import { getCategoryLabel } from "../utils/InquiryUtils";
@@ -36,6 +35,9 @@ const InquiryDetail = ({
         <p><strong>내용:</strong> {inquiry.content}</p>
         <p><strong>상태:</strong> {inquiry.state === "PROCESSING" ? "처리중" : "완료"}</p>
         <p><strong>등록일:</strong> {formatDateTime(inquiry.createdAt)}</p>
+        {inquiry.completeDateTime && (
+          <p><strong>완료일:</strong> {formatDateTime(inquiry.completeDateTime)}</p>
+        )}
       </div>
 
       <div className="inquiry-detail-reply">
@@ -51,6 +53,11 @@ const InquiryDetail = ({
             <div className="inquiry-detail-complete-reply">
               <strong>답변:</strong>
               <p>{inquiry.reply}</p>
+              {inquiry.responderNickname && (
+                <p className="inquiry-detail-responder">
+                  <em>답변자: {inquiry.responderNickname}</em>
+                </p>
+              )}
             </div>
           )
         )}

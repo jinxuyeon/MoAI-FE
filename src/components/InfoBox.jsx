@@ -1,8 +1,8 @@
 import "./InfoBox.css";
+import PostStats from "./post/PostStats";
 import PostTag from "./PostTag";
 import axiosInstance from "./utils/AxiosInstance";
 import { getBoardLabel } from "./utils/boardUtils";
-import { Eye, Heart, MessageCircleMore } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -97,8 +97,6 @@ const InfoBox = ({ boardTypes, title }) => {
                                     {getBoardLabel(type)}
                                 </button>
                             ))}
-
-                            {/* More 버튼 */}
                         </div>
                     </div>
                     <button className="more-btn" onClick={handleMoreClick}>
@@ -134,20 +132,12 @@ const InfoBox = ({ boardTypes, title }) => {
                                             {post.writerNickname} |{" "}
                                             {post.createdDate?.slice(0, 10)}
                                         </p>
-                                        <div className="stats">
-                                            <p className="like">
-                                                <Heart />
-                                                <span>{post.likeCount}</span>
-                                            </p>
-                                            <p className="comment">
-                                                <MessageCircleMore />
-                                                <span>{post.commentCount}</span>
-                                            </p>
-                                            <p className="view">
-                                                <Eye />
-                                                <span>{post.viewCount}</span>
-                                            </p>
-                                        </div>
+                                        {/* PostStats 사용 */}
+                                        <PostStats
+                                            likeCount={post.likeCount}
+                                            commentCount={post.commentCount}
+                                            viewCount={post.viewCount}
+                                        />
                                     </div>
                                 </li>
                             ))
