@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import "./RegisterForm.css";
 import Timer from "./Timer";
 import axiosInstance from "./utils/AxiosInstance";
@@ -75,10 +76,9 @@ const RegisterForm = () => {
                 code: verificationCode,
             });
             const response = await axiosInstance.post("/member/join", formData);
-            alert("회원가입 성공!");
+            toast.success("회원가입 성공!");
             navigate("/login");
         } catch (error) {
-            console.error("인증 실패:", error);
             if (
                 error.response?.status === 400 ||
                 error.response?.status === 403
@@ -88,7 +88,7 @@ const RegisterForm = () => {
                         "인증번호가 올바르지 않습니다.",
                 );
             } else {
-                alert(error.response?.data?.message || "인증 실패");
+                toast.error(error.response?.data?.message || "인증 실패")
             }
         }
     };
@@ -101,11 +101,10 @@ const RegisterForm = () => {
             await axiosInstance.post("/auth/email-check", {
                 email: formData.email,
             });
-            alert("인증 코드가 다시 발송되었습니다.");
+            toast.success("인증 코드가 다시 발송되었습니다.");
             startTimer();
         } catch (error) {
-            console.error("재전송 실패:", error);
-            alert(error.response?.data?.message || "인증 코드 재전송 실패");
+            toast.error(error.response?.data?.message || "인증 코드 재전송 실패");
         } finally {
             setResendLoading(false);
         }
