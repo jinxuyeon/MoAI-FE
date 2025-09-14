@@ -1,7 +1,7 @@
 
 // 게시판 라벨 맵 (네비게이션 바 등에서 사용)
 export const boardTypeMap = {
-  NOTICE: "조교알림",
+  NOTICE: "조교",
   NOTICE_UNIV: "학교공지",
   NOTICE_DEPT: "학과공지",
   NOTICE_SC : "학생회",

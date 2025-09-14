@@ -177,12 +177,7 @@ function Header() {
             label: "커뮤니티",
             basePath: "/main/community/free",
             subMenus: [
-                {
-                    title: "인기 게시판",
-                    desc: "지금 가장 인기있는 글들이에요.",
-                    icon: <FcRating />,
-                    to: "/main/community/popular",
-                },
+                
                 {
                     title: "자유 게시판",
                     desc: "자유롭게 이야기를 나눠보세요.",

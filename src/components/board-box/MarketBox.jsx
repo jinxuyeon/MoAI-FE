@@ -79,7 +79,7 @@ const MarketBox = ({ boardType = "market", setShowUploadModal }) => {
     <div className="MarketBox">
       <div className="market-header">
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h1 className="Free-title">{boardTitle}</h1>
+          <h1 className="Free-title"><b>{boardTitle}</b></h1>
           <button
             onClick={toggleFavorite}
             title="즐겨찾기 추가/제거"
