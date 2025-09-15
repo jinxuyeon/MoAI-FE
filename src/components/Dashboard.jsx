@@ -33,6 +33,21 @@ const Dashboard = () => {
                         </section>
                     </div>
 
+                    <section className="div-area">
+                        <div className="benu">
+                            <StudentCouncilBanner />
+                        </div>
+
+                        <div className="benu">
+                            <StudentCouncilBanner />
+                        </div>
+
+                        <div className="benu">
+                            <StudentCouncilBanner />
+                        </div>
+                    </section>
+
+
                     <section className="div-area marketplace">
                         <header className="header-area">
                             <h1 className="title">
@@ -43,15 +58,11 @@ const Dashboard = () => {
                             <BookMarketBoard title="장터" boardType="MARKET" />
                         </section>
                     </section>
-                    <section className="div-area">
-                        <div className="daily-area desktop-only">
-                            <DailyMenu selectedDate={selectedDate} />
-                        </div>
+                    <div className="daily-area desktop-only">
+                        <DailyMenu selectedDate={selectedDate} />
+                    </div>
 
-                        <div className="benu">
-                            <StudentCouncilBanner />
-                        </div>
-                    </section>
+
                 </div>
                 {/* <aside>
           <ul>
