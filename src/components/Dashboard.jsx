@@ -5,7 +5,7 @@ import InfoBox from "./InfoBox";
 import QuickLinks from "./QuickLinks";
 import { BookOpenCheck } from "lucide-react";
 import { useState } from "react";
-
+import StudentCouncilBanner from "./StudentCouncilBanner";
 const Dashboard = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     return (
@@ -43,9 +43,16 @@ const Dashboard = () => {
                             <BookMarketBoard title="장터" boardType="MARKET" />
                         </section>
                     </section>
-                    <div className="daily-area">
-                        <DailyMenu selectedDate={selectedDate} />
-                    </div>
+                    <section className="div-area">
+                        <div className="daily-area">
+                            <DailyMenu selectedDate={selectedDate} />
+                        </div>
+
+                        <div className="benu">
+                            <StudentCouncilBanner />
+                        </div>
+                    </section>
+
                 </div>
                 {/* <aside>
           <ul>
