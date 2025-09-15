@@ -142,6 +142,7 @@ const MyPageV2 = () => {
                   >
                     개인 정보 수정
                   </li>
+
                   <li
                     role="button"
                     tabIndex={0}
@@ -154,6 +155,7 @@ const MyPageV2 = () => {
                   >
                     문의내역
                   </li>
+
                   <li
                     role="button"
                     tabIndex={0}

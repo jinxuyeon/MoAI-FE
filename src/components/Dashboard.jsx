@@ -44,7 +44,7 @@ const Dashboard = () => {
                         </section>
                     </section>
                     <section className="div-area">
-                        <div className="daily-area">
+                        <div className="daily-area desktop-only">
                             <DailyMenu selectedDate={selectedDate} />
                         </div>
 
@@ -52,7 +52,6 @@ const Dashboard = () => {
                             <StudentCouncilBanner />
                         </div>
                     </section>
-
                 </div>
                 {/* <aside>
           <ul>
