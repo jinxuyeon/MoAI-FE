@@ -1,6 +1,7 @@
 import "./FriendModal.css";
 import InputBox from "./InputBox";
-import Reddot from "./Reddot";
+import ProfileTemplate from "./ProfileTemplate";
+import "./modals/Modal.css";
 import {
     searchFriendByNickname,
     sendFriendRequest,
@@ -8,7 +9,7 @@ import {
     declineFriendRequest,
 } from "./utils/friendApi";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FriendModal = ({
     setOpenModal,
@@ -16,12 +17,34 @@ const FriendModal = ({
     fetchMyFriendInfo,
     setHasFriendrequest,
     setRequestMemberList,
+    myFriendList,
 }) => {
     const [result, setResult] = useState(null);
     const [resultMessage, setResultMessage] = useState("");
     const [isFriendError, setIsFriendError] = useState(false); // ✅ 성공/실패 메시지 구분
-    const [activeTab, setActiveTab] = useState("send");
+    const [activeTab, setActiveTab] = useState("friends");
     const [nickname, setNickname] = useState("");
+    const [filteredFriends, setFilteredFriends] = useState(myFriendList);
+
+    useEffect(() => {
+        setFilteredFriends(myFriendList);
+    }, [myFriendList]);
+
+    // 내 친구 목록에서 검색
+    const handleNicknameChange = (value) => {
+        setNickname(value);
+
+        const keyword = value.trim().toLowerCase();
+        if (!keyword) {
+            setFilteredFriends(myFriendList);
+            return;
+        }
+
+        const filtered = myFriendList.filter((friend) =>
+            friend.nickName.toLowerCase().includes(keyword),
+        );
+        setFilteredFriends(filtered);
+    };
 
     const handleSearch = async () => {
         try {
@@ -52,11 +75,11 @@ const FriendModal = ({
         }
     };
 
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-        setResult(null);
-        setResultMessage("");
-    };
+    // const handleTabChange = (tab) => {
+    //     setActiveTab(tab);
+    //     setResult(null);
+    //     setResultMessage("");
+    // };
 
     const handleAccept = async (idToAccept) => {
         try {
@@ -82,18 +105,41 @@ const FriendModal = ({
     };
 
     return (
-        <div className="Modal">
+        <div className="Modal FriendModal">
             <div className="Overlay">
                 <div className="container">
-                    <div className="header">
-                        <h3>🖐️ 친구 추가</h3>
-                        <button
+                    <div className="friend-modal-header" role="tablist">
+                        <div
+                            className={`tab ${activeTab === "friends" ? "active" : ""}`}
+                            role="tab"
+                            tabIndex="0"
+                            onClick={() => setActiveTab("friends")}
+                        >
+                            <span>내 친구</span>
+                        </div>
+                        <div
+                            className={`tab ${activeTab === "search" ? "active" : ""}`}
+                            role="tab"
+                            tabIndex="0"
+                            onClick={() => setActiveTab("search")}
+                        >
+                            <span>검색</span>
+                        </div>
+                        <div
+                            className={`tab ${activeTab === "request" ? "active" : ""}`}
+                            role="tab"
+                            tabIndex="0"
+                            onClick={() => setActiveTab("request")}
+                        >
+                            <span>받은 요청</span>
+                        </div>
+                        {/* <button
                             className="request-tap-btn"
                             onClick={() => handleTabChange("send")}
                         >
                             검색
-                        </button>
-                        <button
+                        </button> */}
+                        {/* <button
                             className="request-tap-btn"
                             onClick={() => {
                                 handleTabChange("receive");
@@ -102,7 +148,7 @@ const FriendModal = ({
                         >
                             받은요청
                             <Reddot count={requestMemberList.length} />
-                        </button>
+                        </button> */}
                         <button
                             className="exit-btn"
                             onClick={() => setOpenModal(false)}
@@ -111,25 +157,66 @@ const FriendModal = ({
                         </button>
                     </div>
 
-                    {activeTab === "send" ? (
-                        <section>
-                            <div className="search-box">
+                    {activeTab === "friends" && (
+                        <>
+                            <div className="search-section">
                                 <InputBox
                                     state={nickname}
-                                    setStateFunction={setNickname}
-                                    onClickFunction={handleSearch}
-                                    placeholder="닉네임으로 친구를 찾아보세요"
+                                    setStateFunction={handleNicknameChange}
+                                    placeholder="내 친구 목록에서 검색"
                                 />
-                                {resultMessage && (
-                                    <p
-                                        className={`friend-message ${
-                                            isFriendError ? "error" : "success"
-                                        }`}
-                                    >
-                                        {resultMessage}
-                                    </p>
-                                )}
                             </div>
+                            <ul className="Friends-List">
+                                {filteredFriends.length > 0 ? (
+                                    filteredFriends.map((friend) => (
+                                        <li
+                                            key={friend.id}
+                                            className="Friends-Item"
+                                        >
+                                            <div className="friend-item-section">
+                                                <ProfileTemplate
+                                                    profileImageUrl={
+                                                        friend.profileThumbnails
+                                                    }
+                                                    name={friend.nickName}
+                                                    id={friend.id}
+                                                />
+                                                <button className="friend-del-btn">
+                                                    삭제
+                                                </button>
+                                            </div>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="Friends-Item">
+                                        친구가 없습니다.
+                                    </li>
+                                )}
+                            </ul>
+                        </>
+                    )}
+
+                    {activeTab === "search" && (
+                        <div>
+                            <div className="search-section">
+                                <div className="search-box">
+                                    <InputBox
+                                        state={nickname}
+                                        setStateFunction={setNickname}
+                                        onClickFunction={handleSearch}
+                                        placeholder="닉네임으로 친구를 찾아보세요"
+                                    />
+                                </div>
+                            </div>
+                            {resultMessage && (
+                                <p
+                                    className={`friend-message ${
+                                        isFriendError ? "error" : "success"
+                                    }`}
+                                >
+                                    {resultMessage}
+                                </p>
+                            )}
                             <div className="request-container">
                                 {result && (
                                     <>
@@ -153,8 +240,10 @@ const FriendModal = ({
                                     </>
                                 )}
                             </div>
-                        </section>
-                    ) : (
+                        </div>
+                    )}
+
+                    {activeTab === "request" && (
                         <div className="requests-box">
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (

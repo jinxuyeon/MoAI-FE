@@ -1,6 +1,5 @@
 import FriendModal from "./FriendModal";
 import "./Friends.css";
-import ProfileTemplate from "./ProfileTemplate";
 import Reddot from "./Reddot";
 import { getRequestFriendList, getMyFriends } from "./utils/friendApi";
 import { Users } from "lucide-react";
@@ -8,8 +7,60 @@ import { useState, useEffect } from "react";
 
 // 모듈화한 API 사용
 
+const dummyFriends = [
+  {
+    id: 1,
+    nickName: "Alice",
+    profileThumbnails: "https://i.pravatar.cc/100?img=1",
+  },
+  {
+    id: 2,
+    nickName: "Bob",
+    profileThumbnails: "https://i.pravatar.cc/100?img=2",
+  },
+  {
+    id: 3,
+    nickName: "Charlie",
+    profileThumbnails: "https://i.pravatar.cc/100?img=3",
+  },
+  {
+    id: 4,
+    nickName: "David",
+    profileThumbnails: "https://i.pravatar.cc/100?img=4",
+  },
+  {
+    id: 5,
+    nickName: "Eve",
+    profileThumbnails: "https://i.pravatar.cc/100?img=5",
+  },
+  {
+    id: 6,
+    nickName: "Frank",
+    profileThumbnails: "https://i.pravatar.cc/100?img=6",
+  },
+  {
+    id: 7,
+    nickName: "Grace",
+    profileThumbnails: "https://i.pravatar.cc/100?img=7",
+  },
+  {
+    id: 8,
+    nickName: "Heidi",
+    profileThumbnails: "https://i.pravatar.cc/100?img=8",
+  },
+  {
+    id: 9,
+    nickName: "Ivan",
+    profileThumbnails: "https://i.pravatar.cc/100?img=9",
+  },
+  {
+    id: 10,
+    nickName: "Judy",
+    profileThumbnails: "https://i.pravatar.cc/100?img=10",
+  },
+];
+
 const Friends = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [hasFriendRequest, setHasFriendrequest] = useState(false);
     const [requestMemberList, setRequestMemberList] = useState([]);
@@ -45,9 +96,6 @@ const Friends = () => {
 
     return (
         <div className="Friends">
-            {/* <button className="Friends-btn" onClick={() => setIsOpen(!isOpen)}>
-                <h4>친구</h4>
-            </button> */}
             <button className="header-btn" onClick={() => setOpenModal(true)}>
                 <Users />
                 <Reddot count={requestMemberList.length} />
@@ -61,26 +109,10 @@ const Friends = () => {
                     requestMemberList={requestMemberList}
                     setRequestMemberList={setRequestMemberList}
                     fetchMyFriendInfo={fetchMyFriendInfo}
+                    myFriendList={myFriendList}
+                    // myFriendList={dummyFriends}
                 />
             )}
-
-            {/* {isOpen && (
-        <ul className="Friends-List">
-          {myFriendList.length > 0 ? (
-            myFriendList.map((friend) => (
-              <li key={friend.id} className="Friends-Item">
-                <ProfileTemplate
-                  profileImageUrl={friend.profileThumbnails}
-                  name={friend.nickName}
-                  id={friend.id}
-                />
-              </li>
-            ))
-          ) : (
-            <li className="Friends-Item">친구가 없습니다.</li>
-          )}
-        </ul>
-      )} */}
         </div>
     );
 };
