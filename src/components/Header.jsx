@@ -5,7 +5,10 @@ import MailBox from "./MailBox";
 import MobileMenu from "./MobileMenu";
 import MyProfile from "./Myprofile";
 import Sidebar from "./Sidebar";
+import { useLockModal } from "./hooks/useLockModal";
+import LockModal from "./modals/LockModal";
 import axiosInstance from "./utils/AxiosInstance";
+import { roleHierarchy } from "./utils/RoleUtils";
 import { UserContext } from "./utils/UserContext";
 import { Menu } from "lucide-react";
 import { useContext, useEffect, useState, useRef } from "react";
@@ -20,7 +23,6 @@ import {
     FcPaid,
 } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { roleHierarchy } from "./utils/RoleUtils";
 
 function Header() {
     const { user } = useContext(UserContext);
@@ -35,6 +37,9 @@ function Header() {
 
     const openSidebar = () => setSidebarOpen(true);
     const closeSidebar = () => setSidebarOpen(false);
+
+    const { isLockModalOpen, closeLockModal, handleLockedItemClick } =
+        useLockModal();
 
     const handleLogout = async () => {
         try {
@@ -177,7 +182,6 @@ function Header() {
             label: "커뮤니티",
             basePath: "/main/community/free",
             subMenus: [
-                
                 {
                     title: "자유 게시판",
                     desc: "자유롭게 이야기를 나눠보세요.",
@@ -214,6 +218,7 @@ function Header() {
             label: "스터디룸",
             basePath: "/main/study-dashboard",
             subMenus: [],
+            locked: true,
         },
     ];
 
@@ -221,12 +226,25 @@ function Header() {
         gnbData.map((menu, idx) => (
             <div key={idx} className="tooltip-area">
                 <div className="tooltip-label">
-                    <Link
-                        to={menu.basePath}
-                        className={`gnb-title ${location.pathname.startsWith(menu.basePath) ? "on" : ""}`}
-                    >
-                        {menu.label}
-                    </Link>
+                    {menu.locked ? (
+                        <button
+                            onClick={handleLockedItemClick}
+                            className="gnb-title"
+                        >
+                            {menu.label}
+                        </button>
+                    ) : (
+                        <Link
+                            to={menu.basePath}
+                            className={`gnb-title ${
+                                location.pathname.startsWith(menu.basePath)
+                                    ? "on"
+                                    : ""
+                            }`}
+                        >
+                            {menu.label}
+                        </Link>
+                    )}
                 </div>
                 {menu.subMenus.length > 0 && (
                     <div className="tooltip">
@@ -328,7 +346,11 @@ function Header() {
                         )}
                     </div>
 
-                    {user?.roles?.some(role => roleHierarchy.indexOf(role) >= roleHierarchy.indexOf("STUDENT_COUNCIL")) && (
+                    {user?.roles?.some(
+                        (role) =>
+                            roleHierarchy.indexOf(role) >=
+                            roleHierarchy.indexOf("STUDENT_COUNCIL"),
+                    ) && (
                         <div className="header-wrap">
                             <div className="btn-wrap">
                                 <button
@@ -351,6 +373,7 @@ function Header() {
                     newMailCount={newMailCount}
                 />
             </div>
+            <LockModal isOpen={isLockModalOpen} onClose={closeLockModal} />
         </div>
     );
 }
