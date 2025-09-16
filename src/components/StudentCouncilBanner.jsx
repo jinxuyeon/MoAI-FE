@@ -29,14 +29,14 @@ const StudentCouncilBanner = ({
       </div>
 
       {link ? (
-        <a
+        <div
           href={link}
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none", color: "inherit", flex: 1 }}
         >
           {content}
-        </a>
+        </div>
       ) : (
         content
       )}

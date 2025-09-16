@@ -268,7 +268,6 @@ const PostDetail = () => {
                         )}
                     </div>
                 </div>
-
                 <div className="post-meta">
                     {post.boardType === "SECRET" ? (
                         <div className="anonymous-writer">익명</div>
@@ -280,10 +279,20 @@ const PostDetail = () => {
                         />
                     )}
                     <div>
-                        {post.createdDate?.slice(0, 10)} | 조회 {post.viewCount}
-
+                        {post.createdDate
+                            ? new Date(post.createdDate).toLocaleString("ko-KR", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: false, // ✅ 24시간 표기
+                            })
+                            : ""}
+                        {" | "}조회 {post.viewCount}
                     </div>
                 </div>
+
 
                 {post.boardType === "MARKET" ? (
                     <div className="market-horizontal-layout">
