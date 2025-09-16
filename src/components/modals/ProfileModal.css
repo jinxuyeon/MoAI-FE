@@ -67,10 +67,6 @@
     color: #888;
 }
 
-.ProfileModal .role-icon {
-    font-size: 18px;
-}
-
 .ProfileModal__body {
     display: flex;
     flex-direction: column;
@@ -79,36 +75,21 @@
     line-height: 1.5;
 }
 
-.ProfileModal .user-roles {
+.ProfileModal__roles {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     margin-top: 5px;
 }
 
-.ProfileModal .role-badge {
-    font-size: 13px;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-weight: 500;
-    color: white;
-}
-
-/* 칭호별 색상 */
-.ProfileModal .role-student { background-color: #3498db; }   /* 학생 - 파랑 */
-.ProfileModal .role-professor { background-color: #2ecc71; } /* 교수 - 초록 */
-.ProfileModal .role-manager { background-color: #f1c40f; color: black; } /* 매니저 - 노랑 */
-.ProfileModal .role-system { background-color: #9b59b6; }    /* 시스템 - 보라 */
-.ProfileModal .role-admin { background-color: #e74c3c; }     /* 관리자 - 빨강 */
-.ProfileModal .role-student_council { background-color: #8e44ad; }
-.ProfileModal .modal-actions {
+.ProfileModal__actions {
     display: flex;
     gap: 10px;
     margin-top: 10px;
 }
 
-.ProfileModal .action-button,
-.ProfileModal .remove-friend-button {
+.ProfileModal__action-btn,
+.ProfileModal__remove-btn {
     flex: 1;
     padding: 8px 12px;
     border: none;
@@ -117,35 +98,31 @@
     cursor: pointer;
 }
 
-.ProfileModal .action-button {
+.ProfileModal__action-btn {
     background-color: #4a90e2;
     color: white;
 }
-
-.ProfileModal .action-button:hover {
+.ProfileModal__action-btn:hover {
     background-color: #357abd;
 }
 
-.ProfileModal .remove-friend-button {
+.ProfileModal__remove-btn {
     background-color: #f44336;
     color: white;
 }
-
-.ProfileModal .remove-friend-button:hover {
+.ProfileModal__remove-btn:hover {
     background-color: #d32f2f;
 }
 
-.ProfileModal .friend-message {
+.ProfileModal__friend-message {
     margin-top: 8px;
     font-size: 14px;
     font-weight: 500;
 }
-
-.ProfileModal .friend-message.error {
+.ProfileModal__friend-message.error {
     color: #d32f2f;
 }
-
-.ProfileModal .friend-message.success {
+.ProfileModal__friend-message.success {
     color: #388e3c;
 }
 
@@ -164,7 +141,6 @@
     padding: 6px 12px;
     border-radius: 6px;
 }
-
 .ProfileModal__footer button:hover {
     background-color: rgba(74, 144, 226, 0.1);
 }

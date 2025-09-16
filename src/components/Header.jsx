@@ -3,7 +3,6 @@ import Friends from "./Friends";
 import "./Header.css";
 import MailBox from "./MailBox";
 import MobileMenu from "./MobileMenu";
-import MyProfile from "./Myprofile";
 import Sidebar from "./Sidebar";
 import { useLockModal } from "./hooks/useLockModal";
 import LockModal from "./modals/LockModal";
@@ -277,11 +276,6 @@ function Header() {
         <div className={`header ${isScrolled ? "shadow" : ""}`}>
             <div className="header-container">
                 <div className="header-inner">
-                    {!isMobile && (
-                        <button className="menu-btn" onClick={openSidebar}>
-                            <Menu size={24} />
-                        </button>
-                    )}
                     <Link to="/main" className="logo-btn">
                         <img src="/icons/logo.svg" alt="모아이 로고" />
                     </Link>

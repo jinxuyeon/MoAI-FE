@@ -2,10 +2,12 @@ import "./MobileMenu.css";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import DailyMenu from "./DailyMenu"; // ✅ 메인에 쓰던 위젯 불러오기
+import DailyMenu from "./DailyMenu"; // 메인에 쓰던 위젯 불러오기
+import LockModal from "./modals/LockModal"; // 락 모달 임포트
 
 function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
-  const [dietOpen, setDietOpen] = useState(false); // ✅ 식단 모달 상태
+  const [dietOpen, setDietOpen] = useState(false); // 식단 모달 상태
+  const [lockModalOpen, setLockModalOpen] = useState(false); // 스터디룸 락 상태
 
   return (
     <>
@@ -53,7 +55,7 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
           <Link to="/main/community/notice_sc" className="m-gnb-item" onClick={onClose}>학생회 공지</Link>
           <Link to="/main/community/market" className="m-gnb-item" onClick={onClose}>책 장터</Link>
 
-          {/* ✅ 링크 대신 버튼으로 교체 */}
+          {/* 식단 버튼 */}
           <button
             type="button"
             className="m-gnb-item"
@@ -66,11 +68,17 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
         {/* 서비스 */}
         <div className="m-gnb-group">
           <div className="m-gnb-group-title">서비스</div>
-          <Link to="/main/study-dashboard" className="m-gnb-item" onClick={onClose}>스터디룸</Link>
+          {/* 스터디룸 클릭 시 락 모달 */}
+          <button
+            type="button"
+            className="m-gnb-item"
+            onClick={() => { onClose(); setLockModalOpen(true); }}
+          >
+            스터디룸
+          </button>
           <Link to="/chat-mail" className="m-gnb-item" onClick={onClose}>
             메일함{newMailCount > 0 ? ` (${newMailCount})` : ""}
           </Link>
-          <Link className="m-gnb-item" onClick={onClose}>친구</Link>
         </div>
 
         {user && (
@@ -90,7 +98,7 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
 
       <div className={`m-gnb-backdrop ${isOpen ? "show" : ""}`} onClick={onClose} />
 
-      {/* ✅ 식단 모달 */}
+      {/* 식단 모달 */}
       {dietOpen && (
         <div className="diet-modal">
           <div className="diet-modal__header">
@@ -102,6 +110,9 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
           </div>
         </div>
       )}
+
+      {/* 스터디룸 락 모달 */}
+      <LockModal isOpen={lockModalOpen} onClose={() => setLockModalOpen(false)} />
     </>
   );
 }
