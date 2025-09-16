@@ -1,8 +1,8 @@
-// src/components/InquiryForm.jsx
+
 import { useState } from "react";
 import "./InquiryForm.css";
 import axiosInstance from "./utils/AxiosInstance";
-import { ROLE_TITLES } from "./utils/roleUtils";
+import { ROLE_TITLES } from "./utils/RoleUtils";
 import { InquiryCategories, buildInquiryPayload, isRoleRequest } from "./utils/InquiryUtils";
 import { toast } from "sonner";
 const InquiryForm = () => {
