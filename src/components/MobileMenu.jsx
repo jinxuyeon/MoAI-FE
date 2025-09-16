@@ -39,7 +39,6 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
         {/* 커뮤니티 */}
         <div className="m-gnb-group">
           <div className="m-gnb-group-title">커뮤니티</div>
-          <Link to="/main/community/popular" className="m-gnb-item" onClick={onClose}>인기 게시판</Link>
           <Link to="/main/community/free" className="m-gnb-item" onClick={onClose}>자유 게시판</Link>
           <Link to="/main/community/secret" className="m-gnb-item" onClick={onClose}>비밀 게시판</Link>
           <Link to="/main/community/review" className="m-gnb-item" onClick={onClose}>후기 게시판</Link>
@@ -48,9 +47,11 @@ function MobileMenu({ isOpen, onClose, user, onLogout, newMailCount }) {
         {/* 공지/장터 */}
         <div className="m-gnb-group">
           <div className="m-gnb-group-title">공지/장터</div>
-          <Link to="/main/community/notice_c" className="m-gnb-item" onClick={onClose}>공지사항</Link>
-          <Link to="/main/community/notice"   className="m-gnb-item" onClick={onClose}>조교알림</Link>
-          <Link to="/main/community/market"   className="m-gnb-item" onClick={onClose}>책 장터</Link>
+          <Link to="/main/community/notice_dept" className="m-gnb-item" onClick={onClose}>학과 공지사항</Link>
+          <Link to="/main/community/notice_univ" className="m-gnb-item" onClick={onClose}>학교 공지사항</Link>
+          <Link to="/main/community/notice" className="m-gnb-item" onClick={onClose}>조교알림</Link>
+          <Link to="/main/community/notice_sc" className="m-gnb-item" onClick={onClose}>학생회 공지</Link>
+          <Link to="/main/community/market" className="m-gnb-item" onClick={onClose}>책 장터</Link>
 
           {/* ✅ 링크 대신 버튼으로 교체 */}
           <button

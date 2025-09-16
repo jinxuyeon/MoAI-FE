@@ -236,11 +236,10 @@ function Header() {
                     ) : (
                         <Link
                             to={menu.basePath}
-                            className={`gnb-title ${
-                                location.pathname.startsWith(menu.basePath)
+                            className={`gnb-title ${location.pathname.startsWith(menu.basePath)
                                     ? "on"
                                     : ""
-                            }`}
+                                }`}
                         >
                             {menu.label}
                         </Link>
@@ -306,16 +305,14 @@ function Header() {
                         </div>
                         {!isMobile && (
                             <div className="btn-wrap more-gap">
-                                <button
-                                    aria-label="프로필"
+                                <div
                                     className="header-btn profile"
-                                >
-                                    <MyProfile
-                                        profileImageUrl={
-                                            user?.profileThumbnails
-                                        }
-                                    />
-                                </button>
+                                    style={{
+                                        backgroundImage: `url(${user?.profileThumbnails || "/default-profile.png"})`,
+                                        backgroundSize: "cover",
+                                        backgroundPosition: "center",
+                                    }}
+                                />
                                 <div className="profile-menu-list-area">
                                     <ul className="profile-menu-list">
                                         {profileMenuItems.map((item, index) => (
@@ -351,17 +348,17 @@ function Header() {
                             roleHierarchy.indexOf(role) >=
                             roleHierarchy.indexOf("STUDENT_COUNCIL"),
                     ) && (
-                        <div className="header-wrap">
-                            <div className="btn-wrap">
-                                <button
-                                    className="admin-btn"
-                                    onClick={goToAdminPage}
-                                >
-                                    관리자
-                                </button>
+                            <div className="header-wrap">
+                                <div className="btn-wrap">
+                                    <button
+                                        className="admin-btn"
+                                        onClick={goToAdminPage}
+                                    >
+                                        관리자
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
                 </div>
 
                 <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />

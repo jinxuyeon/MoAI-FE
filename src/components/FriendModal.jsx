@@ -1,12 +1,14 @@
 import "./FriendModal.css";
 import InputBox from "./InputBox";
 import ProfileTemplate from "./ProfileTemplate";
+import ConfirmModal from "./modals/ConfirmModal";
 import "./modals/Modal.css";
 import {
     searchFriendByNickname,
     sendFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
+    removeFriend
 } from "./utils/friendApi";
 import { X } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -21,27 +23,25 @@ const FriendModal = ({
 }) => {
     const [result, setResult] = useState(null);
     const [resultMessage, setResultMessage] = useState("");
-    const [isFriendError, setIsFriendError] = useState(false); // ✅ 성공/실패 메시지 구분
+    const [isFriendError, setIsFriendError] = useState(false);
     const [activeTab, setActiveTab] = useState("friends");
     const [nickname, setNickname] = useState("");
     const [filteredFriends, setFilteredFriends] = useState(myFriendList);
+    const [confirmDeleteFriendId, setConfirmDeleteFriendId] = useState(null);
 
     useEffect(() => {
         setFilteredFriends(myFriendList);
     }, [myFriendList]);
 
-    // 내 친구 목록에서 검색
     const handleNicknameChange = (value) => {
         setNickname(value);
-
         const keyword = value.trim().toLowerCase();
         if (!keyword) {
             setFilteredFriends(myFriendList);
             return;
         }
-
         const filtered = myFriendList.filter((friend) =>
-            friend.nickName.toLowerCase().includes(keyword),
+            friend.nickName.toLowerCase().includes(keyword)
         );
         setFilteredFriends(filtered);
     };
@@ -75,17 +75,11 @@ const FriendModal = ({
         }
     };
 
-    // const handleTabChange = (tab) => {
-    //     setActiveTab(tab);
-    //     setResult(null);
-    //     setResultMessage("");
-    // };
-
     const handleAccept = async (idToAccept) => {
         try {
             await acceptFriendRequest(idToAccept);
             setRequestMemberList((prev) =>
-                prev.filter((request) => request.id !== idToAccept),
+                prev.filter((request) => request.id !== idToAccept)
             );
             fetchMyFriendInfo();
         } catch (error) {
@@ -97,10 +91,24 @@ const FriendModal = ({
         try {
             await declineFriendRequest(idToDecline);
             setRequestMemberList((prev) =>
-                prev.filter((request) => request.id !== idToDecline),
+                prev.filter((request) => request.id !== idToDecline)
             );
         } catch (error) {
             console.error("친구 요청 거절 실패:", error);
+        }
+    };
+
+    const handleRemoveFriend = async (friendId) => {
+        try {
+            await removeFriend(friendId);
+            // UI에서 바로 제거
+            setFilteredFriends((prev) =>
+                prev.filter((f) => f.id !== friendId)
+            );
+            // 부모 상태 갱신
+            fetchMyFriendInfo();
+        } catch (error) {
+            console.error("친구 삭제 실패:", error);
         }
     };
 
@@ -133,22 +141,6 @@ const FriendModal = ({
                         >
                             <span>받은 요청</span>
                         </div>
-                        {/* <button
-                            className="request-tap-btn"
-                            onClick={() => handleTabChange("send")}
-                        >
-                            검색
-                        </button> */}
-                        {/* <button
-                            className="request-tap-btn"
-                            onClick={() => {
-                                handleTabChange("receive");
-                                setHasFriendrequest(false);
-                            }}
-                        >
-                            받은요청
-                            <Reddot count={requestMemberList.length} />
-                        </button> */}
                         <button
                             className="exit-btn"
                             onClick={() => setOpenModal(false)}
@@ -169,19 +161,17 @@ const FriendModal = ({
                             <ul className="Friends-List">
                                 {filteredFriends.length > 0 ? (
                                     filteredFriends.map((friend) => (
-                                        <li
-                                            key={friend.id}
-                                            className="Friends-Item"
-                                        >
+                                        <li key={friend.id} className="Friends-Item">
                                             <div className="friend-item-section">
                                                 <ProfileTemplate
-                                                    profileImageUrl={
-                                                        friend.profileThumbnails
-                                                    }
+                                                    profileImageUrl={friend.profileThumbnails}
                                                     name={friend.nickName}
                                                     id={friend.id}
                                                 />
-                                                <button className="friend-del-btn">
+                                                <button
+                                                    className="friend-del-btn"
+                                                    onClick={() => setConfirmDeleteFriendId(friend.id)}
+                                                >
                                                     삭제
                                                 </button>
                                             </div>
@@ -209,11 +199,7 @@ const FriendModal = ({
                                 </div>
                             </div>
                             {resultMessage && (
-                                <p
-                                    className={`friend-message ${
-                                        isFriendError ? "error" : "success"
-                                    }`}
-                                >
+                                <p className={`friend-message ${isFriendError ? "error" : "success"}`}>
                                     {resultMessage}
                                 </p>
                             )}
@@ -222,10 +208,7 @@ const FriendModal = ({
                                     <>
                                         <div className="search-result-profile">
                                             <img
-                                                src={
-                                                    result.profileThumbnails ||
-                                                    "/default-profile.png"
-                                                }
+                                                src={result.profileThumbnails || "/default-profile.png"}
                                                 alt="프로필"
                                                 className="profile-img"
                                             />
@@ -247,16 +230,10 @@ const FriendModal = ({
                         <div className="requests-box">
                             {requestMemberList.length > 0 ? (
                                 requestMemberList.map((request, index) => (
-                                    <div
-                                        className="request-container"
-                                        key={index}
-                                    >
+                                    <div className="request-container" key={index}>
                                         <div className="search-result-profile">
                                             <img
-                                                src={
-                                                    request.profileThumbnails ||
-                                                    "/default-profile.png"
-                                                }
+                                                src={request.profileThumbnails || "/default-profile.png"}
                                                 alt="프로필"
                                                 className="profile-img"
                                             />
@@ -265,18 +242,14 @@ const FriendModal = ({
                                         <div>
                                             <button
                                                 className="request-btn accept"
-                                                onClick={() =>
-                                                    handleAccept(request.id)
-                                                }
+                                                onClick={() => handleAccept(request.id)}
                                             >
                                                 수락
                                             </button>
                                             |
                                             <button
                                                 className="request-btn decline"
-                                                onClick={() =>
-                                                    handleDecline(request.id)
-                                                }
+                                                onClick={() => handleDecline(request.id)}
                                             >
                                                 거절
                                             </button>
@@ -290,6 +263,18 @@ const FriendModal = ({
                     )}
                 </div>
             </div>
+
+            {/* 삭제 확인 모달 */}
+            {confirmDeleteFriendId && (
+                <ConfirmModal
+                    message="정말 삭제하시겠습니까?"
+                    onConfirm={() => {
+                        handleRemoveFriend(confirmDeleteFriendId);
+                        setConfirmDeleteFriendId(null);
+                    }}
+                    onCancel={() => setConfirmDeleteFriendId(null)}
+                />
+            )}
         </div>
     );
 };
