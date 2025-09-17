@@ -8,7 +8,6 @@ const SupportPage = () => {
 
   return (
     <div className="SupportPage">
-
       <InquiryForm />
     </div>
 
