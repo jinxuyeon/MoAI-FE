@@ -6,12 +6,12 @@ import { UserContext } from "../utils/UserContext";
 import CommentBox from "./CommentBox";
 import MenuButton from "./MenuButton";
 import "./PostDetail.css";
-import { Heart, Check, List, Bookmark } from "lucide-react";
+import { Heart, Check, List, Bookmark, ChevronsRight, Eye } from "lucide-react";
 import { useEffect, useState, useRef, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
+import { useParams, useNavigate, Link } from "react-router-dom";
 // 좋아요 API 함수
 import { toast } from "sonner";
+
 const PostDetail = () => {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
@@ -32,7 +32,6 @@ const PostDetail = () => {
     const navigate = useNavigate();
     const { hasRole, user } = useContext(UserContext); // ✅ 현재 로그인 사용자 권한 확인
 
-
     useEffect(() => {
         fetchPost();
         fetchComments();
@@ -49,6 +48,33 @@ const PostDetail = () => {
             setScrapped(postData.isScrap || false);
         } catch (err) {
             console.error("❌ 게시글 상세 불러오기 실패:", err);
+        }
+    };
+
+    // 게시글 작성일 포맷팅
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+
+        return `${year}.${month}.${day} ${hours}:${minutes}`;
+    };
+
+    // 스크랩 버튼 클릭 핸들러
+    const handleScrapBtnClick = async () => {
+        try {
+            if (!scrapped) {
+                const res = await axiosInstance.post(`/post/${postId}/scrap`);
+                setScrapped(true);
+            } else {
+                const res = await axiosInstance.delete(`/post/${postId}/scrap`);
+                setScrapped(false);
+            }
+        } catch (err) {
+            console.error("❌ 스크랩 토글 실패:", err);
+            toast.error("스크랩 처리 중 오류가 발생했습니다.");
         }
     };
 
@@ -99,10 +125,10 @@ const PostDetail = () => {
             prev.map((c) =>
                 c.id === commentId
                     ? {
-                        ...c,
-                        liked: !c.liked,
-                        likes: (c.likes || 0) + (c.liked ? -1 : 1),
-                    }
+                          ...c,
+                          liked: !c.liked,
+                          likes: (c.likes || 0) + (c.liked ? -1 : 1),
+                      }
                     : c,
             ),
         );
@@ -131,7 +157,8 @@ const PostDetail = () => {
 
     const canComment = () =>
         user?.roles?.some(
-            (role) => roleHierarchy.indexOf(role) >= roleHierarchy.indexOf("STUDENT")
+            (role) =>
+                roleHierarchy.indexOf(role) >= roleHierarchy.indexOf("STUDENT"),
         );
 
     const handleCommentSubmit = async () => {
@@ -141,7 +168,11 @@ const PostDetail = () => {
         }
 
         const now = Date.now();
-        if (!newComment.trim() || isSubmitting || now - lastSubmitTime.current < 1000)
+        if (
+            !newComment.trim() ||
+            isSubmitting ||
+            now - lastSubmitTime.current < 1000
+        )
             return;
 
         setIsSubmitting(true);
@@ -154,37 +185,8 @@ const PostDetail = () => {
             setNewComment("");
             await fetchComments();
         } catch (err) {
-            const message = err.response?.data?.message || "댓글 등록에 실패했습니다.";
-            toast.error(message);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleReplySubmit = async (parentId) => {
-        if (!canComment()) {
-            toast.error("권한이 없습니다");
-            return;
-        }
-
-        const now = Date.now();
-        if (!replyContent.trim() || isSubmitting || now - lastSubmitTime.current < 1000)
-            return;
-
-        setIsSubmitting(true);
-        lastSubmitTime.current = now;
-
-        try {
-            await axiosInstance.post(`/post/${postId}/comments`, {
-                content: replyContent,
-                parentId,
-                targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
-            });
-            setReplyContent("");
-            setReplyingTo(null);
-            await fetchReplies(parentId);
-        } catch (err) {
-            const message = err.response?.data?.message || "답글 등록에 실패했습니다.";
+            const message =
+                err.response?.data?.message || "댓글 등록에 실패했습니다.";
             toast.error(message);
         } finally {
             setIsSubmitting(false);
@@ -208,19 +210,38 @@ const PostDetail = () => {
         }
     };
 
-    // 스크랩 버튼 클릭 핸들러
-    const handleScrapBtnClick = async () => {
+    const handleReplySubmit = async (parentId) => {
+        if (!canComment()) {
+            toast.error("권한이 없습니다");
+            return;
+        }
+
+        const now = Date.now();
+        if (
+            !replyContent.trim() ||
+            isSubmitting ||
+            now - lastSubmitTime.current < 1000
+        )
+            return;
+
+        setIsSubmitting(true);
+        lastSubmitTime.current = now;
+
         try {
-            if (!scrapped) {
-                const res = await axiosInstance.post(`/post/${postId}/scrap`);
-                setScrapped(true);
-            } else {
-                const res = await axiosInstance.delete(`/post/${postId}/scrap`);
-                setScrapped(false);
-            }
+            await axiosInstance.post(`/post/${postId}/comments`, {
+                content: replyContent,
+                parentId,
+                targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
+            });
+            setReplyContent("");
+            setReplyingTo(null);
+            await fetchReplies(parentId);
         } catch (err) {
-            console.error("❌ 스크랩 토글 실패:", err);
-            toast.error("스크랩 처리 중 오류가 발생했습니다.");
+            const message =
+                err.response?.data?.message || "답글 등록에 실패했습니다.";
+            toast.error(message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -233,29 +254,6 @@ const PostDetail = () => {
                 <div className="post-title-with-like">
                     <h2 className="post-title">{post.title}</h2>
                     <div className="like-container">
-                        <button
-                            className={`like-toggle-button${liked ? " liked" : ""}`}
-                            onClick={handleLikeBtnClick}
-                        >
-                            <Heart
-                                color={liked ? "#e74c3c" : "#aaa"}
-                                fill={liked ? "#e74c3c" : "none"}
-                            />
-                        </button>
-                        <span>{likenum}</span>
-
-                        {/* 스크랩 버튼 */}
-                        <button
-                            className={`scrap-btn${scrapped ? " scrapped" : ""}`}
-                            onClick={handleScrapBtnClick}
-                        >
-                            <Bookmark
-                                color={scrapped ? "#3399ff" : "#aaa"}
-                                fill={scrapped ? "#3399ff" : "none"}
-                            />
-                            <span>스크랩</span>
-                        </button>
-
                         {post.isAuthor && (
                             <MenuButton
                                 onEdit={() =>
@@ -278,21 +276,33 @@ const PostDetail = () => {
                             id={post.writerId}
                         />
                     )}
-                    <div>
-                        {post.createdDate
-                            ? new Date(post.createdDate).toLocaleString("ko-KR", {
-                                year: "numeric",
-                                month: "2-digit",
-                                day: "2-digit",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                                hour12: false, // ✅ 24시간 표기
-                            })
-                            : ""}
-                        {" | "}조회 {post.viewCount}
+                    <div className="info-area">
+                        <div className="info-left">
+                            <div className="date">
+                                {post.createdDate
+                                    ? formatDate(new Date(post.createdDate))
+                                    : ""}
+                            </div>
+                            <div className="view">
+                                <Eye />
+                                {post.viewCount}
+                            </div>
+                        </div>
+                        <div className="info-right">
+                            {/* 스크랩 버튼 */}
+                            <button
+                                className={`scrap-btn${scrapped ? " scrapped" : ""}`}
+                                onClick={handleScrapBtnClick}
+                            >
+                                <Bookmark
+                                    color={scrapped ? "#3399ff" : "#aaa"}
+                                    fill={scrapped ? "#3399ff" : "none"}
+                                />
+                                <span>스크랩</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-
 
                 {post.boardType === "MARKET" ? (
                     <div className="market-horizontal-layout">
@@ -335,6 +345,32 @@ const PostDetail = () => {
                                 }}
                             ></div>
                         </section>
+                        {post.targetUrl && (
+                            <Link
+                                to={post.targetUrl}
+                                target="_blank"
+                                className="link-area"
+                            >
+                                {post.boardType === "NOTICE_UNIV"
+                                    ? "학교"
+                                    : "학과"}{" "}
+                                홈페이지에서 보기 <ChevronsRight />
+                            </Link>
+                        )}
+
+                        {/* 좋아요 버튼 */}
+                        <div className="react-area">
+                            <button
+                                className={`like-toggle-button${liked ? " liked" : ""}`}
+                                onClick={handleLikeBtnClick}
+                            >
+                                <Heart
+                                    color={liked ? "#e74c3c" : "#aaa"}
+                                    fill={liked ? "#e74c3c" : "none"}
+                                />
+                            </button>
+                            <span>{likenum}</span>
+                        </div>
                     </>
                 )}
 
@@ -344,8 +380,9 @@ const PostDetail = () => {
                     </span>
                     <div className="sort-controls">
                         <button
-                            className={`sort-button ${sortOrder === "oldest" ? "active" : ""
-                                }`}
+                            className={`sort-button ${
+                                sortOrder === "oldest" ? "active" : ""
+                            }`}
                             onClick={() => {
                                 setSortOrder("oldest");
                                 setComments(sortComments(comments, "oldest"));
@@ -356,8 +393,9 @@ const PostDetail = () => {
                             등록순
                         </button>
                         <button
-                            className={`sort-button ${sortOrder === "newest" ? "active" : ""
-                                }`}
+                            className={`sort-button ${
+                                sortOrder === "newest" ? "active" : ""
+                            }`}
                             onClick={() => {
                                 setSortOrder("newest");
                                 setComments(sortComments(comments, "newest"));
