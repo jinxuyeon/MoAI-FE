@@ -6,7 +6,6 @@ import InfoBox from "./InfoBox";
 import MainBanner from "./MainBanner";
 import MediaBox from "./MediaBox";
 import QuickLinks from "./QuickLinks";
-import { BookOpenCheck, Megaphone, Coffee } from "lucide-react";
 import { useState, useEffect } from "react";
 import axiosInstance from "./utils/AxiosInstance";
 

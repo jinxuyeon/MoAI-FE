@@ -27,7 +27,7 @@ const MediaBox = ({ videoUrl = "" }) => {
       style={{ backgroundImage: `url(${thumbnailUrl})` }}
     >
       <div className="MediaBox-overlay">
-        <Play size={48} className="MediaBox-playButton" />
+        <Play size={58} color="grey" className="MediaBox-playButton" />
       </div>
     </a>
   );
