@@ -47,6 +47,8 @@
     color: #555;         /* 회색 톤 */
     margin: 0;
     line-height: 1.5;
+
+     white-space: pre-wrap;
 }
 
 /* 링크 */

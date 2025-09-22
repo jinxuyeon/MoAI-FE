@@ -77,7 +77,7 @@ const Dashboard = () => {
                             {eventBanners.length > 0 && (
                                 <div className="banner-area">
                                     <h1 className="title">
-                                         학생회 이벤트
+                                        학생회 이벤트
                                     </h1>
                                     <section className="banner-list">
                                         <ul>
@@ -97,11 +97,19 @@ const Dashboard = () => {
 
                             {/* 미디어 영역 */}
                             {mediaList.length > 0 && (
-                                <div className="media-list">
-                                    {mediaList.map((m) => (
-                                        <MediaBox key={m.id} videoUrl={m.videoUrl} />
-                                    ))}
+                                <div className="banner-area">
+                                    <h1 className="title">
+                                        미디어
+                                    </h1>
+
+                                    <div className="media-list">
+                                        {mediaList.map((m) => (
+                                            <MediaBox key={m.id} videoUrl={m.videoUrl} />
+                                        ))}
+                                    </div>
                                 </div>
+
+
                             )}
                         </div>
                     )}
@@ -110,7 +118,7 @@ const Dashboard = () => {
                     <section className="div-area marketplace">
                         <header className="header-area">
                             <h1 className="title">
-                                 중고책 사고팔기
+                                중고책 사고팔기
                             </h1>
                         </header>
                         <section className="content-area">
@@ -122,7 +130,7 @@ const Dashboard = () => {
                     <section>
                         <header className="header-area">
                             <h1 className="title">
-                                 오늘의 식단을 확인하세요
+                                오늘의 식단을 확인하세요
                             </h1>
                         </header>
                         <div className="daily-area desktop-only">

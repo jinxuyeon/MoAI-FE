@@ -8,11 +8,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #e5e7eb; /* 연한 회색 */
   color: #6b7280; /* 아이콘 색 (조금 진한 회색) */
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 .help-guide-icon:hover {

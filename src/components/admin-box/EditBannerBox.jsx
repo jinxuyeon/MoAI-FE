@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import "./EditBannerBox.css";
 import axiosInstance from "../utils/AxiosInstance";
+import HelpGuide from "../HelpGuide";
 
 const EditBannerBox = () => {
   const [banners, setBanners] = useState([]);
@@ -84,7 +85,10 @@ const EditBannerBox = () => {
   return (
     <div className="EditBannerBox">
       <section className="edit-section">
-        <h3>이벤트 배너</h3>
+        <div className="title-area">
+          <h3>이벤트 배너</h3>
+          <HelpGuide title="이벤트 배너" content={"제목, 내용, 링크 를 추가하여 배너를 생성하면 메인화면에 표시됩니다.(바로가기 링크는 선택사항) => 내용이 너무 길면 잘릴수있습니다."} />
+        </div>
         {banners.map((b, i) => (
           <div key={i} className="edit-card">
             <input type="text" placeholder="배너 제목" value={b.title} onChange={e => updateBanner(i, "title", e.target.value)} />
@@ -97,7 +101,11 @@ const EditBannerBox = () => {
       </section>
 
       <section className="edit-section">
-        <h3>미디어 영상</h3>
+
+        <div className="title-area">
+          <h3>미디어 영상</h3>
+          <HelpGuide title="미디어 배너" content={"게시를 원하는 유튜브 영상 url을 붙여넣기하면 메인화면에 표시됩니다"} />
+        </div>
         {mediaList.map((m, i) => (
           <div key={i} className="edit-card">
             <input type="text" placeholder="YouTube URL" value={m.videoUrl} onChange={e => updateMedia(i, e.target.value)} />
