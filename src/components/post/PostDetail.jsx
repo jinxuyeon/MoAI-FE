@@ -7,7 +7,7 @@ import CommentBox from "./CommentBox";
 import MenuButton from "./MenuButton";
 import "./PostDetail.css";
 import { Heart, Check, List, Bookmark, ChevronsRight, Eye } from "lucide-react";
-import { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef, useContext, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 // 좋아요 API 함수
 import { toast } from "sonner";
@@ -50,6 +50,22 @@ const PostDetail = () => {
             console.error("❌ 게시글 상세 불러오기 실패:", err);
         }
     };
+
+    // 첨부파일 없으면 렌더링 안 하기
+    const cleanedContent = useMemo(() => {
+        if (!post?.content) return "";
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(post.content, "text/html");
+
+        const fileUl = doc.querySelector("ul.file");
+        if (fileUl && fileUl.querySelectorAll("li").length === 0) {
+            const tr = fileUl.closest("tr");
+            if (tr) tr.remove();
+        }
+
+        return doc.body.innerHTML;
+    }, [post?.content]);
 
     // 게시글 작성일 포맷팅
     const formatDate = (date) => {
@@ -341,7 +357,7 @@ const PostDetail = () => {
                             <div
                                 className="post-content"
                                 dangerouslySetInnerHTML={{
-                                    __html: post.content,
+                                    __html: cleanedContent,
                                 }}
                             ></div>
                         </section>
