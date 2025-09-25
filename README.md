@@ -85,6 +85,7 @@
 ---
 
 **회원가입, 비밀번호 찾기**
+
 <img width="448" height="601" alt="image" src="https://github.com/user-attachments/assets/5107f161-c3e8-4181-8188-eced95d01a55" />
 <img width="447" height="604" alt="image" src="https://github.com/user-attachments/assets/0add6d8f-bf2e-406c-b78c-0737c3a91f7b" />
 
