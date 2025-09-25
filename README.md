@@ -105,6 +105,7 @@
 
 ---
 
+**중고 장터**
 <img width="1261" height="697" alt="image" src="https://github.com/user-attachments/assets/f134f226-5cc1-4c15-9245-28b94f72efdb" />
 
 ---
