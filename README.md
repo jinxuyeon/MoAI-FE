@@ -61,8 +61,8 @@
 
 ## 👩‍💻 기여도 및 역할
 - **Frontend**: React 기반 UI 설계, 게시판/채팅/마이페이지 구현  
-- **Backend**: Spring Boot REST API 개발, JWT 인증·인가, 게시판/채팅 기능 구현  
-- **DevOps**: AWS EC2 배포, RDS 연동, Nginx Reverse Proxy, SSL 적용  
+- **Backend**: Spring Boot REST API 개발, MYSQL, Redis, JWT 인증·인가, 게시판/채팅 기능 구현  
+- **DevOps**: AWS EC2 배포, RDS 연동,  SSL 적용  
 - **운영**: 실제 학과 학생 대상 서비스 운영 및 피드백 반영  
 
 참여 인원  
