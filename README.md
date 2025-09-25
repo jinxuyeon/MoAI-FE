@@ -79,27 +79,28 @@
 ---
 
 ## 📷 스크린샷
--로그인 
+**로그인**
 <img width="1064" height="611" alt="image" src="https://github.com/user-attachments/assets/25bc31d0-255f-4b97-aa54-fab97fcae0aa" />
 
 ---
 
--회원가입, 비밀번호 찾기 이메일 인증 구현
-
+**회원가입, 비밀번호 찾기**
 <img width="448" height="601" alt="image" src="https://github.com/user-attachments/assets/5107f161-c3e8-4181-8188-eced95d01a55" />
 <img width="447" height="604" alt="image" src="https://github.com/user-attachments/assets/0add6d8f-bf2e-406c-b78c-0737c3a91f7b" />
 
 ---
 
-
+**메인 화면**
 <img width="1375" height="1184" alt="image" src="https://github.com/user-attachments/assets/72a0b683-7600-4045-a22a-103d732f0515" />
 
 ---
 
+**공지사항**
 <img width="1260" height="1133" alt="image" src="https://github.com/user-attachments/assets/3b109c43-1c7e-47f9-a449-575a16e2ef4b" />
 
 ---
 
+**커뮤니티 게시판**
 <img width="1260" height="845" alt="image" src="https://github.com/user-attachments/assets/3ef17765-2b56-438e-adc3-dd2bdb513d7c" />
 
 ---
