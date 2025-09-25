@@ -82,10 +82,12 @@
 -로그인 
 <img width="1064" height="611" alt="image" src="https://github.com/user-attachments/assets/25bc31d0-255f-4b97-aa54-fab97fcae0aa" />
 
+---
 -회원가입, 비밀번호 찾기 이메일 인증 구현
+
 <img width="448" height="601" alt="image" src="https://github.com/user-attachments/assets/5107f161-c3e8-4181-8188-eced95d01a55" />
 <img width="447" height="604" alt="image" src="https://github.com/user-attachments/assets/0add6d8f-bf2e-406c-b78c-0737c3a91f7b" />
-
+---
 
 
 <img width="1375" height="1184" alt="image" src="https://github.com/user-attachments/assets/72a0b683-7600-4045-a22a-103d732f0515" />
