@@ -110,13 +110,18 @@
 
 ---
 
+**마이페이지**
 <img width="1261" height="1114" alt="image" src="https://github.com/user-attachments/assets/092a46f3-b5e9-409d-a9f9-27ad9afedeae" />
 
 ---
 
+**식단**
 <img width="543" height="910" alt="image" src="https://github.com/user-attachments/assets/a2cde63b-ed98-4a2a-9c8d-0ce466aab2c6" />
 
 ---
+
+
+**친구추가, 챗메일**
 <img width="638" height="390" alt="image" src="https://github.com/user-attachments/assets/6fa0484d-4b4b-452b-b804-0bb28032dc56" />
 
 
@@ -124,11 +129,13 @@
 
 ---
 
+**관리자 페이지 회원관리**
 <img width="1137" height="1124" alt="image" src="https://github.com/user-attachments/assets/39df2b3e-9c0e-437c-911b-9400246fda86" />
 
+---
 
 
-
+**관리자 페이지 문의관리**
 <img width="1131" height="866" alt="image" src="https://github.com/user-attachments/assets/78392369-bcd9-4b37-b024-6ed31bc44094" />
 
 ---
