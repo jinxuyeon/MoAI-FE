@@ -28,8 +28,8 @@
 - **프로젝트명**: 모아이 (모여라 AI)  
 - **기간**: 2024.07 ~ 2025.08  
 - **기술스택**  
-  - **Frontend**: React   
-  - **Backend**: Spring Boot, MySQL  
+  - **Frontend**: React , js, css, html   
+  - **Backend**:Kotlin, Spring Boot, MySQL  
   - **Infra**: AWS EC2, RDS, S3, Nginx  
 
 ---
