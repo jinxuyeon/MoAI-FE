@@ -61,13 +61,13 @@
 
 ## 👩‍💻 기여도 및 역할
 - **Frontend**: React 기반 UI 설계, 게시판/채팅/마이페이지 구현  
-- **Backend**: Spring Boot REST API 개발, MYSQL, Redis, JWT 인증·인가, 게시판/채팅 기능 구현  
+- **Backend**: Kotlin,  Spring Boot REST API 개발, MYSQL, Redis, JWT 인증·인가, 게시판/채팅 기능 구현, python, 크롤링
 - **DevOps**: AWS EC2 배포, RDS 연동,  SSL 적용  
 - **운영**: 실제 학과 학생 대상 서비스 운영 및 피드백 반영  
 
 참여 인원  
 - **Frontend**: 진수연, 손준호, 서예빈, 최윤주  
-- **Backend**: 손준호  
+- **Backend**: 손준호 , 최윤주
 - **DevOps**: 손준호, 진수연  
 
 ---
