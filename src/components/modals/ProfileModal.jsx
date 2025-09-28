@@ -23,7 +23,6 @@ const ProfileModal = ({
   userInfo,
   onClose,
   onAddFriend,
-  onRemoveFriend,
   friendMessage,
   isFriendError,
 }) => {
@@ -78,14 +77,7 @@ const ProfileModal = ({
               )}
 
               <div className="ProfileModal__actions">
-                {userInfo.isFriend ? (
-                  <button
-                    className="ProfileModal__remove-btn"
-                    onClick={onRemoveFriend}
-                  >
-                    친구 삭제
-                  </button>
-                ) : (
+                {!userInfo.isFriend && (
                   <button
                     className="ProfileModal__action-btn"
                     onClick={onAddFriend}
@@ -93,6 +85,7 @@ const ProfileModal = ({
                     친구 추가
                   </button>
                 )}
+
                 {/* 쪽지 보내기 클릭 시 LockModal 표시 */}
                 <button
                   className="ProfileModal__action-btn"

@@ -20,4 +20,9 @@
 .ProfileTemplate .ProfileTemplate__profile-name {
     font-weight: 600;
     font-size: var(--font-size-xs);
+    
+}
+
+.ProfileTemplate__profile-name:hover {
+    text-decoration: underline; 
 }

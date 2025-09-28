@@ -246,7 +246,7 @@ const PostDetail = () => {
         try {
             await axiosInstance.post(`/post/${postId}/comments`, {
                 content: replyContent,
-                parentId,
+                parentId: parentId,
                 targetUrl: `/main/community/${post.boardType.toLowerCase()}/post/${post.id}`,
             });
             setReplyContent("");
